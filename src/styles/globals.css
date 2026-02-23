@@ -30,6 +30,16 @@
   .accent-underline {
     @apply relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-12 after:bg-accent after:rounded-full;
   }
+  /* Linha de separação com fade nas pontas (contínuo, sem caixas) */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(6, 182, 212, 0.25) 50%,
+      transparent 100%
+    );
+  }
 
 .scrollbar-hide {
   -ms-overflow-style: none;
