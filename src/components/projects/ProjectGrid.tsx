@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { projectsList } from "@/lib/projects";
 import { projectCategories } from "@/lib/projects";
 import type { Project, ProjectCategory } from "@/types";
@@ -13,132 +13,122 @@ export function ProjectGrid() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(
     projectsList[0] ?? null
   );
-  const [activeCategory, setActiveCategory] = useState<ProjectCategory | "all">(
-    "all"
-  );
 
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === "all") return projectsList;
-    return projectsList.filter((p) => p.category === activeCategory);
-  }, [activeCategory]);
-
-  const projectToShow = selectedProject && filteredProjects.some((p) => p.id === selectedProject.id)
-    ? selectedProject
-    : filteredProjects[0] ?? null;
-  const projectUrl = projectToShow?.link && projectToShow.link.startsWith("http")
-    ? projectToShow.link
-    : null;
+  const projectToShow = selectedProject ?? projectsList[0] ?? null;
+  const projectUrl =
+    projectToShow?.link && projectToShow.link.startsWith("http")
+      ? projectToShow.link
+      : null;
+  const hasDev =
+    projectToShow?.developmentExplanation &&
+    !projectToShow.developmentExplanation.startsWith("[");
 
   return (
     <div
       role="tabpanel"
       id="panel-projects"
       aria-labelledby="tab-projects"
-      className="w-full min-w-0 flex flex-col px-4 py-6 md:py-8"
+      className="w-full min-w-0 flex flex-col py-6 md:py-8"
     >
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 flex-1 min-h-0">
-        {/* Lista de projetos */}
-        <div className="flex-shrink-0 lg:w-56 xl:w-64">
-          <p className="text-xs font-medium text-accent uppercase tracking-wider mb-3">
-            Projetos
-          </p>
-          <nav
-            className="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide"
-            aria-label="Lista de projetos"
+      {/* Seletor compacto de projeto: uma linha acima do iframe */}
+      <div className="flex flex-wrap items-center gap-2 mb-4">
+        {projectsList.map((project) => (
+          <button
+            key={project.id}
+            type="button"
+            onClick={() => setSelectedProject(project)}
+            className={`
+              px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus-ring
+              ${
+                projectToShow?.id === project.id
+                  ? "bg-accent text-dark shadow-glow-sm"
+                  : "bg-surface/80 text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
+              }
+            `}
           >
-            {filteredProjects.map((project) => (
-              <button
-                key={project.id}
-                type="button"
-                onClick={() => setSelectedProject(project)}
-                className={`
-                  text-left px-4 py-3 rounded-xl border transition-all duration-200 focus-ring whitespace-nowrap lg:whitespace-normal
-                  ${
-                    projectToShow?.id === project.id
-                      ? "border-accent bg-accent/10 text-primary"
-                      : "border-border-dark/60 text-muted hover:text-primary hover:border-accent/40"
-                  }
-                `}
-              >
-                <span className="text-xs font-medium text-accent/90 block mb-0.5">
-                  {getCategoryLabel(project.category)}
-                </span>
-                <span className="text-sm font-medium">{project.title}</span>
-              </button>
-            ))}
-          </nav>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => setActiveCategory("all")}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                activeCategory === "all"
-                  ? "bg-accent text-dark"
-                  : "bg-surface/80 text-muted hover:text-primary"
-              }`}
-            >
-              Todos
-            </button>
-            {projectCategories.map((cat) => (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  activeCategory === cat.id
-                    ? "bg-accent text-dark"
-                    : "bg-surface/80 text-muted hover:text-primary"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
+            {project.title}
+          </button>
+        ))}
+      </div>
 
-        {/* Área do iframe + barra com título e "Abrir em nova guia" */}
-        <div className="flex-1 flex flex-col min-h-[60vh] lg:min-h-[70vh] rounded-xl border border-border-dark/60 bg-surface/30 overflow-hidden">
-          {projectToShow && (
-            <>
-              <div className="flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-border-dark/50 bg-surface/50">
-                <h3 className="text-sm font-semibold text-primary truncate">
-                  {projectToShow.title}
-                </h3>
-                {projectUrl && (
-                  <a
-                    href={projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
-                  >
-                    Abrir em nova guia
-                  </a>
-                )}
-              </div>
-              <div className="flex-1 min-h-0 relative bg-dark">
-                {projectUrl ? (
-                  <iframe
-                    src={projectUrl}
-                    title={projectToShow.title}
-                    className="absolute inset-0 w-full h-full border-0"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
-                    Sem link de preview
-                  </div>
-                )}
-              </div>
-            </>
-          )}
-          {!projectToShow && (
-            <div className="flex-1 flex items-center justify-center text-muted text-sm">
-              Nenhum projeto nesta categoria
+      {/* Área de apresentação: iframe em destaque */}
+      <div className="flex flex-col flex-1 min-h-[65vh] md:min-h-[72vh] rounded-xl border border-border-dark/60 bg-surface/30 overflow-hidden">
+        {projectToShow && (
+          <>
+            <div className="flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-border-dark/50 bg-surface/50">
+              <h2 className="text-base font-semibold text-primary truncate">
+                {projectToShow.title}
+              </h2>
+              {projectUrl && (
+                <a
+                  href={projectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
+                >
+                  Abrir em nova guia
+                </a>
+              )}
+            </div>
+            <div className="flex-1 min-h-0 relative bg-dark">
+              {projectUrl ? (
+                <iframe
+                  src={projectUrl}
+                  title={projectToShow.title}
+                  className="absolute inset-0 w-full h-full border-0"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
+                  Sem link de preview
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Especificações do projeto: abaixo do iframe */}
+      {projectToShow && (
+        <section
+          className="mt-6 py-6 px-4 md:px-6 rounded-xl border border-border-dark/50 bg-surface/20"
+          aria-labelledby="specs-heading"
+        >
+          <h3
+            id="specs-heading"
+            className="text-sm font-semibold text-accent uppercase tracking-wider mb-4"
+          >
+            Especificações
+          </h3>
+          <p className="text-sm text-accent/90 font-medium mb-1">
+            {getCategoryLabel(projectToShow.category)}
+          </p>
+          <p className="text-muted text-sm leading-relaxed mb-4">
+            {projectToShow.description}
+          </p>
+          {hasDev && (
+            <div>
+              <p className="text-xs font-medium text-accent/90 uppercase tracking-wider mb-2">
+                Sobre o desenvolvimento
+              </p>
+              <p className="text-muted text-sm leading-relaxed">
+                {projectToShow.developmentExplanation}
+              </p>
             </div>
           )}
-        </div>
-      </div>
+          {projectUrl && (
+            <a
+              href={projectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
+            >
+              Abrir site em nova guia
+            </a>
+          )}
+        </section>
+      )}
     </div>
   );
 }

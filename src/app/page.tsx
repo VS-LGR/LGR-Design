@@ -33,16 +33,21 @@ export default function Home() {
     <>
       <TabNav activeTab={activeTab} onTabChange={handleTabChange} />
       <div className="min-h-[50vh] relative" key={activeTab}>
-        <div className="animate-in grid grid-cols-1 xl:grid-cols-[1fr_280px] xl:gap-12 xl:max-w-7xl xl:mx-auto xl:px-6">
-          <div className="min-w-0">
-            {activeTab === "about" && <AboutSection />}
-            {activeTab === "projects" && <ProjectGrid />}
+        {activeTab === "projects" ? (
+          <div className="animate-in w-full max-w-[1600px] mx-auto px-4 md:px-6">
+            <ProjectGrid />
           </div>
-          <DynamicSidebar
-            activeTab={activeTab}
-            activeSectionId={activeSectionId}
-          />
-        </div>
+        ) : (
+          <div className="animate-in grid grid-cols-1 xl:grid-cols-[1fr_280px] xl:gap-12 xl:max-w-7xl xl:mx-auto xl:px-6">
+            <div className="min-w-0">
+              <AboutSection />
+            </div>
+            <DynamicSidebar
+              activeTab={activeTab}
+              activeSectionId={activeSectionId}
+            />
+          </div>
+        )}
       </div>
     </>
   );
