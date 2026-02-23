@@ -18,12 +18,14 @@ export default function Home() {
     <>
       <TabNav activeTab={activeTab} onTabChange={handleTabChange} />
       <div
-        className="min-h-[50vh] animate-in bg-dark bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(6,182,212,0.12),transparent)]"
+        className="min-h-[50vh] relative"
         key={activeTab}
       >
-        {activeTab === "about" && <AboutSection />}
-        {activeTab === "projects" && <ProjectGrid />}
-        {activeTab === "hobbies" && <HobbyGrid />}
+        <div className="animate-in">
+          {activeTab === "about" && <AboutSection />}
+          {activeTab === "projects" && <ProjectGrid />}
+          {activeTab === "hobbies" && <HobbyGrid />}
+        </div>
       </div>
     </>
   );

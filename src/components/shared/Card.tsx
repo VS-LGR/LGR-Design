@@ -11,7 +11,7 @@ export function Card({
 }: CardProps) {
   return (
     <Component
-      className={`rounded-xl border border-border-dark/60 bg-surface shadow-card overflow-hidden transition-all duration-200 hover:border-accent/40 hover:shadow-glow-sm ${className}`}
+      className={`rounded-xl border border-border-dark/60 bg-surface shadow-card overflow-hidden transition-all duration-300 ease-out hover:border-accent/40 hover:shadow-glow-sm hover:-translate-y-0.5 ${className}`}
     >
       {children}
     </Component>

@@ -15,7 +15,7 @@ export function AboutSection() {
       aria-labelledby="tab-about"
       className="container mx-auto px-4 py-8 md:py-12"
     >
-      <div className="max-w-3xl space-y-8">
+      <div className="max-w-3xl space-y-8 stagger-children">
         <Card as="section" className="p-6 md:p-8">
           <IntroBlock />
         </Card>
