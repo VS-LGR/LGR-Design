@@ -9,23 +9,36 @@ export const projectCategories: { id: ProjectCategory; label: string }[] = [
 
 export const projectsList: Project[] = [
   {
-    id: "1",
-    title: "[Placeholder: Nome do projeto]",
+    id: "psi-bia-rossi",
+    title: "Psi Bia Rossi — Psicanálise com Gamificação",
     category: "web",
-    slug: "projeto-exemplo",
-    description: "[Placeholder: descrição curta do projeto e do site.]",
+    slug: "psi-bia-rossi",
+    description:
+      "Site institucional para psicóloga especializada em psicanálise com gamificação através de jogos de tabuleiro. Apresenta metodologia, serviços, depoimentos e formulário de contato.",
     developmentExplanation:
-      "[Placeholder: explique aqui o desenvolvimento — stack, decisões de UX, desafios técnicos, resultado.]",
-    link: "#",
+      "Landing page com foco em conversão e credibilidade: hierarquia visual para serviços e depoimentos, seção de gamificação explicando a metodologia em etapas, e área de contato integrada. Layout responsivo e navegação clara para destacar o diferencial da profissional.",
+    link: "https://psi-bia-rossi.vercel.app",
   },
   {
-    id: "2",
-    title: "[Placeholder: Outro projeto]",
-    category: "ux",
-    slug: "projeto-ux",
-    description: "[Placeholder: descrição.]",
+    id: "lp-farma",
+    title: "Pharmatech — Inovação Farmacêutica Brasileira",
+    category: "web",
+    slug: "lp-farma-com",
+    description:
+      "Landing page da Pharmatech: empresa de desenvolvimento farmacêutico com foco em tecnologia, pesquisa e parcerias. Seções sobre a empresa, especializações, fundador e contato.",
     developmentExplanation:
-      "[Placeholder: explicação do desenvolvimento deste site/projeto.]",
-    link: "#",
+      "Página de apresentação corporativa com estrutura em seções (Sobre, Especializações, Parceiros, Contato). Conteúdo pensado para transmitir credibilidade e inovação, com destaque para diferenciais e call-to-action de contato.",
+    link: "https://lp-farma-com.vercel.app",
+  },
+  {
+    id: "lp-civil",
+    title: "ConstruWork — Construção Civil de Qualidade",
+    category: "web",
+    slug: "lp-civil",
+    description:
+      "Site da ConstruWork: mais de 15 anos em construção civil. Apresenta história, valores, portfólio de trabalhos (residencial, comercial, industrial) e formulário para orçamento.",
+    developmentExplanation:
+      "Landing page para empresa de construção civil com ênfase em portfólio e orçamento. Grid de projetos por tipo (residencial, comercial, saúde etc.), métricas de experiência e área de contato para captação de leads.",
+    link: "https://lp-civil.vercel.app",
   },
 ];
