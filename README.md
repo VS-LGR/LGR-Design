@@ -24,13 +24,13 @@ npm start
 src/
   app/              # Rotas e layout (layout.tsx, page.tsx)
   components/       # Componentes React
-    shared/         # Header, TabNav, Footer, Button, Card
-    about/          # AboutSection, ResumeBlock, EducationBlock, PersonalHistoryBlock
+    shared/         # Header, TabNav, Footer, Button, Card, Carousel
+    about/          # AboutSection, IntroBlock, FormationBlock, ExperienceBlock, SpecialtiesCarousel, DifferentialBlock, CreativePreferencesCarousel, ObjectiveBlock
     projects/       # ProjectGrid, ProjectCard, CategoryFilter
     hobbies/        # HobbyGrid, HobbyCard
   styles/           # globals.css e variáveis da paleta
   lib/              # Conteúdo e constantes
-    about.ts        # Currículo, formação, história pessoal (placeholders)
+    about.ts        # intro, formation, experience, specialties, differential, creativePreferences, professionalObjective, resumePdfUrl
     projects.ts     # Lista de projetos e categorias (placeholders)
     hobbies.ts      # Lista de hobbys (placeholders)
   types/            # Tipos TypeScript (TabId, AboutContent, Project, Hobby)
@@ -40,7 +40,7 @@ public/             # Arquivos estáticos (favicon, imagens)
 
 ## Onde editar textos e dados
 
-- **Sobre Mim:** [src/lib/about.ts](src/lib/about.ts) — resumo profissional, URL do PDF do currículo, formação, história pessoal.
+- **Sobre Mim:** [src/lib/about.ts](src/lib/about.ts) — intro (parágrafos), formation (lista), experience (título + descrição + itens), specialties, differential, creativePreferences, professionalObjective, resumePdfUrl (opcional).
 - **Projetos:** [src/lib/projects.ts](src/lib/projects.ts) — categorias e lista de projetos (título, categoria, descrição, **developmentExplanation** para explicar o desenvolvimento de cada site, thumbnail, link).
 - **Hobbys:** [src/lib/hobbies.ts](src/lib/hobbies.ts) — títulos e descrições dos quatro hobbys (Modelagem 3D, Pintura, Game Design, Pixel Art).
 

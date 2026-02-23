@@ -1,16 +1,22 @@
 export type TabId = "about" | "projects" | "hobbies";
 
 export interface AboutContent {
-  resume: {
-    summary: string;
-    pdfUrl?: string;
-  };
-  education: Array<{
+  intro: string[];
+  formation: Array<{
     title: string;
-    institution: string;
+    institution?: string;
     period?: string;
   }>;
-  personalHistory: string;
+  experience: Array<{
+    title: string;
+    description: string;
+    items?: string[];
+  }>;
+  specialties: string[];
+  differential: string[];
+  creativePreferences: string[];
+  professionalObjective: string;
+  resumePdfUrl?: string;
 }
 
 export type ProjectCategory = "web" | "ux" | "identity" | "other";

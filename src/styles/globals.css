@@ -27,9 +27,17 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-muted;
   }
-  .accent-underline {
-    @apply relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-12 after:bg-accent after:rounded-full;
-  }
+.accent-underline {
+  @apply relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-12 after:bg-accent after:rounded-full;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 }
 
 @keyframes fade-in {
