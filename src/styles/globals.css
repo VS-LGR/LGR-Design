@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-cool-steel: #8da7be;
+  --color-ash-brown: #554640;
+  --color-pale-sky: #cde6f5;
+  --color-cool-steel-2: #87919e;
+  --color-dim-grey: #707078;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-pale-sky text-ash-brown antialiased;
+  }
+}
+
+@layer utilities {
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-cool-steel focus-visible:ring-offset-2 focus-visible:ring-offset-pale-sky;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-in {
+  animation: fade-in 0.25s ease-out forwards;
+}
