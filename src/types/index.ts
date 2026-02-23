@@ -1,4 +1,4 @@
-export type TabId = "about" | "projects" | "hobbies";
+export type TabId = "about" | "projects";
 
 export interface AboutContent {
   intro: string[];

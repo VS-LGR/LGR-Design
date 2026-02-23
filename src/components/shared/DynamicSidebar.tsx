@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import type { TabId } from "@/types";
 import { aboutContent } from "@/lib/about";
 import { projectCategories } from "@/lib/projects";
-import { hobbiesList } from "@/lib/hobbies";
 
 const ABOUT_SECTION_IDS = [
   "about-intro",
@@ -204,26 +203,6 @@ export function DynamicSidebar({
           <ul className="space-y-2 text-sm text-muted">
             {projectCategories.map((c) => (
               <li key={c.id}>{c.label}</li>
-            ))}
-          </ul>
-        </div>
-      </aside>
-    );
-  }
-
-  if (activeTab === "hobbies") {
-    return (
-      <aside
-        className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
-        aria-label="Hobbys"
-      >
-        <div className="space-y-6 pl-2 border-l border-accent/20">
-          <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Hobbys
-          </p>
-          <ul className="space-y-2 text-sm text-muted">
-            {hobbiesList.map((h) => (
-              <li key={h.id}>{h.title}</li>
             ))}
           </ul>
         </div>

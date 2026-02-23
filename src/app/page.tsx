@@ -6,7 +6,6 @@ import { TabNav } from "@/components/shared/TabNav";
 import { DynamicSidebar } from "@/components/shared/DynamicSidebar";
 import { AboutSection } from "@/components/about/AboutSection";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { HobbyGrid } from "@/components/hobbies/HobbyGrid";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 const ABOUT_SECTION_IDS = [
@@ -38,7 +37,6 @@ export default function Home() {
           <div className="min-w-0">
             {activeTab === "about" && <AboutSection />}
             {activeTab === "projects" && <ProjectGrid />}
-            {activeTab === "hobbies" && <HobbyGrid />}
           </div>
           <DynamicSidebar
             activeTab={activeTab}

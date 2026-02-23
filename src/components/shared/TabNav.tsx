@@ -6,7 +6,6 @@ import type { TabId } from "@/types";
 const tabs: { id: TabId; label: string }[] = [
   { id: "about", label: "Sobre Mim" },
   { id: "projects", label: "Projetos" },
-  { id: "hobbies", label: "Hobbys" },
 ];
 
 interface TabNavProps {
