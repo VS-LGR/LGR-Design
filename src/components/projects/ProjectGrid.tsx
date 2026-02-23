@@ -10,11 +10,12 @@ function getCategoryLabel(category: ProjectCategory) {
 }
 
 export function ProjectGrid() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(
-    projectsList[0] ?? null
+  const [selectedId, setSelectedId] = useState<string>(
+    projectsList[0]?.id ?? ""
   );
 
-  const projectToShow = selectedProject ?? projectsList[0] ?? null;
+  const projectToShow =
+    projectsList.find((p) => p.id === selectedId) ?? projectsList[0] ?? null;
   const projectUrl =
     projectToShow?.link && projectToShow.link.startsWith("http")
       ? projectToShow.link
@@ -30,25 +31,27 @@ export function ProjectGrid() {
       aria-labelledby="tab-projects"
       className="w-full min-w-0 flex flex-col py-6 md:py-8"
     >
-      {/* Seletor compacto de projeto: uma linha acima do iframe */}
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        {projectsList.map((project) => (
-          <button
-            key={project.id}
-            type="button"
-            onClick={() => setSelectedProject(project)}
-            className={`
-              px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus-ring
-              ${
-                projectToShow?.id === project.id
-                  ? "bg-accent text-dark shadow-glow-sm"
-                  : "bg-surface/80 text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
-              }
-            `}
-          >
-            {project.title}
-          </button>
-        ))}
+      {/* Seletor de projeto: dropdown */}
+      <div className="mb-4 flex flex-wrap items-center gap-3">
+        <label htmlFor="project-select" className="text-sm font-medium text-muted">
+          Projeto
+        </label>
+        <select
+          id="project-select"
+          value={selectedId}
+          onChange={(e) => setSelectedId(e.target.value)}
+          className="px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors cursor-pointer min-w-[200px]"
+          aria-label="Selecionar projeto"
+        >
+          {projectsList.map((project) => (
+            <option key={project.id} value={project.id}>
+              {project.title}
+            </option>
+          ))}
+        </select>
+        <span className="text-xs text-muted">
+          {projectsList.findIndex((p) => p.id === selectedId) + 1} de {projectsList.length}
+        </span>
       </div>
 
       {/* Área de apresentação: iframe em destaque */}
