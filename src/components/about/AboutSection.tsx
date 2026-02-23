@@ -16,6 +16,7 @@ export function AboutSection() {
     >
       <div className="stagger-children">
         <section
+          id="about-intro"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
           aria-labelledby="intro-heading"
         >
@@ -25,6 +26,7 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
+          id="about-formacao"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
           aria-labelledby="formation-heading"
         >
@@ -34,6 +36,7 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
+          id="about-experiencia"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
           aria-labelledby="experience-heading"
         >
@@ -43,6 +46,7 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
+          id="about-especialidades"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
           aria-labelledby="specialties-heading"
         >
@@ -52,6 +56,7 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
+          id="about-diferencial"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
           aria-labelledby="differential-heading"
         >
@@ -61,6 +66,7 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
+          id="about-preferencias"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
           aria-labelledby="creative-heading"
         >
@@ -70,6 +76,7 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
+          id="about-objetivo"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
           aria-labelledby="objective-heading"
         >

@@ -7,9 +7,24 @@ import { DynamicSidebar } from "@/components/shared/DynamicSidebar";
 import { AboutSection } from "@/components/about/AboutSection";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { HobbyGrid } from "@/components/hobbies/HobbyGrid";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+
+const ABOUT_SECTION_IDS = [
+  "about-intro",
+  "about-formacao",
+  "about-experiencia",
+  "about-especialidades",
+  "about-diferencial",
+  "about-preferencias",
+  "about-objetivo",
+];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>("about");
+  const activeSectionId = useScrollSpy(
+    ABOUT_SECTION_IDS,
+    activeTab === "about"
+  );
 
   const handleTabChange = useCallback((tab: TabId) => {
     setActiveTab(tab);
@@ -25,7 +40,10 @@ export default function Home() {
             {activeTab === "projects" && <ProjectGrid />}
             {activeTab === "hobbies" && <HobbyGrid />}
           </div>
-          <DynamicSidebar activeTab={activeTab} />
+          <DynamicSidebar
+            activeTab={activeTab}
+            activeSectionId={activeSectionId}
+          />
         </div>
       </div>
     </>
