@@ -13,7 +13,9 @@ export const projectsList: Project[] = [
     title: "[Placeholder: Nome do projeto]",
     category: "web",
     slug: "projeto-exemplo",
-    description: "[Placeholder: descrição curta do projeto.]",
+    description: "[Placeholder: descrição curta do projeto e do site.]",
+    developmentExplanation:
+      "[Placeholder: explique aqui o desenvolvimento — stack, decisões de UX, desafios técnicos, resultado.]",
     link: "#",
   },
   {
@@ -22,6 +24,8 @@ export const projectsList: Project[] = [
     category: "ux",
     slug: "projeto-ux",
     description: "[Placeholder: descrição.]",
+    developmentExplanation:
+      "[Placeholder: explicação do desenvolvimento deste site/projeto.]",
     link: "#",
   },
 ];

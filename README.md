@@ -41,20 +41,23 @@ public/             # Arquivos estáticos (favicon, imagens)
 ## Onde editar textos e dados
 
 - **Sobre Mim:** [src/lib/about.ts](src/lib/about.ts) — resumo profissional, URL do PDF do currículo, formação, história pessoal.
-- **Projetos:** [src/lib/projects.ts](src/lib/projects.ts) — categorias e lista de projetos (título, categoria, descrição, thumbnail, link).
+- **Projetos:** [src/lib/projects.ts](src/lib/projects.ts) — categorias e lista de projetos (título, categoria, descrição, **developmentExplanation** para explicar o desenvolvimento de cada site, thumbnail, link).
 - **Hobbys:** [src/lib/hobbies.ts](src/lib/hobbies.ts) — títulos e descrições dos quatro hobbys (Modelagem 3D, Pintura, Game Design, Pixel Art).
 
 Substitua os placeholders pelos seus textos e URLs. Para imagens de projetos ou hobbys, use caminhos em `public/` (ex.: `/images/projeto.jpg`) ou configure `images.remotePatterns` em `next.config.js` para URLs externas.
 
 ## Design system
 
-Paleta em uso (definida em `tailwind.config.ts` e `src/styles/globals.css`):
+Tema escuro focado em tecnologia e UX (definido em `tailwind.config.ts` e `src/styles/globals.css`):
 
-- **Cool Steel:** `#8da7be`
-- **Ash Brown:** `#554640`
-- **Pale Sky:** `#cde6f5`
-- **Cool Steel 2:** `#87919e`
-- **Dim Grey:** `#707078`
+- **dark** (fundo): `#0f172a`
+- **surface** (cards): `#1e293b`
+- **accent** (destaques, links): `#06b6d4`
+- **primary** (texto): `#f1f5f9`
+- **muted** (texto secundário): `#94a3b8`
+- **border-dark**: `#334155`
+
+Tipografia: Plus Jakarta Sans (via `next/font/google`).
 
 ## Deploy (Vercel)
 

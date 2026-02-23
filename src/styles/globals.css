@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --color-cool-steel: #8da7be;
-  --color-ash-brown: #554640;
-  --color-pale-sky: #cde6f5;
-  --color-cool-steel-2: #87919e;
-  --color-dim-grey: #707078;
+  --color-dark: #0f172a;
+  --color-surface: #1e293b;
+  --color-accent: #06b6d4;
+  --color-primary: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-border: #334155;
 }
 
 @layer base {
@@ -15,25 +16,47 @@
     @apply scroll-smooth;
   }
   body {
-    @apply bg-pale-sky text-ash-brown antialiased;
+    @apply bg-dark text-primary antialiased;
   }
 }
 
 @layer utilities {
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-cool-steel focus-visible:ring-offset-2 focus-visible:ring-offset-pale-sky;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-muted;
+  }
+  .accent-underline {
+    @apply relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-12 after:bg-accent after:rounded-full;
   }
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px -5px rgba(6, 182, 212, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 28px -4px rgba(6, 182, 212, 0.4);
   }
 }
 
 .animate-in {
-  animation: fade-in 0.25s ease-out forwards;
+  animation: fade-in 0.35s ease-out forwards;
+}
+
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
 }

@@ -21,10 +21,10 @@ export function CategoryFilter({
       <button
         type="button"
         onClick={() => onCategoryChange("all")}
-        className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 focus-ring ${
+        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus-ring ${
           activeCategory === "all"
-            ? "bg-ash-brown text-pale-sky"
-            : "bg-white/80 text-ash-brown hover:bg-cool-steel-2/30"
+            ? "bg-accent text-dark shadow-glow-sm"
+            : "bg-surface text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
         }`}
       >
         Todos
@@ -34,10 +34,10 @@ export function CategoryFilter({
           key={cat.id}
           type="button"
           onClick={() => onCategoryChange(cat.id)}
-          className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 focus-ring ${
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 focus-ring ${
             activeCategory === cat.id
-              ? "bg-ash-brown text-pale-sky"
-              : "bg-white/80 text-ash-brown hover:bg-cool-steel-2/30"
+              ? "bg-accent text-dark shadow-glow-sm"
+              : "bg-surface text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
           }`}
         >
           {cat.label}

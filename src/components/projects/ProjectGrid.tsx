@@ -21,8 +21,16 @@ export function ProjectGrid() {
       role="tabpanel"
       id="panel-projects"
       aria-labelledby="tab-projects"
-      className="container mx-auto px-4 py-8 md:py-10"
+      className="container mx-auto px-4 py-8 md:py-12"
     >
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold text-primary mb-1">
+          Sites e projetos
+        </h2>
+        <p className="text-muted text-sm max-w-xl">
+          Projetos desenvolvidos com foco em UX, código e identidade visual. Clique em &quot;Sobre o desenvolvimento&quot; para ver o processo.
+        </p>
+      </div>
       <div className="mb-6 md:mb-8">
         <CategoryFilter
           activeCategory={activeCategory}

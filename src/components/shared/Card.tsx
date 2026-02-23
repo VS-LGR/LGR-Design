@@ -11,7 +11,7 @@ export function Card({
 }: CardProps) {
   return (
     <Component
-      className={`bg-white/90 rounded-lg border border-cool-steel-2/30 shadow-sm overflow-hidden transition-shadow duration-200 hover:shadow-md ${className}`}
+      className={`rounded-xl border border-border-dark/60 bg-surface shadow-card overflow-hidden transition-all duration-200 hover:border-accent/40 hover:shadow-glow-sm ${className}`}
     >
       {children}
     </Component>

@@ -38,11 +38,11 @@ export function TabNav({ activeTab, onTabChange }: TabNavProps) {
           tabIndex={activeTab === tab.id ? 0 : -1}
           onClick={() => onTabChange(tab.id)}
           className={`
-            px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 focus-ring
+            px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus-ring
             ${
               activeTab === tab.id
-                ? "bg-ash-brown text-pale-sky"
-                : "text-ash-brown hover:bg-dim-grey/20 hover:text-ash-brown"
+                ? "bg-accent text-dark shadow-glow-sm"
+                : "text-muted hover:text-primary hover:bg-surface"
             }
           `}
         >
@@ -54,7 +54,7 @@ export function TabNav({ activeTab, onTabChange }: TabNavProps) {
 
   return (
     <nav
-      className="sticky top-0 z-40 bg-cool-steel-2/95 backdrop-blur border-b border-dim-grey/30"
+      className="sticky top-[57px] md:top-[65px] z-40 border-b border-border-dark/50 bg-surface/90 backdrop-blur"
       aria-label="Navegação principal"
     >
       <div className="container mx-auto px-4">
@@ -65,11 +65,11 @@ export function TabNav({ activeTab, onTabChange }: TabNavProps) {
             aria-expanded={mobileOpen}
             aria-controls="tablist-mobile"
             id="tablist-mobile-toggle"
-            className="px-4 py-2 rounded-md text-sm font-medium text-ash-brown bg-white/80 hover:bg-dim-grey/20 focus-ring"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-primary bg-surface-hover hover:bg-border-dark focus-ring"
           >
             {mobileOpen ? "Fechar menu" : "Menu"}
           </button>
-          <span className="text-sm text-ash-brown font-medium">
+          <span className="text-sm text-accent font-medium">
             {tabs.find((t) => t.id === activeTab)?.label}
           </span>
         </div>

@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <TabNav activeTab={activeTab} onTabChange={handleTabChange} />
       <div
-        className="min-h-[50vh] animate-in"
+        className="min-h-[50vh] animate-in bg-dark bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(6,182,212,0.12),transparent)]"
         key={activeTab}
       >
         {activeTab === "about" && <AboutSection />}

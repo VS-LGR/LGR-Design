@@ -21,6 +21,8 @@ export interface Project {
   category: ProjectCategory;
   slug: string;
   description: string;
+  /** Explicação do processo de desenvolvimento do site/projeto */
+  developmentExplanation?: string;
   thumbnail?: string;
   link?: string;
 }
