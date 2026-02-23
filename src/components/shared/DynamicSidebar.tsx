@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import type { TabId } from "@/types";
 import { aboutContent } from "@/lib/about";
 import { projectCategories } from "@/lib/projects";
@@ -14,6 +15,8 @@ const ABOUT_SECTION_IDS = [
   "about-preferencias",
   "about-objetivo",
 ] as const;
+
+const SIDEBAR_TRANSITION_MS = 280;
 
 interface DynamicSidebarProps {
   activeTab: TabId;
@@ -132,24 +135,57 @@ export function DynamicSidebar({
   activeSectionId,
 }: DynamicSidebarProps) {
   const isAbout = activeTab === "about";
-  const sectionId =
+  const resolvedSectionId =
     isAbout && activeSectionId && ABOUT_SECTION_IDS.includes(activeSectionId as (typeof ABOUT_SECTION_IDS)[number])
       ? activeSectionId
       : isAbout
         ? "about-intro"
         : null;
 
-  if (isAbout && sectionId) {
+  const [displayId, setDisplayId] = useState(resolvedSectionId ?? "about-intro");
+  const [exitingId, setExitingId] = useState<string | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (!isAbout || !resolvedSectionId) return;
+    if (resolvedSectionId === displayId && !exitingId) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    setExitingId(displayId);
+    setDisplayId(resolvedSectionId);
+
+    timeoutRef.current = setTimeout(() => {
+      setExitingId(null);
+      timeoutRef.current = null;
+    }, SIDEBAR_TRANSITION_MS);
+  }, [isAbout, resolvedSectionId, displayId, exitingId]);
+
+  if (isAbout && (displayId || exitingId)) {
     return (
       <aside
-        className="hidden xl:block sticky top-32 h-fit opacity-70 transition-opacity duration-300"
+        className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
         aria-label="Resumo da seção em vista"
       >
-        <div
-          key={sectionId}
-          className="space-y-6 pl-2 border-l border-accent/20 animate-in"
-        >
-          <AboutSidebarContent sectionId={sectionId} />
+        <div className="relative min-h-[140px] pl-2 border-l border-accent/20">
+          {exitingId && (
+            <div
+              className="absolute top-0 left-0 right-0 sidebar-fade-out pointer-events-none"
+              aria-hidden
+            >
+              <div className="space-y-6">
+                <AboutSidebarContent sectionId={exitingId} />
+              </div>
+            </div>
+          )}
+          <div className="sidebar-fade-in relative">
+            <div className="space-y-6">
+              <AboutSidebarContent sectionId={displayId} />
+            </div>
+          </div>
         </div>
       </aside>
     );
@@ -158,7 +194,7 @@ export function DynamicSidebar({
   if (activeTab === "projects") {
     return (
       <aside
-        className="hidden xl:block sticky top-32 h-fit opacity-70 transition-opacity duration-300"
+        className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
         aria-label="Categorias"
       >
         <div className="space-y-6 pl-2 border-l border-accent/20">
@@ -178,7 +214,7 @@ export function DynamicSidebar({
   if (activeTab === "hobbies") {
     return (
       <aside
-        className="hidden xl:block sticky top-32 h-fit opacity-70 transition-opacity duration-300"
+        className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
         aria-label="Hobbys"
       >
         <div className="space-y-6 pl-2 border-l border-accent/20">

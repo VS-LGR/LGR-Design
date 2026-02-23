@@ -82,6 +82,36 @@
   }
 }
 
+/* Sidebar crossfade: conteúdo sainte some, entrante aparece */
+@keyframes sidebar-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes sidebar-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.sidebar-fade-out {
+  animation: sidebar-fade-out 0.28s ease-out forwards;
+}
+.sidebar-fade-in {
+  animation: sidebar-fade-in 0.28s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-fade-out,
+  .sidebar-fade-in {
+    animation-duration: 0.05s;
+  }
+}
+
 /* Intro overlay */
 @keyframes intro-reveal {
   0% {
