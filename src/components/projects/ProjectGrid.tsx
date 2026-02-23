@@ -31,27 +31,32 @@ export function ProjectGrid() {
       aria-labelledby="tab-projects"
       className="w-full min-w-0 flex flex-col py-6 md:py-8"
     >
-      {/* Seletor de projeto: dropdown */}
-      <div className="mb-4 flex flex-wrap items-center gap-3">
-        <label htmlFor="project-select" className="text-sm font-medium text-muted">
-          Projeto
-        </label>
-        <select
-          id="project-select"
-          value={selectedId}
-          onChange={(e) => setSelectedId(e.target.value)}
-          className="px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 transition-colors cursor-pointer min-w-[200px]"
-          aria-label="Selecionar projeto"
-        >
-          {projectsList.map((project) => (
-            <option key={project.id} value={project.id}>
-              {project.title}
-            </option>
-          ))}
-        </select>
-        <span className="text-xs text-muted">
-          {projectsList.findIndex((p) => p.id === selectedId) + 1} de {projectsList.length}
-        </span>
+      {/* Seletor de projeto estilizado */}
+      <div className="mb-5 p-4 rounded-xl border border-border-dark/50 bg-surface/40">
+        <div className="flex flex-wrap items-center gap-4">
+          <label
+            htmlFor="project-select"
+            className="text-sm font-semibold text-accent uppercase tracking-wider"
+          >
+            Projeto
+          </label>
+          <select
+            id="project-select"
+            value={selectedId}
+            onChange={(e) => setSelectedId(e.target.value)}
+            className="project-select px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary outline-none transition-all cursor-pointer min-w-[240px] max-w-full hover:border-accent/40"
+            aria-label="Selecionar projeto"
+          >
+            {projectsList.map((project) => (
+              <option key={project.id} value={project.id}>
+                {project.title}
+              </option>
+            ))}
+          </select>
+          <span className="text-xs font-medium text-muted bg-surface/60 px-3 py-1.5 rounded-lg border border-border-dark/40">
+            {projectsList.findIndex((p) => p.id === selectedId) + 1} de {projectsList.length}
+          </span>
+        </div>
       </div>
 
       {/* Área de apresentação: iframe em destaque */}
