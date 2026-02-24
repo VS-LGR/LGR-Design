@@ -1,4 +1,4 @@
-import type { Project, ProjectCategory } from "@/types";
+import type { Project, ProjectCategory, ProjectTopic } from "@/types";
 
 export const projectCategories: { id: ProjectCategory; label: string }[] = [
   { id: "web", label: "Web" },
@@ -7,11 +7,19 @@ export const projectCategories: { id: ProjectCategory; label: string }[] = [
   { id: "other", label: "Outros" },
 ];
 
+export const projectTopics: { id: ProjectTopic; label: string }[] = [
+  { id: "saude", label: "Saúde" },
+  { id: "negocios", label: "Negócios" },
+  { id: "empresas", label: "Empresas" },
+  { id: "recreativos", label: "Recreativos" },
+];
+
 export const projectsList: Project[] = [
   {
     id: "psi-bia-rossi",
-    title: "Psi Bia Rossi — Psicanálise com Gamificação",
+    title: "Psi Bia Rossi",
     category: "web",
+    topic: "saude",
     slug: "psi-bia-rossi",
     description:
       "Site institucional para psicóloga especializada em psicanálise com gamificação através de jogos de tabuleiro. Apresenta metodologia, serviços, depoimentos e formulário de contato.",
@@ -21,8 +29,9 @@ export const projectsList: Project[] = [
   },
   {
     id: "lp-farma",
-    title: "Pharmatech — Inovação Farmacêutica Brasileira",
+    title: "Pharmatech",
     category: "web",
+    topic: "empresas",
     slug: "lp-farma-com",
     description:
       "Landing page da Pharmatech: empresa de desenvolvimento farmacêutico com foco em tecnologia, pesquisa e parcerias. Seções sobre a empresa, especializações, fundador e contato.",
@@ -32,8 +41,9 @@ export const projectsList: Project[] = [
   },
   {
     id: "lp-civil",
-    title: "ConstruWork — Construção Civil de Qualidade",
+    title: "ConstruWork",
     category: "web",
+    topic: "negocios",
     slug: "lp-civil",
     description:
       "Site da ConstruWork: mais de 15 anos em construção civil. Apresenta história, valores, portfólio de trabalhos (residencial, comercial, industrial) e formulário para orçamento.",

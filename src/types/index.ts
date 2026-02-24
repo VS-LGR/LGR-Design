@@ -21,10 +21,13 @@ export interface AboutContent {
 
 export type ProjectCategory = "web" | "ux" | "identity" | "other";
 
+export type ProjectTopic = "saude" | "negocios" | "empresas" | "recreativos";
+
 export interface Project {
   id: string;
   title: string;
   category: ProjectCategory;
+  topic: ProjectTopic;
   slug: string;
   description: string;
   /** Explicação do processo de desenvolvimento do site/projeto */

@@ -1,21 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { projectsList } from "@/lib/projects";
+import { useState, useMemo } from "react";
+import { projectsList, projectTopics } from "@/lib/projects";
 import { projectCategories } from "@/lib/projects";
-import type { Project, ProjectCategory } from "@/types";
+import type { Project, ProjectCategory, ProjectTopic } from "@/types";
 
 function getCategoryLabel(category: ProjectCategory) {
   return projectCategories.find((c) => c.id === category)?.label ?? category;
 }
 
 export function ProjectGrid() {
+  const [selectedTopic, setSelectedTopic] = useState<ProjectTopic>("saude");
+  const projectsInTopic = useMemo(
+    () => projectsList.filter((p) => p.topic === selectedTopic),
+    [selectedTopic]
+  );
   const [selectedId, setSelectedId] = useState<string>(
-    projectsList[0]?.id ?? ""
+    projectsInTopic[0]?.id ?? projectsList[0]?.id ?? ""
   );
 
+  const projectInTopic = projectsInTopic.find((p) => p.id === selectedId);
   const projectToShow =
-    projectsList.find((p) => p.id === selectedId) ?? projectsList[0] ?? null;
+    projectInTopic ?? projectsInTopic[0] ?? projectsList[0] ?? null;
   const projectUrl =
     projectToShow?.link && projectToShow.link.startsWith("http")
       ? projectToShow.link
@@ -24,6 +30,18 @@ export function ProjectGrid() {
     projectToShow?.developmentExplanation &&
     !projectToShow.developmentExplanation.startsWith("[");
 
+  const currentTopicProjects = projectsInTopic;
+  const selectedProjectIndex = currentTopicProjects.findIndex((p) => p.id === selectedId);
+  const effectiveIndex = selectedProjectIndex >= 0 ? selectedProjectIndex : 0;
+
+  const handleTopicChange = (topic: ProjectTopic) => {
+    setSelectedTopic(topic);
+    const inNewTopic = projectsList.filter((p) => p.topic === topic);
+    if (inNewTopic.length > 0) {
+      setSelectedId(inNewTopic[0].id);
+    }
+  };
+
   return (
     <div
       role="tabpanel"
@@ -31,32 +49,60 @@ export function ProjectGrid() {
       aria-labelledby="tab-projects"
       className="w-full min-w-0 flex flex-col py-6 md:py-8"
     >
-      {/* Seletor de projeto estilizado */}
-      <div className="mb-5 p-4 rounded-xl border border-border-dark/50 bg-surface/40">
-        <div className="flex flex-wrap items-center gap-4">
-          <label
-            htmlFor="project-select"
-            className="text-sm font-semibold text-accent uppercase tracking-wider"
-          >
-            Projeto
-          </label>
-          <select
-            id="project-select"
-            value={selectedId}
-            onChange={(e) => setSelectedId(e.target.value)}
-            className="project-select px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary outline-none transition-all cursor-pointer min-w-[240px] max-w-full hover:border-accent/40"
-            aria-label="Selecionar projeto"
-          >
-            {projectsList.map((project) => (
-              <option key={project.id} value={project.id}>
-                {project.title}
-              </option>
-            ))}
-          </select>
-          <span className="text-xs font-medium text-muted bg-surface/60 px-3 py-1.5 rounded-lg border border-border-dark/40">
-            {projectsList.findIndex((p) => p.id === selectedId) + 1} de {projectsList.length}
-          </span>
+      {/* Seletor por tópico + projeto */}
+      <div className="mb-5 p-4 md:p-5 rounded-xl border border-border-dark/50 bg-surface/40">
+        <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">
+          Projetos por tópico
+        </p>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {projectTopics.map((topic) => (
+            <button
+              key={topic.id}
+              type="button"
+              onClick={() => handleTopicChange(topic.id)}
+              className={`
+                px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus-ring
+                ${
+                  selectedTopic === topic.id
+                    ? "bg-accent text-dark shadow-glow-sm"
+                    : "bg-surface/80 text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
+                }
+              `}
+            >
+              {topic.label}
+            </button>
+          ))}
         </div>
+        {currentTopicProjects.length > 0 ? (
+          <div className="flex flex-wrap items-center gap-4">
+            <label
+              htmlFor="project-select"
+              className="text-sm font-medium text-muted"
+            >
+              Projeto
+            </label>
+            <select
+              id="project-select"
+              value={selectedId}
+              onChange={(e) => setSelectedId(e.target.value)}
+              className="project-select px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary outline-none transition-all cursor-pointer min-w-[220px] max-w-full hover:border-accent/40"
+              aria-label="Selecionar projeto"
+            >
+              {currentTopicProjects.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.title}
+                </option>
+              ))}
+            </select>
+            <span className="text-xs font-medium text-muted bg-surface/60 px-3 py-1.5 rounded-lg border border-border-dark/40">
+              {effectiveIndex + 1} de {currentTopicProjects.length}
+            </span>
+          </div>
+        ) : (
+          <p className="text-sm text-muted">
+            Nenhum projeto neste tópico no momento.
+          </p>
+        )}
       </div>
 
       {/* Área de apresentação: iframe em destaque */}
