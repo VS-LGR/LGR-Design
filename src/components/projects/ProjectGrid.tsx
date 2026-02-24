@@ -58,6 +58,8 @@ export function ProjectGrid() {
   const MIN_PREVIEW_W = 320;
   const MIN_PREVIEW_H = 280;
   const PREVIEW_EDGE_MARGIN = 24;
+  /** Espaço mínimo no rodapé quando solta, para não “travar” a janela no chão e deixar área útil */
+  const FLOATING_BOTTOM_GAP = 160;
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
@@ -108,9 +110,10 @@ export function ProjectGrid() {
       const h = win ? win.innerHeight : 1080;
       const width = el ? el.offsetWidth : previewSize.width;
       const height = el ? el.offsetHeight : previewSize.height;
+      const maxY = h - height - FLOATING_BOTTOM_GAP;
       setPreviewPosition({
         x: Math.max(PREVIEW_EDGE_MARGIN, Math.min(w - width - PREVIEW_EDGE_MARGIN, dragRef.current.startLeft + dx)),
-        y: Math.max(PREVIEW_EDGE_MARGIN, Math.min(h - height - PREVIEW_EDGE_MARGIN, dragRef.current.startTop + dy)),
+        y: Math.max(PREVIEW_EDGE_MARGIN, Math.min(maxY, dragRef.current.startTop + dy)),
       });
     },
     [isDragging, isResizing, previewMode, previewSize.width, previewSize.height]
@@ -158,6 +161,14 @@ export function ProjectGrid() {
   useEffect(() => {
     if (isPortfolioMobile) setPreviewMode("docked");
   }, [isPortfolioMobile]);
+
+  useEffect(() => {
+    if (previewMode !== "floating" || typeof window === "undefined") return;
+    const maxY = window.innerHeight - previewSize.height - FLOATING_BOTTOM_GAP;
+    if (previewPosition.y > maxY && maxY >= PREVIEW_EDGE_MARGIN) {
+      setPreviewPosition((p) => ({ ...p, y: maxY }));
+    }
+  }, [previewMode]);
 
   const specsBody = projectToShow && (
     <>
@@ -319,17 +330,20 @@ export function ProjectGrid() {
                 </span>
               )}
             </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-3 flex-shrink-0 pl-4 py-2 pr-2 rounded-xl bg-accent/10 border border-accent/25">
+              <span className="text-xs font-semibold text-accent uppercase tracking-wider hidden sm:inline">
+                Ajustes
+              </span>
               {isPortfolioMobile ? (
-                <span className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-accent/90 bg-accent/10 rounded-lg border border-accent/30">
+                <span className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-accent/90 bg-accent/15 rounded-lg border border-accent/40">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                   <span>390px</span>
                 </span>
               ) : (
-                <>
-                  <span className="text-xs text-muted mr-1 hidden md:inline">Largura:</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-accent/90 font-medium hidden md:inline">Largura:</span>
                   <select
                     value={viewportWidthPreset === "full" ? "full" : viewportWidthPreset}
                     onChange={(e) => {
@@ -339,7 +353,7 @@ export function ProjectGrid() {
                       );
                     }}
                     onClick={(e) => e.stopPropagation()}
-                    className="px-3 py-2 text-sm font-medium rounded-lg border border-border-dark/60 bg-surface/80 text-primary cursor-pointer focus-ring min-w-[7rem]"
+                    className="px-3 py-2 text-sm font-medium rounded-lg border border-accent/30 bg-surface text-primary cursor-pointer focus-ring min-w-[8rem] hover:border-accent/50 focus:border-accent"
                     title="Largura horizontal da pré-visualização"
                     aria-label="Largura da pré-visualização"
                   >
@@ -348,7 +362,7 @@ export function ProjectGrid() {
                     <option value={768}>768px (Tablet)</option>
                     <option value={1024}>1024px (Desktop)</option>
                   </select>
-                </>
+                </div>
               )}
               <button
                 type="button"
@@ -356,7 +370,7 @@ export function ProjectGrid() {
                   e.stopPropagation();
                   setPreviewMode((m) => (m === "floating" ? "docked" : "floating"));
                 }}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted hover:text-accent hover:bg-accent/10 transition-colors focus-ring"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted hover:text-accent hover:bg-accent/15 transition-colors focus-ring border border-transparent hover:border-accent/30"
                 title={
                   previewMode === "floating"
                     ? "Prender preview (deixar especificações visíveis)"
