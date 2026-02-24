@@ -42,11 +42,19 @@ export function ProjectGrid() {
     }
   };
 
+  const MIN_PREVIEW_W = 320;
+  const MIN_PREVIEW_H = 280;
+
   type PreviewMode = "floating" | "docked";
   const [previewMode, setPreviewMode] = useState<PreviewMode>("floating");
   const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
+  const [previewSize, setPreviewSize] = useState({ width: 960, height: 600 });
+  const [dockedHeight, setDockedHeight] = useState(420);
+  const [viewportMode, setViewportMode] = useState<"web" | "mobile">("web");
   const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
+  const resizeRef = useRef({ startX: 0, startY: 0, startW: 0, startH: 0 });
   const previewRef = useRef<HTMLDivElement>(null);
 
   const handlePreviewMouseDown = useCallback(
@@ -66,25 +74,68 @@ export function ProjectGrid() {
 
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
+      const win = typeof window !== "undefined" ? window : null;
+      const maxW = win ? win.innerWidth - 48 : 1400;
+      const maxH = win ? Math.round(win.innerHeight * 0.9) : 900;
+
+      if (isResizing) {
+        const dx = e.clientX - resizeRef.current.startX;
+        const dy = e.clientY - resizeRef.current.startY;
+        if (previewMode === "floating") {
+          setPreviewSize({
+            width: Math.max(MIN_PREVIEW_W, Math.min(maxW, resizeRef.current.startW + dx)),
+            height: Math.max(MIN_PREVIEW_H, Math.min(maxH, resizeRef.current.startH + dy)),
+          });
+        } else {
+          setDockedHeight((h) =>
+            Math.max(MIN_PREVIEW_H, Math.min(maxH, resizeRef.current.startH + dy))
+          );
+        }
+        return;
+      }
       if (!isDragging) return;
       const dx = e.clientX - dragRef.current.startX;
       const dy = e.clientY - dragRef.current.startY;
       const el = previewRef.current;
-      const w = typeof window !== "undefined" ? window.innerWidth : 1920;
-      const h = typeof window !== "undefined" ? window.innerHeight : 1080;
-      const width = el ? el.offsetWidth : 896;
-      const height = el ? el.offsetHeight : 600;
+      const w = win ? win.innerWidth : 1920;
+      const h = win ? win.innerHeight : 1080;
+      const width = el ? el.offsetWidth : previewSize.width;
+      const height = el ? el.offsetHeight : previewSize.height;
       setPreviewPosition({
         x: Math.max(0, Math.min(w - width, dragRef.current.startLeft + dx)),
         y: Math.max(0, Math.min(h - height, dragRef.current.startTop + dy)),
       });
     },
-    [isDragging]
+    [isDragging, isResizing, previewMode, previewSize.width, previewSize.height]
   );
 
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
+    setIsResizing(false);
   }, []);
+
+  const handleResizeStart = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsResizing(true);
+      if (previewMode === "floating") {
+        resizeRef.current = {
+          startX: e.clientX,
+          startY: e.clientY,
+          startW: previewSize.width,
+          startH: previewSize.height,
+        };
+      } else {
+        resizeRef.current = {
+          startX: 0,
+          startY: e.clientY,
+          startW: 0,
+          startH: dockedHeight,
+        };
+      }
+    },
+    [previewMode, previewSize.width, previewSize.height, dockedHeight]
+  );
 
   useEffect(() => {
     const w = typeof window !== "undefined" ? window : null;
@@ -164,20 +215,25 @@ export function ProjectGrid() {
       {projectToShow && (
         <div
           ref={previewRef}
-          className={`preview-window flex flex-col rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none transition-all duration-300 ${
-            previewMode === "floating"
-              ? "fixed z-30 w-[calc(100vw-2rem)] max-w-4xl h-[70vh] min-h-[420px] animate-in"
-              : "w-full max-w-4xl mx-auto h-[42vh] min-h-[320px] mb-6"
+          className={`preview-window flex flex-col rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none transition-[box-shadow] duration-300 ${
+            previewMode === "floating" ? "fixed z-30 animate-in" : "w-full max-w-4xl mx-auto mb-6"
           }`}
           style={
             previewMode === "floating"
               ? {
                   left: previewPosition.x,
                   top: previewPosition.y,
+                  width: previewSize.width,
+                  height: previewSize.height,
+                  minWidth: MIN_PREVIEW_W,
+                  minHeight: MIN_PREVIEW_H,
                   boxShadow:
                     "0 0 0 1px rgba(6,182,212,0.15), 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 40px -10px rgba(6,182,212,0.2)",
                 }
-              : undefined
+              : {
+                  height: dockedHeight,
+                  minHeight: MIN_PREVIEW_H,
+                }
           }
         >
           <header
@@ -219,6 +275,49 @@ export function ProjectGrid() {
               )}
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="text-xs text-muted mr-1 hidden md:inline">Resolução:</span>
+              <div className="flex rounded-lg border border-border-dark/60 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setViewportMode("web");
+                  }}
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
+                    viewportMode === "web"
+                      ? "bg-accent/20 text-accent border-accent/40"
+                      : "text-muted hover:text-primary bg-surface/50"
+                  }`}
+                  title="Visualização desktop (largura total)"
+                  aria-label="Ver em resolução web"
+                  aria-pressed={viewportMode === "web"}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span className="hidden sm:inline">Web</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setViewportMode("mobile");
+                  }}
+                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
+                    viewportMode === "mobile"
+                      ? "bg-accent/20 text-accent border-accent/40"
+                      : "text-muted hover:text-primary bg-surface/50"
+                  }`}
+                  title="Visualização mobile (390px)"
+                  aria-label="Ver em resolução mobile"
+                  aria-pressed={viewportMode === "mobile"}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                  <span className="hidden sm:inline">Mobile</span>
+                </button>
+              </div>
               <button
                 type="button"
                 onClick={(e) => {
@@ -266,19 +365,51 @@ export function ProjectGrid() {
               )}
             </div>
           </header>
-          <div className="flex-1 min-h-0 relative bg-dark">
+          <div className="flex-1 min-h-0 relative bg-dark flex items-center justify-center">
             {projectUrl ? (
-              <iframe
-                src={projectUrl}
-                title={projectToShow.title}
-                className="absolute inset-0 w-full h-full border-0"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              viewportMode === "mobile" ? (
+                <div
+                  className="w-[390px] min-h-[400px] max-h-[700px] h-full flex-shrink-0 rounded-[2rem] overflow-hidden border-2 border-border-dark/80 bg-surface shadow-xl"
+                  style={{ boxShadow: "0 0 0 1px rgba(6,182,212,0.2), 0 20px 40px -10px rgba(0,0,0,0.4)" }}
+                >
+                  <iframe
+                    src={projectUrl}
+                    title={projectToShow.title}
+                    className="w-full h-full border-0"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+              ) : (
+                <iframe
+                  src={projectUrl}
+                  title={projectToShow.title}
+                  className="absolute inset-0 w-full h-full border-0"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              )
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
                 Sem link de preview
               </div>
+            )}
+          </div>
+          {/* Alça de redimensionar */}
+          <div
+            onMouseDown={handleResizeStart}
+            className={`absolute z-10 bg-accent/20 hover:bg-accent/30 transition-colors flex items-center justify-center ${
+              previewMode === "floating"
+                ? "bottom-0 right-0 w-6 h-6 cursor-nwse-resize rounded-tl-lg"
+                : "left-0 right-0 bottom-0 h-3 cursor-ns-resize"
+            }`}
+            title={previewMode === "floating" ? "Arrastar para redimensionar" : "Arrastar para alterar altura"}
+            aria-label={previewMode === "floating" ? "Redimensionar janela" : "Redimensionar altura"}
+          >
+            {previewMode === "floating" && (
+              <svg className="w-3.5 h-3.5 text-accent/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 20L20 4M20 4h-8M20 4v8" />
+              </svg>
             )}
           </div>
         </div>
