@@ -471,7 +471,7 @@ export function ProjectGrid() {
 
       {projectToShow && previewMode === "floating" && (
         <div
-          className="fixed bottom-0 left-0 right-0 z-20 max-h-[45vh] overflow-y-auto border-t border-border-dark/60 bg-surface/95 backdrop-blur-md shadow-[0_-8px 32px -8px rgba(0,0,0,0.4)]"
+          className="fixed bottom-0 left-0 right-0 z-40 max-h-[45vh] overflow-y-auto border-t border-border-dark/60 bg-surface/95 backdrop-blur-md shadow-[0_-8px 32px -8px rgba(0,0,0,0.4)]"
           aria-labelledby="specs-heading-floating"
         >
           <div className="py-4 px-4 md:px-6 max-w-4xl mx-auto">
