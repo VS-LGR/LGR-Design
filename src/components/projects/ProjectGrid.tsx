@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { projectsList, projectTopics } from "@/lib/projects";
 import { projectCategories } from "@/lib/projects";
-import type { Project, ProjectCategory, ProjectTopic } from "@/types";
+import type { ProjectCategory, ProjectTopic } from "@/types";
 
 function getCategoryLabel(category: ProjectCategory) {
   return projectCategories.find((c) => c.id === category)?.label ?? category;
@@ -41,6 +41,58 @@ export function ProjectGrid() {
       setSelectedId(inNewTopic[0].id);
     }
   };
+
+  const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
+  const previewRef = useRef<HTMLDivElement>(null);
+
+  const handlePreviewMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if ((e.target as HTMLElement).closest("a, button")) return;
+      setIsDragging(true);
+      dragRef.current = {
+        startX: e.clientX,
+        startY: e.clientY,
+        startLeft: previewPosition.x,
+        startTop: previewPosition.y,
+      };
+    },
+    [previewPosition]
+  );
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isDragging) return;
+      const dx = e.clientX - dragRef.current.startX;
+      const dy = e.clientY - dragRef.current.startY;
+      const el = previewRef.current;
+      const w = typeof window !== "undefined" ? window.innerWidth : 1920;
+      const h = typeof window !== "undefined" ? window.innerHeight : 1080;
+      const width = el ? el.offsetWidth : 896;
+      const height = el ? el.offsetHeight : 600;
+      setPreviewPosition({
+        x: Math.max(0, Math.min(w - width, dragRef.current.startLeft + dx)),
+        y: Math.max(0, Math.min(h - height, dragRef.current.startTop + dy)),
+      });
+    },
+    [isDragging]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  useEffect(() => {
+    const w = typeof window !== "undefined" ? window : null;
+    if (!w) return;
+    w.addEventListener("mousemove", handleMouseMove);
+    w.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      w.removeEventListener("mousemove", handleMouseMove);
+      w.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [handleMouseMove, handleMouseUp]);
 
   return (
     <div
@@ -105,43 +157,72 @@ export function ProjectGrid() {
         )}
       </div>
 
-      {/* Área de apresentação: iframe em destaque */}
-      <div className="flex flex-col flex-1 min-h-[65vh] md:min-h-[72vh] rounded-xl border border-border-dark/60 bg-surface/30 overflow-hidden">
-        {projectToShow && (
-          <>
-            <div className="flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-border-dark/50 bg-surface/50">
+      {/* Preview flutuante: arraste pela barra para reposicionar */}
+      {projectToShow && (
+        <div
+          ref={previewRef}
+          className="preview-window fixed z-30 flex flex-col w-[calc(100vw-2rem)] max-w-4xl h-[70vh] min-h-[420px] rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none animate-in"
+          style={{
+            left: previewPosition.x,
+            top: previewPosition.y,
+            boxShadow:
+              "0 0 0 1px rgba(6,182,212,0.15), 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 40px -10px rgba(6,182,212,0.2)",
+          }}
+        >
+          <header
+            role="button"
+            tabIndex={0}
+            onMouseDown={handlePreviewMouseDown}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") e.currentTarget.click();
+            }}
+            className={`flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-accent/20 bg-surface/80 cursor-grab active:cursor-grabbing ${
+              isDragging ? "cursor-grabbing" : ""
+            }`}
+            aria-label="Arrastar janela de preview"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="flex gap-1.5" aria-hidden>
+                <span className="w-2.5 h-2.5 rounded-full bg-accent/60" />
+                <span className="w-2.5 h-2.5 rounded-full bg-accent/40" />
+                <span className="w-2.5 h-2.5 rounded-full bg-accent/30" />
+              </span>
               <h2 className="text-base font-semibold text-primary truncate">
                 {projectToShow.title}
               </h2>
-              {projectUrl && (
-                <a
-                  href={projectUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
-                >
-                  Abrir em nova guia
-                </a>
-              )}
+              <span className="text-xs text-muted hidden sm:inline">
+                — arraste para mover
+              </span>
             </div>
-            <div className="flex-1 min-h-0 relative bg-dark">
-              {projectUrl ? (
-                <iframe
-                  src={projectUrl}
-                  title={projectToShow.title}
-                  className="absolute inset-0 w-full h-full border-0"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
-                  Sem link de preview
-                </div>
-              )}
-            </div>
-          </>
-        )}
-      </div>
+            {projectUrl && (
+              <a
+                href={projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
+              >
+                Abrir em nova guia
+              </a>
+            )}
+          </header>
+          <div className="flex-1 min-h-0 relative bg-dark">
+            {projectUrl ? (
+              <iframe
+                src={projectUrl}
+                title={projectToShow.title}
+                className="absolute inset-0 w-full h-full border-0"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
+                Sem link de preview
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Especificações do projeto: abaixo do iframe */}
       {projectToShow && (
