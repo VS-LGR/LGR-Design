@@ -42,6 +42,8 @@ export function ProjectGrid() {
     }
   };
 
+  type PreviewMode = "floating" | "docked";
+  const [previewMode, setPreviewMode] = useState<PreviewMode>("floating");
   const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
   const [isDragging, setIsDragging] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
@@ -50,6 +52,7 @@ export function ProjectGrid() {
   const handlePreviewMouseDown = useCallback(
     (e: React.MouseEvent) => {
       if ((e.target as HTMLElement).closest("a, button")) return;
+      if (previewMode !== "floating") return;
       setIsDragging(true);
       dragRef.current = {
         startX: e.clientX,
@@ -58,7 +61,7 @@ export function ProjectGrid() {
         startTop: previewPosition.y,
       };
     },
-    [previewPosition]
+    [previewPosition, previewMode]
   );
 
   const handleMouseMove = useCallback(
@@ -157,29 +160,48 @@ export function ProjectGrid() {
         )}
       </div>
 
-      {/* Preview flutuante: arraste pela barra para reposicionar */}
+      {/* Preview: modo flutuante (arrastável) ou fixo (compacto, especificações visíveis) */}
       {projectToShow && (
         <div
           ref={previewRef}
-          className="preview-window fixed z-30 flex flex-col w-[calc(100vw-2rem)] max-w-4xl h-[70vh] min-h-[420px] rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none animate-in"
-          style={{
-            left: previewPosition.x,
-            top: previewPosition.y,
-            boxShadow:
-              "0 0 0 1px rgba(6,182,212,0.15), 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 40px -10px rgba(6,182,212,0.2)",
-          }}
+          className={`preview-window flex flex-col rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none transition-all duration-300 ${
+            previewMode === "floating"
+              ? "fixed z-30 w-[calc(100vw-2rem)] max-w-4xl h-[70vh] min-h-[420px] animate-in"
+              : "w-full max-w-4xl mx-auto h-[42vh] min-h-[320px] mb-6"
+          }`}
+          style={
+            previewMode === "floating"
+              ? {
+                  left: previewPosition.x,
+                  top: previewPosition.y,
+                  boxShadow:
+                    "0 0 0 1px rgba(6,182,212,0.15), 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 40px -10px rgba(6,182,212,0.2)",
+                }
+              : undefined
+          }
         >
           <header
-            role="button"
-            tabIndex={0}
+            role={previewMode === "floating" ? "button" : undefined}
+            tabIndex={previewMode === "floating" ? 0 : undefined}
             onMouseDown={handlePreviewMouseDown}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") e.currentTarget.click();
-            }}
-            className={`flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-accent/20 bg-surface/80 cursor-grab active:cursor-grabbing ${
-              isDragging ? "cursor-grabbing" : ""
+            onKeyDown={
+              previewMode === "floating"
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ")
+                      (e.currentTarget as HTMLElement).click();
+                  }
+                : undefined
+            }
+            className={`flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-accent/20 bg-surface/80 ${
+              previewMode === "floating"
+                ? `cursor-grab active:cursor-grabbing ${isDragging ? "cursor-grabbing" : ""}`
+                : ""
             }`}
-            aria-label="Arrastar janela de preview"
+            aria-label={
+              previewMode === "floating"
+                ? "Arrastar janela de preview"
+                : undefined
+            }
           >
             <div className="flex items-center gap-3 min-w-0">
               <span className="flex gap-1.5" aria-hidden>
@@ -190,21 +212,59 @@ export function ProjectGrid() {
               <h2 className="text-base font-semibold text-primary truncate">
                 {projectToShow.title}
               </h2>
-              <span className="text-xs text-muted hidden sm:inline">
-                — arraste para mover
-              </span>
+              {previewMode === "floating" && (
+                <span className="text-xs text-muted hidden sm:inline">
+                  — arraste para mover
+                </span>
+              )}
             </div>
-            {projectUrl && (
-              <a
-                href={projectUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPreviewMode((m) => (m === "floating" ? "docked" : "floating"));
+                }}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted hover:text-accent hover:bg-accent/10 transition-colors focus-ring"
+                title={
+                  previewMode === "floating"
+                    ? "Prender preview (deixar especificações visíveis)"
+                    : "Soltar preview (modo flutuante, arrastável)"
+                }
+                aria-label={
+                  previewMode === "floating"
+                    ? "Prender preview"
+                    : "Soltar preview para modo flutuante"
+                }
               >
-                Abrir em nova guia
-              </a>
-            )}
+                {previewMode === "floating" ? (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <span className="hidden sm:inline">Prender</span>
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2m8-16h2a2 2 0 012 2v2m-4 12h2a2 2 0 002-2v-6a2 2 0 00-2-2h-2a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                    </svg>
+                    <span className="hidden sm:inline">Soltar</span>
+                  </>
+                )}
+              </button>
+              {projectUrl && (
+                <a
+                  href={projectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
+                >
+                  Abrir em nova guia
+                </a>
+              )}
+            </div>
           </header>
           <div className="flex-1 min-h-0 relative bg-dark">
             {projectUrl ? (
