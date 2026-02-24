@@ -48,10 +48,12 @@ export function ProjectGrid() {
   const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
   const [previewSize, setPreviewSize] = useState({ width: 960, height: 600 });
   const [dockedHeight, setDockedHeight] = useState(420);
-  const [viewportMode, setViewportMode] = useState<"web" | "mobile">("web");
+  type ViewportWidthPreset = "full" | 390 | 768 | 1024;
+  const [viewportWidthPreset, setViewportWidthPreset] = useState<ViewportWidthPreset>("full");
 
   const isPortfolioMobile = useIsMobile();
-  const effectiveViewportMode = isPortfolioMobile ? "mobile" : viewportMode;
+  const effectiveViewportWidth: ViewportWidthPreset | number =
+    isPortfolioMobile ? 390 : viewportWidthPreset;
 
   const MIN_PREVIEW_W = 320;
   const MIN_PREVIEW_H = 280;
@@ -64,7 +66,7 @@ export function ProjectGrid() {
 
   const handlePreviewMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      if ((e.target as HTMLElement).closest("a, button")) return;
+      if ((e.target as HTMLElement).closest("a, button, select")) return;
       if (previewMode !== "floating") return;
       setIsDragging(true);
       dragRef.current = {
@@ -249,6 +251,9 @@ export function ProjectGrid() {
             Nenhum projeto neste tópico no momento.
           </p>
         )}
+        <p className="mt-3 text-xs text-muted/90 leading-relaxed">
+          Largura e tamanho da pré-visualização são ajustáveis na barra do preview (resolução + redimensionar pelo canto ou borda). Solta = arrastar; Presa = especificações abaixo.
+        </p>
       </div>
 
       {/* Preview: modo flutuante (arrastável) ou fixo (compacto, especificações visíveis) */}
@@ -320,53 +325,29 @@ export function ProjectGrid() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
-                  <span>Mobile</span>
+                  <span>390px</span>
                 </span>
               ) : (
                 <>
-                  <span className="text-xs text-muted mr-1 hidden md:inline">Resolução:</span>
-                  <div className="flex rounded-lg border border-border-dark/60 overflow-hidden">
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setViewportMode("web");
-                      }}
-                      className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
-                        viewportMode === "web"
-                          ? "bg-accent/20 text-accent border-accent/40"
-                          : "text-muted hover:text-primary bg-surface/50"
-                      }`}
-                      title="Visualização desktop (largura total)"
-                      aria-label="Ver em resolução web"
-                      aria-pressed={viewportMode === "web"}
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                      <span className="hidden sm:inline">Web</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setViewportMode("mobile");
-                      }}
-                      className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
-                        viewportMode === "mobile"
-                          ? "bg-accent/20 text-accent border-accent/40"
-                          : "text-muted hover:text-primary bg-surface/50"
-                      }`}
-                      title="Visualização mobile (390px)"
-                      aria-label="Ver em resolução mobile"
-                      aria-pressed={viewportMode === "mobile"}
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                      </svg>
-                      <span className="hidden sm:inline">Mobile</span>
-                    </button>
-                  </div>
+                  <span className="text-xs text-muted mr-1 hidden md:inline">Largura:</span>
+                  <select
+                    value={viewportWidthPreset === "full" ? "full" : viewportWidthPreset}
+                    onChange={(e) => {
+                      const v = e.target.value;
+                      setViewportWidthPreset(
+                        v === "full" ? "full" : (Number(v) as 390 | 768 | 1024)
+                      );
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="px-3 py-2 text-sm font-medium rounded-lg border border-border-dark/60 bg-surface/80 text-primary cursor-pointer focus-ring min-w-[7rem]"
+                    title="Largura horizontal da pré-visualização"
+                    aria-label="Largura da pré-visualização"
+                  >
+                    <option value="full">100% (Web)</option>
+                    <option value={390}>390px (Mobile)</option>
+                    <option value={768}>768px (Tablet)</option>
+                    <option value={1024}>1024px (Desktop)</option>
+                  </select>
                 </>
               )}
               <button
@@ -418,18 +399,20 @@ export function ProjectGrid() {
           </header>
           <div className="flex-1 min-h-0 relative bg-dark flex items-center justify-center overflow-hidden">
             {projectUrl ? (
-              effectiveViewportMode === "mobile" ? (
+              effectiveViewportWidth !== "full" ? (
                 <div
-                  className={`min-h-[400px] max-h-[700px] h-full flex-shrink-0 rounded-[2rem] overflow-hidden border-2 border-border-dark/80 bg-surface shadow-xl ${
-                    isPortfolioMobile ? "w-full max-w-[390px]" : "w-[390px]"
-                  }`}
-                  style={{ boxShadow: "0 0 0 1px rgba(6,182,212,0.2), 0 20px 40px -10px rgba(0,0,0,0.4)" }}
+                  className="min-h-[400px] max-h-[700px] h-full flex-shrink-0 rounded-2xl overflow-hidden border-2 border-border-dark/80 bg-surface shadow-xl"
+                  style={{
+                    width: effectiveViewportWidth,
+                    maxWidth: isPortfolioMobile ? "100%" : undefined,
+                    boxShadow: "0 0 0 1px rgba(6,182,212,0.2), 0 20px 40px -10px rgba(0,0,0,0.4)",
+                  }}
                 >
                   <div className="w-full h-full pt-2 px-1 box-border">
                     <iframe
                       src={projectUrl}
                       title={projectToShow.title}
-                      className="w-full h-full border-0 rounded-[1.4rem]"
+                      className="w-full h-full border-0 rounded-xl"
                       sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                       referrerPolicy="no-referrer-when-downgrade"
                     />
