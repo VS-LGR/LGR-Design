@@ -3,6 +3,7 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { projectsList, projectTopics } from "@/lib/projects";
 import { projectCategories } from "@/lib/projects";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import type { ProjectCategory, ProjectTopic } from "@/types";
 
 function getCategoryLabel(category: ProjectCategory) {
@@ -42,15 +43,19 @@ export function ProjectGrid() {
     }
   };
 
-  const MIN_PREVIEW_W = 320;
-  const MIN_PREVIEW_H = 280;
-
   type PreviewMode = "floating" | "docked";
   const [previewMode, setPreviewMode] = useState<PreviewMode>("floating");
   const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
   const [previewSize, setPreviewSize] = useState({ width: 960, height: 600 });
   const [dockedHeight, setDockedHeight] = useState(420);
   const [viewportMode, setViewportMode] = useState<"web" | "mobile">("web");
+
+  const isPortfolioMobile = useIsMobile();
+  const effectiveViewportMode = isPortfolioMobile ? "mobile" : viewportMode;
+
+  const MIN_PREVIEW_W = 320;
+  const MIN_PREVIEW_H = 280;
+  const PREVIEW_EDGE_MARGIN = 24;
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
@@ -102,8 +107,8 @@ export function ProjectGrid() {
       const width = el ? el.offsetWidth : previewSize.width;
       const height = el ? el.offsetHeight : previewSize.height;
       setPreviewPosition({
-        x: Math.max(0, Math.min(w - width, dragRef.current.startLeft + dx)),
-        y: Math.max(0, Math.min(h - height, dragRef.current.startTop + dy)),
+        x: Math.max(PREVIEW_EDGE_MARGIN, Math.min(w - width - PREVIEW_EDGE_MARGIN, dragRef.current.startLeft + dx)),
+        y: Math.max(PREVIEW_EDGE_MARGIN, Math.min(h - height - PREVIEW_EDGE_MARGIN, dragRef.current.startTop + dy)),
       });
     },
     [isDragging, isResizing, previewMode, previewSize.width, previewSize.height]
@@ -148,12 +153,47 @@ export function ProjectGrid() {
     };
   }, [handleMouseMove, handleMouseUp]);
 
+  useEffect(() => {
+    if (isPortfolioMobile) setPreviewMode("docked");
+  }, [isPortfolioMobile]);
+
+  const specsBody = projectToShow && (
+    <>
+      <p className="text-sm text-accent/90 font-medium mb-1">
+        {getCategoryLabel(projectToShow.category)}
+      </p>
+      <p className="text-muted text-sm leading-relaxed mb-4">
+        {projectToShow.description}
+      </p>
+      {hasDev && (
+        <div>
+          <p className="text-xs font-medium text-accent/90 uppercase tracking-wider mb-2">
+            Sobre o desenvolvimento
+          </p>
+          <p className="text-muted text-sm leading-relaxed">
+            {projectToShow.developmentExplanation}
+          </p>
+        </div>
+      )}
+      {projectUrl && (
+        <a
+          href={projectUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
+        >
+          Abrir site em nova guia
+        </a>
+      )}
+    </>
+  );
+
   return (
     <div
       role="tabpanel"
       id="panel-projects"
       aria-labelledby="tab-projects"
-      className="w-full min-w-0 flex flex-col py-6 md:py-8"
+      className={`w-full min-w-0 flex flex-col py-6 md:py-8 ${isPortfolioMobile ? "overflow-x-hidden" : ""}`}
     >
       {/* Seletor por tópico + projeto */}
       <div className="mb-5 p-4 md:p-5 rounded-xl border border-border-dark/50 bg-surface/40">
@@ -248,7 +288,7 @@ export function ProjectGrid() {
                   }
                 : undefined
             }
-            className={`flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-accent/20 bg-surface/80 ${
+            className={`flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-accent/20 bg-surface/80 rounded-t-2xl ${
               previewMode === "floating"
                 ? `cursor-grab active:cursor-grabbing ${isDragging ? "cursor-grabbing" : ""}`
                 : ""
@@ -275,49 +315,60 @@ export function ProjectGrid() {
               )}
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-xs text-muted mr-1 hidden md:inline">Resolução:</span>
-              <div className="flex rounded-lg border border-border-dark/60 overflow-hidden">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setViewportMode("web");
-                  }}
-                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
-                    viewportMode === "web"
-                      ? "bg-accent/20 text-accent border-accent/40"
-                      : "text-muted hover:text-primary bg-surface/50"
-                  }`}
-                  title="Visualização desktop (largura total)"
-                  aria-label="Ver em resolução web"
-                  aria-pressed={viewportMode === "web"}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <span className="hidden sm:inline">Web</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setViewportMode("mobile");
-                  }}
-                  className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
-                    viewportMode === "mobile"
-                      ? "bg-accent/20 text-accent border-accent/40"
-                      : "text-muted hover:text-primary bg-surface/50"
-                  }`}
-                  title="Visualização mobile (390px)"
-                  aria-label="Ver em resolução mobile"
-                  aria-pressed={viewportMode === "mobile"}
-                >
+              {isPortfolioMobile ? (
+                <span className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-accent/90 bg-accent/10 rounded-lg border border-accent/30">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
-                  <span className="hidden sm:inline">Mobile</span>
-                </button>
-              </div>
+                  <span>Mobile</span>
+                </span>
+              ) : (
+                <>
+                  <span className="text-xs text-muted mr-1 hidden md:inline">Resolução:</span>
+                  <div className="flex rounded-lg border border-border-dark/60 overflow-hidden">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setViewportMode("web");
+                      }}
+                      className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
+                        viewportMode === "web"
+                          ? "bg-accent/20 text-accent border-accent/40"
+                          : "text-muted hover:text-primary bg-surface/50"
+                      }`}
+                      title="Visualização desktop (largura total)"
+                      aria-label="Ver em resolução web"
+                      aria-pressed={viewportMode === "web"}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span className="hidden sm:inline">Web</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setViewportMode("mobile");
+                      }}
+                      className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors focus-ring ${
+                        viewportMode === "mobile"
+                          ? "bg-accent/20 text-accent border-accent/40"
+                          : "text-muted hover:text-primary bg-surface/50"
+                      }`}
+                      title="Visualização mobile (390px)"
+                      aria-label="Ver em resolução mobile"
+                      aria-pressed={viewportMode === "mobile"}
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                      <span className="hidden sm:inline">Mobile</span>
+                    </button>
+                  </div>
+                </>
+              )}
               <button
                 type="button"
                 onClick={(e) => {
@@ -365,20 +416,24 @@ export function ProjectGrid() {
               )}
             </div>
           </header>
-          <div className="flex-1 min-h-0 relative bg-dark flex items-center justify-center">
+          <div className="flex-1 min-h-0 relative bg-dark flex items-center justify-center overflow-hidden">
             {projectUrl ? (
-              viewportMode === "mobile" ? (
+              effectiveViewportMode === "mobile" ? (
                 <div
-                  className="w-[390px] min-h-[400px] max-h-[700px] h-full flex-shrink-0 rounded-[2rem] overflow-hidden border-2 border-border-dark/80 bg-surface shadow-xl"
+                  className={`min-h-[400px] max-h-[700px] h-full flex-shrink-0 rounded-[2rem] overflow-hidden border-2 border-border-dark/80 bg-surface shadow-xl ${
+                    isPortfolioMobile ? "w-full max-w-[390px]" : "w-[390px]"
+                  }`}
                   style={{ boxShadow: "0 0 0 1px rgba(6,182,212,0.2), 0 20px 40px -10px rgba(0,0,0,0.4)" }}
                 >
-                  <iframe
-                    src={projectUrl}
-                    title={projectToShow.title}
-                    className="w-full h-full border-0"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  />
+                  <div className="w-full h-full pt-2 px-1 box-border">
+                    <iframe
+                      src={projectUrl}
+                      title={projectToShow.title}
+                      className="w-full h-full border-0 rounded-[1.4rem]"
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
                 </div>
               ) : (
                 <iframe
@@ -415,8 +470,8 @@ export function ProjectGrid() {
         </div>
       )}
 
-      {/* Especificações do projeto: abaixo do iframe */}
-      {projectToShow && (
+      {/* Especificações: no fluxo quando Presa, painel fixo quando Solta */}
+      {projectToShow && previewMode === "docked" && (
         <section
           className="mt-6 py-6 px-4 md:px-6 rounded-xl border border-border-dark/50 bg-surface/20"
           aria-labelledby="specs-heading"
@@ -427,33 +482,25 @@ export function ProjectGrid() {
           >
             Especificações
           </h3>
-          <p className="text-sm text-accent/90 font-medium mb-1">
-            {getCategoryLabel(projectToShow.category)}
-          </p>
-          <p className="text-muted text-sm leading-relaxed mb-4">
-            {projectToShow.description}
-          </p>
-          {hasDev && (
-            <div>
-              <p className="text-xs font-medium text-accent/90 uppercase tracking-wider mb-2">
-                Sobre o desenvolvimento
-              </p>
-              <p className="text-muted text-sm leading-relaxed">
-                {projectToShow.developmentExplanation}
-              </p>
-            </div>
-          )}
-          {projectUrl && (
-            <a
-              href={projectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
-            >
-              Abrir site em nova guia
-            </a>
-          )}
+          {specsBody}
         </section>
+      )}
+
+      {projectToShow && previewMode === "floating" && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-20 max-h-[45vh] overflow-y-auto border-t border-border-dark/60 bg-surface/95 backdrop-blur-md shadow-[0_-8px 32px -8px rgba(0,0,0,0.4)]"
+          aria-labelledby="specs-heading-floating"
+        >
+          <div className="py-4 px-4 md:px-6 max-w-4xl mx-auto">
+            <h3
+              id="specs-heading-floating"
+              className="text-sm font-semibold text-accent uppercase tracking-wider mb-4"
+            >
+              Especificações
+            </h3>
+            {specsBody}
+          </div>
+        </div>
       )}
     </div>
   );
