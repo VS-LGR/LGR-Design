@@ -3,11 +3,11 @@
 import { useState, useEffect, useCallback } from "react";
 
 const CIRCLE_LAYERS = [
-  { left: "8%", top: "18%", opacity: 0.09, depth: 0.25, duration: "14s", delay: "0s" },
-  { right: "12%", top: "35%", opacity: 0.07, depth: 0.45, duration: "18s", delay: "2s" },
-  { left: "35%", bottom: "20%", opacity: 0.08, depth: 0.65, duration: "16s", delay: "1s" },
-  { right: "28%", bottom: "35%", opacity: 0.06, depth: 0.35, duration: "12s", delay: "0.5s" },
-  { left: "55%", top: "55%", opacity: 0.07, depth: 0.55, duration: "15s", delay: "2.5s" },
+  { left: "8%", top: "18%", opacity: 0.09, depth: 0.25, duration: "14s", delay: "0s", size: "min(28px,5vw)" },
+  { right: "12%", top: "35%", opacity: 0.07, depth: 0.45, duration: "18s", delay: "2s", size: "min(44px,7vw)" },
+  { left: "35%", bottom: "20%", opacity: 0.08, depth: 0.65, duration: "16s", delay: "1s", size: "min(36px,6vw)" },
+  { right: "28%", bottom: "35%", opacity: 0.06, depth: 0.35, duration: "12s", delay: "0.5s", size: "min(24px,4vw)" },
+  { left: "55%", top: "55%", opacity: 0.07, depth: 0.55, duration: "15s", delay: "2.5s", size: "min(52px,9vw)" },
 ] as const;
 
 const MOUSE_INTENSITY = 36;
@@ -76,12 +76,13 @@ export function AnimatedBackground() {
           return (
             <div
               key={i}
-              className="absolute w-[min(120px,18vw)] bg-circle-float"
+              className="absolute bg-circle-float"
               style={{
                 ...("left" in layer && { left: layer.left }),
                 ...("right" in layer && { right: layer.right }),
                 ...("top" in layer && { top: layer.top }),
                 ...("bottom" in layer && { bottom: layer.bottom }),
+                width: layer.size,
                 animationDuration: layer.duration,
                 animationDelay: layer.delay,
               }}
