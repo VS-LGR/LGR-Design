@@ -46,7 +46,10 @@ export function ProjectGrid() {
   type PreviewMode = "floating" | "docked";
   const [previewMode, setPreviewMode] = useState<PreviewMode>("docked");
   const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
-  const [previewSize, setPreviewSize] = useState({ width: 960, height: 600 });
+  const [previewSize, setPreviewSize] = useState(() => ({
+    width: typeof window !== "undefined" ? Math.round(Math.min(1600, window.innerWidth * 0.92)) : 1280,
+    height: 600,
+  }));
   const [dockedHeight, setDockedHeight] = useState(420);
   type ViewportWidthPreset = "full" | 390 | 768 | 1024;
   const [viewportWidthPreset, setViewportWidthPreset] = useState<ViewportWidthPreset>("full");
@@ -163,6 +166,12 @@ export function ProjectGrid() {
   }, [isPortfolioMobile]);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    const w = Math.round(Math.min(1600, window.innerWidth * 0.92));
+    setPreviewSize((s) => (s.width !== w ? { ...s, width: w } : s));
+  }, []);
+
+  useEffect(() => {
     if (previewMode !== "floating" || typeof window === "undefined") return;
     const maxY = window.innerHeight - previewSize.height - FLOATING_BOTTOM_GAP;
     if (previewPosition.y > maxY && maxY >= PREVIEW_EDGE_MARGIN) {
@@ -274,7 +283,7 @@ export function ProjectGrid() {
         <div
           ref={previewRef}
           className={`preview-window flex flex-col rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none transition-[box-shadow] duration-300 ${
-            previewMode === "floating" ? "fixed z-30 animate-in" : "w-full max-w-4xl mx-auto mb-6"
+            previewMode === "floating" ? "fixed z-30 animate-in" : "w-full max-w-[min(1600px,95vw)] mx-auto mb-6"
           }`}
           style={
             previewMode === "floating"
