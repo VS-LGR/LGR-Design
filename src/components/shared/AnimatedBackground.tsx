@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 
 const CIRCLE_LAYERS = [
   { left: "8%", top: "18%", opacity: 0.09, depth: 0.25, duration: "14s", delay: "0s", size: "min(28px,5vw)" },
@@ -87,15 +88,18 @@ export function AnimatedBackground() {
                 animationDelay: layer.delay,
               }}
             >
-              <img
+              <Image
                 src="https://i.imgur.com/WyBAcv0.png"
                 alt=""
+                width={64}
+                height={64}
                 className="h-auto w-full transition-transform duration-150 ease-out"
                 style={{
                   opacity: layer.opacity,
                   filter: "blur(0.5px)",
                   transform: `translate(${dx}px, ${dy}px)`,
                 }}
+                sizes="64px"
               />
             </div>
           );
