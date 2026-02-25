@@ -8,11 +8,14 @@ import { projectCategories } from "@/lib/projects";
 const ABOUT_SECTION_IDS = [
   "about-intro",
   "about-formacao",
-  "about-experiencia",
-  "about-especialidades",
-  "about-diferencial",
+  "about-reconhecimentos",
+  "about-cursor-template",
+  "about-posicionamento",
+  "about-como-trabalho",
+  "about-ferramentas",
   "about-preferencias",
   "about-objetivo",
+  "about-contato",
 ] as const;
 
 const SIDEBAR_TRANSITION_MS = 280;
@@ -31,8 +34,8 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
             Sobre Mim
           </p>
-          <p className="text-sm text-muted mt-2 leading-relaxed">
-            Designer com foco em UI/UX, desenvolvimento web e criação visual
+          <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-4">
+            UX Designer e Web Designer com mentalidade de produto e visão
             estratégica.
           </p>
         </>
@@ -44,47 +47,71 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
             Formação
           </p>
           <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.formation.slice(0, 6).map((item, i) => (
+            {aboutContent.formation.slice(0, 4).map((item, i) => (
               <li key={i}>{item.title}</li>
             ))}
           </ul>
         </>
       );
-    case "about-experiencia":
+    case "about-reconhecimentos":
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Experiência
+            Reconhecimentos
           </p>
           <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.experience.map((item, i) => (
+            {aboutContent.recognitions.map((item, i) => (
               <li key={i}>{item.title}</li>
             ))}
           </ul>
         </>
       );
-    case "about-especialidades":
+    case "about-cursor-template":
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Especialidades
+            Template Cursor
           </p>
-          <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.specialties.map((s, i) => (
-              <li key={i}>{s}</li>
+          <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-3">
+            {aboutContent.cursorTemplate.title}
+          </p>
+        </>
+      );
+    case "about-posicionamento":
+      return (
+        <>
+          <p className="text-xs font-medium text-accent uppercase tracking-wider">
+            Posicionamento
+          </p>
+          <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-3">
+            {aboutContent.positioning[0]}
+          </p>
+        </>
+      );
+    case "about-como-trabalho":
+      return (
+        <>
+          <p className="text-xs font-medium text-accent uppercase tracking-wider">
+            Como Eu Trabalho
+          </p>
+          <ul className="space-y-1 text-sm text-muted mt-2">
+            {aboutContent.howIWork.points.map((p, i) => (
+              <li key={i}>{p}</li>
             ))}
           </ul>
         </>
       );
-    case "about-diferencial":
+    case "about-ferramentas":
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Diferencial
+            Ferramentas
           </p>
-          <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.differential.map((d, i) => (
-              <li key={i}>{d}</li>
+          <ul className="space-y-1 text-sm text-muted mt-2">
+            {aboutContent.tools.items.slice(0, 4).map((item, i) => (
+              <li key={i} className="line-clamp-1">
+                {item.split("–")[0].trim()}
+              </li>
             ))}
           </ul>
         </>
@@ -93,7 +120,7 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Preferências criativas
+            Criatividade
           </p>
           <ul className="space-y-2 text-sm text-muted mt-2">
             {aboutContent.creativePreferences.map((p, i) => (
@@ -113,17 +140,29 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
           </p>
         </>
       );
+    case "about-contato":
+      return (
+        <>
+          <p className="text-xs font-medium text-accent uppercase tracking-wider">
+            Contato
+          </p>
+          <p className="text-sm text-muted mt-2">
+            📱 {aboutContent.contact.phone}
+          </p>
+          <p className="text-sm text-muted mt-1 line-clamp-2">
+            📩 {aboutContent.contact.email}
+          </p>
+        </>
+      );
     default:
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Especialidades
+            Sobre Mim
           </p>
-          <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.specialties.slice(0, 8).map((s, i) => (
-              <li key={i}>{s}</li>
-            ))}
-          </ul>
+          <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-4">
+            {aboutContent.intro[0]}
+          </p>
         </>
       );
   }

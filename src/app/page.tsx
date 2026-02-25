@@ -11,11 +11,14 @@ import { useScrollSpy } from "@/hooks/useScrollSpy";
 const ABOUT_SECTION_IDS = [
   "about-intro",
   "about-formacao",
-  "about-experiencia",
-  "about-especialidades",
-  "about-diferencial",
+  "about-reconhecimentos",
+  "about-cursor-template",
+  "about-posicionamento",
+  "about-como-trabalho",
+  "about-ferramentas",
   "about-preferencias",
   "about-objetivo",
+  "about-contato",
 ];
 
 export default function Home() {

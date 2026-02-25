@@ -12,10 +12,11 @@ export function CreativePreferencesCarousel() {
         id="creative-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Preferências Criativas e Hobbies
+        Criatividade que Sustenta o Processo
       </h2>
       <p className="text-sm text-muted leading-relaxed">
-        Minha criatividade é alimentada por:
+        Minha base criativa vem de áreas que expandem minha visão estrutural e
+        estética:
       </p>
       <Carousel gap="gap-3" fadeWidth="w-12" className="min-w-0">
         {creativePreferences.map((item, index) => (
@@ -28,8 +29,8 @@ export function CreativePreferencesCarousel() {
         ))}
       </Carousel>
       <p className="text-sm text-muted pt-1">
-        Esses hobbies fortalecem minha percepção estética, senso de composição,
-        textura, forma e narrativa visual.
+        Essas práticas fortalecem minha capacidade de construir experiências com
+        profundidade, narrativa e intenção.
       </p>
     </section>
   );

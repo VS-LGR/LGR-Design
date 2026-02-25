@@ -1,10 +1,13 @@
 import { IntroBlock } from "./IntroBlock";
 import { FormationBlock } from "./FormationBlock";
-import { ExperienceBlock } from "./ExperienceBlock";
-import { SpecialtiesCarousel } from "./SpecialtiesCarousel";
-import { DifferentialBlock } from "./DifferentialBlock";
+import { RecognitionsBlock } from "./RecognitionsBlock";
+import { CursorTemplateBlock } from "./CursorTemplateBlock";
+import { PositioningBlock } from "./PositioningBlock";
+import { HowIWorkBlock } from "./HowIWorkBlock";
+import { ToolsBlock } from "./ToolsBlock";
 import { CreativePreferencesCarousel } from "./CreativePreferencesCarousel";
 import { ObjectiveBlock } from "./ObjectiveBlock";
+import { ContactBlock } from "./ContactBlock";
 
 export function AboutSection() {
   return (
@@ -36,32 +39,52 @@ export function AboutSection() {
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
-          id="about-experiencia"
+          id="about-reconhecimentos"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
-          aria-labelledby="experience-heading"
+          aria-labelledby="recognitions-heading"
         >
           <div className="max-w-3xl mx-auto">
-            <ExperienceBlock />
+            <RecognitionsBlock />
           </div>
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
-          id="about-especialidades"
+          id="about-cursor-template"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
-          aria-labelledby="specialties-heading"
+          aria-labelledby="cursor-template-heading"
         >
           <div className="max-w-3xl mx-auto">
-            <SpecialtiesCarousel />
+            <CursorTemplateBlock />
           </div>
         </section>
         <div className="section-divider w-full" aria-hidden />
         <section
-          id="about-diferencial"
+          id="about-posicionamento"
           className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
-          aria-labelledby="differential-heading"
+          aria-labelledby="positioning-heading"
         >
           <div className="max-w-3xl mx-auto">
-            <DifferentialBlock />
+            <PositioningBlock />
+          </div>
+        </section>
+        <div className="section-divider w-full" aria-hidden />
+        <section
+          id="about-como-trabalho"
+          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
+          aria-labelledby="how-i-work-heading"
+        >
+          <div className="max-w-3xl mx-auto">
+            <HowIWorkBlock />
+          </div>
+        </section>
+        <div className="section-divider w-full" aria-hidden />
+        <section
+          id="about-ferramentas"
+          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
+          aria-labelledby="tools-heading"
+        >
+          <div className="max-w-3xl mx-auto">
+            <ToolsBlock />
           </div>
         </section>
         <div className="section-divider w-full" aria-hidden />
@@ -82,6 +105,16 @@ export function AboutSection() {
         >
           <div className="max-w-3xl mx-auto">
             <ObjectiveBlock />
+          </div>
+        </section>
+        <div className="section-divider w-full" aria-hidden />
+        <section
+          id="about-contato"
+          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
+          aria-labelledby="contact-heading"
+        >
+          <div className="max-w-3xl mx-auto">
+            <ContactBlock />
           </div>
         </section>
       </div>
