@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
  */
 export function useScrollSpy(sectionIds: string[], enabled: boolean): string | null {
   const [activeId, setActiveId] = useState<string | null>(sectionIds[0] ?? null);
+  const idsKey = sectionIds.join(",");
 
   useEffect(() => {
     if (!enabled || sectionIds.length === 0) {
@@ -15,11 +16,13 @@ export function useScrollSpy(sectionIds: string[], enabled: boolean): string | n
       return;
     }
 
+    const ids = sectionIds;
+
     const getActiveSection = () => {
       const viewportTop = window.scrollY;
       const target = viewportTop + window.innerHeight * 0.25;
       let current: string | null = null;
-      for (const id of sectionIds) {
+      for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
         const { top, height } = el.getBoundingClientRect();
@@ -29,17 +32,17 @@ export function useScrollSpy(sectionIds: string[], enabled: boolean): string | n
           break;
         }
       }
-      if (!current && sectionIds.length > 0) {
-        const first = document.getElementById(sectionIds[0]);
-        const last = document.getElementById(sectionIds[sectionIds.length - 1]);
+      if (!current && ids.length > 0) {
+        const first = document.getElementById(ids[0]);
+        const last = document.getElementById(ids[ids.length - 1]);
         if (first && last) {
           const firstTop = first.getBoundingClientRect().top + window.scrollY;
           const lastBottom = last.getBoundingClientRect().bottom + window.scrollY;
-          if (target < firstTop) current = sectionIds[0];
-          else if (target > lastBottom) current = sectionIds[sectionIds.length - 1];
-          else current = sectionIds[0];
+          if (target < firstTop) current = ids[0];
+          else if (target > lastBottom) current = ids[ids.length - 1];
+          else current = ids[0];
         } else {
-          current = sectionIds[0];
+          current = ids[0];
         }
       }
       return current;
@@ -55,7 +58,7 @@ export function useScrollSpy(sectionIds: string[], enabled: boolean): string | n
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [enabled, sectionIds.join(",")]);
+  }, [enabled, idsKey, sectionIds]);
 
   return activeId;
 }

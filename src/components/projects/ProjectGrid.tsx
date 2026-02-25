@@ -168,6 +168,8 @@ export function ProjectGrid() {
     if (previewPosition.y > maxY && maxY >= PREVIEW_EDGE_MARGIN) {
       setPreviewPosition((p) => ({ ...p, y: maxY }));
     }
+    // Run only when switching to floating so the window isn't stuck at bottom
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewMode]);
 
   const specsBody = projectToShow && (
