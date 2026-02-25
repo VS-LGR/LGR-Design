@@ -1,6 +1,32 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
+
+const CIRCLE_LAYERS = [
+  { left: "8%", top: "18%", opacity: 0.09, depth: 0.25, duration: "14s", delay: "0s" },
+  { right: "12%", top: "35%", opacity: 0.07, depth: 0.45, duration: "18s", delay: "2s" },
+  { left: "35%", bottom: "20%", opacity: 0.08, depth: 0.65, duration: "16s", delay: "1s" },
+  { right: "28%", bottom: "35%", opacity: 0.06, depth: 0.35, duration: "12s", delay: "0.5s" },
+  { left: "55%", top: "55%", opacity: 0.07, depth: 0.55, duration: "15s", delay: "2.5s" },
+] as const;
+
+const MOUSE_INTENSITY = 36;
+
 export function AnimatedBackground() {
+  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
+
+  const onMove = useCallback((e: MouseEvent) => {
+    setMouse({
+      x: e.clientX / window.innerWidth,
+      y: e.clientY / window.innerHeight,
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [onMove]);
+
   return (
     <div
       className="fixed inset-0 -z-10 overflow-hidden"
@@ -42,68 +68,37 @@ export function AnimatedBackground() {
           animation: "grid-pulse 8s ease-in-out infinite",
         }}
       />
-      {/* Circle detail orbs - integrados ao tema */}
+      {/* Circle detail orbs - profundidade + parallax com o mouse */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <img
-          src="https://i.imgur.com/WyBAcv0.png"
-          alt=""
-          className="absolute w-[min(280px,35vw)] h-auto opacity-[0.09] bg-circle-float"
-          style={{
-            left: "8%",
-            top: "18%",
-            animationDuration: "14s",
-            animationDelay: "0s",
-            filter: "blur(0.5px)",
-          }}
-        />
-        <img
-          src="https://i.imgur.com/WyBAcv0.png"
-          alt=""
-          className="absolute w-[min(200px,28vw)] h-auto opacity-[0.07] bg-circle-float"
-          style={{
-            right: "12%",
-            top: "35%",
-            animationDuration: "18s",
-            animationDelay: "2s",
-            filter: "blur(0.5px)",
-          }}
-        />
-        <img
-          src="https://i.imgur.com/WyBAcv0.png"
-          alt=""
-          className="absolute w-[min(240px,32vw)] h-auto opacity-[0.08] bg-circle-float"
-          style={{
-            left: "35%",
-            bottom: "20%",
-            animationDuration: "16s",
-            animationDelay: "1s",
-            filter: "blur(0.5px)",
-          }}
-        />
-        <img
-          src="https://i.imgur.com/WyBAcv0.png"
-          alt=""
-          className="absolute w-[min(160px,22vw)] h-auto opacity-[0.06] bg-circle-float"
-          style={{
-            right: "28%",
-            bottom: "35%",
-            animationDuration: "12s",
-            animationDelay: "0.5s",
-            filter: "blur(0.5px)",
-          }}
-        />
-        <img
-          src="https://i.imgur.com/WyBAcv0.png"
-          alt=""
-          className="absolute w-[min(220px,30vw)] h-auto opacity-[0.07] bg-circle-float"
-          style={{
-            left: "55%",
-            top: "55%",
-            animationDuration: "15s",
-            animationDelay: "2.5s",
-            filter: "blur(0.5px)",
-          }}
-        />
+        {CIRCLE_LAYERS.map((layer, i) => {
+          const dx = (mouse.x - 0.5) * MOUSE_INTENSITY * layer.depth;
+          const dy = (mouse.y - 0.5) * MOUSE_INTENSITY * layer.depth;
+          return (
+            <div
+              key={i}
+              className="absolute w-[min(120px,18vw)] bg-circle-float"
+              style={{
+                ...("left" in layer && { left: layer.left }),
+                ...("right" in layer && { right: layer.right }),
+                ...("top" in layer && { top: layer.top }),
+                ...("bottom" in layer && { bottom: layer.bottom }),
+                animationDuration: layer.duration,
+                animationDelay: layer.delay,
+              }}
+            >
+              <img
+                src="https://i.imgur.com/WyBAcv0.png"
+                alt=""
+                className="h-auto w-full transition-transform duration-150 ease-out"
+                style={{
+                  opacity: layer.opacity,
+                  filter: "blur(0.5px)",
+                  transform: `translate(${dx}px, ${dy}px)`,
+                }}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
