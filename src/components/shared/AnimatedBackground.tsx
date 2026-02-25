@@ -42,6 +42,69 @@ export function AnimatedBackground() {
           animation: "grid-pulse 8s ease-in-out infinite",
         }}
       />
+      {/* Circle detail orbs - integrados ao tema */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden>
+        <img
+          src="https://i.imgur.com/WyBAcv0.png"
+          alt=""
+          className="absolute w-[min(280px,35vw)] h-auto opacity-[0.09] bg-circle-float"
+          style={{
+            left: "8%",
+            top: "18%",
+            animationDuration: "14s",
+            animationDelay: "0s",
+            filter: "blur(0.5px)",
+          }}
+        />
+        <img
+          src="https://i.imgur.com/WyBAcv0.png"
+          alt=""
+          className="absolute w-[min(200px,28vw)] h-auto opacity-[0.07] bg-circle-float"
+          style={{
+            right: "12%",
+            top: "35%",
+            animationDuration: "18s",
+            animationDelay: "2s",
+            filter: "blur(0.5px)",
+          }}
+        />
+        <img
+          src="https://i.imgur.com/WyBAcv0.png"
+          alt=""
+          className="absolute w-[min(240px,32vw)] h-auto opacity-[0.08] bg-circle-float"
+          style={{
+            left: "35%",
+            bottom: "20%",
+            animationDuration: "16s",
+            animationDelay: "1s",
+            filter: "blur(0.5px)",
+          }}
+        />
+        <img
+          src="https://i.imgur.com/WyBAcv0.png"
+          alt=""
+          className="absolute w-[min(160px,22vw)] h-auto opacity-[0.06] bg-circle-float"
+          style={{
+            right: "28%",
+            bottom: "35%",
+            animationDuration: "12s",
+            animationDelay: "0.5s",
+            filter: "blur(0.5px)",
+          }}
+        />
+        <img
+          src="https://i.imgur.com/WyBAcv0.png"
+          alt=""
+          className="absolute w-[min(220px,30vw)] h-auto opacity-[0.07] bg-circle-float"
+          style={{
+            left: "55%",
+            top: "55%",
+            animationDuration: "15s",
+            animationDelay: "2.5s",
+            filter: "blur(0.5px)",
+          }}
+        />
+      </div>
     </div>
   );
 }

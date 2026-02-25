@@ -227,6 +227,24 @@
   }
 }
 
+/* Circle detail orbs - movimento suave e integrado (opacidade vem do elemento) */
+@keyframes circle-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(6px, -8px) scale(1.03);
+  }
+  66% {
+    transform: translate(-4px, 6px) scale(0.98);
+  }
+}
+.bg-circle-float {
+  animation-name: circle-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
 .animate-in {
   animation: fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -267,9 +285,13 @@
 @media (prefers-reduced-motion: reduce) {
   .animate-in,
   .animate-in-up,
-  .stagger-children > * {
+  .stagger-children > *,
+  .bg-circle-float {
     animation-duration: 0.01ms;
     animation-delay: 0s;
+  }
+  .bg-circle-float {
+    animation-name: none;
   }
   .stagger-children > * {
     opacity: 1;
