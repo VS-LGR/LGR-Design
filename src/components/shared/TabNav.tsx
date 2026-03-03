@@ -57,7 +57,7 @@ export function TabNav({ activeTab, onTabChange }: TabNavProps) {
 
   return (
     <nav
-      className="sticky top-[57px] md:top-[65px] z-40 bg-dark/95 backdrop-blur border-b border-border-dark/40"
+      className="sticky top-0 z-40 bg-dark/95 backdrop-blur border-b border-border-dark/40"
       aria-label="Navegação principal"
     >
       <div className="container mx-auto px-4 max-w-5xl">
