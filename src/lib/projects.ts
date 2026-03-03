@@ -51,4 +51,28 @@ export const projectsList: Project[] = [
       "Landing page para empresa de construção civil com ênfase em portfólio e orçamento. Grid de projetos por tipo (residencial, comercial, saúde etc.), métricas de experiência e área de contato para captação de leads.",
     link: "https://lp-civil.vercel.app",
   },
+  {
+    id: "ofag-revamp",
+    title: "OFAG — Technical Printing",
+    category: "web",
+    topic: "empresas",
+    slug: "ofag-revamp",
+    description:
+      "Site institucional para a OFAG, indústria gráfica especializada em impressão técnica para mercados regulados, com conteúdo em português, inglês e espanhol.",
+    developmentExplanation:
+      "Projeto voltado para o segmento farmacêutico e indústrias reguladas, com arquitetura de informação clara, navegação em múltiplos idiomas (PT/EN/ES) e foco em credibilidade. Destaque para processos, certificações e segmentos atendidos, com layout responsivo e tipografia orientada à leitura de conteúdo técnico.",
+    link: "https://ofag-revamp.vercel.app/pt",
+  },
+  {
+    id: "clinica-dverso",
+    title: "Clínica Dverso",
+    category: "web",
+    topic: "saude",
+    slug: "clinica-dverso",
+    description:
+      "Site da Clínica Dverso, clínica multidisciplinar focada em saúde integrada, neurodivergência e terapia assistida por cão em Sorocaba.",
+    developmentExplanation:
+      "Landing page com múltiplas especialidades (psicologia, neurodivergência, psicoterapia musical, nutrição e terapia assistida por cão), utilizando animações em Lottie para dar vida às seções sem comprometer performance. Organização em blocos claros, CTAs bem definidos e experiência responsiva pensada para famílias acessando via mobile.",
+    link: "https://dversos-clinica.vercel.app",
+  },
 ];

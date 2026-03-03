@@ -48,9 +48,9 @@ export function ProjectGrid() {
   const [previewPosition, setPreviewPosition] = useState({ x: 24, y: 180 });
   const [previewSize, setPreviewSize] = useState(() => ({
     width: typeof window !== "undefined" ? Math.round(Math.min(1600, window.innerWidth * 0.92)) : 1280,
-    height: 600,
+    height: 640,
   }));
-  const [dockedHeight, setDockedHeight] = useState(420);
+  const [dockedHeight, setDockedHeight] = useState(520);
   type ViewportWidthPreset = "full" | 390 | 768 | 1024;
   const [viewportWidthPreset, setViewportWidthPreset] = useState<ViewportWidthPreset>("full");
 
@@ -168,7 +168,17 @@ export function ProjectGrid() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const w = Math.round(Math.min(1600, window.innerWidth * 0.92));
-    setPreviewSize((s) => (s.width !== w ? { ...s, width: w } : s));
+    const maxH = Math.round(window.innerHeight * 0.85);
+    const initialH = Math.max(MIN_PREVIEW_H, Math.min(800, maxH));
+
+    setPreviewSize((s) => ({
+      width: s.width !== w ? w : s.width,
+      height: s.height !== initialH ? initialH : s.height,
+    }));
+
+    setDockedHeight((h) =>
+      h !== initialH ? Math.max(MIN_PREVIEW_H, Math.min(maxH, initialH)) : h
+    );
   }, []);
 
   useEffect(() => {
