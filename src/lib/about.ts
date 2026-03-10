@@ -2,8 +2,8 @@ import type { AboutContent } from "@/types";
 
 export const aboutContent: AboutContent = {
   intro: [
-    "Sou um UX Designer e Web Designer com mentalidade de produto e visão estratégica. Meu trabalho começa no entendimento profundo do problema: antes de desenhar, eu estruturo; antes de estilizar, eu analiso.",
-    "Equilibro necessidades do usuário, objetivos de negócio, viabilidade técnica e clareza visual. Design, para mim, é ferramenta de decisão — não apenas estética.",
+    "Sou UX Designer e Web Designer focado em produtos digitais, landing pages e sites institucionais que conectam estratégia de negócio com experiência do usuário.",
+    "Ajudo times de produto e empresas a transformar requisitos soltos em interfaces claras, navegáveis e prontas para desenvolvimento, unindo design, lógica e viabilidade técnica.",
   ],
   formation: [
     {
@@ -66,10 +66,10 @@ export const aboutContent: AboutContent = {
       "Não se trata apenas de usar uma IDE com IA — mas de estruturar o ambiente para produzir com excelência, consistência e visão estratégica. Esse sistema é único e desenvolvido por mim, refletindo minha mentalidade de processo e performance.",
   },
   positioning: [
-    "Sou um UX Designer e Web Designer com mentalidade de produto e visão estratégica.",
-    "Meu trabalho começa no entendimento profundo do problema. Antes de desenhar, eu estruturo. Antes de estilizar, eu analiso.",
-    "Equilibro: necessidades do usuário, objetivos de negócio, viabilidade técnica e clareza visual.",
-    "Design, para mim, é ferramenta de decisão — não apenas estética.",
+    "Atuo como UX/Web Designer com visão de produto: entendo objetivos, restrições e métricas antes de propor interface.",
+    "Tenho experiência prática em projetos reais para saúde, indústrias reguladas e serviços, do discovery à entrega navegável em produção.",
+    "Trabalho com forte organização estrutural: arquitetura de informação, fluxos, componentes reutilizáveis e handoff limpo para desenvolvimento.",
+    "Confortável em contextos remotos, ferramentas colaborativas e uso estratégico de IA para apoiar decisões de design, não como atalho.",
   ],
   howIWork: {
     intro: "Minha abordagem combina:",
@@ -101,12 +101,12 @@ export const aboutContent: AboutContent = {
     "🎨 Pintura",
   ],
   professionalObjective:
-    "Busco atuar como UX Designer ou Web Designer, contribuindo na construção de produtos digitais bem estruturados, estratégicos e orientados a resultado. Meu diferencial está na interseção entre Design + Lógica + Produto + Tecnologia + Criatividade. Estou em constante evolução, elevando não apenas o que entrego — mas como eu entrego.",
+    "Busco atuar como UX Designer ou Web Designer em times de produto ou squads digitais, ajudando a estruturar e evoluir interfaces de sites, landing pages e aplicações web. Quero contribuir em ambientes que valorizem decisões guiadas por dados e design consistente, apoiando recrutadores e líderes com entregas claras, documentadas e fáceis de apresentar para stakeholders.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",
     message:
-      "Se você busca um profissional que une estratégia, criatividade e execução técnica, estou disponível para conversar. Prefiro contato inicial via WhatsApp ou email, onde consigo responder com mais agilidade e organização. Estou aberto a oportunidades como UX Designer, Web Designer ou projetos estratégicos digitais.",
+      "Se você é recrutador(a) ou lidera um time de produto/design e quer avaliar meu perfil com mais profundidade, estou disponível para uma conversa objetiva. Envie uma mensagem por WhatsApp ou e-mail com o contexto da vaga ou projeto e respondo com portfólio direcionado, disponibilidade e próximos passos.",
   },
   resumePdfUrl: undefined,
 };
