@@ -325,7 +325,7 @@ export function ProjectGrid() {
                   }
                 : undefined
             }
-            className={`flex-shrink-0 flex items-center justify-between gap-4 px-4 py-3 border-b border-accent/20 bg-surface/80 rounded-t-2xl ${
+            className={`flex-shrink-0 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-4 py-3 border-b border-accent/20 bg-surface/80 rounded-t-2xl ${
               previewMode === "floating"
                 ? `cursor-grab active:cursor-grabbing ${isDragging ? "cursor-grabbing" : ""}`
                 : ""
@@ -351,12 +351,12 @@ export function ProjectGrid() {
                 </span>
               )}
             </div>
-            <div className="flex items-center gap-3 flex-shrink-0 pl-4 py-2 pr-2 rounded-xl bg-accent/10 border border-accent/25">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 flex-shrink-0 pl-3 pr-2 py-2 rounded-xl bg-accent/10 border border-accent/25 w-full sm:w-auto">
               <span className="text-xs font-semibold text-accent uppercase tracking-wider hidden sm:inline">
                 Ajustes
               </span>
               {isPortfolioMobile ? (
-                <span className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-accent/90 bg-accent/15 rounded-lg border border-accent/40">
+                <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-accent/90 bg-accent/15 rounded-lg border border-accent/40">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
@@ -425,7 +425,7 @@ export function ProjectGrid() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring w-full sm:w-auto"
                 >
                   Abrir em nova guia
                 </a>
