@@ -2,8 +2,12 @@
 
 import { useRef, useEffect, useCallback } from "react";
 
-const PARTICLE_COUNT = 96;
+const PARTICLE_COUNT = 130;
 const MOUSE_PARALLAX = 28;
+/** Pulso visível: piso alto + ciclo mais rápido (antes ficava ~20s por oscilação). */
+const TWINKLE_SPEED = 0.0011;
+const TWINKLE_FLOOR = 0.78;
+const TWINKLE_AMP = 0.22;
 
 type Particle = {
   x: number;
@@ -24,10 +28,10 @@ function randomParticle(w: number, h: number): Particle {
   return {
     x: Math.random() * w,
     y: Math.random() * h,
-    r: Math.random() * 1.6 + 0.25,
-    vx: (Math.random() - 0.5) * 0.1,
-    vy: -(Math.random() * 0.32 + 0.06),
-    baseOpacity: Math.random() * 0.055 + 0.018,
+    r: Math.random() * 2.1 + 0.5,
+    vx: (Math.random() - 0.5) * 0.14,
+    vy: -(Math.random() * 0.42 + 0.12),
+    baseOpacity: Math.random() * 0.08 + 0.09,
     twPhase: Math.random() * Math.PI * 2,
     depth: Math.random() * 0.55 + 0.25,
     hue,
@@ -41,11 +45,11 @@ function fillParticles(w: number, h: number): Particle[] {
 function particleColor(hue: Particle["hue"], alpha: number): string {
   switch (hue) {
     case "cyan":
-      return `rgba(120, 210, 230, ${alpha})`;
+      return `rgba(150, 235, 250, ${alpha})`;
     case "mist":
-      return `rgba(180, 220, 235, ${alpha * 0.85})`;
+      return `rgba(200, 235, 248, ${alpha * 0.92})`;
     default:
-      return `rgba(70, 140, 175, ${alpha * 0.9})`;
+      return `rgba(95, 175, 205, ${alpha * 0.95})`;
   }
 }
 
@@ -86,7 +90,8 @@ export function AnimatedBackground() {
       ctx.clearRect(0, 0, w, h);
 
       for (const p of particles) {
-        const twinkle = 0.55 + 0.45 * Math.sin(time * 0.00035 + p.twPhase);
+        const twinkle =
+          TWINKLE_FLOOR + TWINKLE_AMP * Math.sin(time * TWINKLE_SPEED + p.twPhase);
         const alpha = p.baseOpacity * twinkle;
         const px = p.x + mx * p.depth;
         const py = p.y + my * p.depth;
@@ -105,7 +110,7 @@ export function AnimatedBackground() {
       for (const p of particlesRef.current) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = particleColor(p.hue, p.baseOpacity * 0.65);
+        ctx.fillStyle = particleColor(p.hue, p.baseOpacity * 0.92);
         ctx.fill();
       }
     };
@@ -120,7 +125,7 @@ export function AnimatedBackground() {
 
       for (const p of particles) {
         p.y += p.vy;
-        p.x += p.vx + Math.sin(time * 0.00025 + p.twPhase) * 0.12;
+        p.x += p.vx + Math.sin(time * 0.00045 + p.twPhase) * 0.16;
         if (p.y < -12) {
           p.y = h + 12;
           p.x = Math.random() * w;
@@ -167,6 +172,7 @@ export function AnimatedBackground() {
         drawStatic();
       } else {
         resize();
+        drawAnimated(performance.now());
         startLoop();
       }
     };
@@ -177,6 +183,7 @@ export function AnimatedBackground() {
     mq.addEventListener("change", onMqChange);
 
     if (!reducedMotionRef.current) {
+      drawAnimated(performance.now());
       startLoop();
     } else {
       drawStatic();
