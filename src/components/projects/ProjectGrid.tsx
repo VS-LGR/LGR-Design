@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
+import Image from "next/image";
 import { projectsList, projectTopics } from "@/lib/projects";
 import { projectCategories } from "@/lib/projects";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -19,6 +20,7 @@ export function ProjectGrid() {
   const [selectedId, setSelectedId] = useState<string>(
     projectsInTopic[0]?.id ?? projectsList[0]?.id ?? ""
   );
+  const [activePreviewId, setActivePreviewId] = useState<string | null>(null);
 
   const projectInTopic = projectsInTopic.find((p) => p.id === selectedId);
   const projectToShow =
@@ -35,11 +37,31 @@ export function ProjectGrid() {
   const selectedProjectIndex = currentTopicProjects.findIndex((p) => p.id === selectedId);
   const effectiveIndex = selectedProjectIndex >= 0 ? selectedProjectIndex : 0;
 
+  const scrollToSelectedPreview = useCallback(() => {
+    if (!projectPreviewAnchorRef.current) return;
+    projectPreviewAnchorRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, []);
+
+  const handleSelectProject = useCallback(
+    (projectId: string, shouldScroll = true) => {
+      setSelectedId(projectId);
+      setActivePreviewId(projectId);
+      if (shouldScroll) {
+        requestAnimationFrame(() => scrollToSelectedPreview());
+      }
+    },
+    [scrollToSelectedPreview]
+  );
+
   const handleTopicChange = (topic: ProjectTopic) => {
     setSelectedTopic(topic);
     const inNewTopic = projectsList.filter((p) => p.topic === topic);
     if (inNewTopic.length > 0) {
       setSelectedId(inNewTopic[0].id);
+      setActivePreviewId(null);
     }
   };
 
@@ -68,6 +90,8 @@ export function ProjectGrid() {
   const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
   const resizeRef = useRef({ startX: 0, startY: 0, startW: 0, startH: 0 });
   const previewRef = useRef<HTMLDivElement>(null);
+  const projectPreviewAnchorRef = useRef<HTMLDivElement>(null);
+  const projectCardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const handlePreviewMouseDown = useCallback(
     (e: React.MouseEvent) => {
@@ -191,6 +215,16 @@ export function ProjectGrid() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewMode]);
 
+  useEffect(() => {
+    const cardEl = projectCardRefs.current[selectedId];
+    if (!cardEl) return;
+    cardEl.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [selectedId]);
+
   const specsBody = projectToShow && (
     <>
       <p className="text-sm text-accent/90 font-medium mb-1">
@@ -264,7 +298,7 @@ export function ProjectGrid() {
             <select
               id="project-select"
               value={selectedId}
-              onChange={(e) => setSelectedId(e.target.value)}
+              onChange={(e) => handleSelectProject(e.target.value)}
               className="project-select px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary outline-none transition-all cursor-pointer min-w-[220px] max-w-full hover:border-accent/40"
               aria-label="Selecionar projeto"
             >
@@ -287,6 +321,97 @@ export function ProjectGrid() {
           Largura e tamanho da pré-visualização são ajustáveis na barra do preview (resolução + redimensionar pelo canto ou borda). Solta = arrastar; Presa = especificações abaixo.
         </p>
       </div>
+
+      {currentTopicProjects.length > 0 && (
+        <section
+          className="mb-6"
+          aria-labelledby="project-cards-heading"
+        >
+          <h3
+            id="project-cards-heading"
+            className="text-sm font-semibold text-accent uppercase tracking-wider mb-3"
+          >
+            Projetos do tópico
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+            {currentTopicProjects.map((project) => {
+              const isActive = project.id === selectedId;
+              return (
+                <button
+                  key={project.id}
+                  type="button"
+                  ref={(el) => {
+                    projectCardRefs.current[project.id] = el;
+                  }}
+                  onClick={() => handleSelectProject(project.id)}
+                  className={`text-left rounded-xl border transition-all overflow-hidden focus-ring ${
+                    isActive
+                      ? "border-accent/70 bg-accent/10 shadow-[0_0_0_1px_rgba(6,182,212,0.25)]"
+                      : "border-border-dark/60 bg-surface/40 hover:border-accent/40"
+                  }`}
+                  aria-pressed={isActive}
+                  aria-label={`Selecionar projeto ${project.title}`}
+                >
+                  <div className="h-28 bg-dark/70 border-b border-border-dark/50 overflow-hidden relative">
+                    {project.thumbnail ? (
+                      <Image
+                        src={project.thumbnail}
+                        alt={`Thumbnail do projeto ${project.title}`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center text-xs text-muted px-2 text-center">
+                        Thumbnail estática
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-3">
+                    <p className="text-sm font-semibold text-primary truncate">
+                      {project.title}
+                    </p>
+                    <p className="text-xs text-muted mt-1 line-clamp-2">
+                      {project.description}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      <div ref={projectPreviewAnchorRef} />
+
+      {projectToShow?.keyStages?.length ? (
+        <section
+          className="mb-5"
+          aria-labelledby="key-stages-heading"
+        >
+          <h3
+            id="key-stages-heading"
+            className="text-sm font-semibold text-accent uppercase tracking-wider mb-3"
+          >
+            Etapas-chave do projeto selecionado
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {projectToShow.keyStages.map((stage) => (
+              <article
+                key={stage.title}
+                className="rounded-xl border border-border-dark/60 bg-surface/35 p-4"
+              >
+                <p className="text-sm font-semibold text-primary">
+                  {stage.title}
+                </p>
+                <p className="text-sm text-muted mt-2 leading-relaxed">
+                  {stage.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* Preview: modo flutuante (arrastável) ou fixo (compacto, especificações visíveis) */}
       {projectToShow && (
@@ -433,7 +558,7 @@ export function ProjectGrid() {
             </div>
           </header>
           <div className="flex-1 min-h-0 relative bg-dark flex items-center justify-center overflow-hidden">
-            {projectUrl ? (
+            {projectUrl && activePreviewId === selectedId ? (
               effectiveViewportWidth !== "full" ? (
                 <div
                   className="min-h-[400px] max-h-[700px] h-full flex-shrink-0 rounded-2xl overflow-hidden border-2 border-border-dark/80 bg-surface shadow-xl"
@@ -464,7 +589,9 @@ export function ProjectGrid() {
               )
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
-                Sem link de preview
+                {projectUrl
+                  ? "Selecione um projeto para carregar o preview completo."
+                  : "Sem link de preview"}
               </div>
             )}
           </div>

@@ -19,10 +19,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const categoryLabel = getCategoryLabel(project.category);
   const href = project.link && !project.link.startsWith("[") ? project.link : "#";
   const hasDev = project.developmentExplanation && !project.developmentExplanation.startsWith("[");
+  const hasThumbnail =
+    typeof project.thumbnail === "string"
+      ? !project.thumbnail.startsWith("[")
+      : Boolean(project.thumbnail);
 
   return (
     <Card as="article" className="group flex flex-col">
-      {project.thumbnail && !project.thumbnail.startsWith("[") ? (
+      {hasThumbnail ? (
         <div className="relative aspect-video bg-surface-hover overflow-hidden">
           <Image
             src={project.thumbnail}

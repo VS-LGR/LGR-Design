@@ -22,7 +22,7 @@ const ABOUT_SECTION_IDS = [
 ];
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabId>("about");
+  const [activeTab, setActiveTab] = useState<TabId>("projects");
   const activeSectionId = useScrollSpy(
     ABOUT_SECTION_IDS,
     activeTab === "about"

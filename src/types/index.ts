@@ -1,5 +1,7 @@
 export type TabId = "about" | "projects";
 
+import type { StaticImageData } from "next/image";
+
 export interface AboutContent {
   intro: string[];
   formation: Array<{
@@ -54,7 +56,12 @@ export interface Project {
   description: string;
   /** Explicação do processo de desenvolvimento do site/projeto */
   developmentExplanation?: string;
-  thumbnail?: string;
+  /** Etapas-chave do projeto para exibição em cards acima do preview */
+  keyStages?: Array<{
+    title: string;
+    description: string;
+  }>;
+  thumbnail?: string | StaticImageData;
   link?: string;
 }
 
