@@ -1,31 +1,193 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { useRef, useEffect, useCallback } from "react";
 
-const CIRCLE_LAYERS = [
-  { left: "8%", top: "18%", opacity: 0.09, depth: 0.25, duration: "14s", delay: "0s", size: "min(28px,5vw)" },
-  { right: "12%", top: "35%", opacity: 0.07, depth: 0.45, duration: "18s", delay: "2s", size: "min(44px,7vw)" },
-  { left: "35%", bottom: "20%", opacity: 0.08, depth: 0.65, duration: "16s", delay: "1s", size: "min(36px,6vw)" },
-  { right: "28%", bottom: "35%", opacity: 0.06, depth: 0.35, duration: "12s", delay: "0.5s", size: "min(24px,4vw)" },
-  { left: "55%", top: "55%", opacity: 0.07, depth: 0.55, duration: "15s", delay: "2.5s", size: "min(52px,9vw)" },
-] as const;
+const PARTICLE_COUNT = 96;
+const MOUSE_PARALLAX = 28;
 
-const MOUSE_INTENSITY = 36;
+type Particle = {
+  x: number;
+  y: number;
+  r: number;
+  vx: number;
+  vy: number;
+  baseOpacity: number;
+  twPhase: number;
+  depth: number;
+  hue: "cyan" | "mist" | "deep";
+};
+
+function randomParticle(w: number, h: number): Particle {
+  const hueRoll = Math.random();
+  const hue: Particle["hue"] =
+    hueRoll < 0.45 ? "cyan" : hueRoll < 0.8 ? "mist" : "deep";
+  return {
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: Math.random() * 1.6 + 0.25,
+    vx: (Math.random() - 0.5) * 0.1,
+    vy: -(Math.random() * 0.32 + 0.06),
+    baseOpacity: Math.random() * 0.055 + 0.018,
+    twPhase: Math.random() * Math.PI * 2,
+    depth: Math.random() * 0.55 + 0.25,
+    hue,
+  };
+}
+
+function fillParticles(w: number, h: number): Particle[] {
+  return Array.from({ length: PARTICLE_COUNT }, () => randomParticle(w, h));
+}
+
+function particleColor(hue: Particle["hue"], alpha: number): string {
+  switch (hue) {
+    case "cyan":
+      return `rgba(120, 210, 230, ${alpha})`;
+    case "mist":
+      return `rgba(180, 220, 235, ${alpha * 0.85})`;
+    default:
+      return `rgba(70, 140, 175, ${alpha * 0.9})`;
+  }
+}
 
 export function AnimatedBackground() {
-  const [mouse, setMouse] = useState({ x: 0.5, y: 0.5 });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
+  const particlesRef = useRef<Particle[]>([]);
+  const reducedMotionRef = useRef(false);
+  const dimensionsRef = useRef({ w: 0, h: 0 });
 
   const onMove = useCallback((e: MouseEvent) => {
-    setMouse({
+    mouseRef.current = {
       x: e.clientX / window.innerWidth,
       y: e.clientY / window.innerHeight,
-    });
+    };
   }, []);
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
+
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    reducedMotionRef.current = mq.matches;
+
+    let raf = 0;
+    let running = false;
+
+    const drawAnimated = (time: number) => {
+      const { w, h } = dimensionsRef.current;
+      if (w === 0 || h === 0) return;
+
+      const particles = particlesRef.current;
+      const mx = (mouseRef.current.x - 0.5) * MOUSE_PARALLAX;
+      const my = (mouseRef.current.y - 0.5) * MOUSE_PARALLAX;
+
+      ctx.clearRect(0, 0, w, h);
+
+      for (const p of particles) {
+        const twinkle = 0.55 + 0.45 * Math.sin(time * 0.00035 + p.twPhase);
+        const alpha = p.baseOpacity * twinkle;
+        const px = p.x + mx * p.depth;
+        const py = p.y + my * p.depth;
+
+        ctx.beginPath();
+        ctx.arc(px, py, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = particleColor(p.hue, alpha);
+        ctx.fill();
+      }
+    };
+
+    const drawStatic = () => {
+      const { w, h } = dimensionsRef.current;
+      if (w === 0 || h === 0) return;
+      ctx.clearRect(0, 0, w, h);
+      for (const p of particlesRef.current) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = particleColor(p.hue, p.baseOpacity * 0.65);
+        ctx.fill();
+      }
+    };
+
+    const step = (time: number) => {
+      if (!running) return;
+      raf = requestAnimationFrame(step);
+      if (document.hidden) return;
+
+      const { w, h } = dimensionsRef.current;
+      const particles = particlesRef.current;
+
+      for (const p of particles) {
+        p.y += p.vy;
+        p.x += p.vx + Math.sin(time * 0.00025 + p.twPhase) * 0.12;
+        if (p.y < -12) {
+          p.y = h + 12;
+          p.x = Math.random() * w;
+        }
+        if (p.x < -12) p.x = w + 12;
+        if (p.x > w + 12) p.x = -12;
+      }
+
+      drawAnimated(time);
+    };
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      dimensionsRef.current = { w, h };
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      particlesRef.current = fillParticles(w, h);
+
+      if (reducedMotionRef.current) {
+        drawStatic();
+      }
+    };
+
+    const startLoop = () => {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(step);
+    };
+
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    const onMqChange = () => {
+      reducedMotionRef.current = mq.matches;
+      if (mq.matches) {
+        stopLoop();
+        drawStatic();
+      } else {
+        resize();
+        startLoop();
+      }
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
     window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
+    mq.addEventListener("change", onMqChange);
+
+    if (!reducedMotionRef.current) {
+      startLoop();
+    } else {
+      drawStatic();
+    }
+
+    return () => {
+      stopLoop();
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMove);
+      mq.removeEventListener("change", onMqChange);
+    };
   }, [onMove]);
 
   return (
@@ -33,78 +195,46 @@ export function AnimatedBackground() {
       className="fixed inset-0 -z-10 overflow-hidden"
       aria-hidden="true"
     >
-      {/* Base gradient layer - slow drift */}
       <div
         className="animated-bg-gradient absolute inset-0 opacity-100"
         style={{
           background: `
-            radial-gradient(ellipse 100% 80% at 20% 10%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
-            radial-gradient(ellipse 80% 100% at 80% 90%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
-            radial-gradient(ellipse 60% 60% at 50% 50%, rgba(30, 41, 59, 0.5) 0%, transparent 70%),
-            #0f172a
+            radial-gradient(ellipse 130% 70% at 50% 110%, rgba(15, 90, 105, 0.22) 0%, transparent 52%),
+            radial-gradient(ellipse 90% 55% at 15% 25%, rgba(25, 70, 95, 0.14) 0%, transparent 48%),
+            radial-gradient(ellipse 70% 50% at 85% 60%, rgba(6, 80, 100, 0.1) 0%, transparent 45%),
+            linear-gradient(180deg, #040a10 0%, #0a1520 35%, #071018 72%, #03080c 100%)
           `,
-          animation: "gradient-drift 18s ease-in-out infinite",
+          animation: "gradient-drift 22s ease-in-out infinite",
         }}
       />
       <div
-        className="animated-bg-float absolute w-[min(80vw,400px)] h-[min(80vw,400px)] rounded-full bg-accent/20 blur-[100px] -left-[20%] top-[10%]"
-        style={{ animation: "float-1 12s ease-in-out infinite" }}
-      />
-      <div
-        className="animated-bg-float absolute w-[min(60vw,320px)] h-[min(60vw,320px)] rounded-full bg-accent/15 blur-[80px] right-[-10%] bottom-[15%]"
-        style={{ animation: "float-2 14s ease-in-out infinite 1s" }}
-      />
-      <div
-        className="animated-bg-float absolute w-[min(40vw,240px)] h-[min(40vw,240px)] rounded-full bg-accent/10 blur-[60px] left-[40%] top-[60%]"
-        style={{ animation: "float-3 16s ease-in-out infinite 0.5s" }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.03] animated-bg-gradient"
+        className="animated-bg-float absolute w-[min(85vw,420px)] h-[min(85vw,420px)] rounded-full blur-[110px] -left-[18%] top-[8%]"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(241, 245, 249, 0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(241, 245, 249, 0.15) 1px, transparent 1px)
-          `,
-          backgroundSize: "48px 48px",
-          animation: "grid-pulse 8s ease-in-out infinite",
+          background:
+            "radial-gradient(circle, rgba(45, 140, 160, 0.14) 0%, transparent 70%)",
+          animation: "float-1 14s ease-in-out infinite",
         }}
       />
-      {/* Circle detail orbs - profundidade + parallax com o mouse */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        {CIRCLE_LAYERS.map((layer, i) => {
-          const dx = (mouse.x - 0.5) * MOUSE_INTENSITY * layer.depth;
-          const dy = (mouse.y - 0.5) * MOUSE_INTENSITY * layer.depth;
-          return (
-            <div
-              key={i}
-              className="absolute bg-circle-float"
-              style={{
-                ...("left" in layer && { left: layer.left }),
-                ...("right" in layer && { right: layer.right }),
-                ...("top" in layer && { top: layer.top }),
-                ...("bottom" in layer && { bottom: layer.bottom }),
-                width: layer.size,
-                animationDuration: layer.duration,
-                animationDelay: layer.delay,
-              }}
-            >
-              <Image
-                src="https://i.imgur.com/WyBAcv0.png"
-                alt=""
-                width={64}
-                height={64}
-                className="h-auto w-full transition-transform duration-150 ease-out"
-                style={{
-                  opacity: layer.opacity,
-                  filter: "blur(0.5px)",
-                  transform: `translate(${dx}px, ${dy}px)`,
-                }}
-                sizes="64px"
-              />
-            </div>
-          );
-        })}
-      </div>
+      <div
+        className="animated-bg-float absolute w-[min(70vw,360px)] h-[min(70vw,360px)] rounded-full blur-[95px] right-[-12%] bottom-[12%]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(6, 100, 120, 0.12) 0%, transparent 72%)",
+          animation: "float-2 16s ease-in-out infinite 1s",
+        }}
+      />
+      <div
+        className="animated-bg-float absolute w-[min(50vw,280px)] h-[min(50vw,280px)] rounded-full blur-[75px] left-[38%] top-[58%]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(100, 180, 200, 0.08) 0%, transparent 75%)",
+          animation: "float-3 18s ease-in-out infinite 0.5s",
+        }}
+      />
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 h-full w-full pointer-events-none"
+      />
     </div>
   );
 }
