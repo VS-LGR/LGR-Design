@@ -19,17 +19,18 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const categoryLabel = getCategoryLabel(project.category);
   const href = project.link && !project.link.startsWith("[") ? project.link : "#";
   const hasDev = project.developmentExplanation && !project.developmentExplanation.startsWith("[");
-  const hasThumbnail =
-    typeof project.thumbnail === "string"
-      ? !project.thumbnail.startsWith("[")
-      : Boolean(project.thumbnail);
+  const thumbnailSrc =
+    project.thumbnail == null ||
+    (typeof project.thumbnail === "string" && project.thumbnail.startsWith("["))
+      ? null
+      : project.thumbnail;
 
   return (
     <Card as="article" className="group flex flex-col">
-      {hasThumbnail ? (
+      {thumbnailSrc ? (
         <div className="relative aspect-video bg-surface-hover overflow-hidden">
           <Image
-            src={project.thumbnail}
+            src={thumbnailSrc}
             alt=""
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
