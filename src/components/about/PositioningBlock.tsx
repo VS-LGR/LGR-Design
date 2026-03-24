@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function PositioningBlock() {
-  const { positioning } = aboutContent;
+  const { about, t } = useLocale();
+  const { positioning } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="positioning-heading">
@@ -9,7 +12,7 @@ export function PositioningBlock() {
         id="positioning-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Meu Posicionamento Profissional
+        {t.sections.positioning}
       </h2>
       <div className="space-y-3 text-muted leading-relaxed">
         {positioning.map((paragraph, i) => (

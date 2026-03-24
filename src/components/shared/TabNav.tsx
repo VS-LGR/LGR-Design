@@ -1,12 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import type { TabId } from "@/types";
-
-const tabs: { id: TabId; label: string }[] = [
-  { id: "about", label: "Sobre Mim" },
-  { id: "projects", label: "Projetos" },
-];
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface TabNavProps {
   activeTab: TabId;
@@ -14,7 +10,17 @@ interface TabNavProps {
 }
 
 export function TabNav({ activeTab, onTabChange }: TabNavProps) {
+  const { t } = useLocale();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const tabs = useMemo(
+    () =>
+      [
+        { id: "projects" as const, label: t.nav.projects },
+        { id: "about" as const, label: t.nav.about },
+      ] satisfies { id: TabId; label: string }[],
+    [t.nav.projects, t.nav.about]
+  );
 
   useEffect(() => {
     setMobileOpen(false);
@@ -58,7 +64,7 @@ export function TabNav({ activeTab, onTabChange }: TabNavProps) {
   return (
     <nav
       className="sticky top-0 z-40 bg-dark/95 backdrop-blur border-b border-border-dark/40"
-      aria-label="Navegação principal"
+      aria-label={t.nav.aria}
     >
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="md:hidden flex items-center justify-between py-2">
@@ -70,7 +76,7 @@ export function TabNav({ activeTab, onTabChange }: TabNavProps) {
             id="tablist-mobile-toggle"
             className="px-3 py-2 rounded-lg text-sm font-medium text-primary bg-surface/80 hover:bg-surface focus-ring"
           >
-            {mobileOpen ? "Fechar" : "Menu"}
+            {mobileOpen ? t.nav.close : t.nav.menu}
           </button>
           <span className="text-sm text-accent font-medium">
             {tabs.find((t) => t.id === activeTab)?.label}

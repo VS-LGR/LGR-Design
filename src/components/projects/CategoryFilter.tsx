@@ -1,7 +1,7 @@
 "use client";
 
 import type { ProjectCategory } from "@/types";
-import { projectCategories } from "@/lib/projects";
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface CategoryFilterProps {
   activeCategory: ProjectCategory | "all";
@@ -12,10 +12,11 @@ export function CategoryFilter({
   activeCategory,
   onCategoryChange,
 }: CategoryFilterProps) {
+  const { projectCategories, t } = useLocale();
   return (
     <div
       role="group"
-      aria-label="Filtrar por categoria"
+      aria-label={t.categoryFilter.aria}
       className="flex flex-wrap gap-2"
     >
       <button
@@ -27,7 +28,7 @@ export function CategoryFilter({
             : "bg-surface text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
         }`}
       >
-        Todos
+        {t.categoryFilter.all}
       </button>
       {projectCategories.map((cat) => (
         <button

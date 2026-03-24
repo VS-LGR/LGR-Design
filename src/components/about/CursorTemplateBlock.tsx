@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function CursorTemplateBlock() {
-  const { cursorTemplate } = aboutContent;
+  const { about } = useLocale();
+  const { cursorTemplate } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="cursor-template-heading">

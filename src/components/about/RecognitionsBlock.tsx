@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function RecognitionsBlock() {
-  const { recognitions } = aboutContent;
+  const { about, t } = useLocale();
+  const { recognitions } = about;
 
   return (
     <section className="space-y-6" aria-labelledby="recognitions-heading">
@@ -9,7 +12,7 @@ export function RecognitionsBlock() {
         id="recognitions-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Reconhecimentos & Destaques
+        {t.sections.recognitions}
       </h2>
       <ul className="space-y-6 list-none">
         {recognitions.map((item, index) => (

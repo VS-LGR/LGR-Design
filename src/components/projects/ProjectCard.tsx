@@ -4,17 +4,17 @@ import { useState } from "react";
 import Image from "next/image";
 import { Card } from "@/components/shared/Card";
 import type { Project } from "@/types";
-import { projectCategories } from "@/lib/projects";
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface ProjectCardProps {
   project: Project;
 }
 
-function getCategoryLabel(category: Project["category"]) {
-  return projectCategories.find((c) => c.id === category)?.label ?? category;
-}
-
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { projectCategories, t } = useLocale();
+  function getCategoryLabel(category: Project["category"]) {
+    return projectCategories.find((c) => c.id === category)?.label ?? category;
+  }
   const [showDev, setShowDev] = useState(false);
   const categoryLabel = getCategoryLabel(project.category);
   const href = project.link && !project.link.startsWith("[") ? project.link : "#";
@@ -43,7 +43,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           className="aspect-video bg-surface-hover flex items-center justify-center text-muted text-sm border-b border-border-dark/50"
           aria-hidden
         >
-          <span className="opacity-60">Preview do projeto</span>
+          <span className="opacity-60">{t.projectCard.previewPlaceholder}</span>
         </div>
       )}
       <div className="p-5 flex flex-col flex-1">
@@ -64,7 +64,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               onClick={() => setShowDev(!showDev)}
               className="text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring rounded"
             >
-              {showDev ? "Ocultar" : "Sobre o desenvolvimento"}
+              {showDev ? t.projectCard.hide : t.projectCard.aboutDev}
             </button>
             {showDev && (
               <p className="mt-3 text-sm text-muted leading-relaxed animate-in">
@@ -80,7 +80,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
           className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring rounded self-start"
         >
-          Ver site
+          {t.projectCard.viewSite}
         </a>
       </div>
     </Card>

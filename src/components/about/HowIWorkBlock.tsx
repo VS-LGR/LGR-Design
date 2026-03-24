@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function HowIWorkBlock() {
-  const { howIWork } = aboutContent;
+  const { about, t } = useLocale();
+  const { howIWork } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="how-i-work-heading">
@@ -9,7 +12,7 @@ export function HowIWorkBlock() {
         id="how-i-work-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Como Eu Trabalho
+        {t.sections.howIWork}
       </h2>
       <p className="text-muted leading-relaxed">{howIWork.intro}</p>
       <ul className="space-y-2 list-none">

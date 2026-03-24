@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const INTRO_DURATION_MS = 2400;
 
 export function IntroOverlay() {
+  const { t } = useLocale();
   const [visible, setVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
 
@@ -38,7 +40,7 @@ export function IntroOverlay() {
             animation: "intro-text 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both",
           }}
         >
-          UX Design &amp; Web Design
+          {t.intro.tagline}
         </p>
       </div>
     </div>

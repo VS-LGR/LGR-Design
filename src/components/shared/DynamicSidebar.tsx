@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { TabId } from "@/types";
-import { aboutContent } from "@/lib/about";
-import { projectCategories } from "@/lib/projects";
+import { useLocale } from "@/contexts/LocaleContext";
 
 const ABOUT_SECTION_IDS = [
   "about-intro",
@@ -26,17 +25,24 @@ interface DynamicSidebarProps {
   activeSectionId?: string | null;
 }
 
+function toolLabelFirstSegment(item: string) {
+  const enDash = item.split("–")[0]?.trim();
+  if (enDash && enDash !== item) return enDash;
+  return item.split("-")[0]?.trim() ?? item;
+}
+
 function AboutSidebarContent({ sectionId }: { sectionId: string }) {
+  const { about, t } = useLocale();
+
   switch (sectionId) {
     case "about-intro":
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Sobre Mim
+            {t.sidebar.about}
           </p>
           <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-4">
-            UX Designer e Web Designer com mentalidade de produto e visão
-            estratégica.
+            {t.sidebar.aboutBlurb}
           </p>
         </>
       );
@@ -44,10 +50,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Formação
+            {t.sidebar.formation}
           </p>
           <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.formation.slice(0, 4).map((item, i) => (
+            {about.formation.slice(0, 4).map((item, i) => (
               <li key={i}>{item.title}</li>
             ))}
           </ul>
@@ -57,10 +63,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Reconhecimentos
+            {t.sidebar.recognitions}
           </p>
           <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.recognitions.map((item, i) => (
+            {about.recognitions.map((item, i) => (
               <li key={i}>{item.title}</li>
             ))}
           </ul>
@@ -70,10 +76,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Template Cursor
+            {t.sidebar.cursorTemplate}
           </p>
           <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-3">
-            {aboutContent.cursorTemplate.title}
+            {about.cursorTemplate.title}
           </p>
         </>
       );
@@ -81,10 +87,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Posicionamento
+            {t.sidebar.positioning}
           </p>
           <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-3">
-            {aboutContent.positioning[0]}
+            {about.positioning[0]}
           </p>
         </>
       );
@@ -92,10 +98,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Como Eu Trabalho
+            {t.sidebar.howIWork}
           </p>
           <ul className="space-y-1 text-sm text-muted mt-2">
-            {aboutContent.howIWork.points.map((p, i) => (
+            {about.howIWork.points.map((p, i) => (
               <li key={i}>{p}</li>
             ))}
           </ul>
@@ -105,12 +111,12 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Ferramentas
+            {t.sidebar.tools}
           </p>
           <ul className="space-y-1 text-sm text-muted mt-2">
-            {aboutContent.tools.items.slice(0, 4).map((item, i) => (
+            {about.tools.items.slice(0, 4).map((item, i) => (
               <li key={i} className="line-clamp-1">
-                {item.split("–")[0].trim()}
+                {toolLabelFirstSegment(item)}
               </li>
             ))}
           </ul>
@@ -120,10 +126,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Criatividade
+            {t.sidebar.creativity}
           </p>
           <ul className="space-y-2 text-sm text-muted mt-2">
-            {aboutContent.creativePreferences.map((p, i) => (
+            {about.creativePreferences.map((p, i) => (
               <li key={i}>{p}</li>
             ))}
           </ul>
@@ -133,10 +139,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Objetivo
+            {t.sidebar.objective}
           </p>
           <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-6">
-            {aboutContent.professionalObjective}
+            {about.professionalObjective}
           </p>
         </>
       );
@@ -144,13 +150,13 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Contato
+            {t.sidebar.contact}
           </p>
           <p className="text-sm text-muted mt-2">
-            📱 {aboutContent.contact.phone}
+            📱 {about.contact.phone}
           </p>
           <p className="text-sm text-muted mt-1 line-clamp-2">
-            📩 {aboutContent.contact.email}
+            📩 {about.contact.email}
           </p>
         </>
       );
@@ -158,10 +164,10 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
       return (
         <>
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Sobre Mim
+            {t.sidebar.about}
           </p>
           <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-4">
-            {aboutContent.intro[0]}
+            {about.intro[0]}
           </p>
         </>
       );
@@ -172,6 +178,7 @@ export function DynamicSidebar({
   activeTab,
   activeSectionId,
 }: DynamicSidebarProps) {
+  const { t, projectCategories } = useLocale();
   const isAbout = activeTab === "about";
   const resolvedSectionId =
     isAbout && activeSectionId && ABOUT_SECTION_IDS.includes(activeSectionId as (typeof ABOUT_SECTION_IDS)[number])
@@ -206,7 +213,7 @@ export function DynamicSidebar({
     return (
       <aside
         className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
-        aria-label="Resumo da seção em vista"
+        aria-label={t.sidebar.sectionAria}
       >
         <div className="relative min-h-[140px] pl-2 border-l border-accent/20">
           {exitingId && (
@@ -233,11 +240,11 @@ export function DynamicSidebar({
     return (
       <aside
         className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
-        aria-label="Categorias"
+        aria-label={t.sidebar.categoriesAria}
       >
         <div className="space-y-6 pl-2 border-l border-accent/20">
           <p className="text-xs font-medium text-accent uppercase tracking-wider">
-            Categorias
+            {t.sidebar.categoriesTitle}
           </p>
           <ul className="space-y-2 text-sm text-muted">
             {projectCategories.map((c) => (

@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function ToolsBlock() {
-  const { tools } = aboutContent;
+  const { about, t } = useLocale();
+  const { tools } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="tools-heading">
@@ -9,7 +12,7 @@ export function ToolsBlock() {
         id="tools-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Ferramentas Estratégicas
+        {t.sections.tools}
       </h2>
       {tools.intro && (
         <p className="text-muted leading-relaxed">{tools.intro}</p>

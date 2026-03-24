@@ -2,29 +2,30 @@
 
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
-import { projectsList, projectTopics } from "@/lib/projects";
-import { projectCategories } from "@/lib/projects";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import type { ProjectCategory, ProjectTopic } from "@/types";
-
-function getCategoryLabel(category: ProjectCategory) {
-  return projectCategories.find((c) => c.id === category)?.label ?? category;
-}
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function ProjectGrid() {
+  const { projects, projectCategories, projectTopics, t } = useLocale();
+
+  function getCategoryLabel(category: ProjectCategory) {
+    return projectCategories.find((c) => c.id === category)?.label ?? category;
+  }
+
   const [selectedTopic, setSelectedTopic] = useState<ProjectTopic>("saude");
   const projectsInTopic = useMemo(
-    () => projectsList.filter((p) => p.topic === selectedTopic),
-    [selectedTopic]
+    () => projects.filter((p) => p.topic === selectedTopic),
+    [projects, selectedTopic]
   );
   const [selectedId, setSelectedId] = useState<string>(
-    projectsInTopic[0]?.id ?? projectsList[0]?.id ?? ""
+    projectsInTopic[0]?.id ?? projects[0]?.id ?? ""
   );
   const [activePreviewId, setActivePreviewId] = useState<string | null>(null);
 
   const projectInTopic = projectsInTopic.find((p) => p.id === selectedId);
   const projectToShow =
-    projectInTopic ?? projectsInTopic[0] ?? projectsList[0] ?? null;
+    projectInTopic ?? projectsInTopic[0] ?? projects[0] ?? null;
   const projectUrl =
     projectToShow?.link && projectToShow.link.startsWith("http")
       ? projectToShow.link
@@ -58,7 +59,7 @@ export function ProjectGrid() {
 
   const handleTopicChange = (topic: ProjectTopic) => {
     setSelectedTopic(topic);
-    const inNewTopic = projectsList.filter((p) => p.topic === topic);
+    const inNewTopic = projects.filter((p) => p.topic === topic);
     if (inNewTopic.length > 0) {
       setSelectedId(inNewTopic[0].id);
       setActivePreviewId(null);
@@ -236,7 +237,7 @@ export function ProjectGrid() {
       {hasDev && (
         <div>
           <p className="text-xs font-medium text-accent/90 uppercase tracking-wider mb-2">
-            Sobre o desenvolvimento
+            {t.projects.aboutDev}
           </p>
           <p className="text-muted text-sm leading-relaxed">
             {projectToShow.developmentExplanation}
@@ -250,7 +251,7 @@ export function ProjectGrid() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
         >
-          Abrir site em nova guia
+          {t.projects.openSiteTab}
         </a>
       )}
     </>
@@ -266,7 +267,7 @@ export function ProjectGrid() {
       {/* Seletor por tópico + projeto */}
       <div className="mb-5 p-4 md:p-5 rounded-xl border border-border-dark/50 bg-surface/40">
         <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">
-          Projetos por tópico
+          {t.projects.byTopic}
         </p>
         <div className="flex flex-wrap gap-2 mb-4">
           {projectTopics.map((topic) => (
@@ -293,14 +294,14 @@ export function ProjectGrid() {
               htmlFor="project-select"
               className="text-sm font-medium text-muted"
             >
-              Projeto
+              {t.projects.project}
             </label>
             <select
               id="project-select"
               value={selectedId}
               onChange={(e) => handleSelectProject(e.target.value)}
               className="project-select px-4 py-2.5 rounded-xl text-sm font-medium bg-surface border border-border-dark/60 text-primary outline-none transition-all cursor-pointer min-w-[220px] max-w-full hover:border-accent/40"
-              aria-label="Selecionar projeto"
+              aria-label={t.projects.selectProjectAria}
             >
               {currentTopicProjects.map((project) => (
                 <option key={project.id} value={project.id}>
@@ -309,16 +310,18 @@ export function ProjectGrid() {
               ))}
             </select>
             <span className="text-xs font-medium text-muted bg-surface/60 px-3 py-1.5 rounded-lg border border-border-dark/40">
-              {effectiveIndex + 1} de {currentTopicProjects.length}
+              {t.projects.ofTotal
+                .replace("{current}", String(effectiveIndex + 1))
+                .replace("{total}", String(currentTopicProjects.length))}
             </span>
           </div>
         ) : (
           <p className="text-sm text-muted">
-            Nenhum projeto neste tópico no momento.
+            {t.projects.noneInTopic}
           </p>
         )}
         <p className="mt-3 text-xs text-muted/90 leading-relaxed">
-          Largura e tamanho da pré-visualização são ajustáveis na barra do preview (resolução + redimensionar pelo canto ou borda). Solta = arrastar; Presa = especificações abaixo.
+          {t.projects.previewHint}
         </p>
       </div>
 
@@ -331,7 +334,7 @@ export function ProjectGrid() {
             id="project-cards-heading"
             className="text-sm font-semibold text-accent uppercase tracking-wider mb-3"
           >
-            Projetos do tópico
+            {t.projects.topicProjects}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
             {currentTopicProjects.map((project) => {
@@ -350,20 +353,20 @@ export function ProjectGrid() {
                       : "border-border-dark/60 bg-surface/40 hover:border-accent/40"
                   }`}
                   aria-pressed={isActive}
-                  aria-label={`Selecionar projeto ${project.title}`}
+                  aria-label={`${t.projects.selectProjectPrefix} ${project.title}`}
                 >
                   <div className="h-28 bg-dark/70 border-b border-border-dark/50 overflow-hidden relative">
                     {project.thumbnail ? (
                       <Image
                         src={project.thumbnail}
-                        alt={`Thumbnail do projeto ${project.title}`}
+                        alt={`${t.projects.thumbnailAltPrefix} ${project.title}`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center text-xs text-muted px-2 text-center">
-                        Thumbnail estática
+                        {t.projects.thumbnailStatic}
                       </div>
                     )}
                   </div>
@@ -393,7 +396,7 @@ export function ProjectGrid() {
             id="key-stages-heading"
             className="text-sm font-semibold text-accent uppercase tracking-wider mb-3"
           >
-            Etapas-chave do projeto selecionado
+            {t.projects.keyStages}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {projectToShow.keyStages.map((stage) => (
@@ -457,7 +460,7 @@ export function ProjectGrid() {
             }`}
             aria-label={
               previewMode === "floating"
-                ? "Arrastar janela de preview"
+                ? t.projects.dragTitle
                 : undefined
             }
           >
@@ -472,13 +475,13 @@ export function ProjectGrid() {
               </h2>
               {previewMode === "floating" && (
                 <span className="text-xs text-muted hidden sm:inline">
-                  — arraste para mover
+                  {t.projects.dragHint}
                 </span>
               )}
             </div>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 flex-shrink-0 pl-3 pr-2 py-2 rounded-xl bg-accent/10 border border-accent/25 w-full sm:w-auto">
               <span className="text-xs font-semibold text-accent uppercase tracking-wider hidden sm:inline">
-                Ajustes
+                {t.projects.adjustments}
               </span>
               {isPortfolioMobile ? (
                 <span className="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium text-accent/90 bg-accent/15 rounded-lg border border-accent/40">
@@ -489,7 +492,7 @@ export function ProjectGrid() {
                 </span>
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-accent/90 font-medium hidden md:inline">Largura:</span>
+                  <span className="text-xs text-accent/90 font-medium hidden md:inline">{t.projects.width}</span>
                   <select
                     value={viewportWidthPreset === "full" ? "full" : viewportWidthPreset}
                     onChange={(e) => {
@@ -500,13 +503,13 @@ export function ProjectGrid() {
                     }}
                     onClick={(e) => e.stopPropagation()}
                     className="px-3 py-2 text-sm font-medium rounded-lg border border-accent/30 bg-surface text-primary cursor-pointer focus-ring min-w-[8rem] hover:border-accent/50 focus:border-accent"
-                    title="Largura horizontal da pré-visualização"
-                    aria-label="Largura da pré-visualização"
+                    title={t.projects.widthTitle}
+                    aria-label={t.projects.widthAria}
                   >
-                    <option value="full">100% (Web)</option>
-                    <option value={390}>390px (Mobile)</option>
-                    <option value={768}>768px (Tablet)</option>
-                    <option value={1024}>1024px (Desktop)</option>
+                    <option value="full">{t.projects.viewportFull}</option>
+                    <option value={390}>{t.projects.viewport390}</option>
+                    <option value={768}>{t.projects.viewport768}</option>
+                    <option value={1024}>{t.projects.viewport1024}</option>
                   </select>
                 </div>
               )}
@@ -519,13 +522,13 @@ export function ProjectGrid() {
                 className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-muted hover:text-accent hover:bg-accent/15 transition-colors focus-ring border border-transparent hover:border-accent/30"
                 title={
                   previewMode === "floating"
-                    ? "Prender preview (deixar especificações visíveis)"
-                    : "Soltar preview (modo flutuante, arrastável)"
+                    ? t.projects.dockTitle
+                    : t.projects.floatTitle
                 }
                 aria-label={
                   previewMode === "floating"
-                    ? "Prender preview"
-                    : "Soltar preview para modo flutuante"
+                    ? t.projects.dockAria
+                    : t.projects.floatAria
                 }
               >
                 {previewMode === "floating" ? (
@@ -533,14 +536,14 @@ export function ProjectGrid() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
-                    <span className="hidden sm:inline">Prender</span>
+                    <span className="hidden sm:inline">{t.projects.dock}</span>
                   </>
                 ) : (
                   <>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2m8-16h2a2 2 0 012 2v2m-4 12h2a2 2 0 002-2v-6a2 2 0 00-2-2h-2a2 2 0 00-2 2v6a2 2 0 002 2z" />
                     </svg>
-                    <span className="hidden sm:inline">Soltar</span>
+                    <span className="hidden sm:inline">{t.projects.float}</span>
                   </>
                 )}
               </button>
@@ -552,7 +555,7 @@ export function ProjectGrid() {
                   onClick={(e) => e.stopPropagation()}
                   className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring w-full sm:w-auto"
                 >
-                  Abrir em nova guia
+                  {t.projects.openNewTab}
                 </a>
               )}
             </div>
@@ -590,8 +593,8 @@ export function ProjectGrid() {
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
                 {projectUrl
-                  ? "Selecione um projeto para carregar o preview completo."
-                  : "Sem link de preview"}
+                  ? t.projects.selectForPreview
+                  : t.projects.noPreviewLink}
               </div>
             )}
           </div>
@@ -603,8 +606,8 @@ export function ProjectGrid() {
                 ? "bottom-0 right-0 w-6 h-6 cursor-nwse-resize rounded-tl-lg"
                 : "left-0 right-0 bottom-0 h-3 cursor-ns-resize"
             }`}
-            title={previewMode === "floating" ? "Arrastar para redimensionar" : "Arrastar para alterar altura"}
-            aria-label={previewMode === "floating" ? "Redimensionar janela" : "Redimensionar altura"}
+            title={previewMode === "floating" ? t.projects.resizeCorner : t.projects.resizeHeight}
+            aria-label={previewMode === "floating" ? t.projects.resizeWindowAria : t.projects.resizeHeightAria}
           >
             {previewMode === "floating" && (
               <svg className="w-3.5 h-3.5 text-accent/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
@@ -625,7 +628,7 @@ export function ProjectGrid() {
             id="specs-heading"
             className="text-sm font-semibold text-accent uppercase tracking-wider mb-4"
           >
-            Especificações
+            {t.projects.specs}
           </h3>
           {specsBody}
         </section>
@@ -641,7 +644,7 @@ export function ProjectGrid() {
               id="specs-heading-floating"
               className="text-sm font-semibold text-accent uppercase tracking-wider mb-4"
             >
-              Especificações
+              {t.projects.specs}
             </h3>
             {specsBody}
           </div>

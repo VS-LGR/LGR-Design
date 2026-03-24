@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function FormationBlock() {
-  const { formation } = aboutContent;
+  const { about, t } = useLocale();
+  const { formation } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="formation-heading">
@@ -9,11 +12,10 @@ export function FormationBlock() {
         id="formation-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Formação & Especialização
+        {t.sections.formation}
       </h2>
       <p className="text-sm text-muted leading-relaxed">
-        Minha formação é direcionada à construção de experiências digitais
-        estratégicas, unindo usabilidade, negócio e execução técnica.
+        {t.sections.formationLead}
       </p>
       <ul className="space-y-4 list-none">
         {formation.map((item, index) => (

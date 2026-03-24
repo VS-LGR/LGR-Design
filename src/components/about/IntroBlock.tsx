@@ -1,7 +1,10 @@
-import { aboutContent } from "@/lib/about";
+"use client";
+
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function IntroBlock() {
-  const { intro, resumePdfUrl } = aboutContent;
+  const { about, t } = useLocale();
+  const { intro, resumePdfUrl } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="intro-heading">
@@ -9,7 +12,7 @@ export function IntroBlock() {
         id="intro-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Sobre Mim
+        {t.sections.about}
       </h2>
       <div className="space-y-4 text-muted leading-relaxed">
         {intro.map((paragraph, i) => (
@@ -23,7 +26,7 @@ export function IntroBlock() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring mt-2"
         >
-          Baixar currículo (PDF)
+          {t.resume.download}
         </a>
       )}
     </section>

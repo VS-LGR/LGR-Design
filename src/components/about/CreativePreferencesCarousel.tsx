@@ -1,10 +1,11 @@
 "use client";
 
 import { Carousel } from "@/components/shared/Carousel";
-import { aboutContent } from "@/lib/about";
+import { useLocale } from "@/contexts/LocaleContext";
 
 export function CreativePreferencesCarousel() {
-  const { creativePreferences } = aboutContent;
+  const { about, t } = useLocale();
+  const { creativePreferences } = about;
 
   return (
     <section className="space-y-4" aria-labelledby="creative-heading">
@@ -12,11 +13,10 @@ export function CreativePreferencesCarousel() {
         id="creative-heading"
         className="text-lg font-semibold text-primary accent-underline pb-1"
       >
-        Criatividade que Sustenta o Processo
+        {t.sections.creative}
       </h2>
       <p className="text-sm text-muted leading-relaxed">
-        Minha base criativa vem de áreas que expandem minha visão estrutural e
-        estética:
+        {t.creative.intro}
       </p>
       <Carousel gap="gap-3" fadeWidth="w-12" className="min-w-0">
         {creativePreferences.map((item, index) => (
@@ -29,8 +29,7 @@ export function CreativePreferencesCarousel() {
         ))}
       </Carousel>
       <p className="text-sm text-muted pt-1">
-        Essas práticas fortalecem minha capacidade de construir experiências com
-        profundidade, narrativa e intenção.
+        {t.creative.outro}
       </p>
     </section>
   );
