@@ -48,6 +48,122 @@ export const projectsList: Project[] = [
     ],
     thumbnail: PsiBiaRossiThumb,
     link: "https://psi-bia-rossi.vercel.app",
+    caseStudy: {
+      context: {
+        type: "Landing page / site de apresentação",
+        segment: "Saúde mental",
+        objective: "Posicionar a profissional com acolhimento e clareza clínica",
+        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        overview:
+          "Projeto para psicóloga com foco em psicanálise (14+ e adultos), integrando gamificação como recurso complementar sem perder credibilidade.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Dor de percepção e clareza",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Sites de saúde mental costumam cair entre o excesso de frieza e a abstração. O desafio foi equilibrar acolhimento, objetividade e confiança.",
+            },
+          ],
+        },
+        {
+          id: "objetivo",
+          label: "Objetivo",
+          title: "Reduzir barreiras de contato",
+          blocks: [
+            {
+              id: "o1",
+              type: "bullets",
+              items: [
+                "Explicar abordagem clínica com linguagem simples",
+                "Transmitir segurança no primeiro contato",
+                "Facilitar agendamento por WhatsApp",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ux-ui",
+          label: "UX/UI",
+          title: "Leitura sensível e escaneável",
+          blocks: [
+            {
+              id: "u1",
+              type: "bullets",
+              items: [
+                "Fluxo em progressão: apresentação, serviços, metodologia e contato",
+                "Hierarquia tipográfica para reduzir carga cognitiva",
+                "Tom visual acolhedor sem aparência amadora",
+              ],
+            },
+          ],
+        },
+        {
+          id: "solucao",
+          label: "Solução",
+          title: "Estrutura orientada à confiança",
+          blocks: [
+            {
+              id: "s1",
+              type: "bullets",
+              items: [
+                "Headline mais leve no topo",
+                "Explicação da gamificação como recurso clínico complementar",
+                "CTAs consistentes em pontos de decisão",
+              ],
+            },
+          ],
+        },
+        {
+          id: "decisoes",
+          label: "Decisões",
+          title: "Racional de design e conversão",
+          blocks: [
+            {
+              id: "d1",
+              type: "tags",
+              items: ["Humanização", "Clareza", "Conversão sem pressão", "Mobile-first"],
+            },
+          ],
+        },
+        {
+          id: "resultado",
+          label: "Resultado",
+          title: "Base mais forte para posicionamento",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Entrega", value: "Site institucional responsivo em produção" },
+                { label: "Foco", value: "Conversão e credibilidade clínica" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "fechamento",
+          label: "Fechamento",
+          title: "Design como pré-acolhimento",
+          blocks: [
+            {
+              id: "f1",
+              type: "quote",
+              content:
+                "A interface foi desenhada para informar e, ao mesmo tempo, reduzir ansiedade antes do primeiro contato terapêutico.",
+            },
+          ],
+        },
+      ],
+      previewTitle: "Preview da experiência",
+      previewDescription:
+        "Etapa final para navegar o projeto publicado e validar como a narrativa se materializa na interface real.",
+    },
     caseProblem:
       "Transmitir de forma clara a abordagem em psicanálise e o diferencial da gamificação com jogos de tabuleiro, gerando confiança e conversão para contato — sem sobrecarregar visitantes leigos.",
     caseSolution:
@@ -92,6 +208,93 @@ export const projectsList: Project[] = [
     ],
     thumbnail: PharmatechThumb,
     link: "https://lp-farma-com.vercel.app",
+    caseStudy: {
+      context: {
+        type: "Landing page institucional",
+        segment: "Farmacêutico",
+        objective: "Reforçar autoridade e abrir canal comercial",
+        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        overview:
+          "Landing institucional para comunicar inovação e capacidade técnica em um setor de alta exigência regulatória.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Confiança exige estrutura",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "No contexto farmacêutico, discurso sem organização não sustenta autoridade. Era necessário apresentar robustez com leitura objetiva.",
+            },
+          ],
+        },
+        {
+          id: "objetivo",
+          label: "Objetivo",
+          title: "Posicionamento institucional forte",
+          blocks: [
+            {
+              id: "o1",
+              type: "bullets",
+              items: [
+                "Evidenciar competência técnica",
+                "Fortalecer percepção de inovação",
+                "Gerar oportunidades de parceria",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ux-ui",
+          label: "UX/UI",
+          title: "Credibilidade com escaneabilidade",
+          blocks: [
+            {
+              id: "u1",
+              type: "tags",
+              items: ["Clareza institucional", "Leitura progressiva", "Estética setorial"],
+            },
+          ],
+        },
+        {
+          id: "solucao",
+          label: "Solução",
+          title: "Narrativa institucional progressiva",
+          blocks: [
+            {
+              id: "s1",
+              type: "bullets",
+              items: [
+                "Hero com proposta de valor imediata",
+                "Blocos sobre tecnologia, equipe, pesquisa e qualidade",
+                "Área de contato preparada para relacionamento B2B",
+              ],
+            },
+          ],
+        },
+        {
+          id: "resultado",
+          label: "Resultado",
+          title: "Presença digital mais robusta",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Entrega", value: "Landing corporativa publicada" },
+                { label: "Objetivo", value: "Credibilidade + geração de contato" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Preview institucional",
+      previewDescription:
+        "Visualização da landing publicada para validar hierarquia, narrativa e pontos de contato comercial.",
+    },
     caseProblem:
       "Apresentar uma empresa de desenvolvimento farmacêutico com linguagem técnica e ao mesmo tempo acessível a parceiros e decisores, em uma única página que vende confiança e abre canal comercial.",
     caseSolution:
@@ -136,6 +339,106 @@ export const projectsList: Project[] = [
     ],
     thumbnail: OfagThumb,
     link: "https://ofag-revamp.vercel.app/pt",
+    caseStudy: {
+      context: {
+        type: "Revamp de site institucional",
+        segment: "Impressão técnica para indústrias reguladas",
+        objective: "Comunicar conformidade, especialização e clareza comercial",
+        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        overview:
+          "Reposicionamento digital da OFAG para alinhar imagem online à maturidade operacional de um negócio técnico.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Capacidade alta, percepção baixa",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "A operação tinha robustez, mas o site não traduzia a autoridade necessária para mercados regulados e decisões industriais.",
+            },
+          ],
+        },
+        {
+          id: "objetivo",
+          label: "Objetivo",
+          title: "Transformar presença em ativo comercial",
+          blocks: [
+            {
+              id: "o1",
+              type: "bullets",
+              items: [
+                "Aumentar percepção de confiabilidade",
+                "Evidenciar rastreabilidade e controle de qualidade",
+                "Apoiar contato comercial com menos fricção",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ux-ui",
+          label: "UX/UI",
+          title: "Lógica de confiança em setores regulados",
+          blocks: [
+            {
+              id: "u1",
+              type: "bullets",
+              items: [
+                "Proposta de valor clara no primeiro bloco",
+                "Progressão: processo, segmentos, qualidade, certificações e contato",
+                "Linguagem visual institucional limpa e técnica",
+              ],
+            },
+          ],
+        },
+        {
+          id: "solucao",
+          label: "Solução",
+          title: "Arquitetura orientada a autoridade",
+          blocks: [
+            {
+              id: "s1",
+              type: "tags",
+              items: ["Credibilidade visual", "Números e provas", "CTAs distribuídos", "Escaneabilidade"],
+            },
+          ],
+        },
+        {
+          id: "resultado",
+          label: "Resultado",
+          title: "Imagem mais alinhada ao nível técnico",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Escopo", value: "Site institucional multilíngue" },
+                { label: "Público", value: "Farmacêutico e regulado" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "fechamento",
+          label: "Fechamento",
+          title: "Modernização com intenção estratégica",
+          blocks: [
+            {
+              id: "f1",
+              type: "quote",
+              content:
+                "O foco foi construir uma presença digital capaz de representar a seriedade do negócio, não apenas atualizar estética.",
+            },
+          ],
+        },
+      ],
+      previewTitle: "Preview do revamp",
+      previewDescription:
+        "Navegue pela versão publicada para ver como conteúdo técnico e clareza comercial convivem na interface.",
+    },
     caseProblem:
       "Comunicar processos, conformidade e alcance internacional para indústrias reguladas, em três idiomas, sem perder clareza nem consistência de marca.",
     caseSolution:
@@ -180,6 +483,93 @@ export const projectsList: Project[] = [
     ],
     thumbnail: ClinaDversoThumb,
     link: "https://dversos-clinica.vercel.app",
+    caseStudy: {
+      context: {
+        type: "Site institucional",
+        segment: "Clínica de saúde integrada",
+        objective: "Unificar múltiplas especialidades com acolhimento e clareza",
+        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        overview:
+          "Projeto para clínica multidisciplinar com foco em neurodivergência e terapia assistida por cão.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Risco de fragmentação da mensagem",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Com muitas especialidades, havia risco de comunicação genérica e confusa, perdendo unidade de marca e orientação ao paciente.",
+            },
+          ],
+        },
+        {
+          id: "objetivo",
+          label: "Objetivo",
+          title: "Cuidado integrado com decisão rápida",
+          blocks: [
+            {
+              id: "o1",
+              type: "bullets",
+              items: [
+                "Explicar áreas de atuação sem ruído",
+                "Reforçar acolhimento familiar",
+                "Facilitar identificação do atendimento ideal",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ux-ui",
+          label: "UX/UI",
+          title: "Equilíbrio entre leveza e organização",
+          blocks: [
+            {
+              id: "u1",
+              type: "tags",
+              items: ["Confiança", "Acolhimento", "Escaneabilidade", "Navegação simples"],
+            },
+          ],
+        },
+        {
+          id: "solucao",
+          label: "Solução",
+          title: "Estrutura clara por frentes de cuidado",
+          blocks: [
+            {
+              id: "s1",
+              type: "bullets",
+              items: [
+                "Apresentação objetiva das especialidades",
+                "Destaque para neurodivergência e terapia assistida por cão",
+                "Linguagem visual acessível com jornada de contato humanizada",
+              ],
+            },
+          ],
+        },
+        {
+          id: "resultado",
+          label: "Resultado",
+          title: "Complexidade traduzida em clareza",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Entrega", value: "Landing multidisciplinar responsiva" },
+                { label: "Experiência", value: "Mobile-first para famílias" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Preview da clínica",
+      previewDescription:
+        "Veja a implementação final com foco em escaneabilidade, acolhimento e navegação orientada à tomada de decisão.",
+    },
     caseProblem:
       "Organizar várias linhas de cuidado (neurodivergência, terapias, nutrição, terapia assistida por cão) para famílias que buscam informação rápida no celular, com tom acolhedor.",
     caseSolution:

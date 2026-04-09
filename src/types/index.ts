@@ -54,6 +54,49 @@ export interface ProjectCaseResult {
   delta?: string;
 }
 
+export type CaseStudyBlockType =
+  | "text"
+  | "bullets"
+  | "quote"
+  | "stats"
+  | "tags";
+
+export interface CaseStudyStat {
+  label: string;
+  value: string;
+  delta?: string;
+}
+
+export interface CaseStudyBlock {
+  id: string;
+  title?: string;
+  type: CaseStudyBlockType;
+  content?: string;
+  items?: string[];
+  stats?: CaseStudyStat[];
+}
+
+export interface CaseStudyChapter {
+  id: string;
+  label: string;
+  title: string;
+  subtitle?: string;
+  blocks: CaseStudyBlock[];
+}
+
+export interface CaseStudyContent {
+  context: {
+    type: string;
+    segment: string;
+    objective: string;
+    role: string;
+    overview: string;
+  };
+  chapters: CaseStudyChapter[];
+  previewTitle?: string;
+  previewDescription?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -76,6 +119,8 @@ export interface Project {
   caseSolution?: string;
   /** Resultados observáveis ou qualitativos */
   caseResults?: ProjectCaseResult[];
+  /** Novo formato de case em capítulos para páginas dedicadas */
+  caseStudy?: CaseStudyContent;
 }
 
 export interface DesignProcessPhase {

@@ -60,6 +60,29 @@ export type UiMessages = {
     solution: string;
     results: string;
   };
+  caseDeck: {
+    backToProjects: string;
+    context: string;
+    projectType: string;
+    segment: string;
+    objective: string;
+    role: string;
+    overview: string;
+    chapterNavAria: string;
+    chapterLabel: string;
+    previousChapter: string;
+    nextChapter: string;
+    progressAria: string;
+    previewCta: string;
+    previewTitle: string;
+    previewDescription: string;
+    openExternal: string;
+    previewUnavailable: string;
+    loadingPreview: string;
+    previewError: string;
+    swipeHint: string;
+    caseCta: string;
+  };
   sections: {
     about: string;
     formation: string;
@@ -201,6 +224,29 @@ export const uiPt: UiMessages = {
     problem: "O problema / contexto",
     solution: "Solução e abordagem",
     results: "Resultados",
+  },
+  caseDeck: {
+    backToProjects: "Voltar para projetos",
+    context: "Contexto",
+    projectType: "Tipo",
+    segment: "Segmento",
+    objective: "Objetivo principal",
+    role: "Meu papel",
+    overview: "Visão geral",
+    chapterNavAria: "Navegação dos capítulos do case",
+    chapterLabel: "Capítulo",
+    previousChapter: "Capítulo anterior",
+    nextChapter: "Próximo capítulo",
+    progressAria: "Progresso de leitura do case",
+    previewCta: "Carregar preview ao vivo",
+    previewTitle: "Preview do projeto",
+    previewDescription: "Navegue no site publicado para validar a implementação final.",
+    openExternal: "Abrir preview em nova guia",
+    previewUnavailable: "Este projeto não possui link de preview disponível.",
+    loadingPreview: "Carregando preview...",
+    previewError: "Nao foi possivel carregar o preview. Use a abertura em nova guia.",
+    swipeHint: "Dica mobile: deslize para esquerda/direita para trocar de capitulo.",
+    caseCta: "Ver estudo de caso",
   },
   sections: {
     about: "Sobre Mim",
@@ -348,6 +394,29 @@ export const uiEn: UiMessages = {
     problem: "Problem / context",
     solution: "Solution and approach",
     results: "Outcomes",
+  },
+  caseDeck: {
+    backToProjects: "Back to projects",
+    context: "Context",
+    projectType: "Type",
+    segment: "Segment",
+    objective: "Main objective",
+    role: "My role",
+    overview: "Overview",
+    chapterNavAria: "Case chapter navigation",
+    chapterLabel: "Chapter",
+    previousChapter: "Previous chapter",
+    nextChapter: "Next chapter",
+    progressAria: "Case reading progress",
+    previewCta: "Load live preview",
+    previewTitle: "Project preview",
+    previewDescription: "Open the published site to validate the final implementation.",
+    openExternal: "Open preview in new tab",
+    previewUnavailable: "This project has no preview link available.",
+    loadingPreview: "Loading preview...",
+    previewError: "Could not load the preview. Use open in new tab.",
+    swipeHint: "Mobile tip: swipe left/right to change chapter.",
+    caseCta: "View case study",
   },
   sections: {
     about: "About Me",
