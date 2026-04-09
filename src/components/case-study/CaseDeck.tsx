@@ -184,7 +184,7 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
               project.caseStudy?.previewDescription ?? t.caseDeck.previewDescription
             }
             previewUrl={project.link}
-            t={t.caseDeck}
+            t={t}
           />
         </div>
       </section>
