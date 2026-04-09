@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "@/styles/globals.css";
 import { Header } from "@/components/shared/Header";
+import { HubReturnBar } from "@/components/shared/HubReturnBar";
 import { Footer } from "@/components/shared/Footer";
 import { AnimatedBackground } from "@/components/shared/AnimatedBackground";
 import { IntroOverlay } from "@/components/shared/IntroOverlay";
@@ -34,6 +35,7 @@ export default function RootLayout({
           <IntroOverlay />
           <SkipLink />
           <Header />
+          <HubReturnBar />
           <main id="main-content" className="flex-1" tabIndex={-1}>
             {children}
           </main>

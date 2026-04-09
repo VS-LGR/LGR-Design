@@ -9,7 +9,8 @@ export type UiMessages = {
     story: string;
     work: string;
     exploration: string;
-    system: string;
+    backToSelection: string;
+    openNavigation: string;
   };
   system: {
     hubTitle: string;
@@ -196,7 +197,8 @@ export const uiPt: UiMessages = {
     story: "História",
     work: "Como trabalho",
     exploration: "Exploração",
-    system: "Sistema",
+    backToSelection: "Voltar ao menu de seleção",
+    openNavigation: "Abrir navegação",
   },
   system: {
     hubTitle: "Acesso ao portfólio",
@@ -396,7 +398,8 @@ export const uiEn: UiMessages = {
     story: "Story",
     work: "How I work",
     exploration: "Playground",
-    system: "System",
+    backToSelection: "Back to selection menu",
+    openNavigation: "Open navigation",
   },
   system: {
     hubTitle: "Portfolio access",

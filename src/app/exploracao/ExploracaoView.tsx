@@ -58,7 +58,7 @@ export function ExploracaoView() {
           href="/"
           className="text-sm font-medium text-accent hover:text-accent-soft focus-ring"
         >
-          {t.nav.system}
+          {t.nav.menu}
         </Link>
       </p>
     </div>

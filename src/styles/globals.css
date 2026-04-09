@@ -304,11 +304,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .system-hub-satellite {
-    transition-duration: 0.08s !important;
+    transition-duration: 0.1s !important;
     transition-delay: 0ms !important;
   }
   .system-hub-core {
-    transition-duration: 0.08s !important;
+    transition-duration: 0.1s !important;
+  }
+  .system-hub-orbit-ring {
+    transition-duration: 0.1s !important;
   }
   .animate-in,
   .animate-in-up,
