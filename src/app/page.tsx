@@ -1,58 +1,12 @@
-"use client";
+import type { Metadata } from "next";
+import { HomeClient } from "./HomeClient";
 
-import { useState, useCallback } from "react";
-import type { TabId } from "@/types";
-import { TabNav } from "@/components/shared/TabNav";
-import { DynamicSidebar } from "@/components/shared/DynamicSidebar";
-import { AboutSection } from "@/components/about/AboutSection";
-import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
-
-const ABOUT_SECTION_IDS = [
-  "about-intro",
-  "about-formacao",
-  "about-reconhecimentos",
-  "about-cursor-template",
-  "about-posicionamento",
-  "about-como-trabalho",
-  "about-processo",
-  "about-ferramentas",
-  "about-preferencias",
-  "about-objetivo",
-  "about-contato",
-];
+export const metadata: Metadata = {
+  title: "Sistema | Lucas Gabriel Rodrigues",
+  description:
+    "Acesso ao portfólio — projetos, história, método de trabalho e exploração interativa.",
+};
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<TabId>("projects");
-  const activeSectionId = useScrollSpy(
-    ABOUT_SECTION_IDS,
-    activeTab === "about"
-  );
-
-  const handleTabChange = useCallback((tab: TabId) => {
-    setActiveTab(tab);
-  }, []);
-
-  return (
-    <>
-      <TabNav activeTab={activeTab} onTabChange={handleTabChange} />
-      <div className="min-h-[50vh] relative" key={activeTab}>
-        {activeTab === "projects" ? (
-          <div className="animate-in w-full max-w-[1600px] mx-auto px-4 md:px-6">
-            <ProjectGrid />
-          </div>
-        ) : (
-          <div className="animate-in grid grid-cols-1 xl:grid-cols-[1fr_280px] xl:gap-12 xl:max-w-7xl xl:mx-auto xl:px-6">
-            <div className="min-w-0">
-              <AboutSection />
-            </div>
-            <DynamicSidebar
-              activeTab={activeTab}
-              activeSectionId={activeSectionId}
-            />
-          </div>
-        )}
-      </div>
-    </>
-  );
+  return <HomeClient />;
 }

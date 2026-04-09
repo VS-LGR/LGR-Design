@@ -6,6 +6,26 @@ export type UiMessages = {
     close: string;
     projects: string;
     about: string;
+    story: string;
+    work: string;
+    exploration: string;
+    system: string;
+  };
+  system: {
+    hubTitle: string;
+    hubSubtitle: string;
+    toggleExpand: string;
+    toggleCollapse: string;
+    centralButtonAria: string;
+    goProjects: string;
+    goStory: string;
+    goWork: string;
+    goExploration: string;
+    explorationTitle: string;
+    explorationLead: string;
+    explorationEmpty: string;
+    explorationSoon: string;
+    explorationLive: string;
   };
   header: {
     tagline: string;
@@ -83,6 +103,11 @@ export type UiMessages = {
     swipeHint: string;
     caseCta: string;
     caseNotFound: string;
+  };
+  pages: {
+    projectsHeading: string;
+    historiaHeading: string;
+    workHeading: string;
   };
   sections: {
     about: string;
@@ -168,6 +193,27 @@ export const uiPt: UiMessages = {
     close: "Fechar",
     projects: "Projetos",
     about: "Sobre Mim",
+    story: "História",
+    work: "Como trabalho",
+    exploration: "Exploração",
+    system: "Sistema",
+  },
+  system: {
+    hubTitle: "Acesso ao portfólio",
+    hubSubtitle: "Escolha um módulo para continuar.",
+    toggleExpand: "Abrir módulos",
+    toggleCollapse: "Fechar módulos",
+    centralButtonAria: "Abrir ou fechar menu circular de módulos",
+    goProjects: "Ir para projetos",
+    goStory: "Ir para história pessoal",
+    goWork: "Ir para como trabalho",
+    goExploration: "Ir para exploração",
+    explorationTitle: "Exploração",
+    explorationLead:
+      "Pequenos sites e experimentos interativos. Novos projetos serão publicados aqui.",
+    explorationEmpty: "Em breve: novas experiências interativas.",
+    explorationSoon: "Em breve",
+    explorationLive: "No ar",
   },
   header: {
     tagline: "UX Design & Web Design",
@@ -220,7 +266,7 @@ export const uiPt: UiMessages = {
     jumpPreview: "Preview",
     jumpSpecs: "Especificações",
     caseLead:
-      "Resumo do contexto e da abordagem neste trabalho. O processo completo em 10 etapas está na aba Sobre Mim.",
+      "Resumo do contexto e da abordagem neste trabalho. O processo completo em 10 etapas está na página Como trabalho.",
     caseHeading: "Case: {title}",
     problem: "O problema / contexto",
     solution: "Solução e abordagem",
@@ -251,6 +297,11 @@ export const uiPt: UiMessages = {
       "Dica mobile: deslize para esquerda/direita para trocar de capítulo.",
     caseCta: "Ver estudo de caso",
     caseNotFound: "Case não encontrado.",
+  },
+  pages: {
+    projectsHeading: "Projetos selecionados",
+    historiaHeading: "História pessoal",
+    workHeading: "Como trabalho",
   },
   sections: {
     about: "Sobre Mim",
@@ -320,7 +371,7 @@ export const uiPt: UiMessages = {
     thumbnailStatic: "Thumbnail estática",
     keyStagesHeading: "Entregas e foco de UX neste site",
     keyStagesLead:
-      "O que foi priorizado neste trabalho — distinto do processo macro na aba Sobre.",
+      "O que foi priorizado neste trabalho — distinto do processo macro na página Como trabalho.",
   },
   projectCard: {
     previewPlaceholder: "Preview do projeto",
@@ -342,6 +393,27 @@ export const uiEn: UiMessages = {
     close: "Close",
     projects: "Projects",
     about: "About Me",
+    story: "Story",
+    work: "How I work",
+    exploration: "Playground",
+    system: "System",
+  },
+  system: {
+    hubTitle: "Portfolio access",
+    hubSubtitle: "Choose a module to continue.",
+    toggleExpand: "Open modules",
+    toggleCollapse: "Close modules",
+    centralButtonAria: "Open or close circular module menu",
+    goProjects: "Go to projects",
+    goStory: "Go to personal story",
+    goWork: "Go to how I work",
+    goExploration: "Go to playground",
+    explorationTitle: "Playground",
+    explorationLead:
+      "Small sites and interactive experiments. New pieces will appear here.",
+    explorationEmpty: "Coming soon: new interactive experiments.",
+    explorationSoon: "Coming soon",
+    explorationLive: "Live",
   },
   header: {
     tagline: "UX Design & Web Design",
@@ -393,7 +465,7 @@ export const uiEn: UiMessages = {
     jumpPreview: "Preview",
     jumpSpecs: "Specs",
     caseLead:
-      "Summary of context and approach for this piece of work. The full 10-phase process is on the About tab.",
+      "Summary of context and approach for this piece of work. The full 10-phase process is on the How I work page.",
     caseHeading: "Case: {title}",
     problem: "Problem / context",
     solution: "Solution and approach",
@@ -422,6 +494,11 @@ export const uiEn: UiMessages = {
     swipeHint: "Mobile tip: swipe left/right to change chapter.",
     caseCta: "View case study",
     caseNotFound: "Case not found.",
+  },
+  pages: {
+    projectsHeading: "Selected projects",
+    historiaHeading: "Personal story",
+    workHeading: "How I work",
   },
   sections: {
     about: "About Me",
@@ -490,7 +567,7 @@ export const uiEn: UiMessages = {
     thumbnailStatic: "Static thumbnail",
     keyStagesHeading: "Deliverables and UX focus on this site",
     keyStagesLead:
-      "What we prioritized in this engagement — separate from the macro process on About.",
+      "What we prioritized in this engagement — separate from the macro process on How I work.",
   },
   projectCard: {
     previewPlaceholder: "Project preview",

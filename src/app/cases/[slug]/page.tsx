@@ -16,7 +16,7 @@ export default function CasePage() {
       <div className="max-w-3xl mx-auto px-4 py-16 text-center">
         <p className="text-muted">{t.caseDeck.caseNotFound}</p>
         <Link
-          href="/"
+          href="/projetos"
           className="inline-flex mt-4 text-sm font-medium text-accent hover:text-accent-soft focus-ring"
         >
           {t.caseDeck.backToProjects}

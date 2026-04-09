@@ -1,4 +1,5 @@
-export type TabId = "about" | "projects";
+/** Contexto da sidebar contextual (projetos / história / método). */
+export type SidebarContext = "projects" | "story" | "work";
 
 import type { StaticImageData } from "next/image";
 

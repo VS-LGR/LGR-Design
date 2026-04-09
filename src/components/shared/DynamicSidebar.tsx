@@ -1,28 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import type { TabId } from "@/types";
+import type { SidebarContext } from "@/types";
 import { useLocale } from "@/contexts/LocaleContext";
-
-const ABOUT_SECTION_IDS = [
-  "about-intro",
-  "about-formacao",
-  "about-reconhecimentos",
-  "about-cursor-template",
-  "about-posicionamento",
-  "about-como-trabalho",
-  "about-processo",
-  "about-ferramentas",
-  "about-preferencias",
-  "about-objetivo",
-  "about-contato",
-] as const;
+import { STORY_SECTION_IDS, WORK_SECTION_IDS } from "@/lib/about-sections";
 
 const SIDEBAR_TRANSITION_MS = 280;
 
 interface DynamicSidebarProps {
-  activeTab: TabId;
-  /** Quando na aba Sobre Mim, id da seção em foco (scroll spy). */
+  sidebarContext: SidebarContext;
+  /** Quando em história ou método, id da seção em foco (scroll spy). */
   activeSectionId?: string | null;
 }
 
@@ -190,24 +177,35 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
 }
 
 export function DynamicSidebar({
-  activeTab,
+  sidebarContext,
   activeSectionId,
 }: DynamicSidebarProps) {
   const { t, projectCategories } = useLocale();
-  const isAbout = activeTab === "about";
+  const sectionIdsForContext =
+    sidebarContext === "story"
+      ? STORY_SECTION_IDS
+      : sidebarContext === "work"
+        ? WORK_SECTION_IDS
+        : null;
+  const isStoryOrWork = sidebarContext === "story" || sidebarContext === "work";
+  const defaultSectionId = sectionIdsForContext?.[0] ?? "about-intro";
+
   const resolvedSectionId =
-    isAbout && activeSectionId && ABOUT_SECTION_IDS.includes(activeSectionId as (typeof ABOUT_SECTION_IDS)[number])
+    isStoryOrWork &&
+    activeSectionId &&
+    sectionIdsForContext &&
+    (sectionIdsForContext as readonly string[]).includes(activeSectionId)
       ? activeSectionId
-      : isAbout
-        ? "about-intro"
+      : isStoryOrWork
+        ? defaultSectionId
         : null;
 
-  const [displayId, setDisplayId] = useState(resolvedSectionId ?? "about-intro");
+  const [displayId, setDisplayId] = useState(resolvedSectionId ?? defaultSectionId);
   const [exitingId, setExitingId] = useState<string | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (!isAbout || !resolvedSectionId) return;
+    if (!isStoryOrWork || !resolvedSectionId) return;
     if (resolvedSectionId === displayId && !exitingId) return;
 
     if (timeoutRef.current) {
@@ -222,9 +220,9 @@ export function DynamicSidebar({
       setExitingId(null);
       timeoutRef.current = null;
     }, SIDEBAR_TRANSITION_MS);
-  }, [isAbout, resolvedSectionId, displayId, exitingId]);
+  }, [isStoryOrWork, resolvedSectionId, displayId, exitingId]);
 
-  if (isAbout && (displayId || exitingId)) {
+  if (isStoryOrWork && (displayId || exitingId)) {
     return (
       <aside
         className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
@@ -251,7 +249,7 @@ export function DynamicSidebar({
     );
   }
 
-  if (activeTab === "projects") {
+  if (sidebarContext === "projects") {
     return (
       <aside
         className="hidden xl:block sticky top-32 h-fit opacity-90 transition-opacity duration-300"
