@@ -5,9 +5,12 @@ import type { CaseStudyChapter, CaseStudyBlock } from "@/types";
 function renderBlock(block: CaseStudyBlock) {
   if (block.type === "bullets" && block.items?.length) {
     return (
-      <ul className="list-disc pl-5 space-y-2 marker:text-accent/70">
+      <ul className="list-disc pl-5 space-y-3 marker:text-accent marker:font-bold">
         {block.items.map((item) => (
-          <li key={item} className="text-sm text-muted leading-[1.65] pl-0.5">
+          <li
+            key={item}
+            className="text-[15px] md:text-base text-primary/90 leading-relaxed pl-0.5"
+          >
             {item}
           </li>
         ))}
@@ -55,14 +58,14 @@ function renderBlock(block: CaseStudyBlock) {
 
   if (block.type === "quote" && block.content) {
     return (
-      <blockquote className="border-l-2 border-accent/50 pl-4 italic text-sm text-muted leading-[1.65]">
+      <blockquote className="border-l-[3px] border-accent/60 pl-4 italic text-base text-primary/85 leading-relaxed">
         {block.content}
       </blockquote>
     );
   }
 
   return (
-    <p className="text-sm text-muted leading-[1.65]">{block.content}</p>
+    <p className="text-[15px] md:text-base text-primary/85 leading-relaxed">{block.content}</p>
   );
 }
 
@@ -103,17 +106,17 @@ export function ChapterSection({ chapter }: ChapterSectionProps) {
         {chapter.blocks.map((block, index) => (
           <article
             key={block.id}
-            className={`space-y-3 border-l-2 border-accent/20 pl-4 md:pl-5 ${
+            className={`space-y-3 border-l-[3px] border-accent/35 bg-surface/30 rounded-r-xl py-2 pl-4 md:pl-5 ${
               hasManyBlocks ? "snap-start" : ""
             }`}
           >
             {showBlockIndex ? (
-              <p className="text-[11px] uppercase tracking-wide text-accent/75 font-semibold">
+              <p className="text-xs uppercase tracking-wide text-accent font-semibold">
                 {index + 1} / {chapter.blocks.length}
               </p>
             ) : null}
             {block.title ? (
-              <h3 className="text-sm font-semibold text-primary leading-snug">
+              <h3 className="text-base md:text-lg font-semibold text-primary leading-snug tracking-tight">
                 {block.title}
               </h3>
             ) : null}

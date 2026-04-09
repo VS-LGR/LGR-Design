@@ -55,10 +55,9 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
   }, [project.id]);
 
   const active = chapters[activeChapter];
-  const chapterLabel = `${t.caseDeck.chapterLabel} ${activeChapter + 1} / ${Math.max(1, chapters.length)}`;
   const activeChapterAnnouncement = active
     ? `${active.label}: ${active.title}`
-    : chapterLabel;
+    : `${t.caseDeck.chapterLabel} ${activeChapter + 1} / ${Math.max(1, chapters.length)}`;
 
   return (
     <div className="w-full max-w-6xl xl:max-w-7xl mx-auto py-6 md:py-10 px-4 sm:px-5 md:px-8 space-y-6 md:space-y-8 overflow-x-hidden">
@@ -102,25 +101,22 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         ) : null}
       </header>
 
-      <ChapterTrack
-        chapters={chapters}
-        activeIndex={activeChapter}
-        onSelect={setActiveChapter}
-        t={t}
-      />
+      <div className="space-y-2">
+        <ChapterTrack
+          chapters={chapters}
+          activeIndex={activeChapter}
+          onSelect={setActiveChapter}
+          t={t}
+        />
+        <p className="text-center text-xs text-muted px-2 lg:hidden leading-relaxed">
+          {t.caseDeck.swipeHint}
+        </p>
+      </div>
 
       <section
-        className="grid grid-cols-1 lg:grid-cols-[minmax(0,11rem)_1fr] gap-5 lg:gap-8 items-start"
+        className="min-w-0"
         aria-labelledby={active ? `chapter-title-${active.id}` : undefined}
       >
-        <aside className="rounded-xl border border-border-dark/50 bg-surface/20 p-3 md:p-4 isolate lg:sticky lg:top-24 self-start">
-          <p className="text-[11px] uppercase tracking-wide text-accent font-semibold">
-            {chapterLabel}
-          </p>
-          <p className="mt-3 text-xs text-muted leading-relaxed lg:hidden">
-            {t.caseDeck.swipeHint}
-          </p>
-        </aside>
         <div
           className="space-y-4 min-w-0 max-w-full overflow-x-hidden"
           onTouchStart={(event) => {
