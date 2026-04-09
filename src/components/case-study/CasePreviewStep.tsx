@@ -66,7 +66,7 @@ export function CasePreviewStep({
               }}
               className="inline-flex items-center px-4 py-2 rounded-xl bg-accent text-dark font-medium hover:bg-accent-soft transition-colors focus-ring"
             >
-              {t.previewCta}
+              {t.caseDeck.previewCta}
             </button>
           ) : (
             <div className="rounded-xl border border-border-dark/60 overflow-hidden bg-dark min-h-[420px] p-2 md:p-3 flex items-center justify-center">
