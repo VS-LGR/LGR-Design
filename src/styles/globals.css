@@ -283,6 +283,14 @@
   }
 }
 
+.chapter-track-fill {
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chapter-track-node--active .chapter-track-dot {
+  transform: scale(1.1);
+}
+
 /* Stagger children */
 .stagger-children > * {
   opacity: 0;
@@ -309,5 +317,14 @@
   .animated-bg-float,
   .animated-bg-gradient {
     animation: none !important;
+  }
+  .chapter-track-fill {
+    transition: none;
+  }
+  .chapter-track-node--active .chapter-track-dot {
+    transform: none;
+  }
+  .chapter-track-chevron {
+    transition: none !important;
   }
 }

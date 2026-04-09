@@ -4,9 +4,8 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import type { Project } from "@/types";
 import type { UiMessages } from "@/lib/i18n/messages";
-import { ChapterRail } from "./ChapterRail";
 import { ChapterSection } from "./ChapterSection";
-import { CaseProgress } from "./CaseProgress";
+import { ChapterTrack } from "./ChapterTrack";
 import { CasePreviewStep } from "./CasePreviewStep";
 
 interface CaseDeckProps {
@@ -102,19 +101,12 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         ) : null}
       </header>
 
-      <div className="space-y-4">
-        <CaseProgress
-          current={activeChapter}
-          total={chapters.length}
-          label={t.caseDeck.progressAria}
-        />
-        <ChapterRail
-          chapters={chapters}
-          activeIndex={activeChapter}
-          onSelect={setActiveChapter}
-          ariaLabel={t.caseDeck.chapterNavAria}
-        />
-      </div>
+      <ChapterTrack
+        chapters={chapters}
+        activeIndex={activeChapter}
+        onSelect={setActiveChapter}
+        t={t}
+      />
 
       <section className="grid grid-cols-1 xl:grid-cols-[280px_1fr] gap-4 items-start">
         <aside className="rounded-2xl border border-border-dark/60 bg-surface/20 p-4 sticky top-20">
@@ -124,27 +116,7 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
           <p className="text-sm text-muted mt-2 leading-relaxed">
             {active?.title ?? project.description}
           </p>
-          <div className="mt-4 flex flex-col gap-2">
-            <button
-              type="button"
-              onClick={() => setActiveChapter((prev) => Math.max(prev - 1, 0))}
-              disabled={activeChapter === 0}
-              className="px-3 py-2 rounded-xl text-sm border border-border-dark/60 text-muted enabled:hover:text-primary enabled:hover:border-accent/40 disabled:opacity-40 focus-ring"
-            >
-              {t.caseDeck.previousChapter}
-            </button>
-            <button
-              type="button"
-              onClick={() =>
-                setActiveChapter((prev) => Math.min(prev + 1, chapters.length - 1))
-              }
-              disabled={activeChapter >= chapters.length - 1}
-              className="px-3 py-2 rounded-xl text-sm border border-border-dark/60 text-muted enabled:hover:text-primary enabled:hover:border-accent/40 disabled:opacity-40 focus-ring"
-            >
-              {t.caseDeck.nextChapter}
-            </button>
-          </div>
-          <p className="mt-3 text-xs text-muted xl:hidden">{t.caseDeck.swipeHint}</p>
+          <p className="mt-4 text-xs text-muted xl:hidden">{t.caseDeck.swipeHint}</p>
         </aside>
         <div
           className="space-y-4"
