@@ -84,7 +84,7 @@ export function SystemHub() {
     },
   ];
 
-  const [orbitPx, setOrbitPx] = useState(ORBIT_R.base);
+  const [orbitPx, setOrbitPx] = useState<number>(ORBIT_R.base);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
