@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
 
-const linkBase =
-  "text-sm font-medium transition-colors duration-200 focus-ring rounded-md py-2.5 px-1 md:py-0 md:px-0";
-
+/**
+ * Mobile: faixa horizontal com pills em scroll (sem hamburger).
+ * Desktop: mesmos destinos em linha, estilo mais discreto.
+ */
 export function MainNav() {
   const pathname = usePathname();
   const { t } = useLocale();
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const items = [
     { href: "/", label: t.nav.menu },
@@ -21,10 +20,6 @@ export function MainNav() {
     { href: "/exploracao", label: t.nav.exploration },
   ] as const;
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
   const isActive = (href: string) =>
     href === "/"
       ? pathname === "/"
@@ -33,57 +28,30 @@ export function MainNav() {
         : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <nav aria-label={t.nav.aria} className="w-full md:w-auto">
-      <div className="flex justify-end md:hidden">
-        <button
-          type="button"
-          className="focus-ring flex items-center gap-2 rounded-lg border border-border-dark/60 bg-surface/40 px-3 py-2 text-sm font-medium text-primary hover:border-accent/40 hover:bg-surface/60 transition-colors"
-          aria-expanded={mobileOpen}
-          aria-controls="main-nav-links"
-          onClick={() => setMobileOpen((o) => !o)}
-        >
-          <span
-            className="flex h-4 w-5 flex-col justify-center gap-1"
-            aria-hidden
-          >
-            <span
-              className={`block h-0.5 w-full rounded-full bg-accent transition-transform duration-300 ease-out ${
-                mobileOpen ? "translate-y-1.5 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-full rounded-full bg-accent transition-opacity duration-200 ${
-                mobileOpen ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-full rounded-full bg-accent transition-transform duration-300 ease-out ${
-                mobileOpen ? "-translate-y-1.5 -rotate-45" : ""
-              }`}
-            />
-          </span>
-          <span>{mobileOpen ? t.nav.close : t.nav.openNavigation}</span>
-        </button>
-      </div>
-
+    <nav
+      aria-label={t.nav.aria}
+      className="w-[calc(100%+2rem)] min-w-0 -mx-4 px-4 md:mx-0 md:w-auto md:px-0"
+    >
       <ul
-        id="main-nav-links"
-        className={`
-          mt-3 flex flex-col gap-0.5 rounded-xl border border-border-dark/50 bg-surface/25 p-2 md:mt-0 md:flex-row md:flex-wrap md:items-center md:gap-x-5 md:gap-y-1 md:border-0 md:bg-transparent md:p-0
-          ${mobileOpen ? "flex" : "hidden md:flex"}
-        `}
+        className="flex flex-nowrap items-stretch gap-2 overflow-x-auto scrollbar-hide pb-1.5 pt-0.5 snap-x snap-mandatory md:flex-wrap md:overflow-visible md:gap-x-6 md:pb-0 md:pt-0 md:snap-none"
+        style={{ WebkitOverflowScrolling: "touch" }}
       >
         {items.map(({ href, label }) => {
           const active = isActive(href);
           return (
-            <li key={href} className="md:inline-block">
+            <li key={href} className="snap-start shrink-0 flex">
               <Link
                 href={href}
-                className={`${linkBase} block md:inline ${
-                  active ? "text-accent" : "text-muted hover:text-primary"
-                }`}
+                className={`
+                  inline-flex items-center justify-center rounded-full border px-3.5 py-2 text-xs font-semibold transition-all duration-300 focus-ring min-h-[2.75rem] sm:text-sm
+                  md:min-h-0 md:rounded-none md:border-0 md:bg-transparent md:px-1 md:py-1 md:font-medium md:shadow-none
+                  ${
+                    active
+                      ? "border-accent/55 bg-accent/12 text-accent shadow-[0_0_18px_-5px_rgba(6,182,212,0.5)] md:shadow-none"
+                      : "border-border-dark/55 bg-surface/35 text-muted hover:border-accent/45 hover:bg-accent/8 hover:text-primary hover:shadow-[0_0_14px_-6px_rgba(6,182,212,0.4)] md:hover:bg-transparent md:hover:shadow-none"
+                  }
+                `}
                 aria-current={active ? "page" : undefined}
-                onClick={() => setMobileOpen(false)}
               >
                 {label}
               </Link>

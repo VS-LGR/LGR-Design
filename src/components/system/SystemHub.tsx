@@ -5,8 +5,11 @@ import Link from "next/link";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-/** Raio da órbita (centro → centro de cada satélite). */
-const ORBIT_R = { base: 140, md: 158 } as const;
+/** Raio da órbita — valores menores no desktop para proporção com o header. */
+const ORBIT_R = { base: 106, md: 116 } as const;
+
+/** Tamanho fixo dos 4 nós (círculos idênticos). */
+const NODE_BOX = "h-[4.35rem] w-[4.35rem] md:h-[5rem] md:w-[5rem]";
 
 type Module = {
   href: string;
@@ -31,7 +34,7 @@ function SatelliteLabel({
     return (
       <span className="flex flex-col items-center justify-center gap-0 text-center">
         {lines.map((line) => (
-          <span key={line} className="block max-w-[5rem] leading-[1.12]">
+          <span key={line} className="block leading-[1.1] text-[10px] md:text-[11px]">
             {line}
           </span>
         ))}
@@ -39,7 +42,7 @@ function SatelliteLabel({
     );
   }
   return (
-    <span className="block max-w-[5.25rem] text-center leading-snug text-balance hyphens-none px-0.5">
+    <span className="block text-center text-[10px] font-semibold leading-tight md:text-[11px]">
       {short}
     </span>
   );
@@ -104,20 +107,28 @@ export function SystemHub() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, onKeyDown]);
 
-  const delayOpen = (i: number) => (reducedMotion ? 0 : i * 48);
-  const delayClose = (i: number) => (reducedMotion ? 0 : (modules.length - 1 - i) * 32);
-  const durationOpen = reducedMotion ? 120 : 640;
-  const durationClose = reducedMotion ? 100 : 480;
+  const delayOpen = (i: number) => (reducedMotion ? 0 : i * 44);
+  const delayClose = (i: number) => (reducedMotion ? 0 : (modules.length - 1 - i) * 28);
+  const durationOpen = reducedMotion ? 120 : 580;
+  const durationClose = reducedMotion ? 100 : 420;
   const easeOpen = "cubic-bezier(0.22, 1, 0.36, 1)";
   const easeClose = "cubic-bezier(0.4, 0, 0.2, 1)";
 
+  const nodeStatic =
+    "focus-ring rounded-full border border-accent/35 bg-gradient-to-b from-surface to-dark/95 text-accent " +
+    "shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_4px_14px_rgba(0,0,0,0.4),0_0_0_1px_rgba(6,182,212,0.12)] " +
+    "transition-[box-shadow,border-color,color,filter,transform] duration-300 ease-out " +
+    "hover:border-accent/80 hover:text-primary " +
+    "hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_0_26px_-3px_rgba(6,182,212,0.55),0_0_0_1px_rgba(6,182,212,0.45)] " +
+    "hover:brightness-110 active:scale-[0.97]";
+
   return (
     <section
-      className="system-hub flex flex-col items-center justify-center min-h-[min(85dvh,720px)] py-10 px-4"
+      className="system-hub flex flex-col items-center justify-center min-h-[min(78dvh,560px)] md:min-h-[min(72dvh,520px)] py-8 px-4 md:py-10"
       aria-labelledby={hubHeadingId}
       aria-describedby={hubDescId}
     >
-      <div className="text-center max-w-md mb-10 md:mb-12 space-y-2">
+      <div className="text-center max-w-md mb-7 md:mb-9 space-y-2">
         <h1
           id={hubHeadingId}
           className="text-2xl md:text-3xl font-bold text-primary tracking-tight"
@@ -129,15 +140,20 @@ export function SystemHub() {
         </p>
       </div>
 
-      <div className="relative w-[min(100vw-1.5rem,400px)] h-[min(100vw-1.5rem,400px)] sm:w-[420px] sm:h-[420px] md:w-[460px] md:h-[460px]">
+      <div className="relative w-[min(100vw-1.5rem,300px)] h-[min(100vw-1.5rem,300px)] sm:w-[318px] sm:h-[318px] md:w-[336px] md:h-[336px]">
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/20 bg-accent/5 pointer-events-none system-hub-orbit-ring"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/25 bg-accent/[0.06] pointer-events-none system-hub-orbit-ring"
           aria-hidden
           style={{
-            width: orbitPx * 2 + 112,
-            height: orbitPx * 2 + 112,
-            opacity: open ? 0.55 : 0.12,
-            transition: `opacity ${reducedMotion ? 100 : 520}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+            width: orbitPx * 2 + 80,
+            height: orbitPx * 2 + 80,
+            opacity: open ? 0.5 : 0.14,
+            boxShadow: open
+              ? "inset 0 0 40px -12px rgba(6,182,212,0.12), 0 0 0 1px rgba(6,182,212,0.15)"
+              : "none",
+            transition: reducedMotion
+              ? "opacity 0.1s ease"
+              : "opacity 480ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         />
 
@@ -154,19 +170,16 @@ export function SystemHub() {
                 href={mod.href}
                 aria-label={mod.label}
                 className={`
-                  system-hub-satellite absolute left-1/2 top-1/2 z-[1]
-                  flex min-h-[3.75rem] min-w-[3.75rem] sm:min-h-[5.5rem] sm:min-w-[5.5rem] md:min-h-[7rem] md:min-w-[7rem]
-                  max-w-[6.5rem] md:max-w-[7.5rem] items-center justify-center rounded-full
-                  border border-accent/45 bg-surface/95 text-[10px] sm:text-[11px] md:text-xs font-semibold text-accent
-                  shadow-lg shadow-black/35 focus-ring
-                  hover:border-accent/75 hover:bg-accent/12 hover:text-primary
-                  px-2 py-2 md:px-3 md:py-2.5
+                  system-hub-satellite system-hub-node absolute left-1/2 top-1/2 z-[1]
+                  flex ${NODE_BOX} shrink-0 items-center justify-center
+                  ${nodeStatic}
+                  px-1.5
                   ${open ? "pointer-events-auto" : "pointer-events-none"}
                 `}
                 style={{
                   transform: open
                     ? `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1)`
-                    : "translate(-50%, -50%) scale(0.72)",
+                    : "translate(-50%, -50%) scale(0.7)",
                   opacity: open ? 1 : 0,
                   transitionProperty: "transform, opacity",
                   transitionDuration: `${dur}ms`,
@@ -188,19 +201,19 @@ export function SystemHub() {
           aria-controls="system-hub-modules"
           aria-label={open ? t.system.toggleCollapse : t.system.toggleExpand}
           onClick={() => setOpen((v) => !v)}
-          className="system-hub-core absolute left-1/2 top-1/2 z-[2] h-[4.25rem] w-[4.25rem] md:h-[4.75rem] md:w-[4.75rem] -translate-x-1/2 -translate-y-1/2 rounded-full
-            border-2 border-accent/50 bg-dark/90 text-accent font-semibold
-            shadow-[0_0_32px_-6px_rgba(6,182,212,0.45)] focus-ring
-            hover:border-accent hover:bg-accent/10
+          className="system-hub-core absolute left-1/2 top-1/2 z-[2] h-[3.85rem] w-[3.85rem] md:h-16 md:w-16 -translate-x-1/2 -translate-y-1/2 rounded-full
+            border-2 border-accent/55 bg-dark/92 text-accent font-semibold
+            shadow-[0_0_28px_-4px_rgba(6,182,212,0.5),inset_0_0_20px_-10px_rgba(6,182,212,0.15)]
+            focus-ring
+            hover:border-accent hover:bg-accent/[0.08]
+            hover:shadow-[0_0_36px_-2px_rgba(6,182,212,0.65),inset_0_0_24px_-8px_rgba(6,182,212,0.2)]
             transition-[border-color,background-color,box-shadow] duration-300 ease-out"
         >
           <span className="flex h-full w-full items-center justify-center" aria-hidden>
             <span className="relative h-4 w-5">
               <span
                 className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-accent transition-all duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  open
-                    ? "top-[7px] rotate-45"
-                    : "top-0 rotate-0"
+                  open ? "top-[7px] rotate-45" : "top-0 rotate-0"
                 }`}
               />
               <span
@@ -210,9 +223,7 @@ export function SystemHub() {
               />
               <span
                 className={`absolute left-0 top-[14px] block h-0.5 w-5 rounded-full bg-accent transition-all duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  open
-                    ? "top-[7px] -rotate-45"
-                    : "top-[14px] rotate-0"
+                  open ? "top-[7px] -rotate-45" : "top-[14px] rotate-0"
                 }`}
               />
             </span>
