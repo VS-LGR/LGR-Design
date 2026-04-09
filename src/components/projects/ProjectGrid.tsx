@@ -94,19 +94,35 @@ export function ProjectGrid() {
               return (
                 <article
                   key={project.id}
-                  className={`text-left rounded-xl border transition-all overflow-hidden ${
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setSelectedId(project.id)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setSelectedId(project.id);
+                    }
+                  }}
+                  aria-label={`${t.projects.selectProjectPrefix} ${project.title}`}
+                  className={`group relative text-left rounded-xl border transition-all overflow-hidden cursor-pointer focus-ring ${
                     isActive
-                      ? "border-accent/70 bg-accent/10 shadow-[0_0_0_1px_rgba(6,182,212,0.25)]"
-                      : "border-border-dark/60 bg-surface/40 hover:border-accent/40"
+                      ? "project-card-active border-accent/70 bg-accent/10 shadow-[0_0_0_1px_rgba(6,182,212,0.25)]"
+                      : "border-border-dark/60 bg-surface/40 hover:border-accent/40 hover:bg-surface/60"
                   }`}
                 >
+                  {isActive ? (
+                    <span
+                      aria-hidden
+                      className="absolute left-0 top-0 h-full w-1 bg-accent"
+                    />
+                  ) : null}
                   <div className="h-28 bg-dark/70 border-b border-border-dark/50 overflow-hidden relative">
                     {project.thumbnail ? (
                       <Image
                         src={project.thumbnail}
                         alt={`${t.projects.thumbnailAltPrefix} ${project.title}`}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                         sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       />
                     ) : (
@@ -116,19 +132,22 @@ export function ProjectGrid() {
                     )}
                   </div>
                   <div className="p-3">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedId(project.id)}
-                      className="text-sm font-semibold text-primary truncate focus-ring"
-                      aria-label={`${t.projects.selectProjectPrefix} ${project.title}`}
-                    >
-                      {project.title}
-                    </button>
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="text-sm font-semibold text-primary truncate">
+                        {project.title}
+                      </p>
+                      {isActive ? (
+                        <span className="text-[10px] uppercase tracking-wide font-semibold text-accent bg-accent/15 border border-accent/30 rounded-full px-2 py-1">
+                          Ativo
+                        </span>
+                      ) : null}
+                    </div>
                     <p className="text-xs text-muted mt-1 line-clamp-2">
                       {project.description}
                     </p>
                     <Link
                       href={`/cases/${project.slug}`}
+                      onClick={(event) => event.stopPropagation()}
                       className="inline-flex mt-3 text-xs font-semibold text-accent hover:text-accent-soft transition-colors focus-ring"
                     >
                       {t.caseDeck.caseCta}
@@ -143,12 +162,25 @@ export function ProjectGrid() {
 
       {effectiveProject ? (
         <section className="rounded-xl border border-border-dark/50 bg-surface/20 p-4 md:p-6">
-          <h2 className="text-base md:text-lg font-semibold text-primary">
-            {effectiveProject.title}
-          </h2>
+          <p className="text-[11px] uppercase tracking-wide text-accent font-semibold">
+            Projeto selecionado
+          </p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <h2 className="text-base md:text-lg font-semibold text-primary">
+              {effectiveProject.title}
+            </h2>
+            <span className="text-[11px] text-muted bg-surface/60 px-2 py-1 rounded-full border border-border-dark/50">
+              {getCategoryLabel(effectiveProject.category)}
+            </span>
+          </div>
           <p className="text-sm text-muted mt-2 max-w-3xl leading-relaxed">
             {effectiveProject.description}
           </p>
+          {effectiveProject.caseStudy?.context.overview ? (
+            <p className="text-sm text-muted/90 mt-3 max-w-3xl leading-relaxed border-l-2 border-accent/40 pl-3">
+              {effectiveProject.caseStudy.context.overview}
+            </p>
+          ) : null}
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
               href={`/cases/${effectiveProject.slug}`}
