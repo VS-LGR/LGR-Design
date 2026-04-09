@@ -25,7 +25,7 @@ export function CasePreviewStep({
   const effectiveViewportPreset: ViewportPreset = viewportPreset;
 
   return (
-    <section className="rounded-2xl border border-accent/25 bg-surface/25 p-4 md:p-6">
+    <section className="w-full max-w-full min-w-0 rounded-2xl border border-accent/25 bg-surface/25 p-4 md:p-6 box-border">
       <p className="text-xs uppercase tracking-wide text-accent font-semibold">
         Preview
       </p>

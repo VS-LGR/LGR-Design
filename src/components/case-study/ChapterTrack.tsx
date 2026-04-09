@@ -79,10 +79,10 @@ export function ChapterTrack({
 
   return (
     <div
-      className="rounded-2xl border border-border-dark/50 bg-surface/25 p-3 md:p-4"
+      className="w-full min-w-0 rounded-2xl border border-border-dark/50 bg-surface/25 p-3 md:p-4"
       aria-label={t.caseDeck.progressAria}
     >
-      <div className="flex items-stretch gap-2 md:gap-3">
+      <div className="flex items-stretch gap-2 md:gap-3 min-w-0">
         <button
           type="button"
           onClick={() => onSelect(Math.max(0, activeIndex - 1))}

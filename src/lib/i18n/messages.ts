@@ -82,6 +82,7 @@ export type UiMessages = {
     previewError: string;
     swipeHint: string;
     caseCta: string;
+    caseNotFound: string;
   };
   sections: {
     about: string;
@@ -244,9 +245,12 @@ export const uiPt: UiMessages = {
     openExternal: "Abrir preview em nova guia",
     previewUnavailable: "Este projeto não possui link de preview disponível.",
     loadingPreview: "Carregando preview...",
-    previewError: "Nao foi possivel carregar o preview. Use a abertura em nova guia.",
-    swipeHint: "Dica mobile: deslize para esquerda/direita para trocar de capitulo.",
+    previewError:
+      "Não foi possível carregar o preview. Use a abertura em nova guia.",
+    swipeHint:
+      "Dica mobile: deslize para esquerda/direita para trocar de capítulo.",
     caseCta: "Ver estudo de caso",
+    caseNotFound: "Case não encontrado.",
   },
   sections: {
     about: "Sobre Mim",
@@ -417,6 +421,7 @@ export const uiEn: UiMessages = {
     previewError: "Could not load the preview. Use open in new tab.",
     swipeHint: "Mobile tip: swipe left/right to change chapter.",
     caseCta: "View case study",
+    caseNotFound: "Case not found.",
   },
   sections: {
     about: "About Me",

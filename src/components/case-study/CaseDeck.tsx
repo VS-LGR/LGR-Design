@@ -61,7 +61,7 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
     : chapterLabel;
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-6 md:py-10 px-4 md:px-6 space-y-6">
+    <div className="w-full max-w-6xl mx-auto py-6 md:py-10 px-4 md:px-6 space-y-6 md:space-y-8 overflow-x-hidden">
       <Link
         href="/"
         className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
@@ -69,32 +69,33 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         {t.caseDeck.backToProjects}
       </Link>
 
-      <header className="rounded-2xl border border-border-dark/60 bg-surface/30 p-4 md:p-6 space-y-4">
-        <p className="text-xs uppercase tracking-wide text-accent font-semibold">
-          {t.caseDeck.context}
-        </p>
-        <h1 className="text-2xl md:text-3xl font-semibold text-primary">
-          {project.title}
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {contextCards.map((item) => (
-            <article
-              key={item.label}
-              className="rounded-xl border border-border-dark/50 bg-surface/40 p-3"
-            >
-              <p className="text-xs uppercase tracking-wide text-accent/90 font-semibold">
-                {item.label}
-              </p>
-              <p className="text-sm text-muted mt-1 leading-relaxed">{item.value}</p>
-            </article>
-          ))}
+      <header className="rounded-2xl border border-border-dark/60 bg-surface/30 p-4 md:p-6 space-y-5 md:space-y-6">
+        <div className="space-y-2">
+          <p className="text-xs uppercase tracking-wide text-accent font-semibold">
+            {t.caseDeck.context}
+          </p>
+          <h1 className="text-2xl md:text-3xl font-semibold text-primary leading-tight">
+            {project.title}
+          </h1>
         </div>
+        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 pt-4 border-t border-border-dark/35">
+          {contextCards.map((item) => (
+            <div key={item.label}>
+              <dt className="text-xs uppercase tracking-wide text-accent/90 font-semibold">
+                {item.label}
+              </dt>
+              <dd className="text-sm text-muted mt-1.5 leading-[1.65]">
+                {item.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
         {project.caseStudy?.context.overview ? (
-          <div>
+          <div className="border-t border-border-dark/35 pt-5 space-y-2">
             <p className="text-xs uppercase tracking-wide text-accent/90 font-semibold">
               {t.caseDeck.overview}
             </p>
-            <p className="text-sm text-muted mt-1 leading-relaxed">
+            <p className="text-sm text-muted leading-[1.65] max-w-3xl">
               {project.caseStudy.context.overview}
             </p>
           </div>
@@ -108,18 +109,20 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         t={t}
       />
 
-      <section className="grid grid-cols-1 xl:grid-cols-[280px_1fr] gap-4 items-start">
-        <aside className="rounded-2xl border border-border-dark/60 bg-surface/20 p-4 sticky top-20">
-          <p className="text-xs uppercase tracking-wide text-accent font-semibold">
+      <section
+        className="grid grid-cols-1 lg:grid-cols-[minmax(0,11rem)_1fr] gap-5 lg:gap-8 items-start"
+        aria-labelledby={active ? `chapter-title-${active.id}` : undefined}
+      >
+        <aside className="rounded-xl border border-border-dark/50 bg-surface/20 p-3 md:p-4 isolate lg:sticky lg:top-24 self-start">
+          <p className="text-[11px] uppercase tracking-wide text-accent font-semibold">
             {chapterLabel}
           </p>
-          <p className="text-sm text-muted mt-2 leading-relaxed">
-            {active?.title ?? project.description}
+          <p className="mt-3 text-xs text-muted leading-relaxed lg:hidden">
+            {t.caseDeck.swipeHint}
           </p>
-          <p className="mt-4 text-xs text-muted xl:hidden">{t.caseDeck.swipeHint}</p>
         </aside>
         <div
-          className="space-y-4"
+          className="space-y-4 min-w-0"
           onTouchStart={(event) => {
             touchStartX.current = event.touches[0]?.clientX ?? null;
             touchStartY.current = event.touches[0]?.clientY ?? null;
@@ -153,8 +156,8 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         </div>
       </section>
 
-      <section className="w-screen relative left-1/2 -translate-x-1/2 px-4 md:px-6">
-        <div className="max-w-none">
+      <section className="w-screen max-w-[100vw] relative left-1/2 -translate-x-1/2 px-4 md:px-6 box-border">
+        <div className="max-w-none min-w-0">
           <CasePreviewStep
             title={project.caseStudy?.previewTitle ?? t.caseDeck.previewTitle}
             description={

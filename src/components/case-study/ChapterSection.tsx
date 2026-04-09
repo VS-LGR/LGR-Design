@@ -5,10 +5,10 @@ import type { CaseStudyChapter, CaseStudyBlock } from "@/types";
 function renderBlock(block: CaseStudyBlock) {
   if (block.type === "bullets" && block.items?.length) {
     return (
-      <ul className="space-y-2">
+      <ul className="list-disc pl-5 space-y-2 marker:text-accent/70">
         {block.items.map((item) => (
-          <li key={item} className="text-sm text-muted leading-relaxed">
-            - {item}
+          <li key={item} className="text-sm text-muted leading-[1.65] pl-0.5">
+            {item}
           </li>
         ))}
       </ul>
@@ -36,12 +36,14 @@ function renderBlock(block: CaseStudyBlock) {
         {block.stats.map((stat) => (
           <article
             key={stat.label}
-            className="rounded-xl border border-border-dark/50 bg-surface/40 p-4"
+            className="rounded-xl border border-border-dark/50 bg-surface/35 p-4"
           >
             <p className="text-xs uppercase tracking-wide text-accent font-semibold">
               {stat.label}
             </p>
-            <p className="text-sm text-primary font-semibold mt-1">{stat.value}</p>
+            <p className="text-sm text-primary font-semibold mt-1 leading-snug">
+              {stat.value}
+            </p>
             {stat.delta ? (
               <p className="text-xs text-muted mt-1">{stat.delta}</p>
             ) : null}
@@ -53,13 +55,15 @@ function renderBlock(block: CaseStudyBlock) {
 
   if (block.type === "quote" && block.content) {
     return (
-      <blockquote className="border-l-2 border-accent pl-4 italic text-sm text-muted leading-relaxed">
+      <blockquote className="border-l-2 border-accent/50 pl-4 italic text-sm text-muted leading-[1.65]">
         {block.content}
       </blockquote>
     );
   }
 
-  return <p className="text-sm text-muted leading-relaxed">{block.content}</p>;
+  return (
+    <p className="text-sm text-muted leading-[1.65]">{block.content}</p>
+  );
 }
 
 interface ChapterSectionProps {
@@ -68,45 +72,50 @@ interface ChapterSectionProps {
 
 export function ChapterSection({ chapter }: ChapterSectionProps) {
   const hasManyBlocks = chapter.blocks.length > 2;
+  const showBlockIndex = chapter.blocks.length > 1;
 
   return (
     <section
-      className="case-slide-panel rounded-2xl border border-border-dark/60 bg-surface/25 p-4 md:p-6 space-y-4"
+      className="rounded-2xl border border-border-dark/50 bg-surface/20 p-4 md:p-8 space-y-5 md:space-y-6"
       aria-labelledby={`chapter-title-${chapter.id}`}
     >
-      <header>
+      <header className="space-y-2 pb-1 border-b border-border-dark/30">
         <p className="text-xs uppercase tracking-wide text-accent font-semibold">
           {chapter.label}
         </p>
         <h2
           id={`chapter-title-${chapter.id}`}
-          className="text-xl md:text-2xl font-semibold text-primary mt-2"
+          className="text-xl md:text-2xl font-semibold text-primary leading-snug"
         >
           {chapter.title}
         </h2>
         {chapter.subtitle ? (
-          <p className="text-sm text-muted mt-2">{chapter.subtitle}</p>
+          <p className="text-sm text-muted leading-relaxed">{chapter.subtitle}</p>
         ) : null}
       </header>
       <div
-        className={`space-y-4 ${
+        className={`space-y-6 ${
           hasManyBlocks
-            ? "max-h-[68vh] overflow-y-auto pr-1 snap-y snap-mandatory"
+            ? "max-h-[min(68vh,32rem)] overflow-y-auto pr-1 -mr-1 snap-y snap-mandatory"
             : ""
         }`}
       >
         {chapter.blocks.map((block, index) => (
           <article
             key={block.id}
-            className={`space-y-2 rounded-xl border border-border-dark/40 bg-surface/20 p-3 md:p-4 ${
+            className={`space-y-3 border-l-2 border-accent/20 pl-4 md:pl-5 ${
               hasManyBlocks ? "snap-start" : ""
             }`}
           >
-            <p className="text-[11px] uppercase tracking-wide text-accent/80 font-semibold">
-              Item {index + 1}
-            </p>
+            {showBlockIndex ? (
+              <p className="text-[11px] uppercase tracking-wide text-accent/75 font-semibold">
+                {index + 1} / {chapter.blocks.length}
+              </p>
+            ) : null}
             {block.title ? (
-              <h3 className="text-sm font-semibold text-primary">{block.title}</h3>
+              <h3 className="text-sm font-semibold text-primary leading-snug">
+                {block.title}
+              </h3>
             ) : null}
             {renderBlock(block)}
           </article>
