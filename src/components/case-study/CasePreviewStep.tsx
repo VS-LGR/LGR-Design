@@ -86,23 +86,15 @@ export function CasePreviewStep({
             </button>
           ) : (
             <div className="rounded-xl border border-border-dark/60 overflow-hidden bg-dark p-2 md:p-3 min-w-0 flex flex-col">
-              {isLoading ? (
-                <div
-                  className={`${previewFrameHeight} w-full min-w-0 flex items-center justify-center text-sm text-muted`}
-                >
-                  {t.caseDeck.loadingPreview}
-                </div>
-              ) : null}
               {hasError ? (
                 <div
                   className={`${previewFrameHeight} w-full min-w-0 flex items-center justify-center text-sm text-muted px-6 text-center`}
                 >
                   {t.caseDeck.previewError}
                 </div>
-              ) : null}
-              {!isLoading && !hasError ? (
+              ) : (
                 <div
-                  className={`${previewFrameHeight} rounded-lg overflow-hidden border border-border-dark/60 min-w-0 mx-auto ${
+                  className={`relative ${previewFrameHeight} rounded-lg overflow-hidden border border-border-dark/60 min-w-0 mx-auto ${
                     effectiveViewportPreset === "full" ? "w-full" : ""
                   }`}
                   style={
@@ -111,10 +103,18 @@ export function CasePreviewStep({
                       : undefined
                   }
                 >
+                  {isLoading ? (
+                    <div
+                      className="absolute inset-0 z-10 flex items-center justify-center bg-dark/90 text-sm text-muted"
+                      aria-busy
+                    >
+                      {t.caseDeck.loadingPreview}
+                    </div>
+                  ) : null}
                   <iframe
                     src={previewUrl}
                     title={title}
-                    className="w-full h-full border-0 bg-white"
+                    className="block w-full h-full min-h-0 border-0 bg-white"
                     sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                     referrerPolicy="no-referrer-when-downgrade"
                     onLoad={() => setIsLoading(false)}
@@ -124,7 +124,7 @@ export function CasePreviewStep({
                     }}
                   />
                 </div>
-              ) : null}
+              )}
             </div>
           )}
           <a
