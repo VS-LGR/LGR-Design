@@ -48,6 +48,14 @@ export const projectsListEn: Project[] = [
     ],
     thumbnail: PsiBiaRossiThumb,
     link: "https://psi-bia-rossi.vercel.app",
+    caseProblem:
+      "Clearly communicate a psychoanalytic approach and the differentiator of board-game gamification, building trust and driving contact—without overwhelming visitors who are new to the topic.",
+    caseSolution:
+      "Landing page with hierarchy for services and testimonials, a dedicated block for the playful methodology, a form and consistent CTAs across the page, mobile-first for people seeking support in sensitive moments.",
+    caseResults: [
+      { label: "Shipped", value: "Responsive institutional site in production" },
+      { label: "Focus", value: "Conversion and clinical credibility" },
+    ],
   },
   {
     id: "lp-farma",
@@ -78,6 +86,14 @@ export const projectsListEn: Project[] = [
     ],
     thumbnail: PharmatechThumb,
     link: "https://lp-farma-com.vercel.app",
+    caseProblem:
+      "Present a pharmaceutical development company with technical yet accessible language for partners and decision-makers on a single page that builds trust and opens a commercial channel.",
+    caseSolution:
+      "Institutional section architecture (company, specializations, partners, contact), scannable reading for executives, and quote/contact CTAs aligned to a B2B funnel.",
+    caseResults: [
+      { label: "Shipped", value: "Corporate landing live" },
+      { label: "Goal", value: "Credibility + lead generation" },
+    ],
   },
   {
     id: "ofag-revamp",
@@ -108,6 +124,14 @@ export const projectsListEn: Project[] = [
     ],
     thumbnail: OfagThumb,
     link: "https://ofag-revamp.vercel.app/pt",
+    caseProblem:
+      "Communicate processes, compliance, and international reach for regulated industries in three languages without losing clarity or brand consistency.",
+    caseSolution:
+      "Multilingual information architecture (PT/EN/ES), narrative oriented to certifications and segments, typography and layout tuned for dense technical reading.",
+    caseResults: [
+      { label: "Scope", value: "Multilingual institutional site" },
+      { label: "Audience", value: "Pharma and regulated industries" },
+    ],
   },
   {
     id: "clinica-dverso",
@@ -138,5 +162,13 @@ export const projectsListEn: Project[] = [
     ],
     thumbnail: ClinaDversoThumb,
     link: "https://dversos-clinica.vercel.app",
+    caseProblem:
+      "Organize multiple care lines (neurodivergence, therapies, nutrition, dog-assisted therapy) for families who need quick information on mobile, with a welcoming tone.",
+    caseSolution:
+      "Modules per specialty, lightweight Lottie motion to humanize without hurting performance, contact CTAs placed at decision moments in the journey.",
+    caseResults: [
+      { label: "Shipped", value: "Responsive multidisciplinary landing" },
+      { label: "Experience", value: "Mobile-first for families" },
+    ],
   },
 ];

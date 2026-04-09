@@ -4,6 +4,7 @@ import { RecognitionsBlock } from "./RecognitionsBlock";
 import { CursorTemplateBlock } from "./CursorTemplateBlock";
 import { PositioningBlock } from "./PositioningBlock";
 import { HowIWorkBlock } from "./HowIWorkBlock";
+import { DesignProcessSection } from "./DesignProcessSection";
 import { ToolsBlock } from "./ToolsBlock";
 import { CreativePreferencesCarousel } from "./CreativePreferencesCarousel";
 import { ObjectiveBlock } from "./ObjectiveBlock";
@@ -75,6 +76,16 @@ export function AboutSection() {
         >
           <div className="max-w-3xl mx-auto">
             <HowIWorkBlock />
+          </div>
+        </section>
+        <div className="section-divider w-full" aria-hidden />
+        <section
+          id="about-processo"
+          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
+          aria-labelledby="design-process-heading"
+        >
+          <div className="max-w-3xl mx-auto">
+            <DesignProcessSection />
           </div>
         </section>
         <div className="section-divider w-full" aria-hidden />

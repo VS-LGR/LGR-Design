@@ -40,6 +40,25 @@ export type UiMessages = {
     creativity: string;
     objective: string;
     contact: string;
+    designProcess: string;
+  };
+  designProcess: {
+    sectionKicker: string;
+    sectionTitle: string;
+    phasesHeading: string;
+    deliverablesLabel: string;
+  };
+  projectCase: {
+    jumpNavAria: string;
+    jumpCase: string;
+    jumpKeyStages: string;
+    jumpPreview: string;
+    jumpSpecs: string;
+    caseLead: string;
+    caseHeading: string;
+    problem: string;
+    solution: string;
+    results: string;
   };
   sections: {
     about: string;
@@ -102,6 +121,8 @@ export type UiMessages = {
     selectProjectPrefix: string;
     thumbnailAltPrefix: string;
     thumbnailStatic: string;
+    keyStagesHeading: string;
+    keyStagesLead: string;
   };
   projectCard: {
     previewPlaceholder: string;
@@ -160,6 +181,26 @@ export const uiPt: UiMessages = {
     creativity: "Criatividade",
     objective: "Objetivo",
     contact: "Contato",
+    designProcess: "Processo de design",
+  },
+  designProcess: {
+    sectionKicker: "Método geral (não é o case de um site específico)",
+    sectionTitle: "Como conduzo projetos de UX e produto",
+    phasesHeading: "Etapas de referência (1–10)",
+    deliverablesLabel: "Entregáveis e práticas típicas",
+  },
+  projectCase: {
+    jumpNavAria: "Ir para seção deste projeto",
+    jumpCase: "Case",
+    jumpKeyStages: "Entregas",
+    jumpPreview: "Preview",
+    jumpSpecs: "Especificações",
+    caseLead:
+      "Resumo do contexto e da abordagem neste trabalho. O processo completo em 10 etapas está na aba Sobre Mim.",
+    caseHeading: "Case: {title}",
+    problem: "O problema / contexto",
+    solution: "Solução e abordagem",
+    results: "Resultados",
   },
   sections: {
     about: "Sobre Mim",
@@ -227,6 +268,9 @@ export const uiPt: UiMessages = {
     selectProjectPrefix: "Selecionar projeto",
     thumbnailAltPrefix: "Thumbnail do projeto",
     thumbnailStatic: "Thumbnail estática",
+    keyStagesHeading: "Entregas e foco de UX neste site",
+    keyStagesLead:
+      "O que foi priorizado neste trabalho — distinto do processo macro na aba Sobre.",
   },
   projectCard: {
     previewPlaceholder: "Preview do projeto",
@@ -284,6 +328,26 @@ export const uiEn: UiMessages = {
     creativity: "Creativity",
     objective: "Objective",
     contact: "Contact",
+    designProcess: "Design process",
+  },
+  designProcess: {
+    sectionKicker: "General method (not a specific site case)",
+    sectionTitle: "How I run UX and product work",
+    phasesHeading: "Reference phases (1–10)",
+    deliverablesLabel: "Typical deliverables and practices",
+  },
+  projectCase: {
+    jumpNavAria: "Jump to section for this project",
+    jumpCase: "Case",
+    jumpKeyStages: "Deliverables",
+    jumpPreview: "Preview",
+    jumpSpecs: "Specs",
+    caseLead:
+      "Summary of context and approach for this piece of work. The full 10-phase process is on the About tab.",
+    caseHeading: "Case: {title}",
+    problem: "Problem / context",
+    solution: "Solution and approach",
+    results: "Outcomes",
   },
   sections: {
     about: "About Me",
@@ -350,6 +414,9 @@ export const uiEn: UiMessages = {
     selectProjectPrefix: "Select project",
     thumbnailAltPrefix: "Project thumbnail",
     thumbnailStatic: "Static thumbnail",
+    keyStagesHeading: "Deliverables and UX focus on this site",
+    keyStagesLead:
+      "What we prioritized in this engagement — separate from the macro process on About.",
   },
   projectCard: {
     previewPlaceholder: "Project preview",

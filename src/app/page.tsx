@@ -15,6 +15,7 @@ const ABOUT_SECTION_IDS = [
   "about-cursor-template",
   "about-posicionamento",
   "about-como-trabalho",
+  "about-processo",
   "about-ferramentas",
   "about-preferencias",
   "about-objetivo",

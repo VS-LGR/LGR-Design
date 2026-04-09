@@ -5,6 +5,16 @@ import Image from "next/image";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import type { ProjectCategory, ProjectTopic } from "@/types";
 import { useLocale } from "@/contexts/LocaleContext";
+import type { Project } from "@/types";
+
+function projectHasCaseContent(p: Project | null): boolean {
+  if (!p) return false;
+  return Boolean(
+    p.caseProblem ||
+      p.caseSolution ||
+      (p.caseResults && p.caseResults.length > 0)
+  );
+}
 
 export function ProjectGrid() {
   const { projects, projectCategories, projectTopics, t } = useLocale();
@@ -38,9 +48,12 @@ export function ProjectGrid() {
   const selectedProjectIndex = currentTopicProjects.findIndex((p) => p.id === selectedId);
   const effectiveIndex = selectedProjectIndex >= 0 ? selectedProjectIndex : 0;
 
-  const scrollToSelectedPreview = useCallback(() => {
-    if (!projectPreviewAnchorRef.current) return;
-    projectPreviewAnchorRef.current.scrollIntoView({
+  const scrollToPrimaryProjectSection = useCallback((p: Project | null) => {
+    if (!p || typeof document === "undefined") return;
+    let id = "project-preview";
+    if (projectHasCaseContent(p)) id = "project-case";
+    else if (p.keyStages?.length) id = "project-key-stages";
+    document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
@@ -51,10 +64,13 @@ export function ProjectGrid() {
       setSelectedId(projectId);
       setActivePreviewId(projectId);
       if (shouldScroll) {
-        requestAnimationFrame(() => scrollToSelectedPreview());
+        requestAnimationFrame(() => {
+          const p = projects.find((x) => x.id === projectId) ?? null;
+          scrollToPrimaryProjectSection(p);
+        });
       }
     },
-    [scrollToSelectedPreview]
+    [projects, scrollToPrimaryProjectSection]
   );
 
   const handleTopicChange = (topic: ProjectTopic) => {
@@ -91,7 +107,6 @@ export function ProjectGrid() {
   const dragRef = useRef({ startX: 0, startY: 0, startLeft: 0, startTop: 0 });
   const resizeRef = useRef({ startX: 0, startY: 0, startW: 0, startH: 0 });
   const previewRef = useRef<HTMLDivElement>(null);
-  const projectPreviewAnchorRef = useRef<HTMLDivElement>(null);
   const projectCardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const handlePreviewMouseDown = useCallback(
@@ -385,19 +400,130 @@ export function ProjectGrid() {
         </section>
       )}
 
-      <div ref={projectPreviewAnchorRef} />
+      {projectToShow && (
+        <nav
+          className="sticky top-[52px] z-30 -mx-1 px-1 py-2 mb-4 md:mb-6 rounded-xl border border-border-dark/40 bg-dark/92 backdrop-blur-md supports-[backdrop-filter]:bg-dark/85"
+          aria-label={t.projectCase.jumpNavAria}
+        >
+          <ul className="flex flex-wrap gap-2 text-xs sm:text-sm font-medium">
+            {projectHasCaseContent(projectToShow) ? (
+              <li>
+                <a
+                  href="#project-case"
+                  className="inline-flex px-3 py-1.5 rounded-lg bg-surface/50 text-muted hover:text-accent hover:border-accent/40 border border-transparent transition-colors focus-ring"
+                >
+                  {t.projectCase.jumpCase}
+                </a>
+              </li>
+            ) : null}
+            {projectToShow.keyStages?.length ? (
+              <li>
+                <a
+                  href="#project-key-stages"
+                  className="inline-flex px-3 py-1.5 rounded-lg bg-surface/50 text-muted hover:text-accent hover:border-accent/40 border border-transparent transition-colors focus-ring"
+                >
+                  {t.projectCase.jumpKeyStages}
+                </a>
+              </li>
+            ) : null}
+            <li>
+              <a
+                href="#project-preview"
+                className="inline-flex px-3 py-1.5 rounded-lg bg-surface/50 text-muted hover:text-accent hover:border-accent/40 border border-transparent transition-colors focus-ring"
+              >
+                {t.projectCase.jumpPreview}
+              </a>
+            </li>
+            <li>
+              <a
+                href="#project-specs"
+                className="inline-flex px-3 py-1.5 rounded-lg bg-surface/50 text-muted hover:text-accent hover:border-accent/40 border border-transparent transition-colors focus-ring"
+              >
+                {t.projectCase.jumpSpecs}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      )}
+
+      {projectToShow && projectHasCaseContent(projectToShow) ? (
+        <section
+          id="project-case"
+          className="mb-8 scroll-mt-32 py-6 px-4 md:px-6 rounded-xl border border-accent/25 bg-surface/25"
+          aria-labelledby="project-case-heading"
+        >
+          <h2
+            id="project-case-heading"
+            className="text-base md:text-lg font-semibold text-primary accent-underline pb-1 mb-2"
+          >
+            {t.projectCase.caseHeading.replace("{title}", projectToShow.title)}
+          </h2>
+          <p className="text-sm text-muted leading-relaxed mb-6">
+            {t.projectCase.caseLead}
+          </p>
+          {projectToShow.caseProblem ? (
+            <div className="mb-5">
+              <h3 className="text-xs font-semibold text-accent uppercase tracking-wider mb-2">
+                {t.projectCase.problem}
+              </h3>
+              <p className="text-sm text-muted leading-relaxed">
+                {projectToShow.caseProblem}
+              </p>
+            </div>
+          ) : null}
+          {projectToShow.caseSolution ? (
+            <div className="mb-5">
+              <h3 className="text-xs font-semibold text-accent uppercase tracking-wider mb-2">
+                {t.projectCase.solution}
+              </h3>
+              <p className="text-sm text-muted leading-relaxed">
+                {projectToShow.caseSolution}
+              </p>
+            </div>
+          ) : null}
+          {projectToShow.caseResults && projectToShow.caseResults.length > 0 ? (
+            <div>
+              <h3 className="text-xs font-semibold text-accent uppercase tracking-wider mb-3">
+                {t.projectCase.results}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {projectToShow.caseResults.map((row) => (
+                  <div
+                    key={row.label}
+                    className="rounded-lg border border-border-dark/50 bg-surface/30 px-4 py-3"
+                  >
+                    <p className="text-xs font-medium text-accent/90 uppercase tracking-wide">
+                      {row.label}
+                    </p>
+                    <p className="text-sm font-semibold text-primary mt-1">
+                      {row.value}
+                    </p>
+                    {row.delta ? (
+                      <p className="text-xs text-muted mt-1">{row.delta}</p>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       {projectToShow?.keyStages?.length ? (
         <section
-          className="mb-5"
+          id="project-key-stages"
+          className="mb-6 scroll-mt-32"
           aria-labelledby="key-stages-heading"
         >
           <h3
             id="key-stages-heading"
-            className="text-sm font-semibold text-accent uppercase tracking-wider mb-3"
+            className="text-sm font-semibold text-accent uppercase tracking-wider"
           >
-            {t.projects.keyStages}
+            {t.projects.keyStagesHeading}
           </h3>
+          <p className="text-xs text-muted mt-2 mb-4 max-w-3xl leading-relaxed">
+            {t.projects.keyStagesLead}
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {projectToShow.keyStages.map((stage) => (
               <article
@@ -419,8 +545,9 @@ export function ProjectGrid() {
       {/* Preview: modo flutuante (arrastável) ou fixo (compacto, especificações visíveis) */}
       {projectToShow && (
         <div
+          id="project-preview"
           ref={previewRef}
-          className={`preview-window flex flex-col rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none transition-[box-shadow] duration-300 ${
+          className={`preview-window scroll-mt-32 flex flex-col rounded-2xl overflow-hidden border border-accent/30 bg-surface/90 backdrop-blur-xl select-none transition-[box-shadow] duration-300 ${
             previewMode === "floating" ? "fixed z-30 animate-in" : "w-full max-w-[min(1600px,95vw)] mx-auto mb-6"
           }`}
           style={
@@ -621,7 +748,8 @@ export function ProjectGrid() {
       {/* Especificações: no fluxo quando Presa, painel fixo quando Solta */}
       {projectToShow && previewMode === "docked" && (
         <section
-          className="mt-6 py-6 px-4 md:px-6 rounded-xl border border-border-dark/50 bg-surface/20"
+          id="project-specs"
+          className="mt-6 scroll-mt-32 py-6 px-4 md:px-6 rounded-xl border border-border-dark/50 bg-surface/20"
           aria-labelledby="specs-heading"
         >
           <h3
@@ -636,6 +764,7 @@ export function ProjectGrid() {
 
       {projectToShow && previewMode === "floating" && (
         <div
+          id="project-specs"
           className="fixed bottom-0 left-0 right-0 z-20 max-h-[45vh] overflow-y-auto border-t border-border-dark/60 bg-surface/95 backdrop-blur-md shadow-[0_-8px 32px -8px rgba(0,0,0,0.4)]"
           aria-labelledby="specs-heading-floating"
         >

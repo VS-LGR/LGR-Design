@@ -47,6 +47,13 @@ export type ProjectCategory = "web" | "ux" | "identity" | "other";
 
 export type ProjectTopic = "saude" | "negocios" | "empresas" | "recreativos";
 
+/** Métrica ou resultado qualitativo honesto no case do projeto */
+export interface ProjectCaseResult {
+  label: string;
+  value: string;
+  delta?: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -63,6 +70,39 @@ export interface Project {
   }>;
   thumbnail?: string | StaticImageData;
   link?: string;
+  /** Case resumido: contexto do problema (aba Projetos; distinto do processo global) */
+  caseProblem?: string;
+  /** Case resumido: abordagem e entregas */
+  caseSolution?: string;
+  /** Resultados observáveis ou qualitativos */
+  caseResults?: ProjectCaseResult[];
+}
+
+export interface DesignProcessPhase {
+  id: number;
+  title: string;
+  subtitle?: string;
+  deliverables: string[];
+}
+
+export interface DesignProcessWorkModel {
+  id: string;
+  title: string;
+  context: string;
+  description: string;
+}
+
+/** Conteúdo da seção global “Como conduzo projetos” (aba Sobre) */
+export interface DesignProcessContent {
+  intro: string;
+  phases: DesignProcessPhase[];
+  workModelsSectionTitle: string;
+  workModelsSectionIntro: string;
+  workModels: DesignProcessWorkModel[];
+  ansoffSectionTitle: string;
+  ansoffSectionIntro: string;
+  /** Rótulos de uma grade 2×2 estática (texto apenas) */
+  ansoffQuadrants: [string, string, string, string];
 }
 
 export interface Hobby {

@@ -48,6 +48,20 @@ export const projectsList: Project[] = [
     ],
     thumbnail: PsiBiaRossiThumb,
     link: "https://psi-bia-rossi.vercel.app",
+    caseProblem:
+      "Transmitir de forma clara a abordagem em psicanálise e o diferencial da gamificação com jogos de tabuleiro, gerando confiança e conversão para contato — sem sobrecarregar visitantes leigos.",
+    caseSolution:
+      "Landing com hierarquia para serviços e depoimentos, bloco dedicado à metodologia lúdica, formulário e CTAs consistentes em toda a página, com foco mobile-first para quem busca apoio em momentos delicados.",
+    caseResults: [
+      {
+        label: "Entrega",
+        value: "Site institucional responsivo em produção",
+      },
+      {
+        label: "Foco",
+        value: "Conversão e credibilidade clínica",
+      },
+    ],
   },
   {
     id: "lp-farma",
@@ -78,6 +92,20 @@ export const projectsList: Project[] = [
     ],
     thumbnail: PharmatechThumb,
     link: "https://lp-farma-com.vercel.app",
+    caseProblem:
+      "Apresentar uma empresa de desenvolvimento farmacêutico com linguagem técnica e ao mesmo tempo acessível a parceiros e decisores, em uma única página que vende confiança e abre canal comercial.",
+    caseSolution:
+      "Arquitetura em seções institucionais (empresa, especializações, parceiros, contato), leitura escaneável para executivos e CTAs de orçamento/contato alinhados ao funil B2B.",
+    caseResults: [
+      {
+        label: "Entrega",
+        value: "Landing corporativa publicada",
+      },
+      {
+        label: "Objetivo",
+        value: "Credibilidade + geração de contato",
+      },
+    ],
   },
   {
     id: "ofag-revamp",
@@ -108,6 +136,20 @@ export const projectsList: Project[] = [
     ],
     thumbnail: OfagThumb,
     link: "https://ofag-revamp.vercel.app/pt",
+    caseProblem:
+      "Comunicar processos, conformidade e alcance internacional para indústrias reguladas, em três idiomas, sem perder clareza nem consistência de marca.",
+    caseSolution:
+      "Arquitetura de informação multilíngue (PT/EN/ES), narrativa orientada a certificações e segmentos, tipografia e layout pensados para leitura de conteúdo técnico denso.",
+    caseResults: [
+      {
+        label: "Escopo",
+        value: "Site institucional multilíngue",
+      },
+      {
+        label: "Público",
+        value: "Farmacêutico e regulado",
+      },
+    ],
   },
   {
     id: "clinica-dverso",
@@ -138,5 +180,19 @@ export const projectsList: Project[] = [
     ],
     thumbnail: ClinaDversoThumb,
     link: "https://dversos-clinica.vercel.app",
+    caseProblem:
+      "Organizar várias linhas de cuidado (neurodivergência, terapias, nutrição, terapia assistida por cão) para famílias que buscam informação rápida no celular, com tom acolhedor.",
+    caseSolution:
+      "Módulos por especialidade, animações Lottie leves para humanizar sem pesar na performance, CTAs de contato distribuídos nos momentos de decisão da jornada.",
+    caseResults: [
+      {
+        label: "Entrega",
+        value: "Landing multidisciplinar responsiva",
+      },
+      {
+        label: "Experiência",
+        value: "Mobile-first para famílias",
+      },
+    ],
   },
 ];

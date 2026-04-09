@@ -11,6 +11,7 @@ const ABOUT_SECTION_IDS = [
   "about-cursor-template",
   "about-posicionamento",
   "about-como-trabalho",
+  "about-processo",
   "about-ferramentas",
   "about-preferencias",
   "about-objetivo",
@@ -105,6 +106,20 @@ function AboutSidebarContent({ sectionId }: { sectionId: string }) {
               <li key={i}>{p}</li>
             ))}
           </ul>
+        </>
+      );
+    case "about-processo":
+      return (
+        <>
+          <p className="text-xs font-medium text-accent uppercase tracking-wider">
+            {t.sidebar.designProcess}
+          </p>
+          <p className="text-sm text-muted mt-2 leading-relaxed line-clamp-5">
+            {t.designProcess.sectionTitle}
+          </p>
+          <p className="text-xs text-muted/90 mt-2 line-clamp-3">
+            {t.designProcess.sectionKicker}
+          </p>
         </>
       );
     case "about-ferramentas":
