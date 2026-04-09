@@ -178,6 +178,11 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
               <ChapterSection chapter={active} />
             </div>
           ) : null}
+        </div>
+      </section>
+
+      <section className="w-screen relative left-1/2 -translate-x-1/2 px-4 md:px-6">
+        <div className="max-w-none">
           <CasePreviewStep
             title={project.caseStudy?.previewTitle ?? t.caseDeck.previewTitle}
             description={
