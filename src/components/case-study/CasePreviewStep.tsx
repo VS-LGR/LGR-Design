@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import type { UiMessages } from "@/lib/i18n/messages";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface CasePreviewStepProps {
   title: string;
@@ -22,9 +21,8 @@ export function CasePreviewStep({
   const [showPreview, setShowPreview] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const isMobile = useIsMobile();
   const [viewportPreset, setViewportPreset] = useState<ViewportPreset>("full");
-  const effectiveViewportPreset: ViewportPreset = isMobile ? 390 : viewportPreset;
+  const effectiveViewportPreset: ViewportPreset = viewportPreset;
 
   return (
     <section className="rounded-2xl border border-accent/25 bg-surface/25 p-4 md:p-6">
@@ -46,7 +44,6 @@ export function CasePreviewStep({
                   value === "full" ? "full" : (Number(value) as 390 | 768 | 1024)
                 );
               }}
-              disabled={isMobile}
               className="project-select px-3 py-1.5 rounded-lg text-xs font-medium bg-surface border border-border-dark/60 text-primary outline-none transition-all cursor-pointer min-w-[9rem] hover:border-accent/40 disabled:opacity-60 disabled:cursor-not-allowed"
               aria-label={t.projects.widthAria}
             >
