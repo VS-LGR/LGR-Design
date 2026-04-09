@@ -93,23 +93,28 @@ export function ChapterTrack({
           <ChevronLeft />
         </button>
 
-        <div className="flex-1 min-w-0 flex flex-col gap-2">
+        <div className="flex-1 min-w-0 flex flex-col gap-2 overflow-hidden">
           <nav
             aria-label={t.caseDeck.chapterNavAria}
-            className="overflow-x-auto scrollbar-hide pb-1"
+            className="overflow-x-auto overflow-y-hidden scrollbar-hide pb-1 -mx-0.5 px-0.5 touch-pan-x"
           >
-            <div className="relative min-w-[min(100%,280px)] px-1">
+            <div
+              className="relative px-1"
+              style={{
+                width: `max(100%, ${Math.max(n * 76, 304)}px)`,
+              }}
+            >
               <div
                 className="absolute left-0 right-0 top-[18px] h-0.5 rounded-full bg-border-dark/55 z-0"
                 aria-hidden
               />
               <div
-                className="chapter-track-fill absolute left-0 top-[18px] h-0.5 rounded-full bg-accent z-0"
+                className="chapter-track-fill absolute left-0 top-[18px] h-0.5 rounded-full bg-accent z-0 max-w-full"
                 style={{ width: `${fillPercent}%` }}
                 aria-hidden
               />
 
-              <ol className="relative z-10 flex justify-between items-start gap-0 list-none m-0 p-0 min-h-[52px]">
+              <ol className="relative z-10 flex flex-nowrap justify-between items-start gap-1 sm:gap-2 list-none m-0 p-0 min-h-[52px] w-full">
                 {chapters.map((chapter, index) => {
                   const isActive = index === activeIndex;
                   const isDone = index < activeIndex;
@@ -119,7 +124,7 @@ export function ChapterTrack({
                       ref={(el) => {
                         itemRefs.current[index] = el;
                       }}
-                      className="flex flex-col items-center flex-1 min-w-[3rem] max-w-[6rem]"
+                      className="flex flex-col items-center shrink-0 w-[4.25rem] sm:w-[4.75rem] md:shrink md:w-auto md:flex-1 md:min-w-0 md:max-w-[7rem]"
                     >
                       <button
                         type="button"

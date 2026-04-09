@@ -12,6 +12,24 @@ interface CasePreviewStepProps {
 
 type ViewportPreset = "full" | 390 | 768 | 1024;
 
+const previewFrameHeight =
+  "min-h-[220px] h-[min(50dvh,440px)] sm:min-h-[280px] sm:h-[min(54dvh,500px)] md:min-h-[360px] md:h-[min(62vh,580px)] lg:h-[min(65vh,640px)]";
+
+function PreviewPlayIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M8 5v14l11-7L8 5z" />
+    </svg>
+  );
+}
+
 export function CasePreviewStep({
   title,
   description,
@@ -61,45 +79,52 @@ export function CasePreviewStep({
                 setIsLoading(true);
                 setShowPreview(true);
               }}
-              className="inline-flex items-center px-4 py-2 rounded-xl bg-accent text-dark font-medium hover:bg-accent-soft transition-colors focus-ring"
+              className="w-full sm:w-auto sm:self-start flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl border border-accent/45 bg-accent/12 text-accent font-semibold text-sm shadow-sm shadow-black/5 hover:bg-accent/20 hover:border-accent/60 active:scale-[0.99] transition-[background-color,border-color,transform] focus-ring"
             >
-              {t.caseDeck.previewCta}
+              <PreviewPlayIcon className="opacity-90 shrink-0" />
+              <span className="text-left leading-snug">{t.caseDeck.previewCta}</span>
             </button>
           ) : (
-            <div className="rounded-xl border border-border-dark/60 overflow-hidden bg-dark min-h-[420px] p-2 md:p-3 flex items-center justify-center">
+            <div className="rounded-xl border border-border-dark/60 overflow-hidden bg-dark p-2 md:p-3 min-w-0 flex flex-col">
               {isLoading ? (
-                <div className="h-[65vh] min-h-[420px] w-full flex items-center justify-center text-sm text-muted">
+                <div
+                  className={`${previewFrameHeight} w-full min-w-0 flex items-center justify-center text-sm text-muted`}
+                >
                   {t.caseDeck.loadingPreview}
                 </div>
               ) : null}
               {hasError ? (
-                <div className="h-[65vh] min-h-[420px] w-full flex items-center justify-center text-sm text-muted px-6 text-center">
+                <div
+                  className={`${previewFrameHeight} w-full min-w-0 flex items-center justify-center text-sm text-muted px-6 text-center`}
+                >
                   {t.caseDeck.previewError}
                 </div>
               ) : null}
-              <div
-                className={`h-[65vh] min-h-[420px] rounded-xl overflow-hidden border border-border-dark/60 ${
-                  effectiveViewportPreset === "full" ? "w-full" : ""
-                } ${isLoading || hasError ? "hidden" : "block"}`}
-                style={
-                  effectiveViewportPreset !== "full"
-                    ? { width: `${effectiveViewportPreset}px`, maxWidth: "100%" }
-                    : undefined
-                }
-              >
-                <iframe
-                  src={previewUrl}
-                  title={title}
-                  className="w-full h-full border-0"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  onLoad={() => setIsLoading(false)}
-                  onError={() => {
-                    setIsLoading(false);
-                    setHasError(true);
-                  }}
-                />
-              </div>
+              {!isLoading && !hasError ? (
+                <div
+                  className={`${previewFrameHeight} rounded-lg overflow-hidden border border-border-dark/60 min-w-0 mx-auto ${
+                    effectiveViewportPreset === "full" ? "w-full" : ""
+                  }`}
+                  style={
+                    effectiveViewportPreset !== "full"
+                      ? { width: `min(100%, ${effectiveViewportPreset}px)` }
+                      : undefined
+                  }
+                >
+                  <iframe
+                    src={previewUrl}
+                    title={title}
+                    className="w-full h-full border-0 bg-white"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    onLoad={() => setIsLoading(false)}
+                    onError={() => {
+                      setIsLoading(false);
+                      setHasError(true);
+                    }}
+                  />
+                </div>
+              ) : null}
             </div>
           )}
           <a

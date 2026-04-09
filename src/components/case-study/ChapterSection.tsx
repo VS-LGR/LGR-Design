@@ -17,11 +17,11 @@ function renderBlock(block: CaseStudyBlock) {
 
   if (block.type === "tags" && block.items?.length) {
     return (
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 min-w-0">
         {block.items.map((item) => (
           <span
             key={item}
-            className="px-3 py-1.5 rounded-full text-xs font-medium bg-accent/15 text-accent border border-accent/30"
+            className="inline-block max-w-full px-3 py-1.5 rounded-full text-xs font-medium bg-accent/15 text-accent border border-accent/30 break-words text-left hyphens-auto"
           >
             {item}
           </span>
@@ -76,7 +76,7 @@ export function ChapterSection({ chapter }: ChapterSectionProps) {
 
   return (
     <section
-      className="rounded-2xl border border-border-dark/50 bg-surface/20 p-4 md:p-8 space-y-5 md:space-y-6"
+      className="rounded-2xl border border-border-dark/50 bg-surface/20 p-4 md:p-8 space-y-5 md:space-y-6 min-w-0 max-w-full overflow-x-hidden"
       aria-labelledby={`chapter-title-${chapter.id}`}
     >
       <header className="space-y-2 pb-1 border-b border-border-dark/30">
@@ -94,9 +94,9 @@ export function ChapterSection({ chapter }: ChapterSectionProps) {
         ) : null}
       </header>
       <div
-        className={`space-y-6 ${
+        className={`space-y-6 min-w-0 ${
           hasManyBlocks
-            ? "max-h-[min(68vh,32rem)] overflow-y-auto pr-1 -mr-1 snap-y snap-mandatory"
+            ? "max-h-[min(52dvh,26rem)] sm:max-h-[min(62vh,30rem)] md:max-h-[min(68vh,32rem)] overflow-y-auto overflow-x-hidden pr-1 -mr-1 snap-y snap-mandatory"
             : ""
         }`}
       >

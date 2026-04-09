@@ -61,7 +61,7 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
     : chapterLabel;
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-6 md:py-10 px-4 md:px-6 space-y-6 md:space-y-8 overflow-x-hidden">
+    <div className="w-full max-w-6xl xl:max-w-7xl mx-auto py-6 md:py-10 px-4 sm:px-5 md:px-8 space-y-6 md:space-y-8 overflow-x-hidden">
       <Link
         href="/"
         className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
@@ -122,7 +122,7 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
           </p>
         </aside>
         <div
-          className="space-y-4 min-w-0"
+          className="space-y-4 min-w-0 max-w-full overflow-x-hidden"
           onTouchStart={(event) => {
             touchStartX.current = event.touches[0]?.clientX ?? null;
             touchStartY.current = event.touches[0]?.clientY ?? null;
@@ -156,8 +156,8 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         </div>
       </section>
 
-      <section className="w-screen max-w-[100vw] relative left-1/2 -translate-x-1/2 px-4 md:px-6 box-border">
-        <div className="max-w-none min-w-0">
+      <section className="w-full min-w-0 max-w-full border-t border-border-dark/30 pt-6 md:pt-8 mt-2">
+        <div className="min-w-0">
           <CasePreviewStep
             title={project.caseStudy?.previewTitle ?? t.caseDeck.previewTitle}
             description={
