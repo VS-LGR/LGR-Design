@@ -18,189 +18,125 @@ export function ProjectGrid() {
     () => projects.filter((p) => p.topic === selectedTopic),
     [projects, selectedTopic]
   );
-  const [selectedId, setSelectedId] = useState<string>(projectsInTopic[0]?.id ?? "");
 
-  const effectiveProject =
-    projectsInTopic.find((project) => project.id === selectedId) ??
-    projectsInTopic[0] ??
-    null;
-  const selectedProjectIndex = projectsInTopic.findIndex(
-    (project) => project.id === effectiveProject?.id
-  );
-  const effectiveIndex = selectedProjectIndex >= 0 ? selectedProjectIndex : 0;
-
-  const handleTopicChange = (topic: ProjectTopic) => {
-    setSelectedTopic(topic);
-    const inNewTopic = projects.filter((p) => p.topic === topic);
-    if (inNewTopic.length > 0) {
-      setSelectedId(inNewTopic[0].id);
-    }
-  };
+  const topicLabel =
+    projectTopics.find((topic) => topic.id === selectedTopic)?.label ?? "";
 
   return (
-    <div
-      role="tabpanel"
-      id="panel-projects"
-      aria-labelledby="tab-projects"
-      className="w-full min-w-0 flex flex-col py-6 md:py-8"
-    >
-      <div className="mb-5 p-4 md:p-5 rounded-xl border border-border-dark/50 bg-surface/40">
-        <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">
-          {t.projects.byTopic}
+    <div className="w-full min-w-0 flex flex-col gap-8 md:gap-10 py-2 md:py-4">
+      <div>
+        <p className="text-sm md:text-base text-muted max-w-2xl leading-relaxed">
+          {t.projects.browseByTopicLead}
         </p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {projectTopics.map((topic) => (
-            <button
-              key={topic.id}
-              type="button"
-              onClick={() => handleTopicChange(topic.id)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus-ring ${
-                selectedTopic === topic.id
-                  ? "bg-accent text-dark shadow-glow-sm"
-                  : "bg-surface/80 text-muted hover:text-primary border border-border-dark/60 hover:border-accent/40"
-              }`}
-            >
-              {topic.label}
-            </button>
-          ))}
+
+        <div
+          role="tablist"
+          aria-label={t.projects.byTopic}
+          className="mt-6 flex flex-wrap gap-x-1 gap-y-0 border-b border-border-dark/40"
+        >
+          {projectTopics.map((topic) => {
+            const selected = selectedTopic === topic.id;
+            return (
+              <button
+                key={topic.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                id={`topic-tab-${topic.id}`}
+                aria-controls="panel-projects-topic"
+                onClick={() => setSelectedTopic(topic.id)}
+                className={`shrink-0 px-3 sm:px-4 py-2.5 text-sm font-medium border-b-2 -mb-px transition-colors focus-ring ${
+                  selected
+                    ? "border-accent text-primary"
+                    : "border-transparent text-muted hover:text-primary hover:border-border-dark/50"
+                }`}
+              >
+                {topic.label}
+              </button>
+            );
+          })}
         </div>
-        {effectiveProject ? (
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs font-medium text-muted bg-surface/60 px-3 py-1.5 rounded-lg border border-border-dark/40">
-              {t.projects.ofTotal
-                .replace("{current}", String(effectiveIndex + 1))
-                .replace("{total}", String(projectsInTopic.length))}
-            </span>
-            <span className="text-xs text-muted">
-              {getCategoryLabel(effectiveProject.category)}
-            </span>
-          </div>
-        ) : (
-          <p className="text-sm text-muted">{t.projects.noneInTopic}</p>
-        )}
       </div>
 
-      {projectsInTopic.length > 0 && (
-        <section className="mb-6" aria-labelledby="project-cards-heading">
-          <h3
-            id="project-cards-heading"
-            className="text-sm font-semibold text-accent uppercase tracking-wider mb-3"
-          >
-            {t.projects.topicProjects}
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
-            {projectsInTopic.map((project) => {
-              const isActive = project.id === effectiveProject?.id;
-              return (
-                <article
-                  key={project.id}
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => setSelectedId(project.id)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      setSelectedId(project.id);
-                    }
-                  }}
-                  aria-label={`${t.projects.selectProjectPrefix} ${project.title}`}
-                  className={`group relative text-left rounded-xl border transition-all overflow-hidden cursor-pointer focus-ring ${
-                    isActive
-                      ? "project-card-active border-accent/70 bg-accent/10 shadow-[0_0_0_1px_rgba(6,182,212,0.25)]"
-                      : "border-border-dark/60 bg-surface/40 hover:border-accent/40 hover:bg-surface/60"
-                  }`}
+      <div
+        role="tabpanel"
+        id="panel-projects-topic"
+        aria-labelledby={`topic-tab-${selectedTopic}`}
+        className="min-w-0"
+      >
+        {projectsInTopic.length === 0 ? (
+          <p className="text-sm text-muted py-4">{t.projects.noneInTopic}</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
+            {projectsInTopic.map((project) => (
+              <article
+                key={project.id}
+                className="group flex flex-col rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/45 to-surface/20 overflow-hidden shadow-[0_12px_40px_-24px_rgba(0,0,0,0.65)] transition-[border-color,box-shadow,transform] duration-300 hover:border-accent/40 hover:shadow-[0_20px_48px_-20px_rgba(6,182,212,0.12)]"
+              >
+                <Link
+                  href={`/cases/${project.slug}`}
+                  className="flex flex-col flex-1 min-h-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark rounded-2xl"
                 >
-                  {isActive ? (
-                    <span
-                      aria-hidden
-                      className="absolute left-0 top-0 h-full w-1 bg-accent"
-                    />
-                  ) : null}
-                  <div className="h-28 bg-dark/70 border-b border-border-dark/50 overflow-hidden relative">
+                  <div className="relative aspect-[5/3] bg-dark/70 border-b border-border-dark/40 overflow-hidden">
                     {project.thumbnail ? (
                       <Image
                         src={project.thumbnail}
                         alt={`${t.projects.thumbnailAltPrefix} ${project.title}`}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-xs text-muted px-2 text-center">
+                      <div className="absolute inset-0 flex items-center justify-center text-xs text-muted px-4 text-center">
                         {t.projects.thumbnailStatic}
                       </div>
                     )}
-                  </div>
-                  <div className="p-3">
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm font-semibold text-primary truncate">
-                        {project.title}
-                      </p>
-                      {isActive ? (
-                        <span className="text-[10px] uppercase tracking-wide font-semibold text-accent bg-accent/15 border border-accent/30 rounded-full px-2 py-1">
-                          Ativo
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent opacity-90" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent/95">
+                          {topicLabel}
                         </span>
-                      ) : null}
+                        <span className="text-[10px] text-primary/70">
+                          {getCategoryLabel(project.category)}
+                        </span>
+                      </div>
+                      <h2 className="text-lg md:text-xl font-semibold text-primary leading-snug group-hover:text-accent-soft transition-colors">
+                        {project.title}
+                      </h2>
                     </div>
-                    <p className="text-xs text-muted mt-1 line-clamp-2">
+                  </div>
+
+                  <div className="p-5 md:p-6 flex flex-col flex-1">
+                    <p className="text-sm text-muted leading-relaxed line-clamp-3">
                       {project.description}
                     </p>
-                    <Link
-                      href={`/cases/${project.slug}`}
-                      onClick={(event) => event.stopPropagation()}
-                      className="inline-flex mt-3 text-xs font-semibold text-accent hover:text-accent-soft transition-colors focus-ring"
-                    >
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent group-hover:gap-2 transition-all">
                       {t.caseDeck.caseCta}
-                    </Link>
+                      <span aria-hidden className="translate-y-px">
+                        →
+                      </span>
+                    </span>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-      )}
+                </Link>
 
-      {effectiveProject ? (
-        <section className="rounded-xl border border-border-dark/50 bg-surface/20 p-4 md:p-6">
-          <p className="text-[11px] uppercase tracking-wide text-accent font-semibold">
-            Projeto selecionado
-          </p>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            <h2 className="text-base md:text-lg font-semibold text-primary">
-              {effectiveProject.title}
-            </h2>
-            <span className="text-[11px] text-muted bg-surface/60 px-2 py-1 rounded-full border border-border-dark/50">
-              {getCategoryLabel(effectiveProject.category)}
-            </span>
+                {project.link ? (
+                  <div className="px-5 md:px-6 pb-5 md:pb-6 -mt-1">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-muted hover:text-accent transition-colors focus-ring rounded underline-offset-4 hover:underline"
+                    >
+                      {t.projects.openSiteTab}
+                    </a>
+                  </div>
+                ) : null}
+              </article>
+            ))}
           </div>
-          <p className="text-sm text-muted mt-2 max-w-3xl leading-relaxed">
-            {effectiveProject.description}
-          </p>
-          {effectiveProject.caseStudy?.context.overview ? (
-            <p className="text-sm text-muted/90 mt-3 max-w-3xl leading-relaxed border-l-2 border-accent/40 pl-3">
-              {effectiveProject.caseStudy.context.overview}
-            </p>
-          ) : null}
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href={`/cases/${effectiveProject.slug}`}
-              className="inline-flex items-center px-4 py-2 rounded-xl bg-accent text-dark text-sm font-semibold hover:bg-accent-soft transition-colors focus-ring"
-            >
-              {t.caseDeck.caseCta}
-            </Link>
-            {effectiveProject.link ? (
-              <a
-                href={effectiveProject.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-4 py-2 rounded-xl border border-border-dark/60 text-sm font-medium text-muted hover:text-primary hover:border-accent/40 transition-colors focus-ring"
-              >
-                {t.projects.openSiteTab}
-              </a>
-            ) : null}
-          </div>
-        </section>
-      ) : null}
+        )}
+      </div>
     </div>
   );
 }

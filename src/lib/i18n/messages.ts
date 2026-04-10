@@ -9,7 +9,6 @@ export type UiMessages = {
     story: string;
     work: string;
     exploration: string;
-    backToSelection: string;
     openNavigation: string;
   };
   system: {
@@ -135,6 +134,7 @@ export type UiMessages = {
   };
   projects: {
     byTopic: string;
+    browseByTopicLead: string;
     project: string;
     selectProjectAria: string;
     ofTotal: string;
@@ -197,7 +197,6 @@ export const uiPt: UiMessages = {
     story: "História",
     work: "Como trabalho",
     exploration: "Expo",
-    backToSelection: "Voltar ao menu de seleção",
     openNavigation: "Abrir navegação",
   },
   system: {
@@ -333,6 +332,8 @@ export const uiPt: UiMessages = {
   },
   projects: {
     byTopic: "Projetos por tópico",
+    browseByTopicLead:
+      "Escolha um tema para ver os trabalhos relacionados — cada card leva ao estudo de caso completo.",
     project: "Projeto",
     selectProjectAria: "Selecionar projeto",
     ofTotal: "{current} de {total}",
@@ -398,7 +399,6 @@ export const uiEn: UiMessages = {
     story: "Story",
     work: "How I work",
     exploration: "Expo",
-    backToSelection: "Back to selection menu",
     openNavigation: "Open navigation",
   },
   system: {
@@ -531,6 +531,8 @@ export const uiEn: UiMessages = {
   },
   projects: {
     byTopic: "Projects by topic",
+    browseByTopicLead:
+      "Pick a theme to see related work — each card opens the full case study.",
     project: "Project",
     selectProjectAria: "Select project",
     ofTotal: "{current} of {total}",

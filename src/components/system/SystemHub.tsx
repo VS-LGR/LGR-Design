@@ -5,8 +5,11 @@ import Link from "next/link";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-/** Raio da órbita — valores menores no desktop para proporção com o header. */
+/** Raio base da órbita (px). Os satélites usam um fator menor que 1 para ficarem mais perto do centro, longe da borda do anel. */
 const ORBIT_R = { base: 106, md: 116 } as const;
+
+/** Posição dos botões em relação ao centro — menor = mais para dentro, afastados do círculo guia. */
+const SATELLITE_ORBIT_FACTOR = 0.62;
 
 /** Tamanho fixo dos 4 nós (círculos idênticos). */
 const NODE_BOX = "h-[4.35rem] w-[4.35rem] md:h-[5rem] md:w-[5rem]";
@@ -145,8 +148,8 @@ export function SystemHub() {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/25 bg-accent/[0.06] pointer-events-none system-hub-orbit-ring"
           aria-hidden
           style={{
-            width: orbitPx * 2 + 80,
-            height: orbitPx * 2 + 80,
+            width: orbitPx * 2 + 108,
+            height: orbitPx * 2 + 108,
             opacity: open ? 0.5 : 0.14,
             boxShadow: open
               ? "inset 0 0 40px -12px rgba(6,182,212,0.12), 0 0 0 1px rgba(6,182,212,0.15)"
@@ -159,8 +162,8 @@ export function SystemHub() {
 
         <div id="system-hub-modules" role="group" aria-label={t.system.hubTitle}>
           {modules.map((mod, i) => {
-            const tx = mod.dx * orbitPx;
-            const ty = mod.dy * orbitPx;
+            const tx = mod.dx * orbitPx * SATELLITE_ORBIT_FACTOR;
+            const ty = mod.dy * orbitPx * SATELLITE_ORBIT_FACTOR;
             const dur = open ? durationOpen : durationClose;
             const ease = open ? easeOpen : easeClose;
 
