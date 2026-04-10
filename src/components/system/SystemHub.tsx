@@ -1,15 +1,26 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
-/** Raio base da órbita (px). Os satélites usam um fator menor que 1 para ficarem mais perto do centro, longe da borda do anel. */
+/** Referência de escala do hub (px); define o tamanho do anel guia. */
 const ORBIT_R = { base: 106, md: 116 } as const;
 
-/** Posição dos botões em relação ao centro — menor = mais para dentro, afastados do círculo guia. */
-const SATELLITE_ORBIT_FACTOR = 0.62;
+/** Diâmetro do anel = orbitPx * 2 + extra → raio externo = orbitPx + extra/2. */
+const ORBIT_RING_EXTRA = 108;
+
+/**
+ * Metade do botão central e dos satélites (NODE_BOX), em px (root 16px), para colocar o centro
+ * de cada satélite no meio do anel útil, sem encostar no núcleo nem ultrapassar o limite.
+ */
+const HUB_GEOMETRY = {
+  base: { coreHalfPx: 31, nodeHalfPx: 35 },
+  md: { coreHalfPx: 32, nodeHalfPx: 40 },
+} as const;
+
+const ORBIT_CLEARANCE_PX = 8;
 
 /** Tamanho fixo dos 4 nós (círculos idênticos). */
 const NODE_BOX = "h-[4.35rem] w-[4.35rem] md:h-[5rem] md:w-[5rem]";
@@ -100,6 +111,15 @@ export function SystemHub() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
+  const satelliteRadiusPx = useMemo(() => {
+    const isMd = orbitPx === ORBIT_R.md;
+    const { coreHalfPx, nodeHalfPx } = isMd ? HUB_GEOMETRY.md : HUB_GEOMETRY.base;
+    const ringOuterR = orbitPx + ORBIT_RING_EXTRA / 2;
+    const rMax = ringOuterR - nodeHalfPx - ORBIT_CLEARANCE_PX;
+    const rMin = coreHalfPx + nodeHalfPx + ORBIT_CLEARANCE_PX;
+    return (rMin + rMax) / 2;
+  }, [orbitPx]);
+
   const onKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") setOpen(false);
   }, []);
@@ -110,11 +130,12 @@ export function SystemHub() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, onKeyDown]);
 
-  const delayOpen = (i: number) => (reducedMotion ? 0 : i * 44);
+  const delayOpen = (i: number) => (reducedMotion ? 0 : i * 52);
   const delayClose = (i: number) => (reducedMotion ? 0 : (modules.length - 1 - i) * 28);
-  const durationOpen = reducedMotion ? 120 : 580;
+  const durationOpen = reducedMotion ? 120 : 820;
   const durationClose = reducedMotion ? 100 : 420;
-  const easeOpen = "cubic-bezier(0.22, 1, 0.36, 1)";
+  /** Abertura: ease-in-out suave, sem exagerar na duração. */
+  const easeOpen = "cubic-bezier(0.45, 0.05, 0.55, 0.95)";
   const easeClose = "cubic-bezier(0.4, 0, 0.2, 1)";
 
   const nodeStatic =
@@ -148,22 +169,22 @@ export function SystemHub() {
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/25 bg-accent/[0.06] pointer-events-none system-hub-orbit-ring"
           aria-hidden
           style={{
-            width: orbitPx * 2 + 108,
-            height: orbitPx * 2 + 108,
+            width: orbitPx * 2 + ORBIT_RING_EXTRA,
+            height: orbitPx * 2 + ORBIT_RING_EXTRA,
             opacity: open ? 0.5 : 0.14,
             boxShadow: open
               ? "inset 0 0 40px -12px rgba(6,182,212,0.12), 0 0 0 1px rgba(6,182,212,0.15)"
               : "none",
             transition: reducedMotion
               ? "opacity 0.1s ease"
-              : "opacity 480ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 480ms cubic-bezier(0.22, 1, 0.36, 1)",
+              : "opacity 640ms cubic-bezier(0.45, 0.05, 0.55, 0.95), box-shadow 640ms cubic-bezier(0.45, 0.05, 0.55, 0.95)",
           }}
         />
 
         <div id="system-hub-modules" role="group" aria-label={t.system.hubTitle}>
           {modules.map((mod, i) => {
-            const tx = mod.dx * orbitPx * SATELLITE_ORBIT_FACTOR;
-            const ty = mod.dy * orbitPx * SATELLITE_ORBIT_FACTOR;
+            const tx = mod.dx * satelliteRadiusPx;
+            const ty = mod.dy * satelliteRadiusPx;
             const dur = open ? durationOpen : durationClose;
             const ease = open ? easeOpen : easeClose;
 
@@ -215,17 +236,17 @@ export function SystemHub() {
           <span className="flex h-full w-full items-center justify-center" aria-hidden>
             <span className="relative h-4 w-5">
               <span
-                className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-accent transition-all duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                className={`absolute left-0 top-0 block h-0.5 w-5 rounded-full bg-accent transition-all duration-[520ms] ease-[cubic-bezier(0.45,0.05,0.55,0.95)] ${
                   open ? "top-[7px] rotate-45" : "top-0 rotate-0"
                 }`}
               />
               <span
-                className={`absolute left-0 top-[7px] block h-0.5 w-5 rounded-full bg-accent transition-all duration-[320ms] ease-out ${
+                className={`absolute left-0 top-[7px] block h-0.5 w-5 rounded-full bg-accent transition-all duration-[400ms] ease-[cubic-bezier(0.45,0.05,0.55,0.95)] ${
                   open ? "scale-x-0 opacity-0" : "scale-x-100 opacity-100"
                 }`}
               />
               <span
-                className={`absolute left-0 top-[14px] block h-0.5 w-5 rounded-full bg-accent transition-all duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                className={`absolute left-0 top-[14px] block h-0.5 w-5 rounded-full bg-accent transition-all duration-[520ms] ease-[cubic-bezier(0.45,0.05,0.55,0.95)] ${
                   open ? "top-[7px] -rotate-45" : "top-[14px] rotate-0"
                 }`}
               />
