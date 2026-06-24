@@ -333,11 +333,11 @@
 @keyframes hub-core-enter {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.7);
+    transform: scale(0.7);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
   }
 }
 
@@ -443,6 +443,7 @@
 }
 
 .hub-core {
+  position: relative;
   opacity: 0;
 }
 

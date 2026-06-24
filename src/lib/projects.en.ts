@@ -11,9 +11,7 @@ export const projectCategoriesEn: { id: ProjectCategory; label: string }[] = [
 
 export const projectTopicsEn: { id: ProjectTopic; label: string }[] = [
   { id: "saude", label: "Healthcare" },
-  { id: "negocios", label: "Business" },
   { id: "empresas", label: "Companies" },
-  { id: "recreativos", label: "Recreation" },
 ];
 
 export const projectsListEn: Project[] = [

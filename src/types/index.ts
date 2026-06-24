@@ -46,7 +46,7 @@ export interface AboutContent {
 
 export type ProjectCategory = "web" | "ux" | "identity" | "other";
 
-export type ProjectTopic = "saude" | "negocios" | "empresas" | "recreativos";
+export type ProjectTopic = "saude" | "empresas";
 
 /** Métrica ou resultado qualitativo honesto no case do projeto */
 export interface ProjectCaseResult {

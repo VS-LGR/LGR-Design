@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useSmoothPointer } from "@/hooks/useSmoothPointer";
@@ -16,6 +16,7 @@ import {
 
 const INTRO_DELAY_MS = 2500;
 const TILT_MAX = 3.5;
+const CORE_FOLLOW_MAX = 40;
 
 function moduleLabels(
   id: HubModuleId,
@@ -48,6 +49,9 @@ export function SystemHub() {
   const [fieldSize, setFieldSize] = useState<number>(HUB_FIELD_SIZE.base);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [introReady, setIntroReady] = useState(reducedMotion);
+  const fieldRef = useRef<HTMLDivElement>(null);
+  const [fieldMeasured, setFieldMeasured] = useState(false);
+  const [fieldCenter, setFieldCenter] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -75,6 +79,26 @@ export function SystemHub() {
     return () => window.clearTimeout(timer);
   }, [reducedMotion]);
 
+  useEffect(() => {
+    const updateCenter = () => {
+      const el = fieldRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setFieldCenter({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+      });
+      setFieldMeasured(true);
+    };
+    updateCenter();
+    window.addEventListener("resize", updateCenter);
+    window.addEventListener("scroll", updateCenter, { passive: true });
+    return () => {
+      window.removeEventListener("resize", updateCenter);
+      window.removeEventListener("scroll", updateCenter);
+    };
+  }, [fieldSize]);
+
   const orbitRadius = useMemo(() => {
     const isMd = fieldSize >= HUB_FIELD_SIZE.md;
     const baseR = isMd ? HUB_ORBIT_RADIUS.md : HUB_ORBIT_RADIUS.base;
@@ -87,6 +111,16 @@ export function SystemHub() {
 
   const tiltX = pointer.enabled ? pointer.nx * TILT_MAX : 0;
   const tiltY = pointer.enabled ? -pointer.ny * TILT_MAX : 0;
+
+  const coreOffset = useMemo(() => {
+    if (!pointer.enabled || !fieldMeasured) return { x: 0, y: 0 };
+    const dx = pointer.clientX - fieldCenter.x;
+    const dy = pointer.clientY - fieldCenter.y;
+    const dist = Math.hypot(dx, dy) || 1;
+    const max = Math.min(fieldSize * 0.13, CORE_FOLLOW_MAX);
+    const pull = Math.min(max, dist * 0.22);
+    return { x: (dx / dist) * pull, y: (dy / dist) * pull };
+  }, [pointer, fieldCenter, fieldSize, fieldMeasured]);
 
   return (
     <section
@@ -116,6 +150,7 @@ export function SystemHub() {
         style={{ perspective: pointer.enabled ? "1000px" : undefined }}
       >
         <div
+          ref={fieldRef}
           className="hub-field relative"
           role="navigation"
           aria-label={t.system.hubTitle}
@@ -162,6 +197,8 @@ export function SystemHub() {
           <HubCore
             mx={pointer.x}
             my={pointer.y}
+            offsetX={coreOffset.x}
+            offsetY={coreOffset.y}
             reducedMotion={reducedMotion}
             introReady={introReady}
           />
