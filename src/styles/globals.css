@@ -409,6 +409,7 @@
   width: 100%;
   max-width: 100%;
   overflow: visible;
+  padding: 1.25rem 0.5rem;
 }
 
 .hub-field {
@@ -443,38 +444,31 @@
 
 .hub-orbit-rotator {
   transform-origin: center center;
+  will-change: transform;
 }
 
-.hub-orbit-rotator--ready:not(.hub-orbit-rotator--paused) {
-  animation: hub-orbit-spin 80s linear infinite;
-}
-
-.hub-node {
-  opacity: 1;
-}
-
-.hub-node-disc {
+.hub-node-card {
   opacity: 0;
 }
 
-.hub-node-disc--ready {
+.hub-node-card--ready {
   animation: hub-node-enter 0.72s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.hub-orbit-arm:nth-child(1) .hub-node-disc--ready {
+.hub-orbit-arm:nth-child(1) .hub-node-card--ready {
   animation-delay: 0ms;
 }
-.hub-orbit-arm:nth-child(2) .hub-node-disc--ready {
+.hub-orbit-arm:nth-child(2) .hub-node-card--ready {
   animation-delay: 80ms;
 }
-.hub-orbit-arm:nth-child(3) .hub-node-disc--ready {
+.hub-orbit-arm:nth-child(3) .hub-node-card--ready {
   animation-delay: 160ms;
 }
-.hub-orbit-arm:nth-child(4) .hub-node-disc--ready {
+.hub-orbit-arm:nth-child(4) .hub-node-card--ready {
   animation-delay: 240ms;
 }
 
-.hub-node-disc--glow {
+.hub-node-card--glow {
   animation: hub-node-glow 3.2s ease-in-out infinite;
 }
 
@@ -509,18 +503,18 @@
   .system-hub-orbit-ring {
     transition-duration: 0.1s !important;
   }
-  .hub-orbit-rotator--ready:not(.hub-orbit-rotator--paused) {
-    animation: none;
+  .hub-orbit-rotator {
+    will-change: auto;
   }
   .hub-orbit-ring-stroke--ready {
     animation: none;
     stroke-dashoffset: 0;
     opacity: 0.45;
   }
-  .hub-node-disc {
+  .hub-node-card {
     opacity: 1;
   }
-  .hub-node-disc--ready {
+  .hub-node-card--ready {
     animation: none;
   }
   .hub-core {
@@ -533,7 +527,7 @@
     animation: none;
     opacity: 1;
   }
-  .hub-node-disc--glow {
+  .hub-node-card--glow {
     animation: none;
   }
   .hub-core-aura--pulse {

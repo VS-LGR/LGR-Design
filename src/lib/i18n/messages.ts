@@ -203,7 +203,7 @@ export const uiPt: UiMessages = {
   system: {
     hubTitle: "Acesso ao portfólio",
     hubSubtitle: "Escolha um módulo para continuar.",
-    hubHint: "Passe o cursor ou escolha um módulo.",
+    hubHint: "Passe o cursor sobre o campo ou escolha um módulo.",
     toggleExpand: "Abrir módulos",
     toggleCollapse: "Fechar módulos",
     centralButtonAria: "Abrir ou fechar menu circular de módulos",
@@ -406,7 +406,7 @@ export const uiEn: UiMessages = {
   system: {
     hubTitle: "Portfolio access",
     hubSubtitle: "Choose a module to continue.",
-    hubHint: "Hover or choose a module.",
+    hubHint: "Hover the field or choose a module.",
     toggleExpand: "Open modules",
     toggleCollapse: "Close modules",
     centralButtonAria: "Open or close circular module menu",

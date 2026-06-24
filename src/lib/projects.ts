@@ -1,8 +1,6 @@
 import type { Project, ProjectCategory, ProjectTopic } from "@/types";
-import PsiBiaRossiThumb from "@/components/PsiBiaRossi.png";
 import PharmatechThumb from "@/components/Pharmatech.png";
 import OfagThumb from "@/components/Ofag.png";
-import ClinaDversoThumb from "@/components/ClinaDverso.png";
 
 export const projectCategories: { id: ProjectCategory; label: string }[] = [
   { id: "web", label: "Web" },
@@ -46,7 +44,7 @@ export const projectsList: Project[] = [
           "Priorizei pontos de contato visíveis e consistentes para aumentar a taxa de agendamento e reduzir abandono.",
       },
     ],
-    thumbnail: PsiBiaRossiThumb,
+    thumbnail: "/img/Screenshot 2026-06-24 133205.png",
     link: "https://psi-bia-rossi.vercel.app",
     caseStudy: {
       context: {
@@ -455,42 +453,172 @@ export const projectsList: Project[] = [
     ],
   },
   {
+    id: "qualiproc-ctli",
+    title: "QualiProc — CTLI",
+    category: "web",
+    topic: "empresas",
+    slug: "qualiproc-ctli",
+    description:
+      "Sistema completo de gestão da qualidade metrológica para laboratórios, com cadastro de agentes de campo, documentos ISO 17025, certificados e coleta de calibração — web e mobile.",
+    developmentExplanation:
+      "Produção integral da plataforma QualiProc (powered by CTLI) voltada à NBR ISO 17025: gestão documental com edição e upload de arquivos Word, Lista Mestra, procedimentos e registros, emissão de certificados, coleta de dados de calibração em campo e fluxo de cadastro de agentes. Interface responsiva e acessível para uso web e mobile em operações de qualidade e metrologia.",
+    keyStages: [
+      {
+        title: "Gestão documental ISO 17025",
+        description:
+          "Estruturei procedimentos, registros, normas controladas e análise crítica em módulos alinhados aos requisitos da NBR ISO 17025, com edição e upload de documentos Word.",
+      },
+      {
+        title: "Operação em campo e certificação",
+        description:
+          "Desenvolvi o cadastro de agentes de campo, coleta de dados de calibração e emissão de certificados integrados ao fluxo de qualidade do laboratório.",
+      },
+      {
+        title: "Experiência web e mobile acessível",
+        description:
+          "Projetei a interface para uso contínuo em desktop e dispositivos móveis, priorizando escaneabilidade, clareza operacional e acessibilidade nas rotinas de auditoria e controle.",
+      },
+    ],
+    thumbnail: "/img/Qualiproc CTLI.png",
+    caseStudy: {
+      context: {
+        type: "Sistema de gestão da qualidade",
+        segment: "Metrologia e laboratórios acreditados",
+        objective: "Centralizar qualidade metrológica conforme NBR ISO 17025",
+        role: "UI/UX, arquitetura da informação, direção visual e front-end",
+        overview:
+          "Plataforma QualiProc para CTLI — gestão documental, certificados, calibração e agentes de campo em um único ambiente regulatório.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Qualidade fragmentada e difícil de rastrear",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Laboratórios acreditados precisam controlar documentos, calibrações, certificados e equipes de campo sem perder rastreabilidade nem conformidade com a NBR ISO 17025.",
+            },
+          ],
+        },
+        {
+          id: "objetivo",
+          label: "Objetivo",
+          title: "Qualidade metrológica em um só lugar",
+          blocks: [
+            {
+              id: "o1",
+              type: "bullets",
+              items: [
+                "Unificar gestão documental e operação de campo",
+                "Garantir aderência aos requisitos ISO 17025",
+                "Agilizar emissão de certificados e coleta de calibração",
+              ],
+            },
+          ],
+        },
+        {
+          id: "ux-ui",
+          label: "UX/UI",
+          title: "Sistema operacional, claro e acessível",
+          blocks: [
+            {
+              id: "u1",
+              type: "tags",
+              items: ["Web + mobile", "Acessibilidade", "Fluxos por perfil", "Conformidade"],
+            },
+          ],
+        },
+        {
+          id: "solucao",
+          label: "Solução",
+          title: "Plataforma completa para qualidade metrológica",
+          blocks: [
+            {
+              id: "s1",
+              type: "bullets",
+              items: [
+                "Cadastro de agentes de campo e coleta de dados de calibração",
+                "Edição e upload de arquivos Word com gestão de procedimentos e registros",
+                "Emissão de certificados, Lista Mestra e controles alinhados à NBR ISO 17025",
+              ],
+            },
+          ],
+        },
+        {
+          id: "resultado",
+          label: "Resultado",
+          title: "Operação de qualidade centralizada",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Entrega", value: "Sistema web e mobile completo" },
+                { label: "Norma", value: "NBR ISO 17025" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Preview do QualiProc",
+      previewDescription:
+        "Visualização da plataforma com foco em gestão documental, certificados, calibração e operação de campo conforme ISO 17025.",
+    },
+    caseProblem:
+      "Centralizar gestão da qualidade metrológica — documentos, calibrações, certificados e agentes de campo — em conformidade com a NBR ISO 17025, com uso fluido em web e mobile.",
+    caseSolution:
+      "Sistema completo com cadastro de agentes, edição e upload de Word, Lista Mestra, emissão de certificados, coleta de calibração e módulos de qualidade estruturados por requisito da norma.",
+    caseResults: [
+      {
+        label: "Entrega",
+        value: "Sistema web e mobile completo",
+      },
+      {
+        label: "Norma",
+        value: "NBR ISO 17025",
+      },
+    ],
+  },
+  {
     id: "clinica-dverso",
     title: "Clínica Dverso",
     category: "web",
     topic: "saude",
     slug: "clinica-dverso",
     description:
-      "Site da Clínica Dverso, clínica multidisciplinar focada em saúde integrada, neurodivergência e terapia assistida por cão em Sorocaba.",
+      "Página acolhedora para a Clínica Dverso — núcleo terapêutico multidisciplinar em Sorocaba — com foco em conversão, microinterações e acessibilidade via VLibras.",
     developmentExplanation:
-      "Landing page com múltiplas especialidades (psicologia, neurodivergência, psicoterapia musical, nutrição e terapia assistida por cão), utilizando animações em Lottie para dar vida às seções sem comprometer performance. Organização em blocos claros, CTAs bem definidos e experiência responsiva pensada para famílias acessando via mobile.",
+      "Desenvolvi uma landing acolhedora e orientada à conversão, reunindo psicologia, neurodivergência, psicoterapia musical, nutrição e terapia assistida por cão em blocos claros. Microinterações com Lottie dão vida às seções sem prejudicar a performance, CTAs estratégicos conduzem ao contato e a integração com VLibras reforça inclusão e confiança na jornada.",
     keyStages: [
       {
-        title: "Mapeamento de especialidades",
+        title: "Página acolhedora com foco em conversão",
         description:
-          "Estruturei cada área clínica em módulos independentes para facilitar descoberta de serviços por famílias e responsáveis.",
+          "Estruturei a narrativa para transmitir cuidado e proximidade, com CTAs bem posicionados que facilitam o primeiro contato de famílias e responsáveis.",
       },
       {
-        title: "Microinterações com Lottie",
+        title: "Microinterações e experiência fluida",
         description:
-          "Utilizei animações leves para enriquecer a experiência sem comprometer clareza, foco de leitura e usabilidade.",
+          "Utilizei animações Lottie leves para humanizar a leitura, guiar a atenção e reforçar momentos de decisão sem comprometer clareza nem velocidade.",
       },
       {
-        title: "Jornada de contato humanizada",
+        title: "Acessibilidade com VLibras",
         description:
-          "Distribuí CTAs de conversa e agendamento em pontos de decisão para reduzir barreiras de primeiro contato.",
+          "Integrei o widget VLibras para ampliar o acesso em Libras, alinhando inclusão, credibilidade institucional e uma experiência mais acolhedora para todos os públicos.",
       },
     ],
-    thumbnail: ClinaDversoThumb,
+    thumbnail: "/img/Dverso.png",
     link: "https://dversos-clinica.vercel.app",
     caseStudy: {
       context: {
         type: "Site institucional",
         segment: "Clínica de saúde integrada",
-        objective: "Unificar múltiplas especialidades com acolhimento e clareza",
+        objective: "Converter visitantes em contatos com acolhimento, clareza e inclusão",
         role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
         overview:
-          "Projeto para clínica multidisciplinar com foco em neurodivergência e terapia assistida por cão.",
+          "Página institucional para clínica multidisciplinar, equilibrando tom acolhedor, microinterações e acessibilidade com VLibras.",
       },
       chapters: [
         {
@@ -509,15 +637,15 @@ export const projectsList: Project[] = [
         {
           id: "objetivo",
           label: "Objetivo",
-          title: "Cuidado integrado com decisão rápida",
+          title: "Acolhimento que conduz à ação",
           blocks: [
             {
               id: "o1",
               type: "bullets",
               items: [
-                "Explicar áreas de atuação sem ruído",
-                "Reforçar acolhimento familiar",
-                "Facilitar identificação do atendimento ideal",
+                "Transmitir proximidade sem perder objetividade",
+                "Orientar famílias com linguagem clara e humana",
+                "Converter interesse em contato com CTAs estratégicos",
               ],
             },
           ],
@@ -525,27 +653,27 @@ export const projectsList: Project[] = [
         {
           id: "ux-ui",
           label: "UX/UI",
-          title: "Equilíbrio entre leveza e organização",
+          title: "Microinterações com propósito",
           blocks: [
             {
               id: "u1",
               type: "tags",
-              items: ["Confiança", "Acolhimento", "Escaneabilidade", "Navegação simples"],
+              items: ["Conversão", "Acolhimento", "Microinterações", "VLibras"],
             },
           ],
         },
         {
           id: "solucao",
           label: "Solução",
-          title: "Estrutura clara por frentes de cuidado",
+          title: "Experiência acolhedora, inclusiva e orientada à conversão",
           blocks: [
             {
               id: "s1",
               type: "bullets",
               items: [
-                "Apresentação objetiva das especialidades",
-                "Destaque para neurodivergência e terapia assistida por cão",
-                "Linguagem visual acessível com jornada de contato humanizada",
+                "Landing com tom humano e blocos escaneáveis por especialidade",
+                "Microinterações em Lottie para guiar atenção e reforçar confiança",
+                "Integração com VLibras e CTAs distribuídos nos momentos de decisão",
               ],
             },
           ],
@@ -553,14 +681,14 @@ export const projectsList: Project[] = [
         {
           id: "resultado",
           label: "Resultado",
-          title: "Complexidade traduzida em clareza",
+          title: "Cuidado traduzido em clareza e conversão",
           blocks: [
             {
               id: "r1",
               type: "stats",
               stats: [
-                { label: "Entrega", value: "Landing multidisciplinar responsiva" },
-                { label: "Experiência", value: "Mobile-first para famílias" },
+                { label: "Entrega", value: "Landing acolhedora e responsiva" },
+                { label: "Diferenciais", value: "Microinterações + VLibras" },
               ],
             },
           ],
@@ -568,20 +696,20 @@ export const projectsList: Project[] = [
       ],
       previewTitle: "Preview da clínica",
       previewDescription:
-        "Veja a implementação final com foco em escaneabilidade, acolhimento e navegação orientada à tomada de decisão.",
+        "Veja a página final com foco em conversão, microinterações leves e acessibilidade com VLibras.",
     },
     caseProblem:
-      "Organizar várias linhas de cuidado (neurodivergência, terapias, nutrição, terapia assistida por cão) para famílias que buscam informação rápida no celular, com tom acolhedor.",
+      "Criar uma página acolhedora para múltiplas linhas de cuidado, capaz de converter visitantes em contato no mobile, sem abrir mão de inclusão e clareza.",
     caseSolution:
-      "Módulos por especialidade, animações Lottie leves para humanizar sem pesar na performance, CTAs de contato distribuídos nos momentos de decisão da jornada.",
+      "Landing orientada à conversão com microinterações Lottie, CTAs nos pontos certos da jornada e integração com VLibras para ampliar acessibilidade em Libras.",
     caseResults: [
       {
         label: "Entrega",
-        value: "Landing multidisciplinar responsiva",
+        value: "Landing acolhedora e responsiva",
       },
       {
-        label: "Experiência",
-        value: "Mobile-first para famílias",
+        label: "Diferenciais",
+        value: "Microinterações + VLibras",
       },
     ],
   },

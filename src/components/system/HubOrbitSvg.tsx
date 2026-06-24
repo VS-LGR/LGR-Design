@@ -27,7 +27,8 @@ export function HubOrbitSvg({
 }: HubOrbitSvgProps) {
   const cx = size / 2;
   const cy = size / 2;
-  const ringR = orbitRadius + 18;
+  const ringR = orbitRadius + 28;
+  const innerRingR = orbitRadius - 36;
   const circumference = 2 * Math.PI * ringR;
 
   return (
@@ -50,6 +51,15 @@ export function HubOrbitSvg({
           <stop offset="100%" stopColor="rgba(150,235,250,0.95)" />
         </linearGradient>
       </defs>
+
+      <circle
+        cx={cx}
+        cy={cy}
+        r={innerRingR}
+        fill="none"
+        stroke="rgba(6,182,212,0.08)"
+        strokeWidth="1"
+      />
 
       <circle
         cx={cx}
