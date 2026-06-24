@@ -480,6 +480,7 @@ export const projectsList: Project[] = [
       },
     ],
     thumbnail: "/img/Qualiproc CTLI.png",
+    link: "https://ctli-sistema.vercel.app/login",
     caseStudy: {
       context: {
         type: "Sistema de gestão da qualidade",
@@ -565,7 +566,7 @@ export const projectsList: Project[] = [
       ],
       previewTitle: "Preview do QualiProc",
       previewDescription:
-        "Visualização da plataforma com foco em gestão documental, certificados, calibração e operação de campo conforme ISO 17025.",
+        "Acesso à tela de login do sistema (ambiente fechado). O preview ilustra a interface de entrada da plataforma de gestão ISO 17025.",
     },
     caseProblem:
       "Centralizar gestão da qualidade metrológica — documentos, calibrações, certificados e agentes de campo — em conformidade com a NBR ISO 17025, com uso fluido em web e mobile.",

@@ -81,9 +81,13 @@ export function SystemHub() {
   }, [reducedMotion]);
 
   const orbitRadius = useMemo(() => {
-    const ratio = fieldSize / (fieldSize >= HUB_FIELD_SIZE.md ? HUB_FIELD_SIZE.md : HUB_FIELD_SIZE.base);
-    const baseR = fieldSize >= HUB_FIELD_SIZE.md ? HUB_ORBIT_RADIUS.md : HUB_ORBIT_RADIUS.base;
-    return Math.round(baseR * ratio);
+    const isMd = fieldSize >= HUB_FIELD_SIZE.md;
+    const baseR = isMd ? HUB_ORBIT_RADIUS.md : HUB_ORBIT_RADIUS.base;
+    const ratio = fieldSize / (isMd ? HUB_FIELD_SIZE.md : HUB_FIELD_SIZE.base);
+    const scaled = Math.round(baseR * ratio);
+    const nodeClearance = isMd ? 56 : 50;
+    const maxR = Math.floor(fieldSize / 2 - nodeClearance);
+    return Math.max(96, Math.min(scaled, maxR));
   }, [fieldSize]);
 
   const tiltX = pointer.enabled ? pointer.nx * TILT_MAX : 0;

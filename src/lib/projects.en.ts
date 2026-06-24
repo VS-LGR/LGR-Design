@@ -396,6 +396,7 @@ export const projectsListEn: Project[] = [
       },
     ],
     thumbnail: "/img/Qualiproc CTLI.png",
+    link: "https://ctli-sistema.vercel.app/login",
     caseStudy: {
       context: {
         type: "Quality management system",
@@ -481,7 +482,7 @@ export const projectsListEn: Project[] = [
       ],
       previewTitle: "QualiProc preview",
       previewDescription:
-        "Platform preview focused on document management, certificates, calibration, and field operations under ISO 17025.",
+        "Login screen access (closed system). The preview shows the entry interface for the ISO 17025 management platform.",
     },
     caseProblem:
       "Centralize metrological quality management — documents, calibrations, certificates, and field agents — in ISO 17025 compliance with a smooth web and mobile experience.",
