@@ -18,7 +18,6 @@ export const HUB_MODULES: HubModuleConfig[] = [
 
 export const HUB_FIELD_SIZE = { base: 360, md: 500 } as const;
 export const HUB_ORBIT_RADIUS = { base: 138, md: 180 } as const;
-export const HUB_ORBIT_SPIN_S = 100;
 
 export function HubModuleIcon({ id, className }: { id: HubModuleId; className?: string }) {
   const props = {

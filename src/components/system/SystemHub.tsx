@@ -2,8 +2,6 @@
 
 import { useEffect, useId, useMemo, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
-import { useHubOrbitAngle } from "@/hooks/useHubOrbitAngle";
-import { useIsMobile } from "@/hooks/useIsMobile";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useSmoothPointer } from "@/hooks/useSmoothPointer";
 import { HubCore } from "./HubCore";
@@ -13,7 +11,6 @@ import {
   HUB_FIELD_SIZE,
   HUB_MODULES,
   HUB_ORBIT_RADIUS,
-  HUB_ORBIT_SPIN_S,
   type HubModuleId,
 } from "./hubModules";
 
@@ -43,7 +40,6 @@ function moduleLabels(
 export function SystemHub() {
   const { t, locale } = useLocale();
   const reducedMotion = usePrefersReducedMotion();
-  const isMobile = useIsMobile();
   const pointer = useSmoothPointer();
   const hubHeadingId = useId();
   const hubDescId = useId();
@@ -51,7 +47,6 @@ export function SystemHub() {
 
   const [fieldSize, setFieldSize] = useState<number>(HUB_FIELD_SIZE.base);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [fieldActive, setFieldActive] = useState(false);
   const [introReady, setIntroReady] = useState(reducedMotion);
 
   useEffect(() => {
@@ -85,22 +80,13 @@ export function SystemHub() {
     const baseR = isMd ? HUB_ORBIT_RADIUS.md : HUB_ORBIT_RADIUS.base;
     const ratio = fieldSize / (isMd ? HUB_FIELD_SIZE.md : HUB_FIELD_SIZE.base);
     const scaled = Math.round(baseR * ratio);
-    const nodeClearance = isMd ? 56 : 50;
+    const nodeClearance = isMd ? 36 : 32;
     const maxR = Math.floor(fieldSize / 2 - nodeClearance);
     return Math.max(96, Math.min(scaled, maxR));
   }, [fieldSize]);
 
   const tiltX = pointer.enabled ? pointer.nx * TILT_MAX : 0;
   const tiltY = pointer.enabled ? -pointer.ny * TILT_MAX : 0;
-  const orbitPaused = hoveredIndex !== null || fieldActive || isMobile || reducedMotion;
-  const orbitSpinning = introReady && !isMobile && !reducedMotion && !orbitPaused;
-  const orbitAngle = useHubOrbitAngle(HUB_ORBIT_SPIN_S, orbitSpinning);
-
-  const handleFieldBlur = (e: React.FocusEvent<HTMLDivElement>) => {
-    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
-      setFieldActive(false);
-    }
-  };
 
   return (
     <section
@@ -136,7 +122,6 @@ export function SystemHub() {
           style={{
             width: fieldSize,
             height: fieldSize,
-            ["--hub-spin-duration" as string]: `${HUB_ORBIT_SPIN_S}s`,
             ["--tilt-x" as string]: String(tiltX),
             ["--tilt-y" as string]: String(tiltY),
             ["--mx" as string]: String(pointer.x),
@@ -145,10 +130,6 @@ export function SystemHub() {
               ? `rotateX(calc(var(--tilt-y) * 1deg)) rotateY(calc(var(--tilt-x) * 1deg))`
               : undefined,
           }}
-          onMouseEnter={() => setFieldActive(true)}
-          onMouseLeave={() => setFieldActive(false)}
-          onFocusCapture={() => setFieldActive(true)}
-          onBlurCapture={handleFieldBlur}
         >
           <HubOrbitSvg
             size={fieldSize}
@@ -158,10 +139,7 @@ export function SystemHub() {
             introReady={introReady}
           />
 
-          <div
-            className="hub-orbit-rotator absolute inset-0"
-            style={{ transform: `rotate(${orbitAngle}deg)` }}
-          >
+          <div className="hub-orbit-rotator absolute inset-0">
             {HUB_MODULES.map((mod, i) => {
               const { short, label } = moduleLabels(mod.id, t, locale);
               return (
@@ -169,7 +147,6 @@ export function SystemHub() {
                   key={mod.id}
                   module={mod}
                   orbitRadius={orbitRadius}
-                  orbitAngle={orbitAngle}
                   short={short}
                   label={label}
                   index={i}
