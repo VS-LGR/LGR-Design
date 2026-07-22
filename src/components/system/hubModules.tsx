@@ -18,45 +18,51 @@ export const HUB_MODULES: HubModuleConfig[] = [
 
 export const HUB_FIELD_SIZE = { base: 340, md: 480 } as const;
 export const HUB_ORBIT_RADIUS = { base: 128, md: 168 } as const;
+/** Diâmetro do disco do ícone (mobile / desktop) — usado para clearance e alinhamento */
+export const HUB_NODE_DISC = { base: 44, md: 48 } as const;
 
 export function HubModuleIcon({ id, className }: { id: HubModuleId; className?: string }) {
   const props = {
-    className,
+    className: `block shrink-0 ${className ?? ""}`,
     viewBox: "0 0 24 24",
+    width: 20,
+    height: 20,
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.75,
+    strokeWidth: 1.6,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
   };
 
+  /** Ícones com caixa visual equilibrada (mesmo stroke e área útil ~16–18px). */
   const icons: Record<HubModuleId, ReactNode> = {
     projetos: (
       <svg {...props}>
-        <path d="M3 7.5V18a1.5 1.5 0 0 0 1.5 1.5H19.5A1.5 1.5 0 0 0 21 18V9" />
-        <path d="M3 7.5 12 3l9 4.5" />
-        <path d="M8.25 21V12h7.5v9" />
+        <rect x="4" y="5" width="16" height="14" rx="2" />
+        <path d="M4 10h16" />
+        <path d="M9 14h6" />
       </svg>
     ),
     historia: (
       <svg {...props}>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 2" />
-        <path d="M7.5 4.5 5 3M16.5 4.5 19 3" />
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4.5l3 1.5" />
       </svg>
     ),
     "como-trabalho": (
       <svg {...props}>
-        <path d="M4 6h6v4H4zM14 6h6v4h-6zM9 14h6v4H9z" />
-        <path d="M7 10v2M17 10v2M12 12v2" />
+        <circle cx="6.5" cy="7" r="2" />
+        <circle cx="17.5" cy="7" r="2" />
+        <circle cx="12" cy="17" r="2" />
+        <path d="M8.3 8.2 10.4 14.2M15.7 8.2 13.6 14.2" />
       </svg>
     ),
     contratar: (
       <svg {...props}>
-        <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7" />
-        <rect x="4" y="7" width="16" height="13" rx="1.5" />
-        <path d="M4 12h16" />
+        <rect x="4" y="8" width="16" height="11" rx="2" />
+        <path d="M9 8V6.5A1.5 1.5 0 0 1 10.5 5h3A1.5 1.5 0 0 1 15 6.5V8" />
+        <path d="M4 12.5h16" />
       </svg>
     ),
   };

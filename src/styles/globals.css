@@ -424,15 +424,19 @@
   animation: hub-node-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.hub-orbit-arm:nth-child(1).hub-node-label--ready,
 .hub-orbit-arm:nth-child(1) .hub-node-label--ready {
   animation-delay: 0ms;
 }
+.hub-orbit-arm:nth-child(2).hub-node-label--ready,
 .hub-orbit-arm:nth-child(2) .hub-node-label--ready {
   animation-delay: 80ms;
 }
+.hub-orbit-arm:nth-child(3).hub-node-label--ready,
 .hub-orbit-arm:nth-child(3) .hub-node-label--ready {
   animation-delay: 160ms;
 }
+.hub-orbit-arm:nth-child(4).hub-node-label--ready,
 .hub-orbit-arm:nth-child(4) .hub-node-label--ready {
   animation-delay: 240ms;
 }
