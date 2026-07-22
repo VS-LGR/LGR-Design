@@ -3,32 +3,40 @@
 import { useLocale } from "@/contexts/LocaleContext";
 
 export function CursorTemplateBlock() {
-  const { about } = useLocale();
+  const { about, t } = useLocale();
   const { cursorTemplate } = about;
 
   return (
-    <section className="space-y-4" aria-labelledby="cursor-template-heading">
-      <h2
-        id="cursor-template-heading"
-        className="text-lg font-semibold text-primary accent-underline pb-1"
-      >
-        {cursorTemplate.title}
-      </h2>
-      <p className="text-muted leading-relaxed">{cursorTemplate.intro}</p>
-      <ul className="space-y-2 list-none">
+    <div className="space-y-5">
+      <header className="space-y-2">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+          {t.sidebar.cursorTemplate}
+        </p>
+        <h2
+          id="cursor-template-heading"
+          className="text-lg md:text-xl font-semibold text-primary accent-underline pb-1"
+        >
+          {cursorTemplate.title}
+        </h2>
+        <p className="text-muted leading-relaxed">{cursorTemplate.intro}</p>
+      </header>
+      <ul className="space-y-2.5 list-none">
         {cursorTemplate.points.map((point, i) => (
           <li
             key={i}
-            className="flex items-start gap-2 text-muted text-sm sm:text-base"
+            className="flex items-start gap-2.5 text-sm md:text-base text-muted leading-relaxed"
           >
-            <span className="text-accent shrink-0 mt-0.5">✔</span>
+            <span
+              className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent/80"
+              aria-hidden
+            />
             <span>{point}</span>
           </li>
         ))}
       </ul>
-      <p className="text-muted leading-relaxed pt-2">
+      <p className="text-sm text-muted leading-relaxed pt-1">
         {cursorTemplate.closing}
       </p>
-    </section>
+    </div>
   );
 }

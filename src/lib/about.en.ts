@@ -52,7 +52,7 @@ export const aboutContentEn: AboutContent = {
   cursorTemplate: {
     title: "Strategic template for Cursor",
     intro:
-      "I built a Cursor IDE template structured to raise delivery quality and project organization. Focused on:",
+      "I structured a Cursor IDE template focused on project organization, quality standards, and AI integration. Goals:",
     points: [
       "Advanced project organization",
       "Structural clarity",
@@ -61,7 +61,7 @@ export const aboutContentEn: AboutContent = {
       "Optimized development flow",
     ],
     closing:
-      "It is not just about using an AI-powered IDE — it is about structuring the environment to ship with consistency and process discipline.",
+      "The differentiator is not just using AI — it is structuring the environment to deliver with consistency and process discipline.",
   },
   positioning: [
     "I work as a UX/Web Designer with a product mindset: goals, constraints, and metrics come before the interface.",
@@ -70,26 +70,27 @@ export const aboutContentEn: AboutContent = {
     "Comfortable in remote contexts and with strategic AI use to support decisions — not as a shortcut.",
   ],
   howIWork: {
-    intro: "My approach combines:",
+    intro:
+      "I work with a lean, adaptable method — depth matches the context, without losing decision clarity.",
     points: [
-      "Analytical thinking",
-      "Structural organization",
-      "Applied creativity",
-      "Strategic clarity",
-      "Technical depth",
+      "Diagnosis before interface: goals, constraints, and metrics",
+      "Clear information architecture and flows",
+      "Prototyping and validation when risk justifies it",
+      "Technical execution aligned with design",
+      "Documented handoff and navigable delivery",
     ],
     closing:
       "I turn complex scenarios into simple, efficient flows. I deliver logic, intent, and performance — not layouts alone.",
   },
   tools: {
-    intro: "Tools as an extension of the process:",
+    intro: "Tools as an extension of the process — not an end in themselves:",
     items: [
       "Figma — prototyping, design systems, and interface structure",
       "Illustrator — graphic design and visual identity",
       "After Effects — motion design and micro-interactions",
-      "Web development and systems thinking",
+      "Web development — front-end implementation and systems logic",
     ],
-    closing: "The tool is a means. Strategy is the differentiator.",
+    closing: "The tool is a means. Strategy and execution are the differentiator.",
   },
   creativePreferences: [
     "Game Development",
@@ -98,7 +99,7 @@ export const aboutContentEn: AboutContent = {
     "Painting",
   ],
   professionalObjective:
-    "I aim to work as a UX or Web Designer on product teams, helping structure interfaces for sites, landing pages, and web apps. I also work with companies and professionals who need clear-scope development — from briefing to launch.",
+    "Work on product teams as a UX/Web Designer, structuring interfaces for sites, landing pages, and web apps — and support companies that need clear-scope development from briefing to launch.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",

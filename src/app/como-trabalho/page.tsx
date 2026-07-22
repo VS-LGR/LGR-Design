@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ComoTrabalhoView } from "./ComoTrabalhoView";
 
 export const metadata: Metadata = {
-  title: "Como trabalho | Lucas Gabriel Rodrigues",
+  title: "Método | Lucas Gabriel Rodrigues",
   description:
-    "Processo de design, ferramentas, entregáveis e como conduzo projetos de UX e produto digital.",
+    "Princípios, processo de UX e produto, ferramentas e como conduzo projetos digitais — do briefing à entrega.",
 };
 
 export default function ComoTrabalhoPage() {

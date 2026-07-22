@@ -48,9 +48,8 @@ export function HubModuleIcon({ id, className }: { id: HubModuleId; className?: 
     ),
     "como-trabalho": (
       <svg {...props}>
-        <path d="M4 14c2-4 4-6 8-6s6 2 8 6" />
-        <path d="M6 18c1.5-2.5 3.5-4 6-4s4.5 1.5 6 4" />
-        <circle cx="12" cy="8" r="2.5" />
+        <path d="M4 6h6v4H4zM14 6h6v4h-6zM9 14h6v4H9z" />
+        <path d="M7 10v2M17 10v2M12 12v2" />
       </svg>
     ),
     contratar: (

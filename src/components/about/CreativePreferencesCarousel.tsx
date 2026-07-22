@@ -8,29 +8,27 @@ export function CreativePreferencesCarousel() {
   const { creativePreferences } = about;
 
   return (
-    <section className="space-y-4" aria-labelledby="creative-heading">
-      <h2
-        id="creative-heading"
-        className="text-lg font-semibold text-primary accent-underline pb-1"
-      >
-        {t.sections.creative}
-      </h2>
-      <p className="text-sm text-muted leading-relaxed">
-        {t.creative.intro}
-      </p>
-      <Carousel gap="gap-3" fadeWidth="w-12" className="min-w-0">
+    <div className="space-y-4">
+      <header className="space-y-2">
+        <h2
+          id="creative-heading"
+          className="text-lg md:text-xl font-semibold text-primary accent-underline pb-1"
+        >
+          {t.sections.creative}
+        </h2>
+        <p className="text-sm text-muted leading-relaxed">{t.creative.intro}</p>
+      </header>
+      <Carousel gap="gap-2.5" fadeWidth="w-10" className="min-w-0">
         {creativePreferences.map((item, index) => (
           <span
             key={index}
-            className="shrink-0 px-4 py-2.5 rounded-lg bg-surface border border-border-dark/60 text-sm font-medium text-primary hover:border-accent/40 hover:text-accent transition-colors duration-200"
+            className="shrink-0 px-3.5 py-2 rounded-lg border border-border-dark/50 bg-surface/25 text-sm font-medium text-primary/90"
           >
             {item}
           </span>
         ))}
       </Carousel>
-      <p className="text-sm text-muted pt-1">
-        {t.creative.outro}
-      </p>
-    </section>
+      <p className="text-sm text-muted pt-0.5">{t.creative.outro}</p>
+    </div>
   );
 }

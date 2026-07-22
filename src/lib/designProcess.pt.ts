@@ -2,7 +2,7 @@ import type { DesignProcessContent } from "@/types";
 
 export const designProcessPt: DesignProcessContent = {
   intro:
-    "Para dar clareza às etapas e alinhar expectativas com stakeholders, adapto profundidade e ritmo conforme o tempo disponível e o tipo de problema. Abaixo está o arcabouço que uso como referência — não é sempre linear: fases podem ser enxutas ou aprofundadas em cada iniciativa.",
+    "Adapto profundidade e ritmo ao tempo disponível e ao tipo de problema. O arcabouço abaixo é referência — fases podem ser enxutas ou aprofundadas conforme a iniciativa.",
   phases: [
     {
       id: 1,

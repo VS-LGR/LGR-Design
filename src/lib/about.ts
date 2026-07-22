@@ -52,7 +52,7 @@ export const aboutContent: AboutContent = {
   cursorTemplate: {
     title: "Template estratégico para Cursor",
     intro:
-      "Desenvolvi um template para a IDE Cursor, estruturado para elevar padrão de entrega e organização de projetos. Foco em:",
+      "Estruturei um template para a IDE Cursor com foco em organização de projetos, padrões de qualidade e integração com IA. Objetivos:",
     points: [
       "Organização avançada de projetos",
       "Clareza estrutural",
@@ -61,7 +61,7 @@ export const aboutContent: AboutContent = {
       "Otimização do fluxo de desenvolvimento",
     ],
     closing:
-      "Não se trata apenas de usar uma IDE com IA — e sim de estruturar o ambiente para produzir com consistência e visão de processo.",
+      "O diferencial não é só usar IA — é estruturar o ambiente para entregar com consistência e disciplina de processo.",
   },
   positioning: [
     "Atuo como UX/Web Designer com visão de produto: objetivos, restrições e métricas vêm antes da interface.",
@@ -70,26 +70,27 @@ export const aboutContent: AboutContent = {
     "Confortável em contextos remotos e no uso estratégico de IA para apoiar decisões — não como atalho.",
   ],
   howIWork: {
-    intro: "Minha abordagem combina:",
+    intro:
+      "Trabalho com um método enxuto e adaptável — profundidade conforme o contexto, sem perder clareza de decisão.",
     points: [
-      "Pensamento analítico",
-      "Organização estrutural",
-      "Criatividade aplicada",
-      "Clareza estratégica",
-      "Domínio técnico",
+      "Diagnóstico antes da interface: objetivos, restrições e métricas",
+      "Arquitetura da informação e fluxos claros",
+      "Prototipação e validação quando o risco justifica",
+      "Execução técnica alinhada ao design",
+      "Handoff documentado e entrega navegável",
     ],
     closing:
       "Transformo cenários complexos em fluxos simples e eficientes. Entrego lógica, intenção e performance — não apenas layouts.",
   },
   tools: {
-    intro: "Ferramentas como extensão do processo:",
+    intro: "Ferramentas como extensão do processo — não como fim em si:",
     items: [
       "Figma — prototipação, design systems e estrutura de interfaces",
       "Illustrator — construção gráfica e identidade visual",
       "After Effects — motion design e microinterações",
-      "Desenvolvimento web e lógica de sistemas",
+      "Desenvolvimento web — implementação front-end e lógica de sistemas",
     ],
-    closing: "A ferramenta é meio. A estratégia é o diferencial.",
+    closing: "A ferramenta é meio. A estratégia e a execução são o diferencial.",
   },
   creativePreferences: [
     "Game Development",
@@ -98,7 +99,7 @@ export const aboutContent: AboutContent = {
     "Pintura",
   ],
   professionalObjective:
-    "Busco atuar como UX Designer ou Web Designer em times de produto, contribuindo com interfaces de sites, landing pages e aplicações web. Também atendo empresas e profissionais que precisam contratar desenvolvimento com escopo claro — do briefing à publicação.",
+    "Atuar em times de produto como UX/Web Designer, estruturando interfaces de sites, landing pages e aplicações web — e atender empresas que precisam de desenvolvimento com escopo claro, do briefing à publicação.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",

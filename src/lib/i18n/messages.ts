@@ -114,6 +114,7 @@ export type UiMessages = {
     projectsHeading: string;
     historiaHeading: string;
     workHeading: string;
+    workLead: string;
     hireHeading: string;
   };
   hire: {
@@ -218,7 +219,7 @@ export const uiPt: UiMessages = {
   system: {
     hubTitle: "Design e desenvolvimento com intenção",
     hubSubtitle:
-      "Escolha um módulo do sistema para ver projetos, trajetória ou contratar.",
+      "Projetos, história, método e contratação — escolha um módulo para continuar.",
     hubHint: "Toque ou passe o cursor sobre um módulo para continuar.",
     hubKicker: "Sistema do portfólio",
     toggleExpand: "Abrir módulos",
@@ -226,7 +227,7 @@ export const uiPt: UiMessages = {
     centralButtonAria: "Abrir ou fechar menu circular de módulos",
     goProjects: "Ver projetos selecionados",
     goStory: "Conhecer a trajetória",
-    goWork: "Entender o método",
+    goWork: "Ver o método",
     goHire: "Contratar serviços",
     coreLabel: "LG",
     quickProjects: "Ver projetos",
@@ -234,7 +235,7 @@ export const uiPt: UiMessages = {
     moduleBlurb: {
       projetos: "Cases e entregas reais",
       historia: "Formação e posicionamento",
-      "como-trabalho": "Processo e ferramentas",
+      "como-trabalho": "Princípios, processo e ferramentas",
       contratar: "LP, institucional e sistemas",
     },
   },
@@ -267,20 +268,20 @@ export const uiPt: UiMessages = {
       "UX e Web Designer com visão de produto, execução técnica e foco em resultados.",
     formation: "Formação",
     recognitions: "Reconhecimentos",
-    cursorTemplate: "Template Cursor",
+    cursorTemplate: "Processo com IA",
     positioning: "Posicionamento",
-    howIWork: "Como Eu Trabalho",
+    howIWork: "Princípios",
     tools: "Ferramentas",
-    creativity: "Criatividade",
+    creativity: "Base criativa",
     objective: "Objetivo",
     contact: "Contato",
-    designProcess: "Processo de design",
+    designProcess: "Processo",
   },
   designProcess: {
-    sectionKicker: "Método geral (não é o case de um site específico)",
+    sectionKicker: "Referência de método",
     sectionTitle: "Como conduzo projetos de UX e produto",
-    phasesHeading: "Etapas de referência (1–10)",
-    deliverablesLabel: "Entregáveis e práticas típicas",
+    phasesHeading: "Etapas de referência",
+    deliverablesLabel: "Entregáveis típicos",
   },
   projectCase: {
     jumpNavAria: "Ir para seção deste projeto",
@@ -324,7 +325,9 @@ export const uiPt: UiMessages = {
   pages: {
     projectsHeading: "Projetos selecionados",
     historiaHeading: "História pessoal",
-    workHeading: "Como trabalho",
+    workHeading: "Método de trabalho",
+    workLead:
+      "Princípios, processo adaptável e ferramentas que uso para transformar requisitos em interfaces claras e entregas navegáveis.",
     hireHeading: "Contratar",
   },
   hire: {
@@ -342,15 +345,15 @@ export const uiPt: UiMessages = {
       "Formação voltada a experiências digitais estratégicas, unindo usabilidade, negócio e execução técnica.",
     recognitions: "Reconhecimentos & Destaques",
     positioning: "Posicionamento profissional",
-    howIWork: "Como eu trabalho",
-    tools: "Ferramentas",
+    howIWork: "Princípios de trabalho",
+    tools: "Ferramentas do processo",
     creative: "Base criativa",
     objective: "Objetivo profissional",
     contact: "Contato",
   },
   creative: {
     intro:
-      "Práticas que ampliam visão estrutural e estética — e alimentam decisões de produto:",
+      "Práticas que ampliam julgamento estrutural e estético — e alimentam decisões de produto:",
     outro:
       "Essas bases reforçam narrativa, intenção e qualidade visual nas entregas.",
   },
@@ -436,7 +439,7 @@ export const uiEn: UiMessages = {
   system: {
     hubTitle: "Design and development with intent",
     hubSubtitle:
-      "Pick a system module to explore projects, background, or hire.",
+      "Projects, story, method, and hiring — pick a module to continue.",
     hubHint: "Tap or hover a module to continue.",
     hubKicker: "Portfolio system",
     toggleExpand: "Open modules",
@@ -444,7 +447,7 @@ export const uiEn: UiMessages = {
     centralButtonAria: "Open or close circular module menu",
     goProjects: "View selected projects",
     goStory: "Explore the story",
-    goWork: "See the method",
+    goWork: "View the method",
     goHire: "Hire services",
     coreLabel: "LG",
     quickProjects: "View projects",
@@ -452,7 +455,7 @@ export const uiEn: UiMessages = {
     moduleBlurb: {
       projetos: "Real cases and deliveries",
       historia: "Background and positioning",
-      "como-trabalho": "Process and tools",
+      "como-trabalho": "Principles, process, and tools",
       contratar: "LPs, sites, and systems",
     },
   },
@@ -484,20 +487,20 @@ export const uiEn: UiMessages = {
       "UX and Web Designer with a product mindset, technical execution, and outcome focus.",
     formation: "Education",
     recognitions: "Recognition",
-    cursorTemplate: "Cursor template",
+    cursorTemplate: "AI-assisted process",
     positioning: "Positioning",
-    howIWork: "How I Work",
+    howIWork: "Principles",
     tools: "Tools",
-    creativity: "Creativity",
+    creativity: "Creative foundation",
     objective: "Objective",
     contact: "Contact",
-    designProcess: "Design process",
+    designProcess: "Process",
   },
   designProcess: {
-    sectionKicker: "General method (not a specific site case)",
-    sectionTitle: "How I run UX and product work",
-    phasesHeading: "Reference phases (1–10)",
-    deliverablesLabel: "Typical deliverables and practices",
+    sectionKicker: "Method reference",
+    sectionTitle: "How I run UX and product projects",
+    phasesHeading: "Reference phases",
+    deliverablesLabel: "Typical deliverables",
   },
   projectCase: {
     jumpNavAria: "Jump to section for this project",
@@ -539,7 +542,9 @@ export const uiEn: UiMessages = {
   pages: {
     projectsHeading: "Selected projects",
     historiaHeading: "Personal story",
-    workHeading: "How I work",
+    workHeading: "Working method",
+    workLead:
+      "Principles, an adaptable process, and tools I use to turn requirements into clear interfaces and navigable deliveries.",
     hireHeading: "Hire",
   },
   hire: {
@@ -557,8 +562,8 @@ export const uiEn: UiMessages = {
       "Background aimed at strategic digital experiences that combine usability, business, and technical execution.",
     recognitions: "Recognition & Highlights",
     positioning: "Professional positioning",
-    howIWork: "How I work",
-    tools: "Tools",
+    howIWork: "Working principles",
+    tools: "Process tools",
     creative: "Creative foundation",
     objective: "Professional objective",
     contact: "Contact",

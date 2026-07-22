@@ -1,84 +1,66 @@
-import { CursorTemplateBlock } from "./CursorTemplateBlock";
+import type { ReactNode } from "react";
 import { HowIWorkBlock } from "./HowIWorkBlock";
 import { DesignProcessSection } from "./DesignProcessSection";
 import { ToolsBlock } from "./ToolsBlock";
+import { CursorTemplateBlock } from "./CursorTemplateBlock";
 import { CreativePreferencesCarousel } from "./CreativePreferencesCarousel";
 import { ObjectiveBlock } from "./ObjectiveBlock";
 import { ContactBlock } from "./ContactBlock";
+
+function WorkSection({
+  id,
+  labelledBy,
+  children,
+}: {
+  id: string;
+  labelledBy: string;
+  children: ReactNode;
+}) {
+  return (
+    <section
+      id={id}
+      className="w-full py-10 md:py-12 px-4 md:px-8"
+      aria-labelledby={labelledBy}
+    >
+      <div className="max-w-3xl mx-auto">{children}</div>
+    </section>
+  );
+}
 
 export function AboutWorkSection() {
   return (
     <div className="w-full min-w-0">
       <div className="stagger-children">
-        <section
+        <WorkSection id="about-como-trabalho" labelledBy="how-i-work-heading">
+          <HowIWorkBlock />
+        </WorkSection>
+        <div className="section-divider w-full" aria-hidden />
+        <WorkSection id="about-processo" labelledBy="design-process-heading">
+          <DesignProcessSection />
+        </WorkSection>
+        <div className="section-divider w-full" aria-hidden />
+        <WorkSection id="about-ferramentas" labelledBy="tools-heading">
+          <ToolsBlock />
+        </WorkSection>
+        <div className="section-divider w-full" aria-hidden />
+        <WorkSection
           id="about-cursor-template"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
-          aria-labelledby="cursor-template-heading"
+          labelledBy="cursor-template-heading"
         >
-          <div className="max-w-3xl mx-auto">
-            <CursorTemplateBlock />
-          </div>
-        </section>
+          <CursorTemplateBlock />
+        </WorkSection>
         <div className="section-divider w-full" aria-hidden />
-        <section
-          id="about-como-trabalho"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
-          aria-labelledby="how-i-work-heading"
-        >
-          <div className="max-w-3xl mx-auto">
-            <HowIWorkBlock />
-          </div>
-        </section>
+        <WorkSection id="about-preferencias" labelledBy="creative-heading">
+          <CreativePreferencesCarousel />
+        </WorkSection>
         <div className="section-divider w-full" aria-hidden />
-        <section
-          id="about-processo"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
-          aria-labelledby="design-process-heading"
-        >
-          <div className="max-w-3xl mx-auto">
-            <DesignProcessSection />
-          </div>
-        </section>
+        <WorkSection id="about-objetivo" labelledBy="objective-heading">
+          <ObjectiveBlock />
+        </WorkSection>
         <div className="section-divider w-full" aria-hidden />
-        <section
-          id="about-ferramentas"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
-          aria-labelledby="tools-heading"
-        >
-          <div className="max-w-3xl mx-auto">
-            <ToolsBlock />
-          </div>
-        </section>
-        <div className="section-divider w-full" aria-hidden />
-        <section
-          id="about-preferencias"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
-          aria-labelledby="creative-heading"
-        >
-          <div className="max-w-3xl mx-auto">
-            <CreativePreferencesCarousel />
-          </div>
-        </section>
-        <div className="section-divider w-full" aria-hidden />
-        <section
-          id="about-objetivo"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/10"
-          aria-labelledby="objective-heading"
-        >
-          <div className="max-w-3xl mx-auto">
-            <ObjectiveBlock />
-          </div>
-        </section>
-        <div className="section-divider w-full" aria-hidden />
-        <section
-          id="about-contato"
-          className="w-full py-10 md:py-14 px-4 md:px-8 bg-surface/5"
-          aria-labelledby="contact-heading"
-        >
-          <div className="max-w-3xl mx-auto">
-            <ContactBlock />
-          </div>
-        </section>
+        <WorkSection id="about-contato" labelledBy="contact-heading">
+          <ContactBlock />
+        </WorkSection>
       </div>
     </div>
   );

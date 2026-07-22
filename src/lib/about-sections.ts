@@ -6,10 +6,10 @@ export const STORY_SECTION_IDS = [
 ] as const;
 
 export const WORK_SECTION_IDS = [
-  "about-cursor-template",
   "about-como-trabalho",
   "about-processo",
   "about-ferramentas",
+  "about-cursor-template",
   "about-preferencias",
   "about-objetivo",
   "about-contato",

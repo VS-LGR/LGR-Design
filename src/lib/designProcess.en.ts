@@ -2,7 +2,7 @@ import type { DesignProcessContent } from "@/types";
 
 export const designProcessEn: DesignProcessContent = {
   intro:
-    "To make steps clear and align expectations with stakeholders, I adapt depth and pace based on available time and the type of problem. The framework below is my reference — it is not always linear: phases can be lean or deep in each initiative.",
+    "I adapt depth and pace to available time and problem type. The framework below is a reference — phases can be lean or deep depending on the initiative.",
   phases: [
     {
       id: 1,
