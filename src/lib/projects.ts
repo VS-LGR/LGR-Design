@@ -20,9 +20,10 @@ export const projectsList: Project[] = [
     title: "Psi Bia Rossi",
     category: "web",
     topic: "saude",
+    deliveryType: "lp-institucional",
     slug: "psi-bia-rossi",
     description:
-      "Site institucional para psicóloga especializada em psicanálise com gamificação através de jogos de tabuleiro. Apresenta metodologia, serviços, depoimentos e formulário de contato.",
+      "Site institucional para psicóloga em psicanálise: metodologia, serviços, depoimentos e contato — com foco em confiança e conversão para agendamento.",
     developmentExplanation:
       "Landing page com foco em conversão e credibilidade: hierarquia visual para serviços e depoimentos, seção de gamificação explicando a metodologia em etapas, e área de contato integrada. Layout responsivo e navegação clara para destacar o diferencial da profissional.",
     keyStages: [
@@ -180,9 +181,10 @@ export const projectsList: Project[] = [
     title: "Pharmatech",
     category: "web",
     topic: "empresas",
+    deliveryType: "lp-institucional",
     slug: "lp-farma-com",
     description:
-      "Landing page da Pharmatech: empresa de desenvolvimento farmacêutico com foco em tecnologia, pesquisa e parcerias. Seções sobre a empresa, especializações, fundador e contato.",
+      "Landing institucional da Pharmatech: posicionamento em tecnologia farmacêutica, especializações, credibilidade e CTA de contato comercial.",
     developmentExplanation:
       "Página de apresentação corporativa com estrutura em seções (Sobre, Especializações, Parceiros, Contato). Conteúdo pensado para transmitir credibilidade e inovação, com destaque para diferenciais e call-to-action de contato.",
     keyStages: [
@@ -311,6 +313,7 @@ export const projectsList: Project[] = [
     title: "OFAG — Technical Printing",
     category: "web",
     topic: "empresas",
+    deliveryType: "lp-institucional",
     slug: "ofag-revamp",
     description:
       "Site institucional para a OFAG, indústria gráfica especializada em impressão técnica para mercados regulados, com conteúdo em português, inglês e espanhol.",
@@ -455,9 +458,10 @@ export const projectsList: Project[] = [
     title: "QualiProc — CTLI",
     category: "web",
     topic: "empresas",
+    deliveryType: "sistema",
     slug: "qualiproc-ctli",
     description:
-      "Sistema completo de gestão da qualidade metrológica para laboratórios, com cadastro de agentes de campo, documentos ISO 17025, certificados e coleta de calibração — web e mobile.",
+      "Sistema de gestão da qualidade metrológica para laboratórios: agentes de campo, documentação ISO 17025, certificados e coleta de calibração — web e mobile.",
     developmentExplanation:
       "Produção integral da plataforma QualiProc (powered by CTLI) voltada à NBR ISO 17025: gestão documental com edição e upload de arquivos Word, Lista Mestra, procedimentos e registros, emissão de certificados, coleta de dados de calibração em campo e fluxo de cadastro de agentes. Interface responsiva e acessível para uso web e mobile em operações de qualidade e metrologia.",
     keyStages: [
@@ -586,9 +590,10 @@ export const projectsList: Project[] = [
     title: "Clínica Dverso",
     category: "web",
     topic: "saude",
+    deliveryType: "lp-institucional",
     slug: "clinica-dverso",
     description:
-      "Página acolhedora para a Clínica Dverso — núcleo terapêutico multidisciplinar em Sorocaba — com foco em conversão, microinterações e acessibilidade via VLibras.",
+      "Landing para a Clínica Dverso (núcleo terapêutico em Sorocaba): conversão, microinterações e acessibilidade com VLibras.",
     developmentExplanation:
       "Desenvolvi uma landing acolhedora e orientada à conversão, reunindo psicologia, neurodivergência, psicoterapia musical, nutrição e terapia assistida por cão em blocos claros. Microinterações com Lottie dão vida às seções sem prejudicar a performance, CTAs estratégicos conduzem ao contato e a integração com VLibras reforça inclusão e confiança na jornada.",
     keyStages: [

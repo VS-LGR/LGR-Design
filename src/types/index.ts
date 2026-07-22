@@ -48,6 +48,47 @@ export type ProjectCategory = "web" | "ux" | "identity" | "other";
 
 export type ProjectTopic = "saude" | "empresas";
 
+/** Tipo de entrega comercial exibido nos cards e na página Contratar */
+export type DeliveryType = "lp-institucional" | "sistema";
+
+export type ServiceId = "lp-institucional" | "sistemas-empresariais";
+
+export interface ServiceOffering {
+  id: ServiceId;
+  title: string;
+  summary: string;
+  audience: string;
+  deliverables: string[];
+  stages: string[];
+  timeline: string;
+  relatedProjectSlugs: string[];
+  whatsappPrefill: string;
+  emailSubject: string;
+  emailBody: string;
+}
+
+export interface ServicesContent {
+  heroKicker: string;
+  heroTitle: string;
+  heroLead: string;
+  offeringsTitle: string;
+  audienceLabel: string;
+  deliverablesLabel: string;
+  stagesLabel: string;
+  timelineLabel: string;
+  relatedLabel: string;
+  processTitle: string;
+  processLead: string;
+  processSteps: Array<{ title: string; description: string }>;
+  ctaTitle: string;
+  ctaLead: string;
+  whatsappCta: string;
+  emailCta: string;
+  ctaWhatsappPrefill: string;
+  ctaEmailSubject: string;
+  offerings: ServiceOffering[];
+}
+
 /** Métrica ou resultado qualitativo honesto no case do projeto */
 export interface ProjectCaseResult {
   label: string;
@@ -103,6 +144,8 @@ export interface Project {
   title: string;
   category: ProjectCategory;
   topic: ProjectTopic;
+  /** LP/institucional vs sistema empresarial — badge nos cards */
+  deliveryType: DeliveryType;
   slug: string;
   description: string;
   /** Explicação do processo de desenvolvimento do site/projeto */

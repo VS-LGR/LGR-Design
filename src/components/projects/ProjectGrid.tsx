@@ -3,15 +3,11 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { ProjectCategory, ProjectTopic } from "@/types";
+import type { ProjectTopic } from "@/types";
 import { useLocale } from "@/contexts/LocaleContext";
 
 export function ProjectGrid() {
-  const { projects, projectCategories, projectTopics, t } = useLocale();
-
-  function getCategoryLabel(category: ProjectCategory) {
-    return projectCategories.find((c) => c.id === category)?.label ?? category;
-  }
+  const { projects, projectTopics, t } = useLocale();
 
   const [selectedTopic, setSelectedTopic] = useState<ProjectTopic>("saude");
   const projectsInTopic = useMemo(
@@ -71,7 +67,7 @@ export function ProjectGrid() {
             {projectsInTopic.map((project) => (
               <article
                 key={project.id}
-                className="group flex flex-col rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/45 to-surface/20 overflow-hidden shadow-[0_12px_40px_-24px_rgba(0,0,0,0.65)] transition-[border-color,box-shadow,transform] duration-300 hover:border-accent/40 hover:shadow-[0_20px_48px_-20px_rgba(6,182,212,0.12)]"
+                  className="group flex flex-col rounded-2xl border border-border-dark/45 bg-gradient-to-b from-surface/40 to-surface/15 overflow-hidden shadow-[0_12px_40px_-24px_rgba(0,0,0,0.55)] transition-[border-color,box-shadow,transform] duration-300 hover:border-accent/35 hover:shadow-[0_18px_44px_-22px_rgba(34,184,207,0.1)]"
               >
                 <Link
                   href={`/cases/${project.slug}`}
@@ -95,10 +91,13 @@ export function ProjectGrid() {
                     <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
                       <div className="flex flex-wrap items-center gap-2 mb-1.5">
                         <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent/95">
-                          {topicLabel}
+                          {t.deliveryType[project.deliveryType]}
                         </span>
-                        <span className="text-[10px] text-primary/70">
-                          {getCategoryLabel(project.category)}
+                        <span className="text-[10px] text-primary/55" aria-hidden>
+                          ·
+                        </span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-primary/75">
+                          {topicLabel}
                         </span>
                       </div>
                       <h2 className="text-lg md:text-xl font-semibold text-primary leading-snug group-hover:text-accent-soft transition-colors">

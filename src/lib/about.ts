@@ -2,74 +2,72 @@ import type { AboutContent } from "@/types";
 
 export const aboutContent: AboutContent = {
   intro: [
-    "Sou UX Designer e Web Designer focado em produtos digitais, landing pages e sites institucionais que conectam estratégia de negócio com experiência do usuário.",
-    "Ajudo times de produto e empresas a transformar requisitos soltos em interfaces claras, navegáveis e prontas para desenvolvimento, unindo design, lógica e viabilidade técnica.",
+    "Sou UX Designer e Web Designer com execução em front-end, focado em produtos digitais, landing pages, sites institucionais e sistemas empresariais.",
+    "Ajudo empresas e profissionais a transformar requisitos em interfaces claras, navegáveis e prontas para produção — unindo estratégia de negócio, experiência do usuário e viabilidade técnica.",
   ],
   formation: [
     {
-      icon: "🎓",
-      title: "UX Design & Web Design – FIAP",
+      title: "UX Design & Web Design",
+      institution: "FIAP",
       description:
-        "Formação focada em experiência do usuário, arquitetura da informação, interfaces digitais e desenvolvimento web. Desenvolvi visão estruturada de produto, pensamento analítico e metodologia orientada à solução.",
+        "Formação em experiência do usuário, arquitetura da informação, interfaces digitais e desenvolvimento web. Visão estruturada de produto e metodologia orientada à solução.",
     },
     {
-      icon: "📚",
-      title: "UX Design – Interaction Design Foundation (em andamento)",
+      title: "UX Design",
+      institution: "Interaction Design Foundation (em andamento)",
       description:
-        "Aprofundamento em design centrado no usuário, pesquisa, heurísticas de usabilidade e comportamento humano aplicado a produtos digitais.",
+        "Aprofundamento em design centrado no usuário, pesquisa, heurísticas de usabilidade e comportamento aplicado a produtos digitais.",
     },
     {
-      icon: "🤖",
-      title: "Consultor de Inteligência Artificial – Adapta (em andamento)",
+      title: "Consultor de Inteligência Artificial",
+      institution: "Adapta (em andamento)",
       description:
-        "Especialização voltada à aplicação estratégica de IA em negócios e produtos digitais, buscando eficiência, inovação e vantagem competitiva.",
+        "Aplicação estratégica de IA em negócios e produtos digitais, com foco em eficiência e vantagem competitiva.",
     },
     {
-      icon: "🎮",
-      title: "Experiência prática com Unity e Unreal Engine",
+      title: "Sistemas interativos",
+      institution: "Unity e Unreal Engine",
       description:
-        "Vivência em construção de sistemas interativos e lógica aplicada à experiência digital, fortalecendo minha visão sistêmica e organização estrutural.",
+        "Experiência prática em lógica e construção de experiências interativas, reforçando visão sistêmica e organização estrutural.",
     },
   ],
   recognitions: [
     {
-      icon: "🏆",
-      title: "Recruta.AI – Apresentado na ARCA (FIAP Next)",
+      title: "Recruta.AI — apresentado na ARCA (FIAP Next)",
       description:
-        "Projeto de uma plataforma ATS com IA integrada, estruturada para otimizar processos de recrutamento com inteligência e clareza estratégica.",
+        "Plataforma ATS com IA integrada, estruturada para otimizar processos de recrutamento com clareza estratégica.",
       items: [
-        "Selecionado para apresentação no evento FIAP Next, reforçando minha capacidade de pensar produto, tecnologia e experiência de forma integrada.",
+        "Selecionado para apresentação no FIAP Next, integrando produto, tecnologia e experiência.",
       ],
     },
     {
-      icon: "🏆",
-      title: "Vencedor – Landing Page Arena (FIAP Next)",
+      title: "Vencedor — Landing Page Arena (FIAP Next)",
       description:
-        "Competição ao vivo contra outros estudantes para desenvolver uma landing page surpresa sob extrema pressão e desafios estratégicos.",
+        "Competição ao vivo para desenvolver uma landing page sob pressão e desafios estratégicos.",
       items: [
-        "A vitória valida minha capacidade de organização, tomada de decisão rápida e execução de alto nível em ambientes competitivos.",
+        "Validação de organização, decisão rápida e execução de alto nível em ambiente competitivo.",
       ],
     },
   ],
   cursorTemplate: {
-    title: "Inovação em Processo: Template Estratégico para Cursor",
+    title: "Template estratégico para Cursor",
     intro:
-      "Desenvolvi um template exclusivo para a IDE Cursor, estruturado para extrair o máximo potencial da ferramenta e elevar o padrão de entregas. Esse template foi criado por mim com foco em:",
+      "Desenvolvi um template para a IDE Cursor, estruturado para elevar padrão de entrega e organização de projetos. Foco em:",
     points: [
       "Organização avançada de projetos",
       "Clareza estrutural",
-      "Padrões de qualidade rigorosos",
+      "Padrões de qualidade",
       "Integração estratégica com IA",
-      "Otimização de fluxo de desenvolvimento",
+      "Otimização do fluxo de desenvolvimento",
     ],
     closing:
-      "Não se trata apenas de usar uma IDE com IA — mas de estruturar o ambiente para produzir com excelência, consistência e visão estratégica. Esse sistema é único e desenvolvido por mim, refletindo minha mentalidade de processo e performance.",
+      "Não se trata apenas de usar uma IDE com IA — e sim de estruturar o ambiente para produzir com consistência e visão de processo.",
   },
   positioning: [
-    "Atuo como UX/Web Designer com visão de produto: entendo objetivos, restrições e métricas antes de propor interface.",
-    "Tenho experiência prática em projetos reais para saúde, indústrias reguladas e serviços, do discovery à entrega navegável em produção.",
-    "Trabalho com forte organização estrutural: arquitetura de informação, fluxos, componentes reutilizáveis e handoff limpo para desenvolvimento.",
-    "Confortável em contextos remotos, ferramentas colaborativas e uso estratégico de IA para apoiar decisões de design, não como atalho.",
+    "Atuo como UX/Web Designer com visão de produto: objetivos, restrições e métricas vêm antes da interface.",
+    "Experiência prática em saúde, indústrias reguladas e serviços — do discovery à entrega em produção.",
+    "Organização estrutural forte: arquitetura da informação, fluxos, componentes reutilizáveis e handoff limpo.",
+    "Confortável em contextos remotos e no uso estratégico de IA para apoiar decisões — não como atalho.",
   ],
   howIWork: {
     intro: "Minha abordagem combina:",
@@ -81,32 +79,31 @@ export const aboutContent: AboutContent = {
       "Domínio técnico",
     ],
     closing:
-      "Tenho facilidade em transformar cenários complexos em fluxos simples e eficientes. Não entrego apenas layouts. Entrego lógica, intenção e performance.",
+      "Transformo cenários complexos em fluxos simples e eficientes. Entrego lógica, intenção e performance — não apenas layouts.",
   },
   tools: {
-    intro:
-      "Utilizo ferramentas como extensão do meu processo:",
+    intro: "Ferramentas como extensão do processo:",
     items: [
-      "Figma – prototipação, design systems e estrutura de interfaces",
-      "Illustrator – construção gráfica e identidade visual",
-      "After Effects – motion design e microinterações",
-      "Base técnica em desenvolvimento web e lógica de sistemas",
+      "Figma — prototipação, design systems e estrutura de interfaces",
+      "Illustrator — construção gráfica e identidade visual",
+      "After Effects — motion design e microinterações",
+      "Desenvolvimento web e lógica de sistemas",
     ],
     closing: "A ferramenta é meio. A estratégia é o diferencial.",
   },
   creativePreferences: [
-    "🎮 Game Development",
-    "🟩 Pixel Art",
-    "🧱 Modelagem 3D",
-    "🎨 Pintura",
+    "Game Development",
+    "Pixel Art",
+    "Modelagem 3D",
+    "Pintura",
   ],
   professionalObjective:
-    "Busco atuar como UX Designer ou Web Designer em times de produto ou squads digitais, ajudando a estruturar e evoluir interfaces de sites, landing pages e aplicações web. Quero contribuir em ambientes que valorizem decisões guiadas por dados e design consistente, apoiando recrutadores e líderes com entregas claras, documentadas e fáceis de apresentar para stakeholders.",
+    "Busco atuar como UX Designer ou Web Designer em times de produto, contribuindo com interfaces de sites, landing pages e aplicações web. Também atendo empresas e profissionais que precisam contratar desenvolvimento com escopo claro — do briefing à publicação.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",
     message:
-      "Se você é recrutador(a) ou lidera um time de produto/design e quer avaliar meu perfil com mais profundidade, estou disponível para uma conversa objetiva. Envie uma mensagem por WhatsApp ou e-mail com o contexto da vaga ou projeto e respondo com portfólio direcionado, disponibilidade e próximos passos.",
+      "Se você é recrutador(a) ou lidera um time de produto/design, estou disponível para uma conversa objetiva. Para contratar LP, site institucional ou sistema empresarial, use a página Contratar — ou envie WhatsApp/e-mail com o contexto do projeto.",
   },
   resumePdfUrl: undefined,
 };

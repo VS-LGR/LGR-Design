@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useCallback } from "react";
 
-const PARTICLE_COUNT = 130;
+const PARTICLE_COUNT = 100;
 const MOUSE_PARALLAX = 28;
 /** Pulso visível: piso alto + ciclo mais rápido (antes ficava ~20s por oscilação). */
 const TWINKLE_SPEED = 0.0011;
@@ -31,7 +31,7 @@ function randomParticle(w: number, h: number): Particle {
     r: Math.random() * 2.1 + 0.5,
     vx: (Math.random() - 0.5) * 0.14,
     vy: -(Math.random() * 0.42 + 0.12),
-    baseOpacity: Math.random() * 0.08 + 0.09,
+    baseOpacity: Math.random() * 0.06 + 0.07,
     twPhase: Math.random() * Math.PI * 2,
     depth: Math.random() * 0.55 + 0.25,
     hue,

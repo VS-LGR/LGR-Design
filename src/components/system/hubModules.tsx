@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type HubModuleId = "projetos" | "historia" | "como-trabalho" | "exploracao";
+export type HubModuleId = "projetos" | "historia" | "como-trabalho" | "contratar";
 
 export type HubModuleConfig = {
   id: HubModuleId;
@@ -13,7 +13,7 @@ export const HUB_MODULES: HubModuleConfig[] = [
   { id: "projetos", href: "/projetos", angle: 0, enterDelay: 0 },
   { id: "historia", href: "/historia", angle: 90, enterDelay: 80 },
   { id: "como-trabalho", href: "/como-trabalho", angle: 180, enterDelay: 160 },
-  { id: "exploracao", href: "/exploracao", angle: 270, enterDelay: 240 },
+  { id: "contratar", href: "/contratar", angle: 270, enterDelay: 240 },
 ];
 
 export const HUB_FIELD_SIZE = { base: 360, md: 500 } as const;
@@ -53,11 +53,11 @@ export function HubModuleIcon({ id, className }: { id: HubModuleId; className?: 
         <circle cx="12" cy="8" r="2.5" />
       </svg>
     ),
-    exploracao: (
+    contratar: (
       <svg {...props}>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
-        <path d="m14.5 9.5-5 5M9.5 9.5l5 5" />
+        <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7" />
+        <rect x="4" y="7" width="16" height="13" rx="1.5" />
+        <path d="M4 12h16" />
       </svg>
     ),
   };

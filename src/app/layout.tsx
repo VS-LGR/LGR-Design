@@ -16,9 +16,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Lucas Gabriel Rodrigues | UX & Web Designer para Produtos Digitais",
+  title: "Lucas Gabriel Rodrigues | UX, Web Design e Desenvolvimento Digital",
   description:
-    "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer focado em produtos digitais, landing pages e sites institucionais, unindo estratégia de negócio, experiência do usuário e implementação web.",
+    "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer com desenvolvimento de landing pages, sites institucionais e sistemas empresariais.",
 };
 
 export default function RootLayout({

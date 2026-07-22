@@ -20,8 +20,7 @@ const CORE_FOLLOW_MAX = 40;
 
 function moduleLabels(
   id: HubModuleId,
-  t: ReturnType<typeof useLocale>["t"],
-  locale: "pt" | "en"
+  t: ReturnType<typeof useLocale>["t"]
 ): { short: string; label: string } {
   switch (id) {
     case "projetos":
@@ -30,16 +29,16 @@ function moduleLabels(
       return { short: t.nav.story, label: t.system.goStory };
     case "como-trabalho":
       return {
-        short: locale === "pt" ? "Como trabalho" : "How I work",
+        short: t.nav.work,
         label: t.system.goWork,
       };
-    case "exploracao":
-      return { short: t.nav.exploration, label: t.system.goExploration };
+    case "contratar":
+      return { short: t.nav.hire, label: t.system.goHire };
   }
 }
 
 export function SystemHub() {
-  const { t, locale } = useLocale();
+  const { t } = useLocale();
   const reducedMotion = usePrefersReducedMotion();
   const pointer = useSmoothPointer();
   const hubHeadingId = useId();
@@ -176,7 +175,7 @@ export function SystemHub() {
 
           <div className="hub-orbit-rotator absolute inset-0">
             {HUB_MODULES.map((mod, i) => {
-              const { short, label } = moduleLabels(mod.id, t, locale);
+              const { short, label } = moduleLabels(mod.id, t);
               return (
                 <HubNode
                   key={mod.id}

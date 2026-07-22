@@ -8,7 +8,7 @@ export type UiMessages = {
     about: string;
     story: string;
     work: string;
-    exploration: string;
+    hire: string;
     openNavigation: string;
   };
   system: {
@@ -21,12 +21,7 @@ export type UiMessages = {
     goProjects: string;
     goStory: string;
     goWork: string;
-    goExploration: string;
-    explorationTitle: string;
-    explorationLead: string;
-    explorationEmpty: string;
-    explorationSoon: string;
-    explorationLive: string;
+    goHire: string;
   };
   header: {
     tagline: string;
@@ -109,6 +104,20 @@ export type UiMessages = {
     projectsHeading: string;
     historiaHeading: string;
     workHeading: string;
+    hireHeading: string;
+  };
+  hire: {
+    viewCase: string;
+    selectServiceAria: string;
+  };
+  deliveryType: {
+    "lp-institucional": string;
+    sistema: string;
+  };
+  contact: {
+    whatsapp: string;
+    email: string;
+    hireLink: string;
   };
   sections: {
     about: string;
@@ -125,10 +134,6 @@ export type UiMessages = {
   creative: {
     intro: string;
     outro: string;
-  };
-  contact: {
-    whatsapp: string;
-    email: string;
   };
   resume: {
     download: string;
@@ -191,18 +196,18 @@ export const uiPt: UiMessages = {
   skipToContent: "Pular para o conteúdo principal",
   nav: {
     aria: "Navegação principal",
-    menu: "Menu",
+    menu: "Início",
     close: "Fechar",
     projects: "Projetos",
     about: "Sobre Mim",
     story: "História",
-    work: "Como trabalho",
-    exploration: "Expo",
+    work: "Método",
+    hire: "Contratar",
     openNavigation: "Abrir navegação",
   },
   system: {
-    hubTitle: "Acesso ao portfólio",
-    hubSubtitle: "Escolha um módulo para continuar.",
+    hubTitle: "Portfólio e serviços",
+    hubSubtitle: "Explore projetos, trajetória e contrate desenvolvimento.",
     hubHint: "Passe o cursor sobre um módulo ou escolha para continuar.",
     toggleExpand: "Abrir módulos",
     toggleCollapse: "Fechar módulos",
@@ -210,16 +215,10 @@ export const uiPt: UiMessages = {
     goProjects: "Ir para projetos",
     goStory: "Ir para história pessoal",
     goWork: "Ir para como trabalho",
-    goExploration: "Ir para Expo",
-    explorationTitle: "Expo",
-    explorationLead:
-      "Pequenos sites e experimentos interativos. Novos projetos serão publicados aqui.",
-    explorationEmpty: "Em breve: novas experiências interativas.",
-    explorationSoon: "Em breve",
-    explorationLive: "No ar",
+    goHire: "Ir para contratar serviços",
   },
   header: {
-    tagline: "UX Design & Web Design",
+    tagline: "UX, Web Design & Desenvolvimento",
   },
   language: {
     aria: "Idioma",
@@ -227,16 +226,16 @@ export const uiPt: UiMessages = {
     en: "EN",
   },
   footer: {
-    line: "Lucas Gabriel Rodrigues — UX Design & Web Design",
+    line: "Lucas Gabriel Rodrigues — UX, Web Design & Desenvolvimento digital",
   },
   intro: {
-    tagline: "UX Design & Web Design",
+    tagline: "UX, Web Design & Desenvolvimento",
   },
   meta: {
     title:
-      "Lucas Gabriel Rodrigues | UX & Web Designer para Produtos Digitais",
+      "Lucas Gabriel Rodrigues | UX, Web Design e Desenvolvimento Digital",
     description:
-      "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer focado em produtos digitais, landing pages e sites institucionais, unindo estratégia de negócio, experiência do usuário e implementação web.",
+      "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer com desenvolvimento de landing pages, sites institucionais e sistemas empresariais.",
   },
   sidebar: {
     sectionAria: "Resumo da seção em vista",
@@ -244,7 +243,7 @@ export const uiPt: UiMessages = {
     categoriesTitle: "Categorias",
     about: "Sobre Mim",
     aboutBlurb:
-      "UX Designer e Web Designer com mentalidade de produto e visão estratégica.",
+      "UX e Web Designer com visão de produto, execução técnica e foco em resultados.",
     formation: "Formação",
     recognitions: "Reconhecimentos",
     cursorTemplate: "Template Cursor",
@@ -305,29 +304,39 @@ export const uiPt: UiMessages = {
     projectsHeading: "Projetos selecionados",
     historiaHeading: "História pessoal",
     workHeading: "Como trabalho",
+    hireHeading: "Contratar",
+  },
+  hire: {
+    viewCase: "Ver case",
+    selectServiceAria: "Escolher serviço e entrar em contato",
+  },
+  deliveryType: {
+    "lp-institucional": "LP / Institucional",
+    sistema: "Sistema",
   },
   sections: {
     about: "Sobre Mim",
     formation: "Formação & Especialização",
     formationLead:
-      "Minha formação é direcionada à construção de experiências digitais estratégicas, unindo usabilidade, negócio e execução técnica.",
+      "Formação voltada a experiências digitais estratégicas, unindo usabilidade, negócio e execução técnica.",
     recognitions: "Reconhecimentos & Destaques",
-    positioning: "Meu Posicionamento Profissional",
-    howIWork: "Como Eu Trabalho",
-    tools: "Ferramentas Estratégicas",
-    creative: "Criatividade que Sustenta o Processo",
-    objective: "Objetivo Profissional",
+    positioning: "Posicionamento profissional",
+    howIWork: "Como eu trabalho",
+    tools: "Ferramentas",
+    creative: "Base criativa",
+    objective: "Objetivo profissional",
     contact: "Contato",
   },
   creative: {
     intro:
-      "Minha base criativa vem de áreas que expandem minha visão estrutural e estética:",
+      "Práticas que ampliam visão estrutural e estética — e alimentam decisões de produto:",
     outro:
-      "Essas práticas fortalecem minha capacidade de construir experiências com profundidade, narrativa e intenção.",
+      "Essas bases reforçam narrativa, intenção e qualidade visual nas entregas.",
   },
   contact: {
-    whatsapp: "WhatsApp:",
-    email: "Email:",
+    whatsapp: "WhatsApp",
+    email: "E-mail",
+    hireLink: "Ver serviços para contratar",
   },
   resume: {
     download: "Baixar currículo (PDF)",
@@ -335,7 +344,7 @@ export const uiPt: UiMessages = {
   projects: {
     byTopic: "Projetos por tópico",
     browseByTopicLead:
-      "Escolha um tema para ver os trabalhos relacionados — cada card leva ao estudo de caso completo.",
+      "Trabalhos reais em saúde e empresas — landing pages, sites institucionais e sistemas. Cada card abre o estudo de caso completo.",
     project: "Projeto",
     selectProjectAria: "Selecionar projeto",
     ofTotal: "{current} de {total}",
@@ -394,18 +403,18 @@ export const uiEn: UiMessages = {
   skipToContent: "Skip to main content",
   nav: {
     aria: "Main navigation",
-    menu: "Menu",
+    menu: "Home",
     close: "Close",
     projects: "Projects",
     about: "About Me",
     story: "Story",
-    work: "How I work",
-    exploration: "Expo",
+    work: "Method",
+    hire: "Hire",
     openNavigation: "Open navigation",
   },
   system: {
-    hubTitle: "Portfolio access",
-    hubSubtitle: "Choose a module to continue.",
+    hubTitle: "Portfolio and services",
+    hubSubtitle: "Explore projects, background, and hire development.",
     hubHint: "Hover a module or choose one to continue.",
     toggleExpand: "Open modules",
     toggleCollapse: "Close modules",
@@ -413,16 +422,10 @@ export const uiEn: UiMessages = {
     goProjects: "Go to projects",
     goStory: "Go to personal story",
     goWork: "Go to how I work",
-    goExploration: "Go to Expo",
-    explorationTitle: "Expo",
-    explorationLead:
-      "Small sites and interactive experiments. New pieces will appear here.",
-    explorationEmpty: "Coming soon: new interactive experiments.",
-    explorationSoon: "Coming soon",
-    explorationLive: "Live",
+    goHire: "Go to hire services",
   },
   header: {
-    tagline: "UX Design & Web Design",
+    tagline: "UX, Web Design & Development",
   },
   language: {
     aria: "Language",
@@ -430,15 +433,15 @@ export const uiEn: UiMessages = {
     en: "EN",
   },
   footer: {
-    line: "Lucas Gabriel Rodrigues — UX Design & Web Design",
+    line: "Lucas Gabriel Rodrigues — UX, Web Design & Digital Development",
   },
   intro: {
-    tagline: "UX Design & Web Design",
+    tagline: "UX, Web Design & Development",
   },
   meta: {
-    title: "Lucas Gabriel Rodrigues | UX & Web Designer for Digital Products",
+    title: "Lucas Gabriel Rodrigues | UX, Web Design & Digital Development",
     description:
-      "Portfolio of Lucas Gabriel Rodrigues — UX & Web Designer focused on digital products, landing pages, and corporate websites, combining business strategy, user experience, and web implementation.",
+      "Portfolio of Lucas Gabriel Rodrigues — UX & Web Designer building landing pages, institutional sites, and business systems.",
   },
   sidebar: {
     sectionAria: "Summary of the section in view",
@@ -446,7 +449,7 @@ export const uiEn: UiMessages = {
     categoriesTitle: "Categories",
     about: "About Me",
     aboutBlurb:
-      "UX and Web Designer with a product mindset and strategic outlook.",
+      "UX and Web Designer with a product mindset, technical execution, and outcome focus.",
     formation: "Education",
     recognitions: "Recognition",
     cursorTemplate: "Cursor template",
@@ -505,29 +508,39 @@ export const uiEn: UiMessages = {
     projectsHeading: "Selected projects",
     historiaHeading: "Personal story",
     workHeading: "How I work",
+    hireHeading: "Hire",
+  },
+  hire: {
+    viewCase: "View case",
+    selectServiceAria: "Choose a service and get in touch",
+  },
+  deliveryType: {
+    "lp-institucional": "LP / Institutional",
+    sistema: "System",
   },
   sections: {
     about: "About Me",
     formation: "Education & Specialization",
     formationLead:
-      "My background is aimed at building strategic digital experiences that combine usability, business, and technical execution.",
+      "Background aimed at strategic digital experiences that combine usability, business, and technical execution.",
     recognitions: "Recognition & Highlights",
-    positioning: "My Professional Positioning",
-    howIWork: "How I Work",
-    tools: "Strategic Tools",
-    creative: "Creativity That Supports the Process",
-    objective: "Professional Objective",
+    positioning: "Professional positioning",
+    howIWork: "How I work",
+    tools: "Tools",
+    creative: "Creative foundation",
+    objective: "Professional objective",
     contact: "Contact",
   },
   creative: {
     intro:
-      "My creative foundation comes from areas that broaden my structural and aesthetic perspective:",
+      "Practices that broaden structural and aesthetic judgment — and feed product decisions:",
     outro:
-      "These practices strengthen my ability to craft experiences with depth, narrative, and intent.",
+      "These foundations reinforce narrative, intent, and visual quality in every delivery.",
   },
   contact: {
-    whatsapp: "WhatsApp:",
-    email: "Email:",
+    whatsapp: "WhatsApp",
+    email: "Email",
+    hireLink: "View services to hire",
   },
   resume: {
     download: "Download résumé (PDF)",
@@ -535,7 +548,7 @@ export const uiEn: UiMessages = {
   projects: {
     byTopic: "Projects by topic",
     browseByTopicLead:
-      "Pick a theme to see related work — each card opens the full case study.",
+      "Real work across health and business — landing pages, institutional sites, and systems. Each card opens the full case study.",
     project: "Project",
     selectProjectAria: "Select project",
     ofTotal: "{current} of {total}",

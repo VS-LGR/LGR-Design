@@ -4,7 +4,7 @@ import { MainNav } from "@/components/shared/MainNav";
 
 export function Header() {
   return (
-    <header className="border-b border-border-dark/80 bg-dark/95 backdrop-blur supports-[backdrop-filter]:bg-dark/80 z-50 relative">
+    <header className="border-b border-border-dark/60 bg-dark/92 backdrop-blur-md supports-[backdrop-filter]:bg-dark/78 z-50 relative">
       <div className="container mx-auto px-4 py-4 md:py-5">
         <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:items-start md:justify-between md:gap-x-4 md:gap-y-3">
           <div className="flex flex-wrap items-baseline gap-3 min-w-0 justify-between gap-y-2 md:justify-start md:min-w-[200px]">
@@ -12,7 +12,7 @@ export function Header() {
               <p className="text-xl md:text-2xl font-bold tracking-tight text-primary">
                 Lucas Gabriel Rodrigues
               </p>
-              <span className="hidden sm:inline text-muted">/</span>
+              <span className="hidden sm:inline text-muted/70">/</span>
               <HeaderTagline />
             </div>
             <div className="flex shrink-0 items-center gap-2 md:hidden">

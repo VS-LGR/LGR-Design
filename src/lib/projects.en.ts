@@ -20,9 +20,10 @@ export const projectsListEn: Project[] = [
     title: "Psi Bia Rossi",
     category: "web",
     topic: "saude",
+    deliveryType: "lp-institucional",
     slug: "psi-bia-rossi",
     description:
-      "Institutional website for a psychologist specializing in psychoanalysis with gamification through board games. Presents methodology, services, testimonials, and a contact form.",
+      "Institutional site for a psychoanalysis practice: methodology, services, testimonials, and contact — focused on trust and booking conversion.",
     developmentExplanation:
       "Landing page focused on conversion and credibility: visual hierarchy for services and testimonials, a gamification section explaining the methodology in steps, and an integrated contact area. Responsive layout and clear navigation to highlight the professional’s differentiators.",
     keyStages: [
@@ -149,9 +150,10 @@ export const projectsListEn: Project[] = [
     title: "Pharmatech",
     category: "web",
     topic: "empresas",
+    deliveryType: "lp-institucional",
     slug: "lp-farma-com",
     description:
-      "Pharmatech landing page: a pharmaceutical development company focused on technology, research, and partnerships. Sections on the company, specializations, founder, and contact.",
+      "Institutional landing for Pharmatech: pharmaceutical technology positioning, specialties, credibility, and a commercial contact CTA.",
     developmentExplanation:
       "Corporate presentation page structured in sections (About, Specializations, Partners, Contact). Content designed to convey credibility and innovation, highlighting differentiators and a contact call-to-action.",
     keyStages: [
@@ -262,9 +264,10 @@ export const projectsListEn: Project[] = [
     title: "OFAG — Technical Printing",
     category: "web",
     topic: "empresas",
+    deliveryType: "lp-institucional",
     slug: "ofag-revamp",
     description:
-      "Institutional website for OFAG, a graphics industry specialist in technical printing for regulated markets, with content in Portuguese, English, and Spanish.",
+      "Institutional site for OFAG, a technical printing company for regulated markets, with content in Portuguese, English, and Spanish.",
     developmentExplanation:
       "Project aimed at pharmaceutical and regulated industries, with clear information architecture, navigation in multiple languages (PT/EN/ES), and a credibility focus. Highlights for processes, certifications, and segments served, with responsive layout and typography suited to technical reading.",
     keyStages: [
@@ -371,9 +374,10 @@ export const projectsListEn: Project[] = [
     title: "QualiProc — CTLI",
     category: "web",
     topic: "empresas",
+    deliveryType: "sistema",
     slug: "qualiproc-ctli",
     description:
-      "Full metrological quality management system for laboratories — field agent onboarding, ISO 17025 documents, certificates, and calibration data collection across web and mobile.",
+      "Metrological quality management system for labs: field agents, ISO 17025 documentation, certificates, and calibration collection — web and mobile.",
     developmentExplanation:
       "End-to-end production of the QualiProc platform (powered by CTLI) aligned with ISO 17025: document management with Word editing and upload, Master List, procedures and records, certificate issuance, field calibration data collection, and field agent registration flows. Responsive, accessible interface for web and mobile use in quality and metrology operations.",
     keyStages: [
@@ -496,9 +500,10 @@ export const projectsListEn: Project[] = [
     title: "Clínica Dverso",
     category: "web",
     topic: "saude",
+    deliveryType: "lp-institucional",
     slug: "clinica-dverso",
     description:
-      "A welcoming page for Clínica Dverso — a multidisciplinary therapeutic center in Sorocaba — focused on conversion, micro-interactions, and VLibras accessibility.",
+      "Landing for Clínica Dverso (therapeutic center in Sorocaba): conversion, micro-interactions, and VLibras accessibility.",
     developmentExplanation:
       "I built a welcoming, conversion-oriented landing page bringing together psychology, neurodivergence, music psychotherapy, nutrition, and dog-assisted therapy in clear blocks. Lottie micro-interactions bring sections to life without hurting performance, strategic CTAs guide users to contact, and VLibras integration strengthens inclusion and trust across the journey.",
     keyStages: [

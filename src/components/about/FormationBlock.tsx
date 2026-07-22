@@ -17,29 +17,24 @@ export function FormationBlock() {
       <p className="text-sm text-muted leading-relaxed">
         {t.sections.formationLead}
       </p>
-      <ul className="space-y-4 list-none">
+      <ul className="space-y-5 list-none">
         {formation.map((item, index) => (
           <li
             key={index}
-            className="pl-4 border-l-2 border-accent/60 text-muted"
+            className="pl-4 border-l-2 border-accent/55 text-muted"
           >
-            <div className="flex items-start gap-2">
-              {item.icon && (
-                <span className="text-lg shrink-0" aria-hidden>
-                  {item.icon}
-                </span>
+            <div>
+              <p className="font-medium text-primary leading-snug">{item.title}</p>
+              {item.institution && (
+                <p className="mt-0.5 text-xs font-medium uppercase tracking-[0.08em] text-accent/90">
+                  {item.institution}
+                </p>
               )}
-              <div>
-                <span className="font-medium text-primary">{item.title}</span>
-                {item.institution && (
-                  <span className="text-muted"> — {item.institution}</span>
-                )}
-                {item.description && (
-                  <p className="text-sm mt-1 text-muted/95 leading-relaxed">
-                    {item.description}
-                  </p>
-                )}
-              </div>
+              {item.description && (
+                <p className="text-sm mt-2 text-muted/95 leading-relaxed">
+                  {item.description}
+                </p>
+              )}
             </div>
           </li>
         ))}

@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --color-dark: #0f172a;
-  --color-surface: #1e293b;
-  --color-accent: #06b6d4;
+  --color-dark: #0c1222;
+  --color-surface: #1a2332;
+  --color-accent: #22b8cf;
   --color-primary: #f1f5f9;
-  --color-muted: #94a3b8;
-  --color-border: #334155;
+  --color-muted: #9aa8bc;
+  --color-border: #2d3a4f;
 }
 
 @layer base {
@@ -36,7 +36,7 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(6, 182, 212, 0.25) 50%,
+      rgba(34, 184, 207, 0.22) 50%,
       transparent 100%
     );
   }
@@ -60,11 +60,11 @@
     padding-right: 2.75rem;
   }
   .project-select:hover {
-    border-color: rgba(6, 182, 212, 0.4);
+    border-color: rgba(34, 184, 207, 0.35);
   }
   .project-select:focus {
-    border-color: #06b6d4;
-    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.25);
+    border-color: #22b8cf;
+    box-shadow: 0 0 0 2px rgba(34, 184, 207, 0.22);
   }
   .project-select option {
     background: #1e293b;
@@ -97,10 +97,10 @@
 @keyframes glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 20px -5px rgba(6, 182, 212, 0.25);
+    box-shadow: 0 0 20px -5px rgba(34, 184, 207, 0.2);
   }
   50% {
-    box-shadow: 0 0 28px -4px rgba(6, 182, 212, 0.4);
+    box-shadow: 0 0 28px -4px rgba(34, 184, 207, 0.32);
   }
 }
 
@@ -244,9 +244,9 @@
   transition: box-shadow 0.2s ease;
 }
 .preview-window:hover {
-  box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.2),
+  box-shadow: 0 0 0 1px rgba(34, 184, 207, 0.2),
     0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 50px -8px rgba(6, 182, 212, 0.25) !important;
+    0 0 50px -8px rgba(34, 184, 207, 0.25) !important;
 }
 
 .case-chapter-transition {
@@ -271,11 +271,11 @@
 @keyframes project-card-focus-in {
   from {
     transform: translateY(2px);
-    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+    box-shadow: 0 0 0 0 rgba(34, 184, 207, 0);
   }
   to {
     transform: translateY(0);
-    box-shadow: 0 0 0 1px rgba(6, 182, 212, 0.25);
+    box-shadow: 0 0 0 1px rgba(34, 184, 207, 0.25);
   }
 }
 
@@ -439,7 +439,7 @@
 
 .hub-node.group:hover,
 .hub-node.group:focus-visible {
-  text-shadow: 0 0 22px rgba(6, 182, 212, 0.45);
+  text-shadow: 0 0 22px rgba(34, 184, 207, 0.32);
 }
 
 .hub-core {
@@ -454,7 +454,7 @@
 .hub-core-aura {
   background: radial-gradient(
     circle at var(--glow-x, 50%) var(--glow-y, 50%),
-    rgba(6, 182, 212, 0.28) 0%,
+    rgba(34, 184, 207, 0.22) 0%,
     transparent 68%
   );
 }
