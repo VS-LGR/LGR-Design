@@ -10,6 +10,7 @@ import { HubNode } from "./HubNode";
 import { HubOrbitSvg } from "./HubOrbitSvg";
 import {
   HUB_FIELD_SIZE,
+  HUB_LABEL_GAP,
   HUB_MODULES,
   HUB_ORBIT_RADIUS,
   type HubModuleId,
@@ -117,10 +118,10 @@ export function SystemHub() {
     const baseR = isMd ? HUB_ORBIT_RADIUS.md : HUB_ORBIT_RADIUS.base;
     const ratio = fieldSize / (isMd ? HUB_FIELD_SIZE.md : HUB_FIELD_SIZE.base);
     const scaled = Math.round(baseR * ratio);
-    /** Disco + rótulo externo + folga para não cortar nas bordas */
-    const nodeClearance = isMd ? 72 : 64;
+    /** Disco interno + gap do rótulo + folga da borda do campo */
+    const nodeClearance = HUB_LABEL_GAP + (isMd ? 28 : 24);
     const maxR = Math.floor(fieldSize / 2 - nodeClearance);
-    return Math.max(96, Math.min(scaled, maxR));
+    return Math.max(88, Math.min(scaled, maxR));
   }, [fieldSize]);
 
   const tiltX = pointer.enabled ? pointer.nx * TILT_MAX : 0;

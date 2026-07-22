@@ -441,14 +441,18 @@
   animation-delay: 240ms;
 }
 
+.hub-node-label {
+  text-shadow: 0 1px 10px rgba(12, 18, 34, 0.9), 0 0 1px rgba(12, 18, 34, 0.8);
+}
+
 .hub-node.group:hover .hub-node-disc,
 .hub-node.group:focus-visible .hub-node-disc {
-  box-shadow: 0 0 20px -6px rgba(34, 184, 207, 0.35);
+  box-shadow: 0 0 18px -6px rgba(34, 184, 207, 0.32);
 }
 
 .hub-node--emphasized.group:hover .hub-node-disc,
 .hub-node--emphasized.group:focus-visible .hub-node-disc {
-  box-shadow: 0 0 24px -4px rgba(34, 184, 207, 0.45);
+  box-shadow: 0 0 20px -4px rgba(34, 184, 207, 0.4);
 }
 
 .hub-core {
