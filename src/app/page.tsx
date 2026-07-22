@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { HomeClient } from "./HomeClient";
 
 export const metadata: Metadata = {
-  title: "Sistema | Lucas Gabriel Rodrigues",
+  title: "Lucas Gabriel Rodrigues | UX, Web Design e Desenvolvimento",
   description:
-    "Acesso ao portfólio — projetos, história, método de trabalho e exploração interativa.",
+    "Portfólio de Lucas Gabriel Rodrigues — projetos, trajetória, método e contratação de landing pages, sites institucionais e sistemas empresariais.",
 };
 
 export default function Home() {

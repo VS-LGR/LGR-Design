@@ -16,8 +16,8 @@ export const HUB_MODULES: HubModuleConfig[] = [
   { id: "contratar", href: "/contratar", angle: 270, enterDelay: 240 },
 ];
 
-export const HUB_FIELD_SIZE = { base: 360, md: 500 } as const;
-export const HUB_ORBIT_RADIUS = { base: 138, md: 180 } as const;
+export const HUB_FIELD_SIZE = { base: 340, md: 480 } as const;
+export const HUB_ORBIT_RADIUS = { base: 128, md: 168 } as const;
 
 export function HubModuleIcon({ id, className }: { id: HubModuleId; className?: string }) {
   const props = {

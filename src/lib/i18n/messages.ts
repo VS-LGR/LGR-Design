@@ -15,6 +15,7 @@ export type UiMessages = {
     hubTitle: string;
     hubSubtitle: string;
     hubHint: string;
+    hubKicker: string;
     toggleExpand: string;
     toggleCollapse: string;
     centralButtonAria: string;
@@ -22,6 +23,15 @@ export type UiMessages = {
     goStory: string;
     goWork: string;
     goHire: string;
+    coreLabel: string;
+    quickProjects: string;
+    quickHire: string;
+    moduleBlurb: {
+      projetos: string;
+      historia: string;
+      "como-trabalho": string;
+      contratar: string;
+    };
   };
   header: {
     tagline: string;
@@ -206,16 +216,27 @@ export const uiPt: UiMessages = {
     openNavigation: "Abrir navegação",
   },
   system: {
-    hubTitle: "Portfólio e serviços",
-    hubSubtitle: "Explore projetos, trajetória e contrate desenvolvimento.",
-    hubHint: "Passe o cursor sobre um módulo ou escolha para continuar.",
+    hubTitle: "Design e desenvolvimento com intenção",
+    hubSubtitle:
+      "Escolha um módulo do sistema para ver projetos, trajetória ou contratar.",
+    hubHint: "Toque ou passe o cursor sobre um módulo para continuar.",
+    hubKicker: "Sistema do portfólio",
     toggleExpand: "Abrir módulos",
     toggleCollapse: "Fechar módulos",
     centralButtonAria: "Abrir ou fechar menu circular de módulos",
-    goProjects: "Ir para projetos",
-    goStory: "Ir para história pessoal",
-    goWork: "Ir para como trabalho",
-    goHire: "Ir para contratar serviços",
+    goProjects: "Ver projetos selecionados",
+    goStory: "Conhecer a trajetória",
+    goWork: "Entender o método",
+    goHire: "Contratar serviços",
+    coreLabel: "LG",
+    quickProjects: "Ver projetos",
+    quickHire: "Contratar",
+    moduleBlurb: {
+      projetos: "Cases e entregas reais",
+      historia: "Formação e posicionamento",
+      "como-trabalho": "Processo e ferramentas",
+      contratar: "LP, institucional e sistemas",
+    },
   },
   header: {
     tagline: "UX, Web Design & Desenvolvimento",
@@ -413,16 +434,27 @@ export const uiEn: UiMessages = {
     openNavigation: "Open navigation",
   },
   system: {
-    hubTitle: "Portfolio and services",
-    hubSubtitle: "Explore projects, background, and hire development.",
-    hubHint: "Hover a module or choose one to continue.",
+    hubTitle: "Design and development with intent",
+    hubSubtitle:
+      "Pick a system module to explore projects, background, or hire.",
+    hubHint: "Tap or hover a module to continue.",
+    hubKicker: "Portfolio system",
     toggleExpand: "Open modules",
     toggleCollapse: "Close modules",
     centralButtonAria: "Open or close circular module menu",
-    goProjects: "Go to projects",
-    goStory: "Go to personal story",
-    goWork: "Go to how I work",
-    goHire: "Go to hire services",
+    goProjects: "View selected projects",
+    goStory: "Explore the story",
+    goWork: "See the method",
+    goHire: "Hire services",
+    coreLabel: "LG",
+    quickProjects: "View projects",
+    quickHire: "Hire",
+    moduleBlurb: {
+      projetos: "Real cases and deliveries",
+      historia: "Background and positioning",
+      "como-trabalho": "Process and tools",
+      contratar: "LPs, sites, and systems",
+    },
   },
   header: {
     tagline: "UX, Web Design & Development",

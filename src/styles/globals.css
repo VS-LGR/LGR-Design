@@ -380,7 +380,7 @@
   width: 100%;
   max-width: 100%;
   overflow: visible;
-  padding: 1.25rem 0.5rem;
+  padding: 0.75rem 0.25rem 0.5rem;
 }
 
 .hub-field {
@@ -401,7 +401,7 @@
 .hub-orbit-ring-stroke--ready {
   animation:
     hub-orbit-ring-draw 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    orbit-flow 28s linear 0.7s infinite;
+    orbit-flow 32s linear 0.7s infinite;
 }
 
 .hub-orbit-ring-stroke--static {
@@ -411,7 +411,7 @@
 }
 
 .hub-orbit-beam--active {
-  animation: hub-beam-pulse 1.6s ease-in-out infinite;
+  animation: hub-beam-pulse 1.8s ease-in-out infinite;
 }
 
 .hub-orbit-rotator {
@@ -437,9 +437,14 @@
   animation-delay: 240ms;
 }
 
-.hub-node.group:hover,
-.hub-node.group:focus-visible {
-  text-shadow: 0 0 22px rgba(34, 184, 207, 0.32);
+.hub-node.group:hover .hub-node-disc,
+.hub-node.group:focus-visible .hub-node-disc {
+  box-shadow: 0 0 20px -6px rgba(34, 184, 207, 0.35);
+}
+
+.hub-node--emphasized.group:hover .hub-node-disc,
+.hub-node--emphasized.group:focus-visible .hub-node-disc {
+  box-shadow: 0 0 24px -4px rgba(34, 184, 207, 0.45);
 }
 
 .hub-core {
@@ -448,19 +453,19 @@
 }
 
 .hub-core--ready {
-  animation: hub-core-enter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+  animation: hub-core-enter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
 }
 
 .hub-core-aura {
   background: radial-gradient(
     circle at var(--glow-x, 50%) var(--glow-y, 50%),
-    rgba(34, 184, 207, 0.22) 0%,
+    rgba(34, 184, 207, 0.18) 0%,
     transparent 68%
   );
 }
 
 .hub-core-aura--pulse {
-  animation: hub-core-aura-pulse 3s ease-in-out infinite;
+  animation: hub-core-aura-pulse 3.4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

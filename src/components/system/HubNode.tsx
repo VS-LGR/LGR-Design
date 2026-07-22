@@ -3,19 +3,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { SmoothPointer } from "@/hooks/useSmoothPointer";
-import type { HubModuleConfig } from "./hubModules";
+import { HubModuleIcon, type HubModuleConfig } from "./hubModules";
 
-const MAGNETIC_MAX = 6;
+const MAGNETIC_MAX = 5;
 
 type HubNodeProps = {
   module: HubModuleConfig;
   orbitRadius: number;
   short: string;
   label: string;
+  blurb: string;
   index: number;
   pointer: SmoothPointer;
   reducedMotion: boolean;
   introReady: boolean;
+  emphasized?: boolean;
   onHoverChange: (index: number | null) => void;
 };
 
@@ -24,10 +26,12 @@ export function HubNode({
   orbitRadius,
   short,
   label,
+  blurb,
   index,
   pointer,
   reducedMotion,
   introReady,
+  emphasized = false,
   onHoverChange,
 }: HubNodeProps) {
   const linkRef = useRef<HTMLAnchorElement>(null);
@@ -47,7 +51,7 @@ export function HubNode({
     const dx = pointer.clientX - cx;
     const dy = pointer.clientY - cy;
     const dist = Math.hypot(dx, dy) || 1;
-    const pull = Math.min(MAGNETIC_MAX, dist * 0.1);
+    const pull = Math.min(MAGNETIC_MAX, dist * 0.08);
     setMagnetic({ x: (dx / dist) * pull, y: (dy / dist) * pull });
   }, [pointer, active, reducedMotion]);
 
@@ -70,11 +74,12 @@ export function HubNode({
       <Link
         ref={linkRef}
         href={module.href}
-        aria-label={label}
+        aria-label={`${label}. ${blurb}`}
         className={`
-          hub-node group focus-ring absolute left-0 top-0 flex -translate-x-1/2 flex-col items-center
-          px-3 py-2 text-center transition-[color,transform,text-shadow] duration-300 ease-out
+          hub-node group focus-ring absolute left-0 top-0 flex -translate-x-1/2 flex-col items-center gap-2
+          transition-[transform,opacity] duration-300 ease-out
           ${introReady ? "hub-node-label--ready" : "opacity-0"}
+          ${emphasized ? "hub-node--emphasized" : ""}
         `}
         style={{
           transform: `translateY(-${orbitRadius}px) translate(${magnetic.x}px, ${magnetic.y}px) rotate(${upright}deg)`,
@@ -84,14 +89,27 @@ export function HubNode({
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
       >
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accent/85 transition-colors duration-300 group-hover:text-primary group-focus-visible:text-primary md:text-sm">
-          {short}
+        <span
+          className={`
+            hub-node-disc relative flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-full
+            border transition-[border-color,background-color,box-shadow,transform] duration-300
+            ${
+              emphasized
+                ? "border-accent/55 bg-accent/15 text-accent shadow-[0_0_18px_-8px_rgba(34,184,207,0.45)] group-hover:bg-accent/25 group-hover:border-accent/70"
+                : "border-border-dark/70 bg-surface/55 text-muted backdrop-blur-sm group-hover:border-accent/45 group-hover:text-accent group-hover:bg-surface/80"
+            }
+            group-hover:scale-105 group-focus-visible:scale-105
+          `}
+        >
+          <HubModuleIcon id={module.id} className="h-5 w-5" />
         </span>
         <span
-          className="mt-1 max-w-[8rem] text-[10px] leading-snug text-muted opacity-0 translate-y-0.5 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 md:text-[11px]"
-          aria-hidden
+          className={`
+            text-[11px] md:text-xs font-semibold uppercase tracking-[0.12em] transition-colors duration-300
+            ${emphasized ? "text-accent" : "text-primary/80 group-hover:text-primary"}
+          `}
         >
-          {label}
+          {short}
         </span>
       </Link>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -14,26 +15,39 @@ import {
   type HubModuleId,
 } from "./hubModules";
 
-const INTRO_DELAY_MS = 2500;
-const TILT_MAX = 3.5;
-const CORE_FOLLOW_MAX = 40;
+const INTRO_DELAY_MS = 2200;
+const TILT_MAX = 2.8;
+const CORE_FOLLOW_MAX = 28;
 
-function moduleLabels(
+function moduleCopy(
   id: HubModuleId,
   t: ReturnType<typeof useLocale>["t"]
-): { short: string; label: string } {
+): { short: string; label: string; blurb: string } {
   switch (id) {
     case "projetos":
-      return { short: t.nav.projects, label: t.system.goProjects };
+      return {
+        short: t.nav.projects,
+        label: t.system.goProjects,
+        blurb: t.system.moduleBlurb.projetos,
+      };
     case "historia":
-      return { short: t.nav.story, label: t.system.goStory };
+      return {
+        short: t.nav.story,
+        label: t.system.goStory,
+        blurb: t.system.moduleBlurb.historia,
+      };
     case "como-trabalho":
       return {
         short: t.nav.work,
         label: t.system.goWork,
+        blurb: t.system.moduleBlurb["como-trabalho"],
       };
     case "contratar":
-      return { short: t.nav.hire, label: t.system.goHire };
+      return {
+        short: t.nav.hire,
+        label: t.system.goHire,
+        blurb: t.system.moduleBlurb.contratar,
+      };
   }
 }
 
@@ -56,8 +70,8 @@ export function SystemHub() {
     const mq = window.matchMedia("(min-width: 768px)");
     const apply = () => {
       const base = mq.matches ? HUB_FIELD_SIZE.md : HUB_FIELD_SIZE.base;
-      const maxVw = mq.matches ? 520 : 380;
-      const vwCap = Math.floor(window.innerWidth * (mq.matches ? 0.92 : 0.94));
+      const maxVw = mq.matches ? 560 : 400;
+      const vwCap = Math.floor(window.innerWidth * (mq.matches ? 0.9 : 0.92));
       setFieldSize(Math.min(base, vwCap, maxVw));
     };
     apply();
@@ -103,9 +117,9 @@ export function SystemHub() {
     const baseR = isMd ? HUB_ORBIT_RADIUS.md : HUB_ORBIT_RADIUS.base;
     const ratio = fieldSize / (isMd ? HUB_FIELD_SIZE.md : HUB_FIELD_SIZE.base);
     const scaled = Math.round(baseR * ratio);
-    const nodeClearance = isMd ? 36 : 32;
+    const nodeClearance = isMd ? 48 : 44;
     const maxR = Math.floor(fieldSize / 2 - nodeClearance);
-    return Math.max(96, Math.min(scaled, maxR));
+    return Math.max(100, Math.min(scaled, maxR));
   }, [fieldSize]);
 
   const tiltX = pointer.enabled ? pointer.nx * TILT_MAX : 0;
@@ -116,37 +130,49 @@ export function SystemHub() {
     const dx = pointer.clientX - fieldCenter.x;
     const dy = pointer.clientY - fieldCenter.y;
     const dist = Math.hypot(dx, dy) || 1;
-    const max = Math.min(fieldSize * 0.13, CORE_FOLLOW_MAX);
-    const pull = Math.min(max, dist * 0.22);
+    const max = Math.min(fieldSize * 0.1, CORE_FOLLOW_MAX);
+    const pull = Math.min(max, dist * 0.16);
     return { x: (dx / dist) * pull, y: (dy / dist) * pull };
   }, [pointer, fieldCenter, fieldSize, fieldMeasured]);
 
+  const activeModule =
+    hoveredIndex != null ? HUB_MODULES[hoveredIndex] : null;
+  const activeCopy = activeModule
+    ? moduleCopy(activeModule.id, t)
+    : null;
+
   return (
     <section
-      className="system-hub flex flex-col items-center justify-center min-h-[min(82dvh,640px)] md:min-h-[min(78dvh,600px)] py-8 px-3 sm:px-4 md:py-10"
+      className="system-hub relative flex flex-col items-center justify-center min-h-[min(88dvh,720px)] md:min-h-[min(84dvh,680px)] py-6 px-3 sm:px-4 md:py-8"
       aria-labelledby={hubHeadingId}
       aria-describedby={`${hubDescId} ${hubHintId}`}
     >
       <div
-        className={`text-center max-w-md mb-6 md:mb-8 space-y-1.5 ${introReady ? "hub-header--ready" : "opacity-0"}`}
+        className={`text-center max-w-xl mb-5 md:mb-7 space-y-3 ${introReady ? "hub-header--ready" : "opacity-0"}`}
       >
+        <p className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          {t.system.hubKicker}
+        </p>
         <h1
           id={hubHeadingId}
-          className="text-2xl md:text-3xl font-bold text-primary tracking-tight"
+          className="text-2xl sm:text-3xl md:text-[2.15rem] font-bold text-primary tracking-tight text-balance leading-tight"
         >
           {t.system.hubTitle}
         </h1>
-        <p id={hubDescId} className="text-sm md:text-base text-muted leading-relaxed">
+        <p
+          id={hubDescId}
+          className="text-sm md:text-base text-muted leading-relaxed max-w-md mx-auto"
+        >
           {t.system.hubSubtitle}
         </p>
-        <p id={hubHintId} className="text-xs text-muted/70">
+        <p id={hubHintId} className="sr-only">
           {t.system.hubHint}
         </p>
       </div>
 
       <div
         className="hub-field-perspective"
-        style={{ perspective: pointer.enabled ? "1000px" : undefined }}
+        style={{ perspective: pointer.enabled ? "1100px" : undefined }}
       >
         <div
           ref={fieldRef}
@@ -175,18 +201,20 @@ export function SystemHub() {
 
           <div className="hub-orbit-rotator absolute inset-0">
             {HUB_MODULES.map((mod, i) => {
-              const { short, label } = moduleLabels(mod.id, t);
+              const copy = moduleCopy(mod.id, t);
               return (
                 <HubNode
                   key={mod.id}
                   module={mod}
                   orbitRadius={orbitRadius}
-                  short={short}
-                  label={label}
+                  short={copy.short}
+                  label={copy.label}
+                  blurb={copy.blurb}
                   index={i}
                   pointer={pointer}
                   reducedMotion={reducedMotion}
                   introReady={introReady}
+                  emphasized={mod.id === "contratar"}
                   onHoverChange={setHoveredIndex}
                 />
               );
@@ -200,7 +228,47 @@ export function SystemHub() {
             offsetY={coreOffset.y}
             reducedMotion={reducedMotion}
             introReady={introReady}
+            monogram={t.system.coreLabel}
           />
+        </div>
+      </div>
+
+      <div
+        className={`mt-5 md:mt-6 flex flex-col items-center gap-3 min-h-[3.25rem] ${introReady ? "hub-header--ready" : "opacity-0"}`}
+        style={{ animationDelay: "0.12s" }}
+      >
+        <p
+          className={`text-xs md:text-sm text-muted/85 transition-opacity duration-300 ${
+            activeCopy ? "opacity-100" : "opacity-0"
+          }`}
+          aria-live="polite"
+        >
+          {activeCopy ? (
+            <>
+              <span className="font-medium text-primary/90">{activeCopy.short}</span>
+              <span className="mx-1.5 text-border-dark">·</span>
+              <span>{activeCopy.blurb}</span>
+            </>
+          ) : (
+            <span className="invisible" aria-hidden>
+              —
+            </span>
+          )}
+        </p>
+
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
+          <Link
+            href="/projetos"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium bg-surface border border-border-dark/70 text-primary hover:border-accent/40 hover:text-accent transition-colors focus-ring"
+          >
+            {t.system.quickProjects}
+          </Link>
+          <Link
+            href="/contratar"
+            className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring"
+          >
+            {t.system.quickHire}
+          </Link>
         </div>
       </div>
     </section>
