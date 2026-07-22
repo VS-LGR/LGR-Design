@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useSmoothPointer } from "@/hooks/useSmoothPointer";
+import { isIntroDone, markIntroDone } from "@/lib/introSession";
 import { HubCore } from "./HubCore";
 import { HubNode } from "./HubNode";
 import { HubOrbitSvg } from "./HubOrbitSvg";
@@ -16,6 +17,7 @@ import {
   type HubModuleId,
 } from "./hubModules";
 
+/** Só na primeira visita da sessão (sincronizado com IntroOverlay). */
 const INTRO_DELAY_MS = 2200;
 const TILT_MAX = 2.8;
 const CORE_FOLLOW_MAX = 28;
@@ -62,7 +64,7 @@ export function SystemHub() {
 
   const [fieldSize, setFieldSize] = useState<number>(HUB_FIELD_SIZE.base);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [introReady, setIntroReady] = useState(reducedMotion);
+  const [introReady, setIntroReady] = useState(false);
   const fieldRef = useRef<HTMLDivElement>(null);
   const [fieldMeasured, setFieldMeasured] = useState(false);
   const [fieldCenter, setFieldCenter] = useState({ x: 0, y: 0 });
@@ -84,12 +86,15 @@ export function SystemHub() {
     };
   }, []);
 
-  useEffect(() => {
-    if (reducedMotion) {
+  useLayoutEffect(() => {
+    if (reducedMotion || isIntroDone()) {
       setIntroReady(true);
       return;
     }
-    const timer = window.setTimeout(() => setIntroReady(true), INTRO_DELAY_MS);
+    const timer = window.setTimeout(() => {
+      setIntroReady(true);
+      markIntroDone();
+    }, INTRO_DELAY_MS);
     return () => window.clearTimeout(timer);
   }, [reducedMotion]);
 

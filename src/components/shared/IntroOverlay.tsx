@@ -2,27 +2,40 @@
 
 import { useState, useEffect } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
+import { isIntroDone, markIntroDone } from "@/lib/introSession";
 
 const INTRO_DURATION_MS = 2400;
 
 export function IntroOverlay() {
   const { t } = useLocale();
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const t = setTimeout(() => setVisible(false), INTRO_DURATION_MS);
-    return () => clearTimeout(t);
+
+    if (isIntroDone()) {
+      return;
+    }
+
+    setVisible(true);
+    const timer = window.setTimeout(() => {
+      setExiting(true);
+      markIntroDone();
+      window.setTimeout(() => setVisible(false), 700);
+    }, INTRO_DURATION_MS);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted || !visible) return null;
 
   return (
     <div
       aria-hidden="true"
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-dark transition-opacity duration-700 ease-out ${
-        visible ? "opacity-100" : "opacity-0 pointer-events-none"
+        exiting ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
       <div className="text-center px-6">
