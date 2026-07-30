@@ -126,6 +126,12 @@ export interface CaseStudyChapter {
   blocks: CaseStudyBlock[];
 }
 
+export interface CaseStudyGalleryItem {
+  src: string;
+  caption: string;
+  alt: string;
+}
+
 export interface CaseStudyContent {
   context: {
     type: string;
@@ -135,6 +141,8 @@ export interface CaseStudyContent {
     overview: string;
   };
   chapters: CaseStudyChapter[];
+  /** Screenshots do produto para o case (opcional) */
+  gallery?: CaseStudyGalleryItem[];
   previewTitle?: string;
   previewDescription?: string;
 }

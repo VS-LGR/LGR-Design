@@ -109,9 +109,12 @@ export type UiMessages = {
     swipeHint: string;
     caseCta: string;
     caseNotFound: string;
+    galleryHeading: string;
   };
   pages: {
     projectsHeading: string;
+    projectsKicker: string;
+    projectsLead: string;
     historiaHeading: string;
     workHeading: string;
     workLead: string;
@@ -321,9 +324,13 @@ export const uiPt: UiMessages = {
       "Dica mobile: deslize para esquerda/direita para trocar de capítulo.",
     caseCta: "Ver estudo de caso",
     caseNotFound: "Case não encontrado.",
+    galleryHeading: "Interface do produto",
   },
   pages: {
     projectsHeading: "Projetos selecionados",
+    projectsKicker: "Portfólio",
+    projectsLead:
+      "Landing pages, sites institucionais e sistemas empresariais — cada card abre o estudo de caso completo.",
     historiaHeading: "História pessoal",
     workHeading: "Método de trabalho",
     workLead:
@@ -538,9 +545,13 @@ export const uiEn: UiMessages = {
     swipeHint: "Mobile tip: swipe left/right to change chapter.",
     caseCta: "View case study",
     caseNotFound: "Case not found.",
+    galleryHeading: "Product interface",
   },
   pages: {
     projectsHeading: "Selected projects",
+    projectsKicker: "Portfolio",
+    projectsLead:
+      "Landing pages, institutional sites, and business systems — each card opens the full case study.",
     historiaHeading: "Personal story",
     workHeading: "Working method",
     workLead:

@@ -371,97 +371,167 @@ export const projectsListEn: Project[] = [
   },
   {
     id: "qualiproc-ctli",
-    title: "QualiProc — CTLI",
+    title: "QualiProc",
     category: "web",
     topic: "empresas",
     deliveryType: "sistema",
     slug: "qualiproc-ctli",
     description:
-      "Metrological quality management system for labs: field agents, ISO 17025 documentation, certificates, and calibration collection — web and mobile.",
+      "Multi-tenant SaaS quality-management platform for calibration labs — documents, field collection, certificates, personnel, and commercial ops aligned with ISO/IEC 17025.",
     developmentExplanation:
-      "End-to-end production of the QualiProc platform (powered by CTLI) aligned with ISO 17025: document management with Word editing and upload, Master List, procedures and records, certificate issuance, field calibration data collection, and field agent registration flows. Responsive, accessible interface for web and mobile use in quality and metrology operations.",
+      "React SPA with Supabase backend (Auth, PostgreSQL, Storage, RLS, and Edge Functions), deployed on Vercel. Includes PDF/DOCX exports, per-tenant backup, and role-based multi-tenant governance — software owned by CTLI, commercial brand QualiProc.",
     keyStages: [
       {
-        title: "ISO 17025 document management",
+        title: "Centralized lab QMS",
         description:
-          "I structured procedures, records, controlled standards, and critical review in modules aligned with ISO 17025 requirements, including Word document editing and upload.",
+          "Requirements hub, controlled documents, Master List, and field/certification flows in one authenticated environment.",
       },
       {
-        title: "Field operations and certification",
+        title: "Multi-tenant governance",
         description:
-          "I built field agent registration, calibration data collection, and certificate issuance integrated into the lab's quality workflow.",
+          "Per-client environment isolation, access roles, audit trails on sensitive operations, and CTLI administration.",
       },
       {
-        title: "Accessible web and mobile experience",
+        title: "Operations and continuity",
         description:
-          "I designed the interface for continuous use on desktop and mobile devices, prioritizing scannability, operational clarity, and accessibility in audit and control routines.",
+          "Dashboard shortcuts and indicators, expiry notices, on-demand/periodic backup, and module onboarding by access level.",
       },
     ],
-    thumbnail: "/img/Qualiproc CTLI.png",
+    thumbnail: "/img/qualiproc/dashboard-sidebar.png",
     link: "https://ctli-sistema.vercel.app/login",
     caseStudy: {
       context: {
-        type: "Quality management system",
-        segment: "Metrology and accredited laboratories",
-        objective: "Centralize metrological quality under ISO 17025",
-        role: "UI/UX, information architecture, visual direction and front-end",
+        type: "Multi-tenant SaaS / laboratory QMS",
+        segment: "Calibration laboratories · ISO/IEC 17025",
+        objective:
+          "Centralize documents, collection, certificates, personnel, and commercial ops with traceability and access control",
+        role: "UI/UX, information architecture, visual direction, and front-end",
         overview:
-          "QualiProc platform for CTLI — document management, certificates, calibration, and field agents in a single regulatory environment.",
+          "QualiProc (powered by CTLI) is a multi-tenant SaaS quality-management platform for calibration labs: documents, collection, certificates, personnel, and commercial operations in one system — with access control, backup, and governance aligned to ISO 17025. Commercial brand QualiProc; software ownership CTLI.",
       },
+      gallery: [
+        {
+          src: "/img/qualiproc/dashboard-sidebar.png",
+          caption: "Dashboard with requirements navigation and operational shortcut hub",
+          alt: "QualiProc dashboard with sidebar and shortcuts",
+        },
+        {
+          src: "/img/qualiproc/dashboard-hub.png",
+          caption: "Shortcut hub: commercial, collection, certificates, personnel, and registries",
+          alt: "QualiProc dashboard shortcut hub",
+        },
+        {
+          src: "/img/qualiproc/indicadores.png",
+          caption: "Monthly indicators and expiry notices for standards and instruments",
+          alt: "Indicators panel and expiry notices",
+        },
+        {
+          src: "/img/qualiproc/lista-mestra-alteracoes.png",
+          caption: "Recent Master List changes — document traceability",
+          alt: "Master List change feed",
+        },
+        {
+          src: "/img/qualiproc/documentos-lembretes.png",
+          caption: "Recent documents, pinned items, and environment reminders",
+          alt: "Recent documents and reminders in QualiProc",
+        },
+        {
+          src: "/img/qualiproc/ambientes-admin.png",
+          caption: "CTLI administration of environments (clients) with isolated tenant data",
+          alt: "Multi-tenant environment management in QualiProc",
+        },
+      ],
       chapters: [
         {
           id: "problem",
           label: "Problem",
-          title: "Fragmented quality that's hard to trace",
+          title: "Scattered quality, hard to audit",
           blocks: [
             {
               id: "p1",
               type: "text",
               content:
-                "Accredited labs must control documents, calibrations, certificates, and field teams without losing traceability or ISO 17025 compliance.",
+                "Calibration labs must bring together procedures, records, field collection, certificates, controlled documents, personnel, and commercial flows without losing traceability or ISO/IEC 17025 compliance.",
             },
-          ],
-        },
-        {
-          id: "objective",
-          label: "Objective",
-          title: "Metrological quality in one place",
-          blocks: [
             {
-              id: "o1",
+              id: "p2",
               type: "bullets",
               items: [
-                "Unify document management and field operations",
-                "Ensure adherence to ISO 17025 requirements",
-                "Speed up certificate issuance and calibration collection",
+                "Processes and evidence fragmented across tools and spreadsheets",
+                "Unclear access roles for quality management, field teams, and client portal",
+                "Hard to keep Master List, versioning, and operational alerts consistent",
               ],
-            },
-          ],
-        },
-        {
-          id: "ux-ui",
-          label: "UX/UI",
-          title: "Operational, clear, accessible system",
-          blocks: [
-            {
-              id: "u1",
-              type: "tags",
-              items: ["Web + mobile", "Accessibility", "Role-based flows", "Compliance"],
             },
           ],
         },
         {
           id: "solution",
           label: "Solution",
-          title: "Complete platform for metrological quality",
+          title: "An authenticated, modular, multi-tenant QMS",
           blocks: [
             {
               id: "s1",
+              type: "text",
+              content:
+                "QualiProc concentrates quality operations in a multi-tenant SPA: each environment (client) has isolated data, branding, and users.",
+            },
+            {
+              id: "s2",
+              type: "bullets",
+              title: "Core modules",
+              items: [
+                "Requirements navigation and document hub aligned to the lab QMS",
+                "Controlled documents / Master List with editor and operational versioning",
+                "Field collection, certificates, personnel/competence, and supporting registries",
+                "Commercial flows (proposals, orders, quotes) and dashboard shortcuts/reminders",
+                "Per-tenant backup and recovery; help/tutorials by module and role",
+              ],
+            },
+          ],
+        },
+        {
+          id: "architecture",
+          label: "Stack",
+          title: "Product architecture (high level)",
+          blocks: [
+            {
+              id: "a1",
+              type: "tags",
+              items: [
+                "React SPA",
+                "React Router",
+                "Tailwind / Radix",
+                "Supabase",
+                "Vercel",
+                "PDF / DOCX",
+              ],
+            },
+            {
+              id: "a2",
               type: "bullets",
               items: [
-                "Field agent registration and calibration data collection",
-                "Word editing and upload with procedures and records management",
-                "Certificate issuance, Master List, and controls aligned with ISO 17025",
+                "React front-end with custom components plus Radix/Tailwind UI",
+                "Supabase: PostgreSQL, Auth, Storage, RLS, and Edge Functions",
+                "Institutional PDF exports and DOCX editor for procedures/records",
+                "Per-tenant backup (integrity checks, dry-run, confirmed restore) plus platform continuity",
+              ],
+            },
+          ],
+        },
+        {
+          id: "governance",
+          label: "Governance",
+          title: "Security and accountability without exposing IP",
+          blocks: [
+            {
+              id: "g1",
+              type: "bullets",
+              items: [
+                "Account authentication and distinct roles (CTLI admin, quality, field, portal)",
+                "Tenant isolation and access policies (RLS / module gates)",
+                "Audit trails on sensitive operations (e.g. backup/restore)",
+                "EULA and proprietary license with rights reserved to CTLI",
+                "CSV/BPx-compatible approach when quality/data impact requires it — without exposing internal protocols",
               ],
             },
           ],
@@ -469,30 +539,38 @@ export const projectsListEn: Project[] = [
         {
           id: "results",
           label: "Results",
-          title: "Centralized quality operations",
+          title: "Quality operations in one environment",
           blocks: [
             {
               id: "r1",
               type: "stats",
               stats: [
-                { label: "Shipped", value: "Full web and mobile system" },
-                { label: "Standard", value: "ISO 17025" },
+                { label: "Model", value: "Multi-tenant SaaS" },
+                { label: "Standard", value: "ISO/IEC 17025" },
+                { label: "Scope", value: "QMS + field + commercial" },
+                { label: "Ownership", value: "CTLI · QualiProc brand" },
               ],
+            },
+            {
+              id: "r2",
+              type: "quote",
+              content:
+                "One system for documents, collection, certificates, personnel, and commercial operations — with governance aligned to accredited laboratory reality.",
             },
           ],
         },
       ],
       previewTitle: "QualiProc preview",
       previewDescription:
-        "Login screen access (closed system). The preview shows the entry interface for the ISO 17025 management platform.",
+        "Login screen for the authenticated environment (closed system). The preview shows product entry — without exposing real operational data.",
     },
     caseProblem:
-      "Centralize metrological quality management — documents, calibrations, certificates, and field agents — in ISO 17025 compliance with a smooth web and mobile experience.",
+      "Centralize laboratory QMS — documents, collection, certificates, personnel, and commercial ops — with multi-tenant isolation under ISO/IEC 17025.",
     caseSolution:
-      "Full system with agent registration, Word editing and upload, Master List, certificate issuance, calibration collection, and quality modules structured by standard requirements.",
+      "QualiProc SPA (CTLI) with quality modules, operational hub, indicators, Master List, environment admin, and per-tenant backup.",
     caseResults: [
-      { label: "Shipped", value: "Full web and mobile system" },
-      { label: "Standard", value: "ISO 17025" },
+      { label: "Model", value: "Multi-tenant SaaS" },
+      { label: "Standard", value: "ISO/IEC 17025" },
     ],
   },
   {

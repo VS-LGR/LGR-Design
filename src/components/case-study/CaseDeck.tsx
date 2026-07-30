@@ -7,6 +7,7 @@ import type { UiMessages } from "@/lib/i18n/messages";
 import { ChapterSection } from "./ChapterSection";
 import { ChapterTrack } from "./ChapterTrack";
 import { CasePreviewStep } from "./CasePreviewStep";
+import { CaseGallery } from "./CaseGallery";
 
 interface CaseDeckProps {
   project: Project;
@@ -15,6 +16,7 @@ interface CaseDeckProps {
 
 export function CaseDeck({ project, t }: CaseDeckProps) {
   const chapters = project.caseStudy?.chapters ?? [];
+  const gallery = project.caseStudy?.gallery ?? [];
   const [activeChapter, setActiveChapter] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -28,7 +30,13 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
       { label: t.caseDeck.objective, value: context.objective },
       { label: t.caseDeck.role, value: context.role },
     ];
-  }, [project.caseStudy?.context, t.caseDeck.objective, t.caseDeck.projectType, t.caseDeck.role, t.caseDeck.segment]);
+  }, [
+    project.caseStudy?.context,
+    t.caseDeck.objective,
+    t.caseDeck.projectType,
+    t.caseDeck.role,
+    t.caseDeck.segment,
+  ]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -59,6 +67,8 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
     ? `${active.label}: ${active.title}`
     : `${t.caseDeck.chapterLabel} ${activeChapter + 1} / ${Math.max(1, chapters.length)}`;
 
+  const deliveryLabel = t.deliveryType[project.deliveryType];
+
   return (
     <div className="w-full max-w-6xl xl:max-w-7xl mx-auto py-6 md:py-10 px-4 sm:px-5 md:px-8 space-y-6 md:space-y-8 overflow-x-hidden">
       <Link
@@ -68,38 +78,54 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         {t.caseDeck.backToProjects}
       </Link>
 
-      <header className="rounded-2xl border border-border-dark/60 bg-surface/30 p-4 md:p-6 space-y-5 md:space-y-6">
-        <div className="space-y-2">
-          <p className="text-xs uppercase tracking-wide text-accent font-semibold">
-            {t.caseDeck.context}
-          </p>
-          <h1 className="text-2xl md:text-3xl font-semibold text-primary leading-tight">
+      <header className="rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/40 to-surface/20 p-5 md:p-7 space-y-5 md:space-y-6">
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center rounded-md border border-accent/35 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">
+              {deliveryLabel}
+            </span>
+            {project.caseStudy?.context.type ? (
+              <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-muted">
+                {project.caseStudy.context.type}
+              </span>
+            ) : null}
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-primary tracking-tight leading-tight text-balance">
             {project.title}
           </h1>
+          {project.caseStudy?.context.segment ? (
+            <p className="text-sm text-muted">{project.caseStudy.context.segment}</p>
+          ) : null}
         </div>
+
         <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 pt-4 border-t border-border-dark/35">
           {contextCards.map((item) => (
             <div key={item.label}>
-              <dt className="text-xs uppercase tracking-wide text-accent/90 font-semibold">
+              <dt className="text-[11px] uppercase tracking-[0.12em] text-accent/90 font-semibold">
                 {item.label}
               </dt>
-              <dd className="text-sm text-muted mt-1.5 leading-[1.65]">
+              <dd className="text-sm text-primary/85 mt-1.5 leading-relaxed">
                 {item.value}
               </dd>
             </div>
           ))}
         </dl>
+
         {project.caseStudy?.context.overview ? (
-          <div className="border-t border-border-dark/35 pt-5 space-y-2">
-            <p className="text-xs uppercase tracking-wide text-accent/90 font-semibold">
+          <div className="border-t border-border-dark/35 pt-5 space-y-2.5">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-accent/90 font-semibold">
               {t.caseDeck.overview}
             </p>
-            <p className="text-sm text-muted leading-[1.65] max-w-3xl">
+            <p className="text-sm md:text-base text-muted leading-relaxed max-w-3xl">
               {project.caseStudy.context.overview}
             </p>
           </div>
         ) : null}
       </header>
+
+      {gallery.length > 0 ? (
+        <CaseGallery items={gallery} heading={t.caseDeck.galleryHeading} />
+      ) : null}
 
       <div className="space-y-2">
         <ChapterTrack

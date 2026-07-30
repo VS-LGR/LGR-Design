@@ -4,7 +4,7 @@ import { ProjetosView } from "./ProjetosView";
 export const metadata: Metadata = {
   title: "Projetos | Lucas Gabriel Rodrigues",
   description:
-    "Portfólio de projetos de UX, web design e identidade — produtos digitais, landing pages e sites institucionais.",
+    "Cases de landing pages, sites institucionais e sistemas empresariais — incluindo QualiProc, plataforma SaaS de gestão da qualidade para laboratórios.",
 };
 
 export default function ProjetosPage() {
