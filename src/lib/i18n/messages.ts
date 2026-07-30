@@ -128,11 +128,21 @@ export type UiMessages = {
     lead: string;
     printCta: string;
     openCta: string;
+    openProjectCta: string;
+    selectHeading: string;
+    selectLead: string;
     roleLabel: string;
     typeLabel: string;
     segmentLabel: string;
+    objectiveLabel: string;
+    challengeLabel: string;
+    solutionLabel: string;
+    stagesLabel: string;
+    galleryLabel: string;
     footer: string;
     linkedinHint: string;
+    backToSelect: string;
+    notFound: string;
   };
   hire: {
     viewCase: string;
@@ -354,17 +364,28 @@ export const uiPt: UiMessages = {
     hireHeading: "Contratar",
   },
   exportDoc: {
-    title: "Seleção de projetos",
-    kicker: "Documento para LinkedIn",
-    lead: "Resumo profissional de entregas em UX, web design e sistemas — pronto para PDF ou anexo no LinkedIn.",
+    title: "Export LinkedIn",
+    kicker: "Documento por projeto",
+    lead: "Escolha um projeto para gerar um one-pager profissional — visual alinhado à marca, pronto para PDF no LinkedIn.",
     printCta: "Imprimir / salvar PDF",
-    openCta: "Abrir documento LinkedIn",
+    openCta: "Exportar para LinkedIn",
+    openProjectCta: "Export LinkedIn",
+    selectHeading: "Escolha o projeto",
+    selectLead:
+      "Cada documento é um one-pager focado — ideal para carrossel, anexo ou base de post no LinkedIn.",
     roleLabel: "Papel",
     typeLabel: "Tipo",
     segmentLabel: "Segmento",
+    objectiveLabel: "Objetivo",
+    challengeLabel: "Desafio",
+    solutionLabel: "Solução",
+    stagesLabel: "Etapas-chave",
+    galleryLabel: "Interface",
     footer: "Lucas Gabriel Rodrigues — UX, Web Design & Desenvolvimento digital",
     linkedinHint:
-      "Use Imprimir → Salvar como PDF (A4) e anexe no LinkedIn ou use como base de post.",
+      "Imprimir → Salvar como PDF (A4). Anexe no LinkedIn ou use o visual como base de post.",
+    backToSelect: "Todos os exports",
+    notFound: "Projeto não encontrado para export.",
   },
   hire: {
     viewCase: "Ver case",
@@ -590,17 +611,28 @@ export const uiEn: UiMessages = {
     hireHeading: "Hire",
   },
   exportDoc: {
-    title: "Selected projects",
-    kicker: "LinkedIn document",
-    lead: "Professional summary of UX, web design, and systems work — ready as PDF or LinkedIn attachment.",
+    title: "LinkedIn export",
+    kicker: "Per-project document",
+    lead: "Pick a project to generate a professional one-pager — brand-aligned, ready as a LinkedIn PDF.",
     printCta: "Print / save PDF",
-    openCta: "Open LinkedIn document",
+    openCta: "Export for LinkedIn",
+    openProjectCta: "LinkedIn export",
+    selectHeading: "Choose a project",
+    selectLead:
+      "Each document is a focused one-pager — ideal for a carousel, attachment, or LinkedIn post outline.",
     roleLabel: "Role",
     typeLabel: "Type",
     segmentLabel: "Segment",
+    objectiveLabel: "Objective",
+    challengeLabel: "Challenge",
+    solutionLabel: "Solution",
+    stagesLabel: "Key stages",
+    galleryLabel: "Interface",
     footer: "Lucas Gabriel Rodrigues — UX, Web Design & Digital Development",
     linkedinHint:
-      "Use Print → Save as PDF (A4) and attach on LinkedIn, or use it as a post outline.",
+      "Print → Save as PDF (A4). Attach on LinkedIn or use the layout as a post outline.",
+    backToSelect: "All exports",
+    notFound: "Project not found for export.",
   },
   hire: {
     viewCase: "View case",

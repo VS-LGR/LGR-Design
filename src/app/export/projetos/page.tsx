@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { ExportProjetosView } from "./ExportProjetosView";
+import { ExportProjetosIndexView } from "./ExportProjetosIndexView";
 
 export const metadata: Metadata = {
   title: "Export LinkedIn — Projetos | Lucas Gabriel Rodrigues",
   description:
-    "Documento profissional com seleção de projetos para PDF e LinkedIn.",
+    "Escolha um projeto e gere um one-pager profissional para PDF e LinkedIn.",
   robots: { index: false, follow: false },
 };
 
 export default function ExportProjetosPage() {
-  return <ExportProjetosView />;
+  return <ExportProjetosIndexView />;
 }

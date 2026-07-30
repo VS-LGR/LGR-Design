@@ -543,8 +543,7 @@
 }
 
 /* Página de export: esconde chrome do site */
-body:has([data-export-layout]) header,
-body:has([data-export-layout]) footer,
+body:has([data-export-layout]) [data-site-chrome],
 body:has([data-export-layout]) [data-animated-bg] {
   display: none !important;
 }
@@ -553,23 +552,22 @@ body:has([data-export-layout]) {
   background: #0a0f1a;
 }
 
-/* Documento LinkedIn / PDF — impressão A4 */
+/* Documento LinkedIn / PDF — impressão A4 (mantém identidade escura + cyan) */
 @media print {
   @page {
     size: A4;
-    margin: 14mm 12mm;
+    margin: 10mm 10mm;
   }
 
   body {
-    background: #fff !important;
-    color: #0f172a !important;
+    background: #0a0f1a !important;
+    color: #f1f5f9 !important;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
 
   .no-print,
-  header,
-  footer,
+  [data-site-chrome],
   [data-animated-bg] {
     display: none !important;
   }
@@ -579,8 +577,8 @@ body:has([data-export-layout]) {
   }
 
   .export-doc {
-    background: #fff !important;
-    color: #0f172a !important;
+    background: #0a0f1a !important;
+    color: #f1f5f9 !important;
     min-height: 0 !important;
   }
 
@@ -590,36 +588,23 @@ body:has([data-export-layout]) {
     margin: 0 !important;
   }
 
-  .export-doc-sheet h1,
-  .export-doc-sheet h2,
-  .export-doc-sheet .text-primary,
-  .export-doc-sheet p.font-semibold {
-    color: #0f172a !important;
-  }
-
-  .export-doc-sheet .text-muted,
-  .export-doc-sheet .text-primary\/85,
-  .export-doc-sheet .text-primary\/80,
-  .export-doc-sheet .text-primary\/90 {
-    color: #475569 !important;
-  }
-
-  .export-doc-sheet .text-accent,
-  .export-doc-sheet .text-accent\/90 {
-    color: #0e7490 !important;
-  }
-
-  .export-doc-card {
+  .export-brand-masthead,
+  .export-meta,
+  .export-split > div,
+  .export-hero {
     break-inside: avoid;
     page-break-inside: avoid;
-    border: 1px solid #cbd5e1 !important;
-    background: #f8fafc !important;
-    border-radius: 8px !important;
+  }
+
+  .export-hero {
     box-shadow: none !important;
   }
 
-  .export-doc-card img {
-    max-height: 140px;
-    object-fit: contain;
+  .export-hero .aspect-\[16\/9\] {
+    max-height: 88mm;
+  }
+
+  .export-doc-footer {
+    break-inside: avoid;
   }
 }

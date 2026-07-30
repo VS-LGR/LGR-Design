@@ -71,12 +71,20 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
 
   return (
     <div className="w-full max-w-6xl xl:max-w-7xl mx-auto py-6 md:py-10 px-4 sm:px-5 md:px-8 space-y-6 md:space-y-8 overflow-x-hidden">
-      <Link
-        href="/projetos"
-        className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
-      >
-        {t.caseDeck.backToProjects}
-      </Link>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Link
+          href="/projetos"
+          className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring"
+        >
+          {t.caseDeck.backToProjects}
+        </Link>
+        <Link
+          href={`/export/projetos/${project.slug}`}
+          className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring rounded underline-offset-4 hover:underline"
+        >
+          {t.exportDoc.openProjectCta}
+        </Link>
+      </div>
 
       <header className="rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/40 to-surface/20 p-5 md:p-7 space-y-5 md:space-y-6">
         <div className="space-y-3">
