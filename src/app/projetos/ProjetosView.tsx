@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { useLocale } from "@/contexts/LocaleContext";
 
@@ -16,6 +17,14 @@ export function ProjetosView() {
         </h1>
         <p className="text-sm md:text-base text-muted leading-relaxed max-w-2xl">
           {t.pages.projectsLead}
+        </p>
+        <p className="pt-1">
+          <Link
+            href="/export/projetos"
+            className="inline-flex items-center text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring rounded underline-offset-4 hover:underline"
+          >
+            {t.exportDoc.openCta}
+          </Link>
         </p>
       </header>
       <ProjectGrid />

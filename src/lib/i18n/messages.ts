@@ -110,6 +110,8 @@ export type UiMessages = {
     caseCta: string;
     caseNotFound: string;
     galleryHeading: string;
+    galleryExpand: string;
+    galleryClose: string;
   };
   pages: {
     projectsHeading: string;
@@ -119,6 +121,18 @@ export type UiMessages = {
     workHeading: string;
     workLead: string;
     hireHeading: string;
+  };
+  exportDoc: {
+    title: string;
+    kicker: string;
+    lead: string;
+    printCta: string;
+    openCta: string;
+    roleLabel: string;
+    typeLabel: string;
+    segmentLabel: string;
+    footer: string;
+    linkedinHint: string;
   };
   hire: {
     viewCase: string;
@@ -325,6 +339,8 @@ export const uiPt: UiMessages = {
     caseCta: "Ver estudo de caso",
     caseNotFound: "Case não encontrado.",
     galleryHeading: "Interface do produto",
+    galleryExpand: "Ampliar captura",
+    galleryClose: "Fechar",
   },
   pages: {
     projectsHeading: "Projetos selecionados",
@@ -336,6 +352,19 @@ export const uiPt: UiMessages = {
     workLead:
       "Princípios, processo adaptável e ferramentas que uso para transformar requisitos em interfaces claras e entregas navegáveis.",
     hireHeading: "Contratar",
+  },
+  exportDoc: {
+    title: "Seleção de projetos",
+    kicker: "Documento para LinkedIn",
+    lead: "Resumo profissional de entregas em UX, web design e sistemas — pronto para PDF ou anexo no LinkedIn.",
+    printCta: "Imprimir / salvar PDF",
+    openCta: "Abrir documento LinkedIn",
+    roleLabel: "Papel",
+    typeLabel: "Tipo",
+    segmentLabel: "Segmento",
+    footer: "Lucas Gabriel Rodrigues — UX, Web Design & Desenvolvimento digital",
+    linkedinHint:
+      "Use Imprimir → Salvar como PDF (A4) e anexe no LinkedIn ou use como base de post.",
   },
   hire: {
     viewCase: "Ver case",
@@ -546,6 +575,8 @@ export const uiEn: UiMessages = {
     caseCta: "View case study",
     caseNotFound: "Case not found.",
     galleryHeading: "Product interface",
+    galleryExpand: "Expand screenshot",
+    galleryClose: "Close",
   },
   pages: {
     projectsHeading: "Selected projects",
@@ -557,6 +588,19 @@ export const uiEn: UiMessages = {
     workLead:
       "Principles, an adaptable process, and tools I use to turn requirements into clear interfaces and navigable deliveries.",
     hireHeading: "Hire",
+  },
+  exportDoc: {
+    title: "Selected projects",
+    kicker: "LinkedIn document",
+    lead: "Professional summary of UX, web design, and systems work — ready as PDF or LinkedIn attachment.",
+    printCta: "Print / save PDF",
+    openCta: "Open LinkedIn document",
+    roleLabel: "Role",
+    typeLabel: "Type",
+    segmentLabel: "Segment",
+    footer: "Lucas Gabriel Rodrigues — UX, Web Design & Digital Development",
+    linkedinHint:
+      "Use Print → Save as PDF (A4) and attach on LinkedIn, or use it as a post outline.",
   },
   hire: {
     viewCase: "View case",

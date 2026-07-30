@@ -541,3 +541,85 @@
     transform: none;
   }
 }
+
+/* Página de export: esconde chrome do site */
+body:has([data-export-layout]) header,
+body:has([data-export-layout]) footer,
+body:has([data-export-layout]) [data-animated-bg] {
+  display: none !important;
+}
+
+body:has([data-export-layout]) {
+  background: #0a0f1a;
+}
+
+/* Documento LinkedIn / PDF — impressão A4 */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 12mm;
+  }
+
+  body {
+    background: #fff !important;
+    color: #0f172a !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .no-print,
+  header,
+  footer,
+  [data-animated-bg] {
+    display: none !important;
+  }
+
+  main {
+    display: block !important;
+  }
+
+  .export-doc {
+    background: #fff !important;
+    color: #0f172a !important;
+    min-height: 0 !important;
+  }
+
+  .export-doc-sheet {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .export-doc-sheet h1,
+  .export-doc-sheet h2,
+  .export-doc-sheet .text-primary,
+  .export-doc-sheet p.font-semibold {
+    color: #0f172a !important;
+  }
+
+  .export-doc-sheet .text-muted,
+  .export-doc-sheet .text-primary\/85,
+  .export-doc-sheet .text-primary\/80,
+  .export-doc-sheet .text-primary\/90 {
+    color: #475569 !important;
+  }
+
+  .export-doc-sheet .text-accent,
+  .export-doc-sheet .text-accent\/90 {
+    color: #0e7490 !important;
+  }
+
+  .export-doc-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+
+  .export-doc-card img {
+    max-height: 140px;
+    object-fit: contain;
+  }
+}

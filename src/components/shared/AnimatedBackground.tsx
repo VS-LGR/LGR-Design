@@ -201,6 +201,7 @@ export function AnimatedBackground() {
     <div
       className="fixed inset-0 -z-10 overflow-hidden"
       aria-hidden="true"
+      data-animated-bg
     >
       <div
         className="animated-bg-gradient absolute inset-0 opacity-100"

@@ -124,7 +124,12 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
       </header>
 
       {gallery.length > 0 ? (
-        <CaseGallery items={gallery} heading={t.caseDeck.galleryHeading} />
+        <CaseGallery
+          items={gallery}
+          heading={t.caseDeck.galleryHeading}
+          expandLabel={t.caseDeck.galleryExpand}
+          closeLabel={t.caseDeck.galleryClose}
+        />
       ) : null}
 
       <div className="space-y-2">
