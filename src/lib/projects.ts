@@ -789,4 +789,119 @@ export const projectsList: Project[] = [
       },
     ],
   },
+  {
+    id: "grimorio-aventureiro",
+    title: "Grimório do Aventureiro",
+    category: "web",
+    topic: "empresas",
+    deliveryType: "sistema",
+    slug: "grimorio-aventureiro",
+    description:
+      "Ferramenta web de fichas DnD 5e em português: criação guiada, cálculos automáticos, magias e formas selvagens traduzidas, e forja de itens com scores de balanceamento.",
+    developmentExplanation:
+      "SPA focada na mesa brasileira — fluxo de criação alinhado ao Capítulo 1, motor de regras para HP/CA/perícias/slots, catálogos traduzidos e forja com orçamento por raridade. Conteúdo baseado em material SRD autorizado; não afiliado à Wizards of the Coast.",
+    keyStages: [
+      {
+        title: "Criação guiada de personagem",
+        description:
+          "Fluxo passo a passo (raça, classe, atributos, antecedente e equipamento) pensado para quem joga em português.",
+      },
+      {
+        title: "Motor de regras e ficha viva",
+        description:
+          "HP, CA, perícias, slots e DC calculados automaticamente — menos erro manual na mesa.",
+      },
+      {
+        title: "Forja com balanceamento",
+        description:
+          "Criação de itens mágicos com orçamento por raridade e score automático para manter o jogo equilibrado.",
+      },
+    ],
+    link: "https://dnd-br.com.br",
+    caseStudy: {
+      context: {
+        type: "Ferramenta web / sistema de fichas RPG",
+        segment: "Jogadores e mesas DnD 5e no Brasil",
+        objective:
+          "Facilitar criação e gestão de fichas em português com cálculos automáticos e conteúdo traduzido",
+        role: "UI/UX, arquitetura da informação, direção visual e front-end",
+        overview:
+          "Grimório do Aventureiro é uma ferramenta compatível com DnD 5e para a mesa brasileira: fichas em português, magias e formas selvagens traduzidas, e forja de itens com scores de balanceamento. Não afiliado à Wizards of the Coast; regras com base em material SRD autorizado.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Fichas em inglês e cálculos manuais na mesa BR",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Jogadores brasileiros enfrentam ferramentas em inglês, cálculos manuais propensos a erro e pouco suporte a magias/formas selvagens traduzidas ou criação de itens balanceados.",
+            },
+            {
+              id: "p2",
+              type: "bullets",
+              items: [
+                "Conteúdo de regras e magias majoritariamente em inglês",
+                "Cálculos de HP, CA e slots feitos à mão",
+                "Criação de itens mágicos sem referência de balanceamento",
+              ],
+            },
+          ],
+        },
+        {
+          id: "solucao",
+          label: "Solução",
+          title: "Ferramenta completa em português para a mesa",
+          blocks: [
+            {
+              id: "s1",
+              type: "text",
+              content:
+                "Um ambiente web com criação guiada, ficha viva, catálogos traduzidos e forja com score automático — focado na experiência do usuário brasileiro.",
+            },
+            {
+              id: "s2",
+              type: "bullets",
+              title: "Capacidades",
+              items: [
+                "Criação guiada alinhada ao Capítulo 1",
+                "Ficha viva com motor de regras",
+                "Magias e formas selvagens em português",
+                "Forja de itens com orçamento e score de balanceamento",
+              ],
+            },
+          ],
+        },
+        {
+          id: "resultado",
+          label: "Resultado",
+          title: "Menos fricção entre regra e mesa",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Idioma", value: "Português (BR)" },
+                { label: "Escopo", value: "Fichas · Magias · Forja" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Preview do Grimório",
+      previewDescription:
+        "Abra a ferramenta publicada para ver criação de fichas, magias e forja em português.",
+    },
+    caseProblem:
+      "Reduzir a fricção de fichas DnD 5e em inglês e cálculos manuais para mesas brasileiras, com conteúdo traduzido e criação de itens balanceada.",
+    caseSolution:
+      "SPA Grimório com criação guiada, motor de regras, magias/formas selvagens em PT e forja com scores automáticos de balanceamento.",
+    caseResults: [
+      { label: "Idioma", value: "Português (BR)" },
+      { label: "Escopo", value: "Fichas · Magias · Forja" },
+    ],
+  },
 ];

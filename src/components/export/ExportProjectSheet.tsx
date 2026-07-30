@@ -5,31 +5,52 @@ import type { UiMessages } from "@/lib/i18n/messages";
 import {
   ExportScene,
   PRODUCT_SCENE_IDS,
+  getPackCaptions,
   type ExportSceneId,
 } from "@/components/export/ExportScene";
 
+function chapterTitle(project: Project, chapterId: string): string | null {
+  const alt =
+    chapterId === "problema"
+      ? "problem"
+      : chapterId === "solucao"
+        ? "solution"
+        : null;
+  return (
+    project.caseStudy?.chapters?.find(
+      (c) => c.id === chapterId || (alt != null && c.id === alt)
+    )?.title ?? null
+  );
+}
+
 function firstTextBlock(project: Project, chapterId: string): string | null {
-  const chapter = project.caseStudy?.chapters?.find((c) => c.id === chapterId);
+  const alt =
+    chapterId === "problema"
+      ? "problem"
+      : chapterId === "solucao"
+        ? "solution"
+        : null;
+  const chapter = project.caseStudy?.chapters?.find(
+    (c) => c.id === chapterId || (alt != null && c.id === alt)
+  );
   const block = chapter?.blocks?.find((b) => b.type === "text" && b.content);
   return block?.content ?? null;
 }
 
-function chapterTitle(project: Project, chapterId: string): string | null {
-  return (
-    project.caseStudy?.chapters?.find((c) => c.id === chapterId)?.title ?? null
-  );
-}
-
-function sceneCaption(id: ExportSceneId, t: UiMessages): string {
+function sceneCaption(
+  id: ExportSceneId,
+  captions: { hub: string; flow: string; trust: string },
+  fallback: string
+): string {
   switch (id) {
     case "product-hub":
-      return t.exportDoc.sceneHub;
+      return captions.hub;
     case "product-flow":
-      return t.exportDoc.sceneFlow;
+      return captions.flow;
     case "product-trust":
-      return t.exportDoc.sceneTrust;
+      return captions.trust;
     default:
-      return t.exportDoc.sceneConcept;
+      return fallback;
   }
 }
 
@@ -75,7 +96,6 @@ function SlideChrome({ index, total, t, children }: SlideChromeProps) {
   );
 }
 
-/** Bloco de texto compacto + cena SVG ocupando o restante do slide */
 function SlideBody({
   kicker,
   title,
@@ -116,7 +136,11 @@ type ExportProjectSheetProps = {
   locale: "pt" | "en";
 };
 
-export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
+export function ExportProjectSheet({
+  project,
+  t,
+  locale,
+}: ExportProjectSheetProps) {
   const ctx = project.caseStudy?.context;
   const stages = (project.keyStages ?? []).slice(0, 3);
   const challenge =
@@ -128,6 +152,8 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
   const results = (project.caseResults ?? []).slice(0, 4);
   const deliveryLabel = t.deliveryType[project.deliveryType];
   const deliveryType = project.deliveryType;
+  const slug = project.slug;
+  const packCaptions = getPackCaptions(slug, locale);
   const visualScenes = PRODUCT_SCENE_IDS;
   const hasProblem = Boolean(challenge);
   const hasSolution = Boolean(solution);
@@ -145,13 +171,19 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
   let n = 0;
   const next = () => ++n;
 
+  const sceneProps = {
+    projectSlug: slug,
+    deliveryType,
+    title: project.title,
+    locale,
+  };
+
   return (
     <article className="export-doc-sheet export-carousel mx-auto max-w-[720px] px-4 sm:px-5 py-8 md:py-10 space-y-6 md:space-y-8">
       <p className="no-print mx-auto max-w-lg text-center text-xs leading-relaxed text-muted">
         {t.exportDoc.carouselLabel} · {total} slides · {t.exportDoc.linkedinHint}
       </p>
 
-      {/* CAPA — visual dominante */}
       <SlideChrome index={next()} total={total} t={t}>
         <div className="flex shrink-0 flex-wrap items-center gap-2">
           <span className="inline-flex rounded-md border border-accent/40 bg-accent/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
@@ -168,12 +200,7 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
           {problemHook ?? t.exportDoc.coverHook}
         </p>
         <div className="min-h-0 flex-1">
-          <ExportScene
-            id="cover"
-            deliveryType={deliveryType}
-            title={project.title}
-            className="h-full"
-          />
+          <ExportScene id="cover" {...sceneProps} className="h-full" />
         </div>
         <p className="shrink-0 text-sm font-semibold text-accent">
           {t.exportDoc.swipeHint}
@@ -209,11 +236,7 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
               ) : null
             }
             scene={
-              <ExportScene
-                id="challenge"
-                deliveryType={deliveryType}
-                className="h-full"
-              />
+              <ExportScene id="challenge" {...sceneProps} className="h-full" />
             }
           />
         </SlideChrome>
@@ -243,7 +266,7 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
           <div className="min-h-0 flex-1">
             <ExportScene
               id="step"
-              deliveryType={deliveryType}
+              {...sceneProps}
               stepIndex={i}
               className="h-full"
             />
@@ -255,14 +278,13 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
         <SlideChrome key={sceneId} index={next()} total={total} t={t}>
           <SlideBody
             kicker={t.exportDoc.visualLabel}
-            title={sceneCaption(sceneId, t)}
+            title={sceneCaption(
+              sceneId,
+              packCaptions,
+              t.exportDoc.sceneConcept
+            )}
             scene={
-              <ExportScene
-                id={sceneId}
-                deliveryType={deliveryType}
-                title={project.title}
-                className="h-full"
-              />
+              <ExportScene id={sceneId} {...sceneProps} className="h-full" />
             }
           />
         </SlideChrome>
@@ -275,17 +297,12 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
             title={solutionHook ?? t.exportDoc.solutionLabel}
             body={solution}
             scene={
-              <ExportScene
-                id="solution"
-                deliveryType={deliveryType}
-                className="h-full"
-              />
+              <ExportScene id="solution" {...sceneProps} className="h-full" />
             }
           />
         </SlideChrome>
       ) : null}
 
-      {/* RESULTADO — cards em grade + SVG dominante (sem vazio) */}
       {hasResults ? (
         <SlideChrome index={next()} total={total} t={t}>
           <header className="shrink-0 space-y-1">
@@ -312,11 +329,7 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
             ))}
           </ul>
           <div className="min-h-0 flex-1">
-            <ExportScene
-              id="result"
-              deliveryType={deliveryType}
-              className="h-full"
-            />
+            <ExportScene id="result" {...sceneProps} className="h-full" />
           </div>
         </SlideChrome>
       ) : null}
@@ -324,11 +337,7 @@ export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
       <SlideChrome index={next()} total={total} t={t}>
         <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-3 text-center">
           <div className="w-full max-h-[42%] min-h-0 flex-1">
-            <ExportScene
-              id="cta"
-              deliveryType={deliveryType}
-              className="h-full"
-            />
+            <ExportScene id="cta" {...sceneProps} className="h-full" />
           </div>
           <h2 className="shrink-0 max-w-sm text-2xl font-bold leading-tight tracking-tight text-primary text-balance">
             {t.exportDoc.ctaTitle}

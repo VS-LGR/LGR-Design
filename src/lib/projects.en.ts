@@ -699,4 +699,119 @@ export const projectsListEn: Project[] = [
       { label: "Highlights", value: "Micro-interactions + VLibras" },
     ],
   },
+  {
+    id: "grimorio-aventureiro",
+    title: "Grimório do Aventureiro",
+    category: "web",
+    topic: "empresas",
+    deliveryType: "sistema",
+    slug: "grimorio-aventureiro",
+    description:
+      "DnD 5e character-sheet web tool in Portuguese: guided creation, automatic calculations, translated spells and wild shapes, and item forge with balance scores.",
+    developmentExplanation:
+      "SPA built for Brazilian tables — Chapter 1 creation flow, rules engine for HP/AC/skills/slots, translated catalogs, and rarity-budget forge. SRD-based content; not affiliated with Wizards of the Coast.",
+    keyStages: [
+      {
+        title: "Guided character creation",
+        description:
+          "Step-by-step flow (race, class, abilities, background, gear) designed for Portuguese-speaking players.",
+      },
+      {
+        title: "Rules engine and living sheet",
+        description:
+          "HP, AC, skills, slots, and DCs calculated automatically — fewer manual mistakes at the table.",
+      },
+      {
+        title: "Forge with balance scoring",
+        description:
+          "Magic item creation with rarity budgets and an automatic score to keep play balanced.",
+      },
+    ],
+    link: "https://dnd-br.com.br",
+    caseStudy: {
+      context: {
+        type: "Web tool / RPG character sheet system",
+        segment: "DnD 5e players and tables in Brazil",
+        objective:
+          "Make Portuguese character creation and management easier with auto-calculations and translated content",
+        role: "UI/UX, information architecture, visual direction, and front-end",
+        overview:
+          "Grimório do Aventureiro is a DnD 5e-compatible tool for Brazilian tables: sheets in Portuguese, translated spells and wild shapes, and an item forge with balance scores. Not affiliated with Wizards of the Coast; rules based on authorized SRD material.",
+      },
+      chapters: [
+        {
+          id: "problem",
+          label: "Problem",
+          title: "English sheets and manual math at Brazilian tables",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Brazilian players often face English-only tools, error-prone manual calculations, and little support for translated spells/wild shapes or balanced item crafting.",
+            },
+            {
+              id: "p2",
+              type: "bullets",
+              items: [
+                "Rules and spell content mostly in English",
+                "HP, AC, and slot math done by hand",
+                "Magic item creation without balance guidance",
+              ],
+            },
+          ],
+        },
+        {
+          id: "solution",
+          label: "Solution",
+          title: "A full Portuguese tool for the table",
+          blocks: [
+            {
+              id: "s1",
+              type: "text",
+              content:
+                "A web environment with guided creation, a living sheet, translated catalogs, and a forge with automatic scoring — focused on Brazilian UX.",
+            },
+            {
+              id: "s2",
+              type: "bullets",
+              title: "Capabilities",
+              items: [
+                "Guided creation aligned with Chapter 1",
+                "Living sheet with a rules engine",
+                "Spells and wild shapes in Portuguese",
+                "Item forge with budget and balance score",
+              ],
+            },
+          ],
+        },
+        {
+          id: "results",
+          label: "Results",
+          title: "Less friction between rules and play",
+          blocks: [
+            {
+              id: "r1",
+              type: "stats",
+              stats: [
+                { label: "Language", value: "Brazilian Portuguese" },
+                { label: "Scope", value: "Sheets · Spells · Forge" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Grimório preview",
+      previewDescription:
+        "Open the live tool to explore character creation, spells, and forge in Portuguese.",
+    },
+    caseProblem:
+      "Reduce friction from English DnD 5e sheets and manual math for Brazilian tables, with translated content and balanced item creation.",
+    caseSolution:
+      "Grimório SPA with guided creation, rules engine, PT spells/wild shapes, and forge with automatic balance scores.",
+    caseResults: [
+      { label: "Language", value: "Brazilian Portuguese" },
+      { label: "Scope", value: "Sheets · Spells · Forge" },
+    ],
+  },
 ];
