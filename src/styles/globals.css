@@ -623,4 +623,13 @@ body:has([data-export-layout]) {
     page-break-after: auto;
     break-after: auto;
   }
+
+  .export-scene {
+    border-radius: 10px !important;
+  }
+
+  .export-scene svg {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }

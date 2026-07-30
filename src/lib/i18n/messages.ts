@@ -155,6 +155,10 @@ export type UiMessages = {
     ctaLead: string;
     ctaContact: string;
     slideOf: string;
+    sceneHub: string;
+    sceneFlow: string;
+    sceneTrust: string;
+    sceneConcept: string;
   };
   hire: {
     viewCase: string;
@@ -411,6 +415,10 @@ export const uiPt: UiMessages = {
       "UX, web design e sistemas — do briefing à interface pronta para usar.",
     ctaContact: "Vamos conversar",
     slideOf: "de",
+    sceneHub: "Hub visual do produto",
+    sceneFlow: "Módulos conectados em fluxo",
+    sceneTrust: "Rastreabilidade e confiança",
+    sceneConcept: "Cenário ilustrado do projeto",
   },
   hire: {
     viewCase: "Ver case",
@@ -671,6 +679,10 @@ export const uiEn: UiMessages = {
       "UX, web design, and systems — from briefing to a ready-to-use interface.",
     ctaContact: "Let's talk",
     slideOf: "of",
+    sceneHub: "Product hub concept",
+    sceneFlow: "Connected modules in flow",
+    sceneTrust: "Traceability and trust",
+    sceneConcept: "Illustrated project scenario",
   },
   hire: {
     viewCase: "View case",

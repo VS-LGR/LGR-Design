@@ -1,21 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import type { StaticImageData } from "next/image";
 import type { Project } from "@/types";
 import type { UiMessages } from "@/lib/i18n/messages";
-
-function thumbSrc(
-  thumbnail: Project["thumbnail"]
-): string | StaticImageData | null {
-  if (
-    thumbnail == null ||
-    (typeof thumbnail === "string" && thumbnail.startsWith("["))
-  ) {
-    return null;
-  }
-  return thumbnail;
-}
+import {
+  ExportScene,
+  PRODUCT_SCENE_IDS,
+  type ExportSceneId,
+} from "@/components/export/ExportScene";
 
 function firstTextBlock(project: Project, chapterId: string): string | null {
   const chapter = project.caseStudy?.chapters?.find((c) => c.id === chapterId);
@@ -27,6 +18,19 @@ function chapterTitle(project: Project, chapterId: string): string | null {
   return (
     project.caseStudy?.chapters?.find((c) => c.id === chapterId)?.title ?? null
   );
+}
+
+function sceneCaption(id: ExportSceneId, t: UiMessages): string {
+  switch (id) {
+    case "product-hub":
+      return t.exportDoc.sceneHub;
+    case "product-flow":
+      return t.exportDoc.sceneFlow;
+    case "product-trust":
+      return t.exportDoc.sceneTrust;
+    default:
+      return t.exportDoc.sceneConcept;
+  }
 }
 
 type SlideChromeProps = {
@@ -85,14 +89,9 @@ type ExportProjectSheetProps = {
   locale: "pt" | "en";
 };
 
-export function ExportProjectSheet({
-  project,
-  t,
-}: ExportProjectSheetProps) {
+export function ExportProjectSheet({ project, t }: ExportProjectSheetProps) {
   const ctx = project.caseStudy?.context;
-  const gallery = project.caseStudy?.gallery ?? [];
   const stages = (project.keyStages ?? []).slice(0, 3);
-  const hero = gallery[0]?.src ?? thumbSrc(project.thumbnail);
   const challenge =
     project.caseProblem ?? firstTextBlock(project, "problema");
   const solution =
@@ -101,10 +100,9 @@ export function ExportProjectSheet({
   const solutionHook = chapterTitle(project, "solucao");
   const results = (project.caseResults ?? []).slice(0, 3);
   const deliveryLabel = t.deliveryType[project.deliveryType];
+  const deliveryType = project.deliveryType;
 
-  /** Capturas dedicadas (pula a do hero da capa para variar o carrossel) */
-  const visualSlides = (gallery.length > 1 ? gallery.slice(1, 4) : gallery.slice(0, 2));
-
+  const visualScenes = PRODUCT_SCENE_IDS;
   const hasProblem = Boolean(challenge);
   const hasSolution = Boolean(solution);
   const hasResults = results.length > 0;
@@ -113,7 +111,7 @@ export function ExportProjectSheet({
     1 +
     (hasProblem ? 1 : 0) +
     stages.length +
-    visualSlides.length +
+    visualScenes.length +
     (hasSolution ? 1 : 0) +
     (hasResults ? 1 : 0) +
     1;
@@ -127,9 +125,9 @@ export function ExportProjectSheet({
         {t.exportDoc.carouselLabel} · {total} slides · {t.exportDoc.linkedinHint}
       </p>
 
-      {/* CAPA — o que o LinkedIn mostra primeiro */}
+      {/* CAPA */}
       <SlideChrome index={next()} total={total} t={t}>
-        <div className="flex flex-1 flex-col gap-3.5 min-h-0">
+        <div className="flex flex-1 flex-col gap-3 min-h-0">
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex rounded-md border border-accent/40 bg-accent/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent">
               {t.exportDoc.coverEyebrow}
@@ -149,18 +147,14 @@ export function ExportProjectSheet({
             {project.description}
           </p>
 
-          {hero ? (
-            <div className="relative mt-auto flex-1 min-h-[180px] overflow-hidden rounded-xl border border-white/10 bg-[#e8eef5] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]">
-              <Image
-                src={hero}
-                alt={gallery[0]?.alt ?? project.title}
-                fill
-                className="object-contain object-top p-1.5"
-                sizes="680px"
-                priority
-              />
-            </div>
-          ) : null}
+          <div className="mt-auto flex-1 min-h-0 flex flex-col justify-end">
+            <ExportScene
+              id="cover"
+              deliveryType={deliveryType}
+              title={project.title}
+              className="aspect-[16/9] max-h-[200px]"
+            />
+          </div>
 
           <p className="text-sm font-semibold text-accent">
             {t.exportDoc.swipeHint}
@@ -171,46 +165,41 @@ export function ExportProjectSheet({
       {/* DESAFIO */}
       {hasProblem && challenge ? (
         <SlideChrome index={next()} total={total} t={t}>
-          <div className="flex flex-1 flex-col gap-5 justify-center">
+          <div className="flex flex-1 flex-col gap-3 min-h-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
               {t.exportDoc.challengeLabel}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight leading-tight text-balance">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary tracking-tight leading-tight text-balance">
               {problemHook ?? t.exportDoc.challengeLabel}
             </h2>
-            <p className="text-base sm:text-lg text-primary/85 leading-relaxed">
+            <p className="text-sm sm:text-base text-primary/85 leading-relaxed line-clamp-4">
               {challenge}
             </p>
+            <div className="mt-auto">
+              <ExportScene
+                id="challenge"
+                deliveryType={deliveryType}
+                className="aspect-[16/9] max-h-[160px]"
+              />
+            </div>
             {ctx ? (
-              <div className="grid grid-cols-1 gap-3 pt-1">
-                <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-accent/90 font-semibold">
-                    {t.exportDoc.segmentLabel}
-                  </p>
-                  <p className="mt-1 text-sm text-primary/90">{ctx.segment}</p>
-                </div>
-                <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-accent/90 font-semibold">
-                    {t.exportDoc.roleLabel}
-                  </p>
-                  <p className="mt-1 text-sm text-primary/90">{ctx.role}</p>
-                </div>
-              </div>
+              <p className="text-xs text-muted truncate">
+                {ctx.segment} · {ctx.role}
+              </p>
             ) : null}
-            <p className="text-sm font-medium text-muted">{t.exportDoc.swipeHint}</p>
           </div>
         </SlideChrome>
       ) : null}
 
-      {/* PASSOS / DICAS — formato carrossel */}
+      {/* PASSOS + ilustração SVG */}
       {stages.map((stage, i) => (
         <SlideChrome key={stage.title} index={next()} total={total} t={t}>
-          <div className="flex flex-1 flex-col gap-5 justify-center">
-            <div className="flex items-end gap-4">
-              <span className="text-6xl sm:text-7xl font-bold text-accent/25 leading-none tabular-nums select-none">
+          <div className="flex flex-1 flex-col gap-3 min-h-0">
+            <div className="flex items-end gap-3">
+              <span className="text-5xl font-bold text-accent/25 leading-none tabular-nums select-none">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div className="pb-1.5">
+              <div className="pb-1">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
                   {t.exportDoc.stepLabel} {i + 1}/{stages.length}
                 </p>
@@ -219,38 +208,43 @@ export function ExportProjectSheet({
                 </p>
               </div>
             </div>
-            <h2 className="text-2xl sm:text-[1.75rem] font-bold text-primary tracking-tight leading-snug text-balance">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary tracking-tight leading-snug text-balance">
               {stage.title}
             </h2>
-            <p className="text-base text-primary/80 leading-relaxed max-w-prose">
+            <p className="text-sm text-primary/80 leading-relaxed line-clamp-3">
               {stage.description}
             </p>
-            <div className="h-1 w-16 rounded-full bg-accent/50" aria-hidden />
-            <p className="text-sm font-medium text-muted">{t.exportDoc.swipeHint}</p>
+            <div className="mt-auto">
+              <ExportScene
+                id="step"
+                deliveryType={deliveryType}
+                stepIndex={i}
+                className="aspect-[16/9] max-h-[150px]"
+              />
+            </div>
           </div>
         </SlideChrome>
       ))}
 
-      {/* IMAGENS AUTÊNTICAS — uma por swipe */}
-      {visualSlides.map((item) => (
-        <SlideChrome key={item.src} index={next()} total={total} t={t}>
+      {/* CENÁRIOS DE PRODUTO (SVG, sem prints) */}
+      {visualScenes.map((sceneId) => (
+        <SlideChrome key={sceneId} index={next()} total={total} t={t}>
           <div className="flex flex-1 flex-col gap-3 min-h-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
               {t.exportDoc.visualLabel}
             </p>
             <h2 className="text-lg sm:text-xl font-bold text-primary tracking-tight leading-snug text-balance">
-              {item.caption}
+              {sceneCaption(sceneId, t)}
             </h2>
-            <div className="relative flex-1 min-h-[240px] overflow-hidden rounded-xl border border-white/10 bg-[#e8eef5]">
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                className="object-contain object-top p-1.5"
-                sizes="680px"
+            <div className="mt-auto flex-1 flex flex-col justify-end">
+              <ExportScene
+                id={sceneId}
+                deliveryType={deliveryType}
+                title={project.title}
+                className="aspect-[16/9] min-h-[180px]"
               />
             </div>
-            <p className="text-xs text-muted">{t.exportDoc.galleryLabel}</p>
+            <p className="text-xs text-muted">{t.exportDoc.sceneConcept}</p>
           </div>
         </SlideChrome>
       ))}
@@ -258,26 +252,23 @@ export function ExportProjectSheet({
       {/* SOLUÇÃO */}
       {hasSolution && solution ? (
         <SlideChrome index={next()} total={total} t={t}>
-          <div className="flex flex-1 flex-col gap-5 justify-center">
+          <div className="flex flex-1 flex-col gap-3 min-h-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
               {t.exportDoc.solutionLabel}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight leading-tight text-balance">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary tracking-tight leading-tight text-balance">
               {solutionHook ?? t.exportDoc.solutionLabel}
             </h2>
-            <p className="text-base sm:text-lg text-primary/85 leading-relaxed">
+            <p className="text-sm sm:text-base text-primary/85 leading-relaxed line-clamp-4">
               {solution}
             </p>
-            {ctx?.objective ? (
-              <div className="rounded-xl border border-accent/25 bg-accent/10 px-4 py-3.5">
-                <p className="text-[10px] uppercase tracking-[0.12em] text-accent font-semibold">
-                  {t.exportDoc.objectiveLabel}
-                </p>
-                <p className="mt-1.5 text-sm text-primary/90 leading-snug">
-                  {ctx.objective}
-                </p>
-              </div>
-            ) : null}
+            <div className="mt-auto">
+              <ExportScene
+                id="solution"
+                deliveryType={deliveryType}
+                className="aspect-[16/9] max-h-[160px]"
+              />
+            </div>
           </div>
         </SlideChrome>
       ) : null}
@@ -285,56 +276,66 @@ export function ExportProjectSheet({
       {/* RESULTADO */}
       {hasResults ? (
         <SlideChrome index={next()} total={total} t={t}>
-          <div className="flex flex-1 flex-col gap-5 justify-center">
+          <div className="flex flex-1 flex-col gap-3 min-h-0">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
               {t.exportDoc.resultLabel}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight leading-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-primary tracking-tight">
               {project.title}
             </h2>
-            <ul className="space-y-3 list-none">
+            <ul className="space-y-2 list-none">
               {results.map((r) => (
                 <li
                   key={r.label}
-                  className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3.5"
+                  className="rounded-xl border border-white/8 bg-white/[0.03] px-3.5 py-2.5"
                 >
                   <p className="text-[10px] uppercase tracking-[0.12em] text-accent font-semibold">
                     {r.label}
                   </p>
-                  <p className="mt-1 text-lg font-semibold text-primary">{r.value}</p>
-                  {r.delta ? (
-                    <p className="mt-0.5 text-xs text-muted">{r.delta}</p>
-                  ) : null}
+                  <p className="mt-0.5 text-base font-semibold text-primary">
+                    {r.value}
+                  </p>
                 </li>
               ))}
             </ul>
+            <div className="mt-auto">
+              <ExportScene
+                id="result"
+                deliveryType={deliveryType}
+                className="aspect-[16/9] max-h-[120px]"
+              />
+            </div>
           </div>
         </SlideChrome>
       ) : null}
 
-      {/* CTA — fecha o carrossel pedindo ação */}
+      {/* CTA */}
       <SlideChrome index={next()} total={total} t={t}>
-        <div className="flex flex-1 flex-col items-center justify-center text-center gap-5 px-2">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-accent/45 bg-accent/15 text-lg font-bold text-accent shadow-[0_0_32px_-4px_rgba(34,184,207,0.55)]">
-            {t.system.coreLabel}
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight leading-tight text-balance max-w-sm">
-            {t.exportDoc.ctaTitle}
-          </h2>
-          <p className="text-sm sm:text-base text-muted leading-relaxed max-w-sm">
-            {t.exportDoc.ctaLead}
-          </p>
-          <div className="rounded-xl border border-accent/35 bg-accent/10 px-6 py-3.5">
-            <p className="text-sm font-semibold text-accent">
-              {t.exportDoc.ctaContact}
+        <div className="flex flex-1 flex-col gap-3 min-h-0">
+          <div className="flex-1 flex flex-col items-center justify-center text-center gap-4">
+            <ExportScene
+              id="cta"
+              deliveryType={deliveryType}
+              className="aspect-[16/9] max-h-[140px] w-full"
+            />
+            <h2 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight leading-tight text-balance max-w-sm">
+              {t.exportDoc.ctaTitle}
+            </h2>
+            <p className="text-sm text-muted leading-relaxed max-w-sm">
+              {t.exportDoc.ctaLead}
             </p>
-            <p className="text-xs text-primary/80 mt-1">
-              lukagabriel.rodrigues@gmail.com
+            <div className="rounded-xl border border-accent/35 bg-accent/10 px-6 py-3">
+              <p className="text-sm font-semibold text-accent">
+                {t.exportDoc.ctaContact}
+              </p>
+              <p className="text-xs text-primary/80 mt-1">
+                lukagabriel.rodrigues@gmail.com
+              </p>
+            </div>
+            <p className="text-[11px] text-muted max-w-xs leading-relaxed">
+              {t.exportDoc.footer}
             </p>
           </div>
-          <p className="text-[11px] text-muted max-w-xs leading-relaxed">
-            {t.exportDoc.footer}
-          </p>
         </div>
       </SlideChrome>
     </article>
