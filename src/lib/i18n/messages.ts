@@ -143,6 +143,18 @@ export type UiMessages = {
     linkedinHint: string;
     backToSelect: string;
     notFound: string;
+    carouselLabel: string;
+    swipeHint: string;
+    coverEyebrow: string;
+    coverHook: string;
+    stepLabel: string;
+    tipLabel: string;
+    visualLabel: string;
+    resultLabel: string;
+    ctaTitle: string;
+    ctaLead: string;
+    ctaContact: string;
+    slideOf: string;
   };
   hire: {
     viewCase: string;
@@ -365,27 +377,40 @@ export const uiPt: UiMessages = {
   },
   exportDoc: {
     title: "Export LinkedIn",
-    kicker: "Documento por projeto",
-    lead: "Escolha um projeto para gerar um one-pager profissional — visual alinhado à marca, pronto para PDF no LinkedIn.",
+    kicker: "Carrossel por projeto",
+    lead: "Escolha um projeto e gere um PDF em slides — formato documento/carrossel do LinkedIn, com passos e imagens reais.",
     printCta: "Imprimir / salvar PDF",
     openCta: "Exportar para LinkedIn",
     openProjectCta: "Export LinkedIn",
     selectHeading: "Escolha o projeto",
     selectLead:
-      "Cada documento é um one-pager focado — ideal para carrossel, anexo ou base de post no LinkedIn.",
+      "Cada export vira um carrossel PDF: capa chamativa, passos para deslizar e capturas reais da interface.",
     roleLabel: "Papel",
     typeLabel: "Tipo",
     segmentLabel: "Segmento",
     objectiveLabel: "Objetivo",
-    challengeLabel: "Desafio",
-    solutionLabel: "Solução",
+    challengeLabel: "O desafio",
+    solutionLabel: "A solução",
     stagesLabel: "Etapas-chave",
-    galleryLabel: "Interface",
+    galleryLabel: "Interface real",
     footer: "Lucas Gabriel Rodrigues — UX, Web Design & Desenvolvimento digital",
     linkedinHint:
-      "Imprimir → Salvar como PDF (A4). Anexe no LinkedIn ou use o visual como base de post.",
+      "Imprimir → Destino: Salvar como PDF → Páginas no tamanho do slide. No LinkedIn: criar publicação → Documento.",
     backToSelect: "Todos os exports",
     notFound: "Projeto não encontrado para export.",
+    carouselLabel: "Carrossel LinkedIn",
+    swipeHint: "Deslize para o próximo →",
+    coverEyebrow: "Case real",
+    coverHook: "Do problema à interface — em passos",
+    stepLabel: "Passo",
+    tipLabel: "Dica",
+    visualLabel: "Por dentro do produto",
+    resultLabel: "Resultado",
+    ctaTitle: "Quer um projeto com essa clareza?",
+    ctaLead:
+      "UX, web design e sistemas — do briefing à interface pronta para usar.",
+    ctaContact: "Vamos conversar",
+    slideOf: "de",
   },
   hire: {
     viewCase: "Ver case",
@@ -612,27 +637,40 @@ export const uiEn: UiMessages = {
   },
   exportDoc: {
     title: "LinkedIn export",
-    kicker: "Per-project document",
-    lead: "Pick a project to generate a professional one-pager — brand-aligned, ready as a LinkedIn PDF.",
+    kicker: "Per-project carousel",
+    lead: "Pick a project and generate a slide PDF — LinkedIn document/carousel format, with steps and real screenshots.",
     printCta: "Print / save PDF",
     openCta: "Export for LinkedIn",
     openProjectCta: "LinkedIn export",
     selectHeading: "Choose a project",
     selectLead:
-      "Each document is a focused one-pager — ideal for a carousel, attachment, or LinkedIn post outline.",
+      "Each export becomes a PDF carousel: hook cover, swipeable steps, and real interface captures.",
     roleLabel: "Role",
     typeLabel: "Type",
     segmentLabel: "Segment",
     objectiveLabel: "Objective",
-    challengeLabel: "Challenge",
-    solutionLabel: "Solution",
+    challengeLabel: "The challenge",
+    solutionLabel: "The solution",
     stagesLabel: "Key stages",
-    galleryLabel: "Interface",
+    galleryLabel: "Real interface",
     footer: "Lucas Gabriel Rodrigues — UX, Web Design & Digital Development",
     linkedinHint:
-      "Print → Save as PDF (A4). Attach on LinkedIn or use the layout as a post outline.",
+      "Print → Destination: Save as PDF → Keep slide page size. On LinkedIn: create post → Document.",
     backToSelect: "All exports",
     notFound: "Project not found for export.",
+    carouselLabel: "LinkedIn carousel",
+    swipeHint: "Swipe for the next →",
+    coverEyebrow: "Real case",
+    coverHook: "From problem to interface — step by step",
+    stepLabel: "Step",
+    tipLabel: "Tip",
+    visualLabel: "Inside the product",
+    resultLabel: "Outcome",
+    ctaTitle: "Want a project with this clarity?",
+    ctaLead:
+      "UX, web design, and systems — from briefing to a ready-to-use interface.",
+    ctaContact: "Let's talk",
+    slideOf: "of",
   },
   hire: {
     viewCase: "View case",
