@@ -321,6 +321,13 @@ body:has([data-export-layout]) {
   box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.65);
 }
 
+/* Apresentação do portfólio — LinkedIn 1200×627 */
+.export-landscape-slide {
+  aspect-ratio: 1200 / 627;
+  width: 100%;
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.65);
+}
+
 /* Documento LinkedIn — PDF carrossel (1 slide = 1 página quadrada) */
 @media print {
   @page {
@@ -382,6 +389,28 @@ body:has([data-export-layout]) {
   }
 
   .export-carousel-slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* Portfólio /exportar — físico 1200×627 (@96dpi ≈ 317.5×165.9 mm) */
+  .export-landscape-slide {
+    aspect-ratio: auto;
+    width: 317.5mm;
+    height: 165.89375mm;
+    max-width: 317.5mm;
+    max-height: 165.89375mm;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    overflow: hidden;
+  }
+
+  .export-landscape-slide:last-child {
     page-break-after: auto;
     break-after: auto;
   }

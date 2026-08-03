@@ -197,6 +197,32 @@ export type UiMessages = {
     sceneTrust: string;
     sceneConcept: string;
   };
+  exportPortfolio: {
+    backHome: string;
+    carouselLabel: string;
+    linkedinHint: string;
+    coverEyebrow: string;
+    coverTitle: string;
+    coverLead: string;
+    positionKicker: string;
+    positionTitle: string;
+    positionPoints: Array<{ title: string; body: string }>;
+    screenHome: string;
+    homeTitle: string;
+    screenProjects: string;
+    projectsTitle: string;
+    projectsLead: string;
+    screenProcess: string;
+    processTitle: string;
+    screenAbout: string;
+    aboutTitle: string;
+    aboutObjectiveLabel: string;
+    screenContact: string;
+    contactTitle: string;
+    ctaEyebrow: string;
+    ctaTitle: string;
+    ctaLead: string;
+  };
   hire: {
     viewCase: string;
     selectServiceAria: string;
@@ -522,6 +548,49 @@ export const uiPt: UiMessages = {
     sceneFlow: "Módulos: documentos, coleta, certificados, comercial",
     sceneTrust: "Lista Mestra e rastreabilidade documental",
     sceneConcept: "Cenário ilustrado do sistema",
+  },
+  exportPortfolio: {
+    backHome: "Início",
+    carouselLabel: "Apresentação do portfólio",
+    linkedinHint:
+      "Imprimir → Salvar como PDF (1200×627). No LinkedIn: Documento ou sequência de imagens.",
+    coverEyebrow: "Novo portfólio",
+    coverTitle: "Do problema ao produto navegável.",
+    coverLead:
+      "Apresento meu portfólio atualizado — UX/UI, produto e desenvolvimento web em uma narrativa feita para recrutadores.",
+    positionKicker: "Posicionamento",
+    positionTitle: "Não desenho só interface — construo produto.",
+    positionPoints: [
+      {
+        title: "UX/UI",
+        body: "Experiência, hierarquia e clareza de decisão na interface.",
+      },
+      {
+        title: "Product",
+        body: "Problema, escopo e critérios antes do layout.",
+      },
+      {
+        title: "Web",
+        body: "Entrega navegável alinhada ao design e ao contexto.",
+      },
+    ],
+    screenHome: "Tela · Home",
+    homeTitle: "Entrada pensada para contratação",
+    screenProjects: "Tela · Projetos",
+    projectsTitle: "Seleção em destaque",
+    projectsLead:
+      "Cases onde UX, produto e tecnologia trabalham juntos — incluindo sistemas, web e estudos.",
+    screenProcess: "Tela · Processo",
+    processTitle: "Método em cinco movimentos",
+    screenAbout: "Tela · Sobre",
+    aboutTitle: "Trajetória e objetivo",
+    aboutObjectiveLabel: "Objetivo profissional",
+    screenContact: "Tela · Contato",
+    contactTitle: "Próximo passo",
+    ctaEyebrow: "Explore",
+    ctaTitle: "Conheça o portfólio completo",
+    ctaLead:
+      "Cases, processo e contato — tudo alinhado à interseção de UX, produto e web.",
   },
   hire: {
     viewCase: "Ver case",
@@ -854,6 +923,49 @@ export const uiEn: UiMessages = {
     sceneFlow: "Modules: documents, field, certificates, sales",
     sceneTrust: "Master list and document traceability",
     sceneConcept: "Illustrated system scenario",
+  },
+  exportPortfolio: {
+    backHome: "Home",
+    carouselLabel: "Portfolio presentation",
+    linkedinHint:
+      "Print → Save as PDF (1200×627). On LinkedIn: Document or image sequence.",
+    coverEyebrow: "New portfolio",
+    coverTitle: "From problem to navigable product.",
+    coverLead:
+      "Here's my updated portfolio — UX/UI, product, and web development in a narrative built for recruiters.",
+    positionKicker: "Positioning",
+    positionTitle: "I don't only design interfaces — I build product.",
+    positionPoints: [
+      {
+        title: "UX/UI",
+        body: "Experience, hierarchy, and clear decisions in the interface.",
+      },
+      {
+        title: "Product",
+        body: "Problem, scope, and criteria before the layout.",
+      },
+      {
+        title: "Web",
+        body: "Navigable delivery aligned with design and context.",
+      },
+    ],
+    screenHome: "Screen · Home",
+    homeTitle: "An entry built for hiring",
+    screenProjects: "Screen · Projects",
+    projectsTitle: "Featured selection",
+    projectsLead:
+      "Cases where UX, product, and technology work together — including systems, web, and studies.",
+    screenProcess: "Screen · Process",
+    processTitle: "Method in five moves",
+    screenAbout: "Screen · About",
+    aboutTitle: "Path and objective",
+    aboutObjectiveLabel: "Professional objective",
+    screenContact: "Screen · Contact",
+    contactTitle: "Next step",
+    ctaEyebrow: "Explore",
+    ctaTitle: "See the full portfolio",
+    ctaLead:
+      "Cases, process, and contact — aligned with the intersection of UX, product, and web.",
   },
   hire: {
     viewCase: "View case",

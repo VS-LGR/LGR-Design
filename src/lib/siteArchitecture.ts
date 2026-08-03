@@ -20,6 +20,7 @@ export const SITE_ROUTES = {
   hire: "/contratar",
   exportIndex: "/export/projetos",
   exportProject: (slug: string) => `/export/projetos/${slug}`,
+  exportPortfolio: "/exportar",
 } as const;
 
 /** Destinos legados → canônicos */
