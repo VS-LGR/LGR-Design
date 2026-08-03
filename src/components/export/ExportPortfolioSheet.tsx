@@ -2,8 +2,11 @@
 
 import type { Project } from "@/types";
 import type { UiMessages } from "@/lib/i18n/messages";
-import { SITE_URL } from "@/lib/siteMeta";
 import { ProjectCover } from "@/components/projects/covers/ProjectCover";
+import { IconQualiProc } from "@/components/projects/covers/ProjectCoverIcons";
+
+const PORTFOLIO_URL = "https://lgr-design.vercel.app";
+const PORTFOLIO_HOST = "lgr-design.vercel.app";
 
 type ExportPortfolioSheetProps = {
   t: UiMessages;
@@ -67,11 +70,10 @@ export function ExportPortfolioSheet({
   projects,
 }: ExportPortfolioSheetProps) {
   const ep = t.exportPortfolio;
-  const siteHost = SITE_URL.replace(/^https?:\/\//, "");
   const qualiproc = bySlug(projects, "qualiproc-ctli");
   const dverso = bySlug(projects, "clinica-dverso");
   const ofag = bySlug(projects, "ofag-revamp");
-  const grimorio = bySlug(projects, "grimorio-aventureiro");
+  const processSteps = t.home.processSteps;
 
   const total = 6;
   let n = 0;
@@ -95,6 +97,7 @@ export function ExportPortfolioSheet({
           <p className="text-sm sm:text-base text-muted max-w-lg leading-relaxed">
             {ep.coverLead}
           </p>
+          <p className="text-xs font-medium text-accent/90">{PORTFOLIO_URL}</p>
         </div>
       </Slide>
 
@@ -121,7 +124,7 @@ export function ExportPortfolioSheet({
         </div>
       </Slide>
 
-      {/* 03 — QualiProc */}
+      {/* 03 — QualiProc (ícone centralizado) */}
       <Slide index={next()} total={total} t={t}>
         <div className="flex min-h-0 flex-1 flex-col gap-3 md:flex-row md:items-stretch md:gap-6">
           <div className="flex min-w-0 flex-1 flex-col justify-center gap-3">
@@ -148,15 +151,12 @@ export function ExportPortfolioSheet({
               </p>
             ) : null}
           </div>
-          {qualiproc ? (
-            <div className="min-h-0 w-full md:w-[46%] shrink-0 overflow-hidden rounded-xl border border-white/10">
-              <ProjectCover
-                project={qualiproc}
-                variant="flagship"
-                className="aspect-[16/10] h-full min-h-[180px] border-0"
-              />
-            </div>
-          ) : null}
+          <div className="flex min-h-[180px] w-full md:w-[46%] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-[#0f1728] to-[#0c1222]">
+            <IconQualiProc
+              className="h-28 w-28 sm:h-32 sm:w-32 text-accent"
+              title="QualiProc"
+            />
+          </div>
         </div>
       </Slide>
 
@@ -200,36 +200,36 @@ export function ExportPortfolioSheet({
         </div>
       </Slide>
 
-      {/* 05 — Grimório (produto + UX) */}
+      {/* 05 — Método de desenvolvimento */}
       <Slide index={next()} total={total} t={t}>
-        <div className="flex min-h-0 flex-1 flex-col gap-3 md:flex-row md:items-stretch md:gap-6">
-          {grimorio ? (
-            <div className="min-h-0 w-full md:w-[46%] shrink-0 overflow-hidden rounded-xl border border-white/10 order-2 md:order-1">
-              <ProjectCover
-                project={grimorio}
-                className="aspect-[16/10] h-full min-h-[180px] border-0"
-              />
-            </div>
-          ) : null}
-          <div className="flex min-w-0 flex-1 flex-col justify-center gap-3 order-1 md:order-2">
+        <div className="flex min-h-0 flex-1 flex-col gap-3">
+          <div className="shrink-0 max-w-2xl">
             <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">
-              {ep.productEyebrow}
+              {ep.methodEyebrow}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary">
-              {grimorio?.title ?? "Grimório"}
+            <h2 className="mt-1 text-2xl sm:text-3xl font-bold tracking-tight text-primary">
+              {ep.methodTitle}
             </h2>
-            {grimorio?.cardHook ? (
-              <p className="text-sm font-medium text-accent/90 leading-snug">
-                {grimorio.cardHook}
-              </p>
-            ) : null}
-            <p className="text-sm text-muted leading-relaxed line-clamp-3">
-              {grimorio?.description}
-            </p>
-            {grimorio?.cardRole ? (
-              <p className="text-[11px] text-muted/90">{grimorio.cardRole}</p>
-            ) : null}
+            <p className="mt-1.5 text-sm text-muted">{ep.methodLead}</p>
           </div>
+          <ol className="grid min-h-0 flex-1 grid-cols-5 gap-2 content-center list-none">
+            {processSteps.map((step, i) => (
+              <li
+                key={step.title}
+                className="flex flex-col gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] p-3"
+              >
+                <span className="text-[10px] font-bold tabular-nums text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-xs sm:text-sm font-semibold text-primary leading-snug">
+                  {step.title}
+                </p>
+                <p className="text-[10px] text-muted leading-snug line-clamp-3">
+                  {step.description}
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
       </Slide>
 
@@ -247,7 +247,7 @@ export function ExportPortfolioSheet({
           </p>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-2.5">
             <span className="rounded-full border border-accent/40 bg-accent/10 px-5 py-2 text-sm font-semibold text-accent">
-              {siteHost}
+              {PORTFOLIO_HOST}
             </span>
             <span className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-dark">
               {ep.ctaContact}

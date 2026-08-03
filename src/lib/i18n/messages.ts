@@ -207,7 +207,9 @@ export type UiMessages = {
     flagshipEyebrow: string;
     webEyebrow: string;
     webTitle: string;
-    productEyebrow: string;
+    methodEyebrow: string;
+    methodTitle: string;
+    methodLead: string;
     ctaKicker: string;
     ctaLead: string;
     ctaContact: string;
@@ -550,9 +552,12 @@ export const uiPt: UiMessages = {
     flagshipEyebrow: "Projeto principal",
     webEyebrow: "Web",
     webTitle: "Experiências web com clareza e conversão",
-    productEyebrow: "Produto · UX",
+    methodEyebrow: "Método",
+    methodTitle: "Como eu desenvolvo",
+    methodLead: "Do problema ao produto — em cinco movimentos.",
     ctaKicker: "UX/UI · Product Design · Web",
-    ctaLead: "Conheça o portfólio completo e vamos conversar sobre o próximo passo.",
+    ctaLead:
+      "Conheça o portfólio completo em lgr-design.vercel.app e vamos conversar sobre o próximo passo.",
     ctaContact: "Vamos conversar",
   },
   hire: {
@@ -899,9 +904,12 @@ export const uiEn: UiMessages = {
     flagshipEyebrow: "Flagship project",
     webEyebrow: "Web",
     webTitle: "Web experiences with clarity and conversion",
-    productEyebrow: "Product · UX",
+    methodEyebrow: "Method",
+    methodTitle: "How I build",
+    methodLead: "From problem to product — in five moves.",
     ctaKicker: "UX/UI · Product Design · Web",
-    ctaLead: "Explore the full portfolio — let's talk about the next step.",
+    ctaLead:
+      "See the full portfolio at lgr-design.vercel.app — let's talk about the next step.",
     ctaContact: "Let's talk",
   },
   hire: {

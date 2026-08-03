@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://lucasgabriel.vercel.app";
+  "https://lgr-design.vercel.app";
 
 export const siteName = "Lucas Gabriel Rodrigues";
 
