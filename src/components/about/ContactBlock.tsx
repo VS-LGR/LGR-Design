@@ -34,6 +34,26 @@ export function ContactBlock() {
           {t.contact.email}
           <span className="opacity-80 font-normal break-all">{contact.email}</span>
         </a>
+        {contact.linkedin ? (
+          <a
+            href={contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium bg-surface border border-border-dark/50 text-primary hover:border-accent/40 transition-colors focus-ring"
+          >
+            {t.contact.linkedin}
+          </a>
+        ) : null}
+        {contact.github ? (
+          <a
+            href={contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium bg-surface border border-border-dark/50 text-primary hover:border-accent/40 transition-colors focus-ring"
+          >
+            {t.contact.github}
+          </a>
+        ) : null}
       </div>
       <div className="flex flex-wrap gap-4 pt-1">
         <Link

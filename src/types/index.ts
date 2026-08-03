@@ -34,12 +34,21 @@ export interface AboutContent {
     items: string[];
     closing?: string;
   };
+  /** Skills agrupadas para a home (hierarquia hiring) */
+  skillGroups: {
+    uxProduct: { title: string; items: string[] };
+    development: { title: string; items: string[] };
+    visual: { title: string; items: string[] };
+    closing: string;
+  };
   creativePreferences: string[];
   professionalObjective: string;
   contact: {
     phone: string;
     email: string;
     message: string;
+    linkedin?: string;
+    github?: string;
   };
   resumePdfUrl?: string;
 }
@@ -159,6 +168,12 @@ export interface Project {
   deliveryType: DeliveryType;
   /** featured (padrão) | secondary (explorações) | academic */
   visibility?: ProjectVisibility;
+  /** Tags curtas no card (SaaS · UX/UI · …) */
+  cardCategories?: string[];
+  /** Pergunta/conceito no card (flagship) */
+  cardHook?: string;
+  /** Papel no card */
+  cardRole?: string;
   slug: string;
   description: string;
   /** Explicação do processo de desenvolvimento do site/projeto */

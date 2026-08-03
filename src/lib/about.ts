@@ -2,8 +2,8 @@ import type { AboutContent } from "@/types";
 
 export const aboutContent: AboutContent = {
   intro: [
-    "Sou UX Designer e Web Designer com execução em front-end e visão de produto — focado em sistemas, produtos digitais e experiências web.",
-    "Una experiência do usuário, decisões de produto e viabilidade técnica para transformar requisitos em interfaces claras e navegáveis.",
+    "Sou UX/UI Designer, Product Designer e desenvolvedor web — focado em produtos digitais, sistemas e experiências que funcionam.",
+    "Conecto design, produto e tecnologia para transformar problemas reais em interfaces e sistemas claros.",
   ],
   formation: [
     {
@@ -92,6 +92,47 @@ export const aboutContent: AboutContent = {
     ],
     closing: "A ferramenta é meio. A estratégia e a execução são o diferencial.",
   },
+  skillGroups: {
+    uxProduct: {
+      title: "UX / Product",
+      items: [
+        "UX Design",
+        "UI Design",
+        "Product Design",
+        "Arquitetura da Informação",
+        "Wireframing",
+        "Prototipação",
+        "Design Systems",
+      ],
+    },
+    development: {
+      title: "Development",
+      items: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "Supabase",
+        "PostgreSQL",
+      ],
+    },
+    visual: {
+      title: "Visual",
+      items: [
+        "Figma",
+        "Illustrator",
+        "Photoshop",
+        "After Effects",
+        "Motion Design",
+        "Blender",
+      ],
+    },
+    closing: "As ferramentas são meios. O foco é resolver problemas.",
+  },
   creativePreferences: [
     "Game Development",
     "Pixel Art",
@@ -99,12 +140,14 @@ export const aboutContent: AboutContent = {
     "Pintura",
   ],
   professionalObjective:
-    "Atuar em times de produto na interseção de UX/UI, product thinking e desenvolvimento — e, quando fizer sentido, atender escopos freelance de LP, institucional e sistemas com entrega clara.",
+    "Atuar em times de produto na interseção de UX/UI, produto e desenvolvimento — e, quando fizer sentido, atender escopos freelance com entrega clara.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",
     message:
       "Se você é recrutador(a) ou lidera um time de produto/design, estou disponível para uma conversa objetiva. Para LP, site institucional ou sistema empresarial, use Contratar — ou WhatsApp/e-mail com o contexto do projeto.",
+    linkedin: "https://www.linkedin.com/in/lgr-art",
+    github: "https://github.com/VS-LGR",
   },
   resumePdfUrl: "/cv/lucas-gabriel-rodrigues.pdf",
 };

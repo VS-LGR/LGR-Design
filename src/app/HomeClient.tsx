@@ -4,6 +4,7 @@ import {
   HomeContactCta,
   HomeFeaturedProjects,
   HomeHero,
+  HomeProcess,
   HomeSkills,
 } from "@/components/home/HomeSections";
 
@@ -12,6 +13,7 @@ export function HomeClient() {
     <div className="animate-in">
       <HomeHero />
       <HomeFeaturedProjects />
+      <HomeProcess />
       <HomeSkills />
       <HomeContactCta />
     </div>

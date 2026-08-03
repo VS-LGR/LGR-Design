@@ -2,8 +2,8 @@ import type { AboutContent } from "@/types";
 
 export const aboutContentEn: AboutContent = {
   intro: [
-    "I am a UX and Web Designer with front-end execution and a product mindset — focused on systems, digital products, and web experiences.",
-    "I combine user experience, product decisions, and technical feasibility to turn requirements into clear, navigable interfaces.",
+    "I am a UX/UI Designer, Product Designer, and web developer — focused on digital products, systems, and experiences that work.",
+    "I connect design, product, and technology to turn real problems into clear interfaces and systems.",
   ],
   formation: [
     {
@@ -92,6 +92,47 @@ export const aboutContentEn: AboutContent = {
     ],
     closing: "The tool is a means. Strategy and execution are the differentiator.",
   },
+  skillGroups: {
+    uxProduct: {
+      title: "UX / Product",
+      items: [
+        "UX Design",
+        "UI Design",
+        "Product Design",
+        "Information Architecture",
+        "Wireframing",
+        "Prototyping",
+        "Design Systems",
+      ],
+    },
+    development: {
+      title: "Development",
+      items: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "Supabase",
+        "PostgreSQL",
+      ],
+    },
+    visual: {
+      title: "Visual",
+      items: [
+        "Figma",
+        "Illustrator",
+        "Photoshop",
+        "After Effects",
+        "Motion Design",
+        "Blender",
+      ],
+    },
+    closing: "Tools are means. The focus is solving problems.",
+  },
   creativePreferences: [
     "Game Development",
     "Pixel Art",
@@ -99,12 +140,14 @@ export const aboutContentEn: AboutContent = {
     "Painting",
   ],
   professionalObjective:
-    "Join product teams at the intersection of UX/UI, product thinking, and development — and, when it fits, take clear-scope freelance work on LPs, institutional sites, and systems.",
+    "Join product teams at the intersection of UX/UI, product, and development — and, when it fits, take clear-scope freelance work.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",
     message:
       "If you are a recruiter or lead a product/design team, I am available for a focused conversation. For an LP, institutional site, or business system, use Hire — or WhatsApp/email with project context.",
+    linkedin: "https://www.linkedin.com/in/lgr-art",
+    github: "https://github.com/VS-LGR",
   },
   resumePdfUrl: "/cv/lucas-gabriel-rodrigues.pdf",
 };

@@ -58,9 +58,15 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
       >
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center rounded-md border border-accent/35 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">
-              {deliveryLabel}
-            </span>
+            {project.cardCategories && project.cardCategories.length > 0 ? (
+              <span className="inline-flex items-center rounded-md border border-accent/35 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">
+                {project.cardCategories.join(" · ")}
+              </span>
+            ) : (
+              <span className="inline-flex items-center rounded-md border border-accent/35 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">
+                {deliveryLabel}
+              </span>
+            )}
             {project.visibility === "academic" ? (
               <span className="inline-flex items-center rounded-md border border-border-dark/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
                 {t.home.academicBadge}

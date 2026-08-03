@@ -7,10 +7,10 @@ export const SITE_URL =
 export const siteName = "Lucas Gabriel Rodrigues";
 
 export const defaultTitle =
-  "Lucas Gabriel Rodrigues | UX, Product & Desenvolvimento";
+  "Lucas Gabriel Rodrigues — UX/UI Designer, Product Designer & Desenvolvedor Web";
 
 export const defaultDescription =
-  "Portfólio de Lucas Gabriel Rodrigues — UX/UI, product thinking e desenvolvimento digital. Cases de sistemas, produtos e experiências web.";
+  "Portfólio de Lucas Gabriel Rodrigues, profissional de UX/UI, Product Design e Desenvolvimento Web, com projetos de produtos digitais, sistemas, SaaS e experiências web.";
 
 export const rootMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),

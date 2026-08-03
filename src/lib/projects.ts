@@ -21,9 +21,11 @@ export const projectsList: Project[] = [
     category: "web",
     topic: "saude",
     deliveryType: "lp-institucional",
+    cardCategories: ["UX/UI","Conversão","Gamificação"],
+    cardRole: "UX/UI · Copy · Front-end",
     slug: "psi-bia-rossi",
     description:
-      "Site institucional para psicóloga em psicanálise: metodologia, serviços, depoimentos e contato — com foco em confiança e conversão para agendamento.",
+      "Uma experiência digital pensada para transmitir conforto, confiança e facilitar o primeiro contato.",
     developmentExplanation:
       "Landing page com foco em conversão e credibilidade: hierarquia visual para serviços e depoimentos, seção de gamificação explicando a metodologia em etapas, e área de contato integrada. Layout responsivo e navegação clara para destacar o diferencial da profissional.",
     keyStages: [
@@ -50,7 +52,7 @@ export const projectsList: Project[] = [
         type: "Landing page / site de apresentação",
         segment: "Saúde mental",
         objective: "Posicionar a profissional com acolhimento e clareza clínica",
-        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        role: "UX/UI, direção visual, copy e front-end",
         overview:
           "Projeto para psicóloga com foco em psicanálise (14+ e adultos), integrando gamificação como recurso complementar sem perder credibilidade.",
       },
@@ -311,13 +313,16 @@ export const projectsList: Project[] = [
   },
   {
     id: "ofag-revamp",
-    title: "OFAG — Technical Printing",
+    title: "OFAG",
     category: "web",
     topic: "empresas",
     deliveryType: "lp-institucional",
+    cardCategories: ["B2B","UX/UI","Web"],
+    cardHook: "Capacidade alta, percepção baixa.",
+    cardRole: "UX/UI · Arquitetura da Informação · Front-end",
     slug: "ofag-revamp",
     description:
-      "Site institucional para a OFAG, indústria gráfica especializada em impressão técnica para mercados regulados, com conteúdo em português, inglês e espanhol.",
+      "Recriação e evolução de uma presença digital para uma empresa técnica com atuação internacional.",
     developmentExplanation:
       "Projeto voltado para o segmento farmacêutico e indústrias reguladas, com arquitetura de informação clara, navegação em múltiplos idiomas (PT/EN/ES) e foco em credibilidade. Destaque para processos, certificações e segmentos atendidos, com layout responsivo e tipografia orientada à leitura de conteúdo técnico.",
     keyStages: [
@@ -344,7 +349,7 @@ export const projectsList: Project[] = [
         type: "Revamp de site institucional",
         segment: "Impressão técnica para indústrias reguladas",
         objective: "Comunicar conformidade, especialização e clareza comercial",
-        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        role: "UX/UI, arquitetura da informação e front-end",
         overview:
           "Reposicionamento digital da OFAG para alinhar imagem online à maturidade operacional de um negócio técnico.",
       },
@@ -460,9 +465,12 @@ export const projectsList: Project[] = [
     category: "web",
     topic: "empresas",
     deliveryType: "sistema",
+    cardCategories: ["SaaS","UX/UI","Produto","Sistemas"],
+    cardHook: "Como transformar processos complexos em um SaaS?",
+    cardRole: "UX/UI · Arquitetura da Informação · Produto · Desenvolvimento",
     slug: "qualiproc-ctli",
     description:
-      "Plataforma SaaS multi-tenant de gestão da qualidade para laboratórios de calibração — documentos, coleta, certificados, pessoal e operações comerciais alinhados à ISO/IEC 17025.",
+      "Plataforma de gestão da qualidade para laboratórios de calibração.",
     developmentExplanation:
       "SPA React com backend Supabase (Auth, PostgreSQL, Storage, RLS e Edge Functions), deploy em Vercel. Inclui exportações PDF/DOCX, backup por tenant e governança com papéis e isolamento multi-tenant — titularidade CTLI, marca comercial QualiProc.",
     keyStages: [
@@ -490,7 +498,7 @@ export const projectsList: Project[] = [
         segment: "Laboratórios de calibração · ISO/IEC 17025",
         objective:
           "Centralizar documentos, coleta, certificados, pessoal e operações comerciais com rastreabilidade e controlo de acesso",
-        role: "UI/UX, arquitetura da informação, direção visual e front-end",
+        role: "UX/UI, arquitetura da informação, produto e desenvolvimento",
         overview:
           "QualiProc (powered by CTLI) é uma plataforma SaaS multi-tenant de gestão da qualidade para laboratórios de calibração: documentos, coleta, certificados, pessoal e operações comerciais num só sistema, com controlo de acesso, backup e governança alinhada a ISO 17025. A marca comercial é QualiProc; a titularidade do software é da CTLI.",
       },
@@ -704,13 +712,15 @@ export const projectsList: Project[] = [
   },
   {
     id: "clinica-dverso",
-    title: "Clínica Dverso",
+    title: "Clínica DVERSO",
     category: "web",
     topic: "saude",
     deliveryType: "lp-institucional",
+    cardCategories: ["Web","UX/UI","SEO","Conversão"],
+    cardRole: "UX/UI · Arquitetura da Informação · Front-end",
     slug: "clinica-dverso",
     description:
-      "Landing para a Clínica Dverso (núcleo terapêutico em Sorocaba): clareza de oferta, microinterações e acessibilidade com VLibras.",
+      "Experiência digital para uma clínica com múltiplas especialidades, estruturada para comunicação, aquisição e conversão.",
     developmentExplanation:
       "Desenvolvi uma landing acolhedora e orientada à conversão, reunindo psicologia, neurodivergência, psicoterapia musical, nutrição e terapia assistida por cão em blocos claros. Microinterações com Lottie dão vida às seções sem prejudicar a performance, CTAs estratégicos conduzem ao contato e a integração com VLibras reforça inclusão e confiança na jornada.",
     keyStages: [
@@ -737,7 +747,7 @@ export const projectsList: Project[] = [
         type: "Site institucional",
         segment: "Clínica de saúde integrada",
         objective: "Converter visitantes em contatos com acolhimento, clareza e inclusão",
-        role: "UI/UX, direção visual, arquitetura da informação, copy estratégica e front-end",
+        role: "UX/UI, arquitetura da informação, copy e front-end",
         overview:
           "Página institucional para clínica multidisciplinar, equilibrando tom acolhedor, microinterações e acessibilidade com VLibras.",
       },
@@ -861,9 +871,11 @@ export const projectsList: Project[] = [
     category: "web",
     topic: "empresas",
     deliveryType: "sistema",
+    cardCategories: ["Product Design","UX","Desenvolvimento"],
+    cardRole: "UX/UI · Produto · Desenvolvimento",
     slug: "grimorio-aventureiro",
     description:
-      "Ferramenta web de fichas DnD 5e em português: criação guiada, cálculos automáticos, magias e formas selvagens traduzidas, e forja de itens com scores de balanceamento.",
+      "Uma experiência em português para simplificar a criação e o gerenciamento de personagens de RPG.",
     developmentExplanation:
       "SPA focada na mesa brasileira — fluxo de criação alinhado ao Capítulo 1, motor de regras para HP/CA/perícias/slots, catálogos traduzidos e forja com orçamento por raridade. Conteúdo baseado em material SRD autorizado; não afiliado à Wizards of the Coast.",
     keyStages: [
@@ -890,7 +902,7 @@ export const projectsList: Project[] = [
         segment: "Jogadores e mesas DnD 5e no Brasil",
         objective:
           "Facilitar criação e gestão de fichas em português com cálculos automáticos e conteúdo traduzido",
-        role: "UI/UX, arquitetura da informação, direção visual e front-end",
+        role: "UX/UI, produto e desenvolvimento",
         overview:
           "Grimório do Aventureiro é uma ferramenta compatível com DnD 5e para a mesa brasileira: fichas em português, magias e formas selvagens traduzidas, e forja de itens com scores de balanceamento. Não afiliado à Wizards of the Coast; regras com base em material SRD autorizado.",
       },
@@ -1011,14 +1023,16 @@ export const projectsList: Project[] = [
   },
   {
     id: "hirely",
-    title: "Hirely (Recruta.AI)",
+    title: "Hirely",
     category: "ux",
     topic: "empresas",
     deliveryType: "sistema",
     visibility: "academic",
+    cardCategories: ["Product Design","IA","UX"],
+    cardRole: "Product Design · UX/UI (contexto acadêmico)",
     slug: "hirely",
     description:
-      "Conceito acadêmico de ATS com IA (Recruta.AI) — fluxo de recrutamento, clareza de produto e experiência para times de talent. Apresentado na ARCA / FIAP Next.",
+      "Conceito acadêmico de ATS com IA — recolocação, matching e experiência de recrutadores, com a IA apoiando (e não substituindo) a decisão humana.",
     developmentExplanation:
       "Estudo de produto e interface para um ATS com apoio de IA: jornada do recrutador, organização de etapas e proposta de valor sem claim de produto comercial em produção.",
     keyStages: [
@@ -1046,7 +1060,7 @@ export const projectsList: Project[] = [
         segment: "Recrutamento / ATS",
         objective:
           "Propor uma experiência de recrutamento com IA integrada, com clareza estratégica e fluxo navegável",
-        role: "Product thinking, UX/UI e narrativa de produto (contexto acadêmico)",
+        role: "Product design e UX/UI em contexto acadêmico (FIAP)",
         overview:
           "Hirely (também referido como Recruta.AI) é um estudo de produto apresentado na ARCA (FIAP Next): um ATS pensado para reduzir ambiguidade no funil de contratação com apoio de IA. Não é um produto comercial publicado — o case documenta o pensamento, a estrutura de experiência e o enquadramento acadêmico.",
       },
