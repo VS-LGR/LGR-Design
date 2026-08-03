@@ -1,6 +1,6 @@
 # Portfólio — Lucas Gabriel Rodrigues
 
-Portfólio em Next.js (App Router), React, TypeScript e Tailwind. Vitrine de projetos e apresentação profissional em UX Design e Web Design.
+Site de contratação (recruiter-first) em **Next.js 14** (App Router), React 18, TypeScript e Tailwind. Posicionamento híbrido: **UX/UI · Product · Desenvolvimento**.
 
 ## Como rodar
 
@@ -11,62 +11,44 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000).
 
-Build para produção:
-
 ```bash
-npm run build
-npm start
+npm run build && npm start
 ```
 
-## Estrutura de pastas
+Opcional: `NEXT_PUBLIC_SITE_URL` para canonical/OG/sitemap (padrão em `src/lib/siteMeta.ts`).
 
-```
-src/
-  app/              # Rotas e layout (layout.tsx, page.tsx)
-  components/       # Componentes React
-    shared/         # Header, TabNav, Footer, Button, Card, Carousel
-    about/          # AboutSection, IntroBlock, FormationBlock, ExperienceBlock, SpecialtiesCarousel, DifferentialBlock, CreativePreferencesCarousel, ObjectiveBlock
-    projects/       # ProjectGrid, ProjectCard, CategoryFilter
-    hobbies/        # HobbyGrid, HobbyCard
-  styles/           # globals.css e variáveis da paleta
-  lib/              # Conteúdo e constantes
-    about.ts        # intro, formation, experience, specialties, differential, creativePreferences, professionalObjective, resumePdfUrl
-    projects.ts     # Lista de projetos e categorias (placeholders)
-    hobbies.ts      # Lista de hobbys (placeholders)
-  types/            # Tipos TypeScript (TabId, AboutContent, Project, Hobby)
-  assets/           # Imagens e mídia (opcional)
-public/             # Arquivos estáticos (favicon, imagens)
-```
+## Rotas
 
-## Onde editar textos e dados
+| Rota | Função |
+|------|--------|
+| `/` | Home — hero + cases + skills + CTA |
+| `/projetos` | Lista (destaque + explorações) |
+| `/projetos/[slug]` | Case study (SEO por projeto) |
+| `/processo` | Método, processo e ferramentas |
+| `/sobre` | Trajetória e posicionamento |
+| `/contato` | Contato / recrutamento |
+| `/contratar` | Serviços freelance (secundário) |
+| `/export/projetos[/slug]` | Carrossel PDF LinkedIn (`noindex`) |
 
-- **Sobre Mim:** [src/lib/about.ts](src/lib/about.ts) — intro (parágrafos), formation (lista), experience (título + descrição + itens), specialties, differential, creativePreferences, professionalObjective, resumePdfUrl (opcional).
-- **Projetos:** [src/lib/projects.ts](src/lib/projects.ts) — categorias e lista de projetos (título, categoria, descrição, **developmentExplanation** para explicar o desenvolvimento de cada site, thumbnail, link).
-- **Hobbys:** [src/lib/hobbies.ts](src/lib/hobbies.ts) — títulos e descrições dos quatro hobbys (Modelagem 3D, Pintura, Game Design, Pixel Art).
+Redirects legados: `/historia` → `/sobre`, `/como-trabalho` → `/processo`, `/cases/:slug` → `/projetos/:slug`, `/exploracao` → `/contato`.
 
-Substitua os placeholders pelos seus textos e URLs. Para imagens de projetos ou hobbys, use caminhos em `public/` (ex.: `/images/projeto.jpg`) ou configure `images.remotePatterns` em `next.config.js` para URLs externas.
+## Onde editar conteúdo
 
-## Design system
+- Projetos PT/EN: `src/lib/projects.ts`, `src/lib/projects.en.ts`
+- Sobre: `src/lib/about.ts`, `src/lib/about.en.ts`
+- Serviços freelance: `src/lib/services.ts`
+- UI i18n: `src/lib/i18n/messages.ts`
+- Arquitetura/nav: `src/lib/siteArchitecture.ts`
+- **CV:** coloque o PDF em `public/cv/lucas-gabriel-rodrigues.pdf` e ative `CV_AVAILABLE` em `src/lib/cv.ts` (ou `resumePdfUrl` em about)
 
-Tema escuro focado em tecnologia e UX (definido em `tailwind.config.ts` e `src/styles/globals.css`):
+## Design
 
-- **dark** (fundo): `#0f172a`
-- **surface** (cards): `#1e293b`
-- **accent** (destaques, links): `#06b6d4`
-- **primary** (texto): `#f1f5f9`
-- **muted** (texto secundário): `#94a3b8`
-- **border-dark**: `#334155`
+Tokens em `src/styles/globals.css` / Tailwind:
 
-Tipografia: Plus Jakarta Sans (via `next/font/google`).
+- dark `#0c1222` · surface `#1a2332` · accent `#22b8cf` · primary `#f1f5f9` · muted `#9aa8bc`
 
-## Deploy (Vercel)
+Font: Plus Jakarta Sans (`next/font`).
 
-1. Envie o projeto para um repositório Git.
-2. Conecte o repositório na Vercel.
-3. Build command: `npm run build`. Output: `.next`. Nenhuma variável de ambiente obrigatória na primeira entrega.
+## Honestidade de conteúdo
 
-## Pontos de atenção / melhorias futuras
-
-- **Imagens:** Use `next/image` para thumbnails em `public/`; para domínios externos, configurar `images.remotePatterns` em `next.config.js`.
-- **Conteúdo:** Considerar CMS ou JSON externo para projetos se a lista crescer.
-- **i18n / modo escuro:** Deixados para decisão explícita posterior.
+Não inventar métricas, clientes ou depoimentos. Hirely é **acadêmico/conceitual**. Preview QualiProc é login de sistema fechado, enquadrado como tal.

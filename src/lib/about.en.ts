@@ -2,8 +2,8 @@ import type { AboutContent } from "@/types";
 
 export const aboutContentEn: AboutContent = {
   intro: [
-    "I am a UX and Web Designer with front-end execution, focused on digital products, landing pages, institutional sites, and business systems.",
-    "I help companies and professionals turn requirements into clear, navigable, production-ready interfaces — combining business strategy, user experience, and technical feasibility.",
+    "I am a UX and Web Designer with front-end execution and a product mindset — focused on systems, digital products, and web experiences.",
+    "I combine user experience, product decisions, and technical feasibility to turn requirements into clear, navigable interfaces.",
   ],
   formation: [
     {
@@ -33,9 +33,9 @@ export const aboutContentEn: AboutContent = {
   ],
   recognitions: [
     {
-      title: "Recruta.AI — presented at ARCA (FIAP Next)",
+      title: "Hirely / Recruta.AI — presented at ARCA (FIAP Next)",
       description:
-        "ATS platform with integrated AI, structured to optimize recruitment with strategic clarity.",
+        "Academic ATS concept with integrated AI — documented in the Hirely case. Built for strategic clarity in recruiting.",
       items: [
         "Selected to present at FIAP Next, integrating product, technology, and experience.",
       ],
@@ -99,12 +99,12 @@ export const aboutContentEn: AboutContent = {
     "Painting",
   ],
   professionalObjective:
-    "Work on product teams as a UX/Web Designer, structuring interfaces for sites, landing pages, and web apps — and support companies that need clear-scope development from briefing to launch.",
+    "Join product teams at the intersection of UX/UI, product thinking, and development — and, when it fits, take clear-scope freelance work on LPs, institutional sites, and systems.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",
     message:
-      "If you are a recruiter or lead a product/design team, I am available for a focused conversation. To hire an LP, institutional site, or business system, use the Hire page — or send WhatsApp/email with project context.",
+      "If you are a recruiter or lead a product/design team, I am available for a focused conversation. For an LP, institutional site, or business system, use Hire — or WhatsApp/email with project context.",
   },
-  resumePdfUrl: undefined,
+  resumePdfUrl: "/cv/lucas-gabriel-rodrigues.pdf",
 };

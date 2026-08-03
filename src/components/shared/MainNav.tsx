@@ -3,30 +3,32 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
+import { PRIMARY_NAV, SITE_ROUTES } from "@/lib/siteArchitecture";
+import type { NavItemId } from "@/lib/siteArchitecture";
 
-/**
- * Mobile: faixa horizontal com pills em scroll (sem hamburger).
- * Desktop: mesmos destinos em linha, estilo mais discreto.
- * Contratar recebe ênfase leve de accent sem competir com a marca.
- */
 export function MainNav() {
   const pathname = usePathname();
   const { t } = useLocale();
 
-  const items = [
-    { href: "/", label: t.nav.menu, emphasize: false },
-    { href: "/projetos", label: t.nav.projects, emphasize: false },
-    { href: "/historia", label: t.nav.story, emphasize: false },
-    { href: "/como-trabalho", label: t.nav.work, emphasize: false },
-    { href: "/contratar", label: t.nav.hire, emphasize: true },
-  ] as const;
+  const labels: Record<NavItemId, string> = {
+    home: t.nav.menu,
+    projects: t.nav.projects,
+    process: t.nav.process,
+    about: t.nav.about,
+    contact: t.nav.contact,
+  };
 
-  const isActive = (href: string) =>
-    href === "/"
-      ? pathname === "/"
-      : href === "/projetos"
-        ? pathname === "/projetos" || pathname.startsWith("/cases/")
-        : pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) => {
+    if (href === SITE_ROUTES.home) return pathname === "/";
+    if (href === SITE_ROUTES.projects) {
+      return (
+        pathname === "/projetos" ||
+        pathname.startsWith("/projetos/") ||
+        pathname.startsWith("/cases/")
+      );
+    }
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
 
   return (
     <nav
@@ -37,8 +39,9 @@ export function MainNav() {
         className="flex flex-nowrap items-stretch gap-2 overflow-x-auto scrollbar-hide pb-1.5 pt-0.5 snap-x snap-mandatory md:flex-wrap md:overflow-visible md:gap-x-5 md:pb-0 md:pt-0 md:snap-none"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
-        {items.map(({ href, label, emphasize }) => {
+        {PRIMARY_NAV.map(({ id, href }) => {
           const active = isActive(href);
+          const emphasize = id === "contact";
           return (
             <li key={href} className="snap-start shrink-0 flex">
               <Link
@@ -58,7 +61,7 @@ export function MainNav() {
                 `}
                 aria-current={active ? "page" : undefined}
               >
-                {label}
+                {labels[id]}
               </Link>
             </li>
           );

@@ -8,6 +8,7 @@ import { IntroOverlay } from "@/components/shared/IntroOverlay";
 import { Providers } from "@/components/shared/Providers";
 import { SkipLink } from "@/components/shared/SkipLink";
 import { Analytics } from "@vercel/analytics/next";
+import { rootMetadata } from "@/lib/siteMeta";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -15,15 +16,7 @@ const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
 });
 
-export const metadata: Metadata = {
-  title: "Lucas Gabriel Rodrigues | UX, Web Design e Desenvolvimento Digital",
-  description:
-    "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer com desenvolvimento de landing pages, sites institucionais e sistemas empresariais.",
-  icons: {
-    icon: [{ url: "/icon", type: "image/png" }],
-    apple: [{ url: "/apple-icon", type: "image/png" }],
-  },
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,

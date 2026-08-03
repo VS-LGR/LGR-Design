@@ -1,10 +1,12 @@
 "use client";
 
 import { useLocale } from "@/contexts/LocaleContext";
+import { resolveResumeUrl } from "@/lib/cv";
 
 export function IntroBlock() {
   const { about, t } = useLocale();
   const { intro, resumePdfUrl } = about;
+  const resumeUrl = resolveResumeUrl(resumePdfUrl);
 
   return (
     <section className="space-y-4" aria-labelledby="intro-heading">
@@ -19,16 +21,16 @@ export function IntroBlock() {
           <p key={i}>{paragraph}</p>
         ))}
       </div>
-      {resumePdfUrl && (
+      {resumeUrl ? (
         <a
-          href={resumePdfUrl}
+          href={resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium bg-accent text-dark hover:bg-accent-soft transition-colors focus-ring mt-2"
         >
           {t.resume.download}
         </a>
-      )}
+      ) : null}
     </section>
   );
 }

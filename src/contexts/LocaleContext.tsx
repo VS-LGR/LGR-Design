@@ -31,6 +31,7 @@ import {
 import { servicesContent } from "@/lib/services";
 import { servicesContentEn } from "@/lib/services.en";
 import { uiPt, uiEn, type UiMessages } from "@/lib/i18n/messages";
+import { orderProjects } from "@/lib/projectOrder";
 
 export type Locale = "pt" | "en";
 
@@ -81,7 +82,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       setLocale,
       t: isEn ? uiEn : uiPt,
       about: isEn ? aboutContentEn : aboutContent,
-      projects: isEn ? projectsListEn : projectsList,
+      projects: orderProjects(isEn ? projectsListEn : projectsList),
       projectCategories: isEn ? projectCategoriesEn : projectCategories,
       projectTopics: isEn ? projectTopicsEn : projectTopics,
       services: isEn ? servicesContentEn : servicesContent,

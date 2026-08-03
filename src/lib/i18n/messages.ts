@@ -8,8 +8,30 @@ export type UiMessages = {
     about: string;
     story: string;
     work: string;
+    process: string;
+    contact: string;
     hire: string;
     openNavigation: string;
+  };
+  home: {
+    kicker: string;
+    headline: string;
+    lead: string;
+    ctaProjects: string;
+    ctaContact: string;
+    featuredKicker: string;
+    featuredTitle: string;
+    featuredLead: string;
+    featuredAll: string;
+    explorationsTitle: string;
+    academicBadge: string;
+    skillsKicker: string;
+    skillsTitle: string;
+    skillsLead: string;
+    skillsProcess: string;
+    contactKicker: string;
+    contactTitle: string;
+    contactLead: string;
   };
   system: {
     hubTitle: string;
@@ -117,11 +139,16 @@ export type UiMessages = {
     projectsHeading: string;
     projectsKicker: string;
     projectsLead: string;
+    projectsFeaturedHeading: string;
+    projectsExplorationsHeading: string;
     historiaHeading: string;
     historiaKicker: string;
     historiaLead: string;
     workHeading: string;
     workLead: string;
+    contactHeading: string;
+    contactKicker: string;
+    contactLead: string;
     hireHeading: string;
     sectionsJumpAria: string;
   };
@@ -175,6 +202,7 @@ export type UiMessages = {
     whatsapp: string;
     email: string;
     hireLink: string;
+    cvHint: string;
   };
   sections: {
     about: string;
@@ -256,11 +284,37 @@ export const uiPt: UiMessages = {
     menu: "Início",
     close: "Fechar",
     projects: "Projetos",
-    about: "Sobre Mim",
-    story: "História",
-    work: "Método",
+    about: "Sobre",
+    story: "Sobre",
+    work: "Processo",
+    process: "Processo",
+    contact: "Contato",
     hire: "Contratar",
     openNavigation: "Abrir navegação",
+  },
+  home: {
+    kicker: "UX · Product · Desenvolvimento",
+    headline:
+      "Desenho experiências e construo interfaces — do problema ao produto navegável.",
+    lead: "Sou Lucas Gabriel Rodrigues. Atuo na interseção de UX/UI, product thinking e desenvolvimento: cases reais de sistemas e web, com narrativa honesta de problema, decisão e entrega.",
+    ctaProjects: "Ver projetos",
+    ctaContact: "Falar comigo",
+    featuredKicker: "Seleção",
+    featuredTitle: "Projetos em destaque",
+    featuredLead:
+      "Sistemas e produtos primeiro — incluindo conceito acadêmico de Product + IA.",
+    featuredAll: "Ver todos",
+    explorationsTitle: "Explorações",
+    academicBadge: "Acadêmico",
+    skillsKicker: "Capacidades",
+    skillsTitle: "Skills em uso",
+    skillsLead:
+      "Ferramentas e práticas que sustentam pesquisa, interface e implementação.",
+    skillsProcess: "Ver processo completo",
+    contactKicker: "Próximo passo",
+    contactTitle: "Disponível para times de produto e design",
+    contactLead:
+      "Recrutadores e líderes: vamos conversar com objetividade. Freelance de LP/sistemas permanece em Contratar como caminho secundário.",
   },
   system: {
     hubTitle: "Design e desenvolvimento com intenção",
@@ -286,7 +340,7 @@ export const uiPt: UiMessages = {
     },
   },
   header: {
-    tagline: "UX, Web Design & Desenvolvimento",
+    tagline: "UX, Product & Desenvolvimento",
   },
   language: {
     aria: "Idioma",
@@ -294,16 +348,16 @@ export const uiPt: UiMessages = {
     en: "EN",
   },
   footer: {
-    line: "Lucas Gabriel Rodrigues — UX, Web Design & Desenvolvimento digital",
+    line: "Lucas Gabriel Rodrigues — UX, Product & Desenvolvimento digital",
   },
   intro: {
-    tagline: "UX, Web Design & Desenvolvimento",
+    tagline: "UX, Product & Desenvolvimento",
   },
   meta: {
     title:
-      "Lucas Gabriel Rodrigues | UX, Web Design e Desenvolvimento Digital",
+      "Lucas Gabriel Rodrigues | UX, Product e Desenvolvimento Digital",
     description:
-      "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer com desenvolvimento de landing pages, sites institucionais e sistemas empresariais.",
+      "Portfólio de Lucas Gabriel Rodrigues — UX/UI, product thinking e desenvolvimento. Cases de sistemas, produtos e experiências web.",
   },
   sidebar: {
     sectionAria: "Resumo da seção em vista",
@@ -375,14 +429,20 @@ export const uiPt: UiMessages = {
     projectsHeading: "Projetos selecionados",
     projectsKicker: "Portfólio",
     projectsLead:
-      "Landing pages, sites institucionais e sistemas empresariais — cada card abre o estudo de caso completo.",
-    historiaHeading: "História pessoal",
+      "Sistemas, produtos e experiências web — cada card abre o estudo de caso completo. Explorações ficam em seção própria.",
+    projectsFeaturedHeading: "Em destaque",
+    projectsExplorationsHeading: "Explorações",
+    historiaHeading: "Sobre",
     historiaKicker: "Trajetória",
     historiaLead:
-      "Formação, reconhecimentos e posicionamento — o percurso que sustenta o trabalho em UX, web e sistemas.",
-    workHeading: "Método de trabalho",
+      "Formação, reconhecimentos e posicionamento — UX, product thinking e execução técnica.",
+    workHeading: "Processo de trabalho",
     workLead:
-      "Princípios, processo adaptável e ferramentas que uso para transformar requisitos em interfaces claras e entregas navegáveis.",
+      "Princípios, processo adaptável e ferramentas para transformar requisitos em interfaces claras e entregas navegáveis.",
+    contactHeading: "Contato",
+    contactKicker: "Conversa objetiva",
+    contactLead:
+      "Recrutamento, colaboração em produto/design ou escopo freelance — escolha o canal que preferir.",
     hireHeading: "Contratar",
     sectionsJumpAria: "Ir para seção",
   },
@@ -450,14 +510,16 @@ export const uiPt: UiMessages = {
   },
   creative: {
     intro:
-      "Práticas que ampliam julgamento estrutural e estético — e alimentam decisões de produto:",
+      "Base criativa secundária — hobbies e práticas que informam julgamento visual, não o posicionamento principal:",
     outro:
-      "Essas bases reforçam narrativa, intenção e qualidade visual nas entregas.",
+      "Mantidas ao final do Processo para não competir com princípios e método profissional.",
   },
   contact: {
     whatsapp: "WhatsApp",
     email: "E-mail",
     hireLink: "Ver serviços para contratar",
+    cvHint:
+      "CV em PDF disponível no site — use o botão de download ou peça por e-mail/WhatsApp.",
   },
   resume: {
     download: "Baixar currículo (PDF)",
@@ -527,11 +589,37 @@ export const uiEn: UiMessages = {
     menu: "Home",
     close: "Close",
     projects: "Projects",
-    about: "About Me",
-    story: "Story",
-    work: "Method",
+    about: "About",
+    story: "About",
+    work: "Process",
+    process: "Process",
+    contact: "Contact",
     hire: "Hire",
     openNavigation: "Open navigation",
+  },
+  home: {
+    kicker: "UX · Product · Development",
+    headline:
+      "I design experiences and build interfaces — from problem to navigable product.",
+    lead: "I'm Lucas Gabriel Rodrigues. I work at the intersection of UX/UI, product thinking, and development: real systems and web cases, with an honest problem → decision → delivery narrative.",
+    ctaProjects: "View projects",
+    ctaContact: "Get in touch",
+    featuredKicker: "Selected",
+    featuredTitle: "Featured projects",
+    featuredLead:
+      "Systems and products first — including an academic Product + AI concept.",
+    featuredAll: "View all",
+    explorationsTitle: "Explorations",
+    academicBadge: "Academic",
+    skillsKicker: "Capabilities",
+    skillsTitle: "Skills in use",
+    skillsLead:
+      "Tools and practices that support research, interface, and implementation.",
+    skillsProcess: "See full process",
+    contactKicker: "Next step",
+    contactTitle: "Available for product and design teams",
+    contactLead:
+      "Recruiters and leaders: let’s talk clearly. Freelance LP/systems remains under Hire as a secondary path.",
   },
   system: {
     hubTitle: "Design and development with intent",
@@ -557,7 +645,7 @@ export const uiEn: UiMessages = {
     },
   },
   header: {
-    tagline: "UX, Web Design & Development",
+    tagline: "UX, Product & Development",
   },
   language: {
     aria: "Language",
@@ -565,15 +653,15 @@ export const uiEn: UiMessages = {
     en: "EN",
   },
   footer: {
-    line: "Lucas Gabriel Rodrigues — UX, Web Design & Digital Development",
+    line: "Lucas Gabriel Rodrigues — UX, Product & Digital Development",
   },
   intro: {
-    tagline: "UX, Web Design & Development",
+    tagline: "UX, Product & Development",
   },
   meta: {
-    title: "Lucas Gabriel Rodrigues | UX, Web Design & Digital Development",
+    title: "Lucas Gabriel Rodrigues | UX, Product & Digital Development",
     description:
-      "Portfolio of Lucas Gabriel Rodrigues — UX & Web Designer building landing pages, institutional sites, and business systems.",
+      "Portfolio of Lucas Gabriel Rodrigues — UX/UI, product thinking, and development. Cases on systems, products, and web experiences.",
   },
   sidebar: {
     sectionAria: "Summary of the section in view",
@@ -643,14 +731,20 @@ export const uiEn: UiMessages = {
     projectsHeading: "Selected projects",
     projectsKicker: "Portfolio",
     projectsLead:
-      "Landing pages, institutional sites, and business systems — each card opens the full case study.",
-    historiaHeading: "Personal story",
+      "Systems, products, and web experiences — each card opens the full case study. Explorations live in their own section.",
+    projectsFeaturedHeading: "Featured",
+    projectsExplorationsHeading: "Explorations",
+    historiaHeading: "About",
     historiaKicker: "Background",
     historiaLead:
-      "Education, recognition, and positioning — the path behind the UX, web, and systems work.",
-    workHeading: "Working method",
+      "Education, recognition, and positioning — UX, product thinking, and technical execution.",
+    workHeading: "Working process",
     workLead:
-      "Principles, an adaptable process, and tools I use to turn requirements into clear interfaces and navigable deliveries.",
+      "Principles, an adaptable process, and tools to turn requirements into clear interfaces and navigable deliveries.",
+    contactHeading: "Contact",
+    contactKicker: "Clear conversation",
+    contactLead:
+      "Recruiting, product/design collaboration, or freelance scope — pick the channel you prefer.",
     hireHeading: "Hire",
     sectionsJumpAria: "Jump to section",
   },
@@ -718,14 +812,16 @@ export const uiEn: UiMessages = {
   },
   creative: {
     intro:
-      "Practices that broaden structural and aesthetic judgment — and feed product decisions:",
+      "Secondary creative foundations — hobbies and practices that inform visual judgment, not the primary positioning:",
     outro:
-      "These foundations reinforce narrative, intent, and visual quality in every delivery.",
+      "Kept at the end of Process so they don’t compete with principles and professional method.",
   },
   contact: {
     whatsapp: "WhatsApp",
     email: "Email",
     hireLink: "View services to hire",
+    cvHint:
+      "PDF resume is available on the site — use the download button or request via email/WhatsApp.",
   },
   resume: {
     download: "Download résumé (PDF)",

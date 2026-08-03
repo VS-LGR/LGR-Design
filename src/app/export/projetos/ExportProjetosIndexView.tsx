@@ -51,7 +51,7 @@ export function ExportProjetosIndexView() {
                     {thumb ? (
                       <Image
                         src={thumb}
-                        alt=""
+                        alt={`${t.projects.thumbnailAltPrefix} ${project.title}`}
                         fill
                         className="object-contain object-top p-1.5 transition-transform duration-300 group-hover:scale-[1.02]"
                         sizes="(max-width: 640px) 100vw, 420px"

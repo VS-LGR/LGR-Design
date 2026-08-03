@@ -61,8 +61,8 @@ export function useWorkJumpItems(): JumpItem[] {
     { id: "about-processo", label: t.sidebar.designProcess },
     { id: "about-ferramentas", label: t.sidebar.tools },
     { id: "about-cursor-template", label: t.sidebar.cursorTemplate },
-    { id: "about-preferencias", label: t.sidebar.creativity },
     { id: "about-objetivo", label: t.sidebar.objective },
     { id: "about-contato", label: t.sidebar.contact },
+    { id: "about-preferencias", label: t.sidebar.creativity },
   ];
 }

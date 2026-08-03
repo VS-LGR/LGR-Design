@@ -50,16 +50,16 @@ export function AboutWorkSection() {
           <CursorTemplateBlock />
         </WorkSection>
         <div className="section-divider w-full" aria-hidden />
-        <WorkSection id="about-preferencias" labelledBy="creative-heading">
-          <CreativePreferencesCarousel />
-        </WorkSection>
-        <div className="section-divider w-full" aria-hidden />
         <WorkSection id="about-objetivo" labelledBy="objective-heading">
           <ObjectiveBlock />
         </WorkSection>
         <div className="section-divider w-full" aria-hidden />
         <WorkSection id="about-contato" labelledBy="contact-heading">
           <ContactBlock />
+        </WorkSection>
+        <div className="section-divider w-full" aria-hidden />
+        <WorkSection id="about-preferencias" labelledBy="creative-heading">
+          <CreativePreferencesCarousel />
         </WorkSection>
       </div>
     </div>

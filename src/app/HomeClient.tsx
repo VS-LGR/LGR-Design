@@ -1,7 +1,19 @@
 "use client";
 
-import { SystemHub } from "@/components/system/SystemHub";
+import {
+  HomeContactCta,
+  HomeFeaturedProjects,
+  HomeHero,
+  HomeSkills,
+} from "@/components/home/HomeSections";
 
 export function HomeClient() {
-  return <SystemHub />;
+  return (
+    <div className="animate-in">
+      <HomeHero />
+      <HomeFeaturedProjects />
+      <HomeSkills />
+      <HomeContactCta />
+    </div>
+  );
 }

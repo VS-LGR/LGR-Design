@@ -2,8 +2,8 @@ import type { AboutContent } from "@/types";
 
 export const aboutContent: AboutContent = {
   intro: [
-    "Sou UX Designer e Web Designer com execução em front-end, focado em produtos digitais, landing pages, sites institucionais e sistemas empresariais.",
-    "Ajudo empresas e profissionais a transformar requisitos em interfaces claras, navegáveis e prontas para produção — unindo estratégia de negócio, experiência do usuário e viabilidade técnica.",
+    "Sou UX Designer e Web Designer com execução em front-end e visão de produto — focado em sistemas, produtos digitais e experiências web.",
+    "Una experiência do usuário, decisões de produto e viabilidade técnica para transformar requisitos em interfaces claras e navegáveis.",
   ],
   formation: [
     {
@@ -33,9 +33,9 @@ export const aboutContent: AboutContent = {
   ],
   recognitions: [
     {
-      title: "Recruta.AI — apresentado na ARCA (FIAP Next)",
+      title: "Hirely / Recruta.AI — apresentado na ARCA (FIAP Next)",
       description:
-        "Plataforma ATS com IA integrada, estruturada para otimizar processos de recrutamento com clareza estratégica.",
+        "Conceito acadêmico de ATS com IA integrada — documentado no case Hirely. Plataforma pensada para clareza estratégica no recrutamento.",
       items: [
         "Selecionado para apresentação no FIAP Next, integrando produto, tecnologia e experiência.",
       ],
@@ -99,12 +99,12 @@ export const aboutContent: AboutContent = {
     "Pintura",
   ],
   professionalObjective:
-    "Atuar em times de produto como UX/Web Designer, estruturando interfaces de sites, landing pages e aplicações web — e atender empresas que precisam de desenvolvimento com escopo claro, do briefing à publicação.",
+    "Atuar em times de produto na interseção de UX/UI, product thinking e desenvolvimento — e, quando fizer sentido, atender escopos freelance de LP, institucional e sistemas com entrega clara.",
   contact: {
     phone: "11 99519-7442",
     email: "lukagabriel.rodrigues@gmail.com",
     message:
-      "Se você é recrutador(a) ou lidera um time de produto/design, estou disponível para uma conversa objetiva. Para contratar LP, site institucional ou sistema empresarial, use a página Contratar — ou envie WhatsApp/e-mail com o contexto do projeto.",
+      "Se você é recrutador(a) ou lidera um time de produto/design, estou disponível para uma conversa objetiva. Para LP, site institucional ou sistema empresarial, use Contratar — ou WhatsApp/e-mail com o contexto do projeto.",
   },
-  resumePdfUrl: undefined,
+  resumePdfUrl: "/cv/lucas-gabriel-rodrigues.pdf",
 };

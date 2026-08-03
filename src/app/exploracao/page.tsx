@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 
-export default function ExploracaoRedirectPage() {
-  redirect("/contratar");
+/** Mantido para tipagem/build; redirect canônico está em next.config. */
+export default function ExploracaoPage() {
+  redirect("/contato");
 }

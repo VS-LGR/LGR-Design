@@ -51,6 +51,9 @@ export type ProjectTopic = "saude" | "empresas";
 /** Tipo de entrega comercial exibido nos cards e na página Contratar */
 export type DeliveryType = "lp-institucional" | "sistema";
 
+/** Destaque na vitrine — academic = estudo/conceitual (sem claim comercial) */
+export type ProjectVisibility = "featured" | "secondary" | "academic";
+
 export type ServiceId = "lp-institucional" | "sistemas-empresariais";
 
 export interface ServiceOffering {
@@ -154,6 +157,8 @@ export interface Project {
   topic: ProjectTopic;
   /** LP/institucional vs sistema empresarial — badge nos cards */
   deliveryType: DeliveryType;
+  /** featured (padrão) | secondary (explorações) | academic */
+  visibility?: ProjectVisibility;
   slug: string;
   description: string;
   /** Explicação do processo de desenvolvimento do site/projeto */
@@ -200,12 +205,4 @@ export interface DesignProcessContent {
   ansoffSectionIntro: string;
   /** Rótulos de uma grade 2×2 estática (texto apenas) */
   ansoffQuadrants: [string, string, string, string];
-}
-
-export interface Hobby {
-  id: string;
-  title: string;
-  description: string;
-  image?: string;
-  link?: string;
 }

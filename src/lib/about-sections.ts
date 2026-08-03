@@ -10,9 +10,9 @@ export const WORK_SECTION_IDS = [
   "about-processo",
   "about-ferramentas",
   "about-cursor-template",
-  "about-preferencias",
   "about-objetivo",
   "about-contato",
+  "about-preferencias",
 ] as const;
 
 export type StorySectionId = (typeof STORY_SECTION_IDS)[number];

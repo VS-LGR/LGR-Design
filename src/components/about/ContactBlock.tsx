@@ -35,14 +35,20 @@ export function ContactBlock() {
           <span className="opacity-80 font-normal break-all">{contact.email}</span>
         </a>
       </div>
-      <p className="pt-1">
+      <div className="flex flex-wrap gap-4 pt-1">
+        <Link
+          href="/contato"
+          className="text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring rounded underline-offset-4 hover:underline"
+        >
+          {t.nav.contact}
+        </Link>
         <Link
           href="/contratar"
-          className="text-sm font-medium text-accent hover:text-accent-soft transition-colors focus-ring rounded underline-offset-4 hover:underline"
+          className="text-sm font-medium text-muted hover:text-accent transition-colors focus-ring rounded underline-offset-4 hover:underline"
         >
           {t.contact.hireLink}
         </Link>
-      </p>
+      </div>
     </section>
   );
 }

@@ -1,12 +1,5 @@
-import type { Metadata } from "next";
-import { HistoriaView } from "./HistoriaView";
+import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "História | Lucas Gabriel Rodrigues",
-  description:
-    "Trajetória, formação e posicionamento — UX e Web Design com visão de produto.",
-};
-
-export default function HistoriaPage() {
-  return <HistoriaView />;
+export default function HistoriaLegacyPage() {
+  redirect("/sobre");
 }

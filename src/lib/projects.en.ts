@@ -125,8 +125,8 @@ export const projectsListEn: Project[] = [
               id: "r1",
               type: "stats",
               stats: [
-                { label: "Shipped", value: "Responsive institutional website in production" },
-                { label: "Focus", value: "Conversion and clinical credibility" },
+                { label: "Shipped", value: "Responsive institutional site published" },
+                { label: "Objective", value: "Clarity for clinical contact" },
               ],
             },
           ],
@@ -141,8 +141,8 @@ export const projectsListEn: Project[] = [
     caseSolution:
       "Landing page with hierarchy for services and testimonials, a dedicated block for the playful methodology, a form and consistent CTAs across the page, mobile-first for people seeking support in sensitive moments.",
     caseResults: [
-      { label: "Shipped", value: "Responsive institutional site in production" },
-      { label: "Focus", value: "Conversion and clinical credibility" },
+      { label: "Shipped", value: "Responsive institutional site published" },
+      { label: "Objective", value: "Clarity for clinical contact" },
     ],
   },
   {
@@ -151,6 +151,7 @@ export const projectsListEn: Project[] = [
     category: "web",
     topic: "empresas",
     deliveryType: "lp-institucional",
+    visibility: "secondary",
     slug: "lp-farma-com",
     description:
       "Institutional landing for Pharmatech: pharmaceutical technology positioning, specialties, credibility, and a commercial contact CTA.",
@@ -240,7 +241,7 @@ export const projectsListEn: Project[] = [
               type: "stats",
               stats: [
                 { label: "Shipped", value: "Corporate landing page live" },
-                { label: "Goal", value: "Credibility + lead generation" },
+                { label: "Objective", value: "Positioning and contact channel" },
               ],
             },
           ],
@@ -256,7 +257,7 @@ export const projectsListEn: Project[] = [
       "Institutional section architecture (company, specializations, partners, contact), scannable reading for executives, and quote/contact CTAs aligned to a B2B funnel.",
     caseResults: [
       { label: "Shipped", value: "Corporate landing live" },
-      { label: "Goal", value: "Credibility + lead generation" },
+      { label: "Objective", value: "Positioning and contact channel" },
     ],
   },
   {
@@ -465,6 +466,50 @@ export const projectsListEn: Project[] = [
           ],
         },
         {
+          id: "thinking",
+          label: "Thinking",
+          title: "Quality product before “more screens”",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "The hypothesis: value comes from a continuous evidence flow — from requirement to document and from field collection to certificate — with tenant isolation. AI or automation only belongs where governance and traceability remain intact.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Prioritize roles (CTLI admin, quality, field, portal) and module permissions",
+                "Treat the Master List and versioning as the QMS core, not an appendix",
+                "Keep the case IP-safe: no internal rules, protocols, or real client data",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "A scannable operational hub",
+          blocks: [
+            {
+              id: "d1",
+              type: "text",
+              content:
+                "The interface organizes complexity into a dashboard with shortcuts, indicators, and alerts — less of an endless menu, more aligned with laboratory routines.",
+            },
+            {
+              id: "d2",
+              type: "bullets",
+              items: [
+                "Sidebar organized by QMS requirements and modules",
+                "Shortcut hub for commercial, collection, certificates, and personnel",
+                "Dense surfaces with clear typographic hierarchy and no unnecessary ornament",
+              ],
+            },
+          ],
+        },
+        {
           id: "solution",
           label: "Solution",
           title: "An authenticated, modular, multi-tenant QMS",
@@ -491,7 +536,7 @@ export const projectsListEn: Project[] = [
         },
         {
           id: "architecture",
-          label: "Stack",
+          label: "Tech",
           title: "Product architecture (high level)",
           blocks: [
             {
@@ -538,7 +583,7 @@ export const projectsListEn: Project[] = [
         },
         {
           id: "results",
-          label: "Results",
+          label: "Product",
           title: "Quality operations in one environment",
           blocks: [
             {
@@ -555,7 +600,7 @@ export const projectsListEn: Project[] = [
               id: "r2",
               type: "quote",
               content:
-                "One system for documents, collection, certificates, personnel, and commercial operations — with governance aligned to accredited laboratory reality.",
+                "One system for documents, collection, certificates, personnel, and commercial operations — with governance aligned to accredited laboratory reality. The public preview shows the closed product’s authenticated entry point without exposing real operational data.",
             },
           ],
         },
@@ -581,12 +626,12 @@ export const projectsListEn: Project[] = [
     deliveryType: "lp-institucional",
     slug: "clinica-dverso",
     description:
-      "Landing for Clínica Dverso (therapeutic center in Sorocaba): conversion, micro-interactions, and VLibras accessibility.",
+      "Landing page for Clínica Dverso (a therapeutic center in Sorocaba): clear contact paths, micro-interactions, and VLibras accessibility.",
     developmentExplanation:
-      "I built a welcoming, conversion-oriented landing page bringing together psychology, neurodivergence, music psychotherapy, nutrition, and dog-assisted therapy in clear blocks. Lottie micro-interactions bring sections to life without hurting performance, strategic CTAs guide users to contact, and VLibras integration strengthens inclusion and trust across the journey.",
+      "I built a welcoming landing page bringing together psychology, neurodivergence, music psychotherapy, nutrition, and dog-assisted therapy in clear blocks. Lightweight Lottie micro-interactions guide attention, contact CTAs support the journey, and VLibras expands access in Brazilian Sign Language.",
     keyStages: [
       {
-        title: "Welcoming page built for conversion",
+        title: "Welcoming page built for contact",
         description:
           "I shaped the narrative to convey care and proximity, with well-placed CTAs that make first contact easier for families and caregivers.",
       },
@@ -607,7 +652,7 @@ export const projectsListEn: Project[] = [
       context: {
         type: "Institutional website",
         segment: "Integrated health clinic",
-        objective: "Turn visitors into leads with warmth, clarity, and inclusion",
+        objective: "Make first contact easier with warmth, clarity, and inclusion",
         role: "UI/UX, visual direction, information architecture, strategic copy and front-end",
         overview:
           "Institutional page for a multidisciplinary clinic, balancing a welcoming tone, micro-interactions, and VLibras accessibility.",
@@ -627,75 +672,96 @@ export const projectsListEn: Project[] = [
           ],
         },
         {
-          id: "objective",
-          label: "Objective",
-          title: "Warmth that drives action",
+          id: "thinking",
+          label: "Thinking",
+          title: "One narrative, multiple forms of care",
           blocks: [
             {
-              id: "o1",
+              id: "t1",
+              type: "text",
+              content:
+                "The site needed to welcome and guide families without becoming a cold catalog. Specialties were treated as scannable blocks under one brand voice, with contact CTAs at decision points and no unsupported conversion claims.",
+            },
+            {
+              id: "t2",
               type: "bullets",
               items: [
-                "Convey closeness without losing clarity",
-                "Guide families with human, accessible language",
-                "Turn interest into contact with strategic CTAs",
+                "Unify care and clarity across every therapeutic specialty",
+                "Prioritize mobile use and quick reading",
+                "Treat Brazilian Sign Language accessibility as a requirement, not an extra",
               ],
             },
           ],
         },
         {
-          id: "ux-ui",
-          label: "UX/UI",
-          title: "Purposeful micro-interactions",
+          id: "design",
+          label: "Design",
+          title: "Warm and scannable",
           blocks: [
             {
-              id: "u1",
-              type: "tags",
-              items: ["Conversion", "Warmth", "Micro-interactions", "VLibras"],
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Light typographic hierarchy to reduce cognitive load",
+                "Specialty sections with a consistent visual rhythm",
+                "Recurring CTAs that do not compete with clinical content",
+              ],
             },
           ],
         },
         {
-          id: "solution",
-          label: "Solution",
-          title: "Welcoming, inclusive, conversion-oriented experience",
+          id: "tech",
+          label: "Tech",
+          title: "Micro-interactions and inclusion",
           blocks: [
             {
-              id: "s1",
+              id: "te1",
+              type: "tags",
+              items: ["Lottie", "VLibras", "Responsive landing"],
+            },
+            {
+              id: "te2",
               type: "bullets",
               items: [
-                "Landing with a human tone and scannable blocks per specialty",
-                "Lottie micro-interactions to guide attention and build trust",
-                "VLibras integration and CTAs placed at key decision moments",
+                "Lightweight Lottie animations guide attention without blocking reading",
+                "VLibras widget expands access in Brazilian Sign Language",
+                "Implementation focused on mobile performance and clarity",
               ],
             },
           ],
         },
         {
           id: "results",
-          label: "Results",
-          title: "Care translated into clarity and conversion",
+          label: "Product",
+          title: "A published landing page designed for contact",
           blocks: [
             {
               id: "r1",
               type: "stats",
               stats: [
-                { label: "Shipped", value: "Welcoming responsive landing page" },
+                { label: "Shipped", value: "Responsive landing published" },
                 { label: "Highlights", value: "Micro-interactions + VLibras" },
               ],
+            },
+            {
+              id: "r2",
+              type: "text",
+              content:
+                "Observable result: a live website with a unified narrative and an accessible contact path, without claiming unverified conversion performance.",
             },
           ],
         },
       ],
       previewTitle: "Clinic preview",
       previewDescription:
-        "See the final page focused on conversion, lightweight micro-interactions, and VLibras accessibility.",
+        "Explore the published page’s welcoming tone, lightweight micro-interactions, and VLibras accessibility.",
     },
     caseProblem:
-      "Build a welcoming page for multiple care lines that converts visitors into contact on mobile, without sacrificing inclusion or clarity.",
+      "Create a welcoming page for multiple care specialties that guides families toward first contact on mobile without sacrificing inclusion or clarity.",
     caseSolution:
-      "Conversion-oriented landing with Lottie micro-interactions, CTAs at the right journey moments, and VLibras integration to expand access in Brazilian Sign Language.",
+      "Responsive landing page with scannable specialty sections, lightweight Lottie micro-interactions, clear contact CTAs, and VLibras integration.",
     caseResults: [
-      { label: "Shipped", value: "Welcoming responsive landing page" },
+      { label: "Shipped", value: "Responsive landing published" },
       { label: "Highlights", value: "Micro-interactions + VLibras" },
     ],
   },
@@ -762,8 +828,46 @@ export const projectsListEn: Project[] = [
           ],
         },
         {
+          id: "thinking",
+          label: "Thinking",
+          title: "A product for the table, not a polished PDF",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "The differentiator is reducing friction during actual play: a Chapter 1-aligned flow, a dependable rules engine, and Portuguese content — with clear attribution to SRD material and no Wizards of the Coast affiliation.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Prioritize guided character creation before advanced features",
+                "Automate calculations that commonly cause human error (HP, AC, slots, DC)",
+                "Treat the forge as a constrained system, not an unrestricted sandbox",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "Tool UI, not marketing UI",
+          blocks: [
+            {
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Clear steps throughout character creation",
+                "Dense but readable sheets with critical information first",
+                "RPG visual language without ornamental noise",
+              ],
+            },
+          ],
+        },
+        {
           id: "solution",
-          label: "Solution",
+          label: "Tech / Product",
           title: "A full Portuguese tool for the table",
           blocks: [
             {
@@ -787,8 +891,8 @@ export const projectsListEn: Project[] = [
         },
         {
           id: "results",
-          label: "Results",
-          title: "Less friction between rules and play",
+          label: "Product",
+          title: "Published web tool",
           blocks: [
             {
               id: "r1",
@@ -796,6 +900,7 @@ export const projectsListEn: Project[] = [
               stats: [
                 { label: "Language", value: "Brazilian Portuguese" },
                 { label: "Scope", value: "Sheets · Spells · Forge" },
+                { label: "Status", value: "Published at dnd-br.com.br" },
               ],
             },
           ],
@@ -812,6 +917,157 @@ export const projectsListEn: Project[] = [
     caseResults: [
       { label: "Language", value: "Brazilian Portuguese" },
       { label: "Scope", value: "Sheets · Spells · Forge" },
+      { label: "Status", value: "Published at dnd-br.com.br" },
+    ],
+  },
+  {
+    id: "hirely",
+    title: "Hirely (Recruta.AI)",
+    category: "ux",
+    topic: "empresas",
+    deliveryType: "sistema",
+    visibility: "academic",
+    slug: "hirely",
+    description:
+      "Academic ATS concept with AI (Recruta.AI) — recruitment flow, product clarity, and experience for talent teams. Presented at ARCA / FIAP Next.",
+    developmentExplanation:
+      "Product and interface study for an AI-assisted ATS: recruiter journey, stage organization, and value proposition without claiming a commercial live product.",
+    keyStages: [
+      {
+        title: "Product problem",
+        description:
+          "Map typical recruitment friction (screening, follow-up, lack of visibility) without inventing market metrics.",
+      },
+      {
+        title: "Product thinking + UX",
+        description:
+          "Define flow, critical info per stage, and interface tone for fast recruiter decisions.",
+      },
+      {
+        title: "Academic narrative",
+        description:
+          "Package the proposal for presentation (FIAP Next / ARCA), making the conceptual nature explicit.",
+      },
+    ],
+    thumbnail: undefined,
+    link: undefined,
+    caseStudy: {
+      context: {
+        type: "Academic concept · Product + UX + AI",
+        segment: "Recruiting / ATS",
+        objective:
+          "Propose a recruitment experience with integrated AI, strategic clarity, and a navigable flow",
+        role: "Product thinking, UX/UI, and product narrative (academic context)",
+        overview:
+          "Hirely (also referred to as Recruta.AI) is a product study presented at ARCA (FIAP Next): an ATS designed to reduce ambiguity in the hiring funnel with AI support. It is not a published commercial product — the case documents the thinking, experience structure, and academic framing.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problem",
+          title: "Opaque, fragmented recruiting",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Talent teams often work with disconnected tools and little feedback on candidate progress. The pain isn’t “more AI” — it’s visibility and decision-making with less noise.",
+            },
+            {
+              id: "p2",
+              type: "bullets",
+              items: [
+                "Hard-to-scan funnel stages",
+                "Decision criteria poorly surfaced in the UI",
+                "Risk of tech overclaim in AI solutions",
+              ],
+            },
+          ],
+        },
+        {
+          id: "thinking",
+          label: "Thinking",
+          title: "Product before the AI feature",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "Core hypothesis: AI only helps if the recruiter flow is already clear. Design prioritizes funnel states, priorities, and next steps — using AI as support, not magic narrative.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Separate screening, evaluation, and follow-up",
+                "Make status and criteria readable in seconds",
+                "Declare academic concept limits (no invented metrics)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "Interface for fast decisions",
+          blocks: [
+            {
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Hierarchy by hiring process stage",
+                "Cards and lists with minimum needed information",
+                "Sober visual language for corporate context",
+              ],
+            },
+          ],
+        },
+        {
+          id: "tech",
+          label: "Tech / AI",
+          title: "AI as a support layer",
+          blocks: [
+            {
+              id: "te1",
+              type: "text",
+              content:
+                "In the concept, AI supports screening and information organization. The case does not describe a production stack or real performance — focus is product framing and experience.",
+            },
+          ],
+        },
+        {
+          id: "produto",
+          label: "Product",
+          title: "Academic validation (FIAP Next)",
+          blocks: [
+            {
+              id: "pr1",
+              type: "text",
+              content:
+                "Selected for presentation at ARCA (FIAP Next), integrating product, technology, and experience. Outcome: concept exposure and a hybrid Product + UX + AI narrative — without claiming commercial traction.",
+            },
+            {
+              id: "pr2",
+              type: "stats",
+              stats: [
+                { label: "Context", value: "Academic / conceptual" },
+                { label: "Presentation", value: "ARCA · FIAP Next" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "No public preview",
+      previewDescription:
+        "This case is academic/conceptual and has no open commercial product. Value is in the problem, product, and experience narrative.",
+    },
+    caseProblem:
+      "Opaque, fragmented recruiting flows; risk of selling “AI” without product clarity.",
+    caseSolution:
+      "ATS concept (Hirely / Recruta.AI) with a readable funnel and AI as support — presented academically at FIAP Next.",
+    caseResults: [
+      { label: "Context", value: "Academic" },
+      { label: "Presentation", value: "ARCA · FIAP Next" },
     ],
   },
 ];

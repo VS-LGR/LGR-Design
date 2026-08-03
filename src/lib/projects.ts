@@ -137,8 +137,8 @@ export const projectsList: Project[] = [
               id: "r1",
               type: "stats",
               stats: [
-                { label: "Entrega", value: "Site institucional responsivo em produção" },
-                { label: "Foco", value: "Conversão e credibilidade clínica" },
+                { label: "Entrega", value: "Site institucional responsivo publicado" },
+                { label: "Objetivo", value: "Clareza clínica e facilitar o contato" },
               ],
             },
           ],
@@ -168,11 +168,11 @@ export const projectsList: Project[] = [
     caseResults: [
       {
         label: "Entrega",
-        value: "Site institucional responsivo em produção",
+        value: "Site institucional responsivo publicado",
       },
       {
-        label: "Foco",
-        value: "Conversão e credibilidade clínica",
+        label: "Objetivo",
+        value: "Clareza clínica e facilitar o contato",
       },
     ],
   },
@@ -182,6 +182,7 @@ export const projectsList: Project[] = [
     category: "web",
     topic: "empresas",
     deliveryType: "lp-institucional",
+    visibility: "secondary",
     slug: "lp-farma-com",
     description:
       "Landing institucional da Pharmatech: posicionamento em tecnologia farmacêutica, especializações, credibilidade e CTA de contato comercial.",
@@ -283,7 +284,7 @@ export const projectsList: Project[] = [
               type: "stats",
               stats: [
                 { label: "Entrega", value: "Landing corporativa publicada" },
-                { label: "Objetivo", value: "Credibilidade + geração de contato" },
+                { label: "Objetivo", value: "Posicionamento e canal de contato" },
               ],
             },
           ],
@@ -304,7 +305,7 @@ export const projectsList: Project[] = [
       },
       {
         label: "Objetivo",
-        value: "Credibilidade + geração de contato",
+        value: "Posicionamento e canal de contato",
       },
     ],
   },
@@ -549,6 +550,50 @@ export const projectsList: Project[] = [
           ],
         },
         {
+          id: "thinking",
+          label: "Pensamento",
+          title: "Produto de qualidade antes de “mais telas”",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "A hipótese: o valor está em um fluxo contínuo de evidência — do requisito ao documento, da coleta ao certificado — com isolamento por tenant. IA ou automação só entram se não quebrarem governança e rastreabilidade.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Priorizar papéis (admin CTLI, qualidade, campo, portal) e permissões por módulo",
+                "Tratar Lista Mestra e versionamento como núcleo do SGQ, não como anexo",
+                "Manter o case IP-safe: sem expor regras internas, protocolos nem dados reais de clientes",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "Hub operacional escaneável",
+          blocks: [
+            {
+              id: "d1",
+              type: "text",
+              content:
+                "A interface organiza a complexidade em um dashboard com atalhos, indicadores e avisos — menos “menu infinito”, mais próximo da rotina do laboratório.",
+            },
+            {
+              id: "d2",
+              type: "bullets",
+              items: [
+                "Sidebar por requisitos / módulos do SGQ",
+                "Hub de atalhos para comercial, coleta, certificados e pessoal",
+                "Superfícies densas com hierarquia tipográfica clara (sem ornamento)",
+              ],
+            },
+          ],
+        },
+        {
           id: "solucao",
           label: "Solução",
           title: "Um SGQ autenticado, modular e multi-tenant",
@@ -575,7 +620,7 @@ export const projectsList: Project[] = [
         },
         {
           id: "arquitetura",
-          label: "Stack",
+          label: "Tech",
           title: "Arquitetura de produto (alto nível)",
           blocks: [
             {
@@ -622,7 +667,7 @@ export const projectsList: Project[] = [
         },
         {
           id: "resultado",
-          label: "Resultado",
+          label: "Produto",
           title: "Operação de qualidade num único ambiente",
           blocks: [
             {
@@ -639,7 +684,7 @@ export const projectsList: Project[] = [
               id: "r2",
               type: "quote",
               content:
-                "Um sistema para documentos, coleta, certificados, pessoal e operação comercial — com governança alinhada à realidade de laboratórios acreditados.",
+                "Um sistema para documentos, coleta, certificados, pessoal e operação comercial — com governança alinhada à realidade de laboratórios acreditados. Preview público mostra a entrada autenticada (sistema fechado), sem dados operacionais reais.",
             },
           ],
         },
@@ -665,7 +710,7 @@ export const projectsList: Project[] = [
     deliveryType: "lp-institucional",
     slug: "clinica-dverso",
     description:
-      "Landing para a Clínica Dverso (núcleo terapêutico em Sorocaba): conversão, microinterações e acessibilidade com VLibras.",
+      "Landing para a Clínica Dverso (núcleo terapêutico em Sorocaba): clareza de oferta, microinterações e acessibilidade com VLibras.",
     developmentExplanation:
       "Desenvolvi uma landing acolhedora e orientada à conversão, reunindo psicologia, neurodivergência, psicoterapia musical, nutrição e terapia assistida por cão em blocos claros. Microinterações com Lottie dão vida às seções sem prejudicar a performance, CTAs estratégicos conduzem ao contato e a integração com VLibras reforça inclusão e confiança na jornada.",
     keyStages: [
@@ -711,80 +756,101 @@ export const projectsList: Project[] = [
           ],
         },
         {
-          id: "objetivo",
-          label: "Objetivo",
-          title: "Acolhimento que conduz à ação",
+          id: "thinking",
+          label: "Pensamento",
+          title: "Uma narrativa, vários cuidados",
           blocks: [
             {
-              id: "o1",
+              id: "t1",
+              type: "text",
+              content:
+                "O site precisa acolher e orientar famílias sem virar catálogo frio. A decisão foi tratar especialidades como blocos escaneáveis sob uma mesma voz de marca, com CTAs de contato nos momentos de decisão — sem afirmar taxa de conversão.",
+            },
+            {
+              id: "t2",
               type: "bullets",
               items: [
-                "Transmitir proximidade sem perder objetividade",
-                "Orientar famílias com linguagem clara e humana",
-                "Converter interesse em contato com CTAs estratégicos",
+                "Unificar tom (cuidado + clareza) acima de cada linha terapêutica",
+                "Priorizar mobile e leitura rápida",
+                "Incluir acessibilidade em Libras como requisito, não como extras",
               ],
             },
           ],
         },
         {
-          id: "ux-ui",
-          label: "UX/UI",
-          title: "Microinterações com propósito",
+          id: "design",
+          label: "Design",
+          title: "Acolhimento escaneável",
           blocks: [
             {
-              id: "u1",
-              type: "tags",
-              items: ["Conversão", "Acolhimento", "Microinterações", "VLibras"],
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Hierarquia tipográfica leve para reduzir carga cognitiva",
+                "Seções por especialidade com ritmo visual consistente",
+                "CTAs recorrentes sem competir com o conteúdo clínico",
+              ],
             },
           ],
         },
         {
-          id: "solucao",
-          label: "Solução",
-          title: "Experiência acolhedora, inclusiva e orientada à conversão",
+          id: "tech",
+          label: "Tech",
+          title: "Microinterações e inclusão",
           blocks: [
             {
-              id: "s1",
+              id: "te1",
+              type: "tags",
+              items: ["Lottie", "VLibras", "Landing responsiva"],
+            },
+            {
+              id: "te2",
               type: "bullets",
               items: [
-                "Landing com tom humano e blocos escaneáveis por especialidade",
-                "Microinterações em Lottie para guiar atenção e reforçar confiança",
-                "Integração com VLibras e CTAs distribuídos nos momentos de decisão",
+                "Animações Lottie leves para guiar atenção sem bloquear a leitura",
+                "Widget VLibras para ampliar acesso em Libras",
+                "Implementação focada em performance e clareza no mobile",
               ],
             },
           ],
         },
         {
           id: "resultado",
-          label: "Resultado",
-          title: "Cuidado traduzido em clareza e conversão",
+          label: "Produto",
+          title: "Landing publicada, orientada ao contato",
           blocks: [
             {
               id: "r1",
               type: "stats",
               stats: [
-                { label: "Entrega", value: "Landing acolhedora e responsiva" },
-                { label: "Diferenciais", value: "Microinterações + VLibras" },
+                { label: "Entrega", value: "Landing responsiva publicada" },
+                { label: "Recursos", value: "Microinterações + VLibras" },
               ],
+            },
+            {
+              id: "r2",
+              type: "text",
+              content:
+                "Resultado observável: site ao ar com narrativa unificada e canal de contato acessível. Sem métricas de conversão inventadas.",
             },
           ],
         },
       ],
       previewTitle: "Preview da clínica",
       previewDescription:
-        "Veja a página final com foco em conversão, microinterações leves e acessibilidade com VLibras.",
+        "Veja a página publicada: tom acolhedor, microinterações leves e VLibras. O objetivo é facilitar o contato — sem números de conversão inventados.",
     },
     caseProblem:
-      "Criar uma página acolhedora para múltiplas linhas de cuidado, capaz de converter visitantes em contato no mobile, sem abrir mão de inclusão e clareza.",
+      "Criar uma página acolhedora para múltiplas linhas de cuidado, capaz de orientar famílias e abrir contato no mobile, sem abrir mão de inclusão e clareza.",
     caseSolution:
-      "Landing orientada à conversão com microinterações Lottie, CTAs nos pontos certos da jornada e integração com VLibras para ampliar acessibilidade em Libras.",
+      "Landing com microinterações Lottie, CTAs nos pontos certos da jornada e integração com VLibras para ampliar acessibilidade em Libras.",
     caseResults: [
       {
         label: "Entrega",
-        value: "Landing acolhedora e responsiva",
+        value: "Landing responsiva publicada",
       },
       {
-        label: "Diferenciais",
+        label: "Recursos",
         value: "Microinterações + VLibras",
       },
     ],
@@ -852,15 +918,53 @@ export const projectsList: Project[] = [
           ],
         },
         {
+          id: "thinking",
+          label: "Pensamento",
+          title: "Produto para a mesa, não um PDF bonito",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "O diferencial é reduzir fricção no uso real: fluxo alinhado ao Capítulo 1, motor de regras confiável e conteúdo em PT — com honestidade sobre bases SRD e ausência de afiliação à Wizards.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Priorizar criação guiada antes de features avançadas",
+                "Automatizar o que causa erro humano (HP, CA, slots, DC)",
+                "Tratar forja como sistema com restrições, não sandbox livre",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "UI de ferramenta, não de marketing",
+          blocks: [
+            {
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Passos claros na criação de personagem",
+                "Ficha densa porém legível (informação crítica primeiro)",
+                "Linguagem visual de RPG sem ruído ornamental",
+              ],
+            },
+          ],
+        },
+        {
           id: "solucao",
-          label: "Solução",
-          title: "Ferramenta completa em português para a mesa",
+          label: "Tech / Produto",
+          title: "SPA completa em português para a mesa",
           blocks: [
             {
               id: "s1",
               type: "text",
               content:
-                "Um ambiente web com criação guiada, ficha viva, catálogos traduzidos e forja com score automático — focado na experiência do usuário brasileiro.",
+                "Ambiente web com criação guiada, ficha viva, catálogos traduzidos e forja com score automático — focado na experiência do usuário brasileiro.",
             },
             {
               id: "s2",
@@ -877,8 +981,8 @@ export const projectsList: Project[] = [
         },
         {
           id: "resultado",
-          label: "Resultado",
-          title: "Menos fricção entre regra e mesa",
+          label: "Produto",
+          title: "Ferramenta publicada",
           blocks: [
             {
               id: "r1",
@@ -886,6 +990,7 @@ export const projectsList: Project[] = [
               stats: [
                 { label: "Idioma", value: "Português (BR)" },
                 { label: "Escopo", value: "Fichas · Magias · Forja" },
+                { label: "Status", value: "Publicado em dnd-br.com.br" },
               ],
             },
           ],
@@ -902,6 +1007,156 @@ export const projectsList: Project[] = [
     caseResults: [
       { label: "Idioma", value: "Português (BR)" },
       { label: "Escopo", value: "Fichas · Magias · Forja" },
+    ],
+  },
+  {
+    id: "hirely",
+    title: "Hirely (Recruta.AI)",
+    category: "ux",
+    topic: "empresas",
+    deliveryType: "sistema",
+    visibility: "academic",
+    slug: "hirely",
+    description:
+      "Conceito acadêmico de ATS com IA (Recruta.AI) — fluxo de recrutamento, clareza de produto e experiência para times de talent. Apresentado na ARCA / FIAP Next.",
+    developmentExplanation:
+      "Estudo de produto e interface para um ATS com apoio de IA: jornada do recrutador, organização de etapas e proposta de valor sem claim de produto comercial em produção.",
+    keyStages: [
+      {
+        title: "Problema de produto",
+        description:
+          "Mapear fricção típica de recrutamento (triagem, acompanhamento e falta de visão) sem inventar métricas de mercado.",
+      },
+      {
+        title: "Pensamento de produto + UX",
+        description:
+          "Definir fluxo, informação crítica por etapa e tom de interface para decisões rápidas do recrutador.",
+      },
+      {
+        title: "Narrativa acadêmica",
+        description:
+          "Empacotar a proposta para apresentação (FIAP Next / ARCA), deixando explícito o caráter conceitual.",
+      },
+    ],
+    thumbnail: undefined,
+    link: undefined,
+    caseStudy: {
+      context: {
+        type: "Conceito acadêmico · Product + UX + IA",
+        segment: "Recrutamento / ATS",
+        objective:
+          "Propor uma experiência de recrutamento com IA integrada, com clareza estratégica e fluxo navegável",
+        role: "Product thinking, UX/UI e narrativa de produto (contexto acadêmico)",
+        overview:
+          "Hirely (também referido como Recruta.AI) é um estudo de produto apresentado na ARCA (FIAP Next): um ATS pensado para reduzir ambiguidade no funil de contratação com apoio de IA. Não é um produto comercial publicado — o case documenta o pensamento, a estrutura de experiência e o enquadramento acadêmico.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Recrutamento opaco e fragmentado",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Times de talent costumam operar com ferramentas desconectadas e pouco feedback sobre o avanço de candidatos. A dor não é “mais IA”, e sim visão e decisão com menos ruído.",
+            },
+            {
+              id: "p2",
+              type: "bullets",
+              items: [
+                "Etapas do funil difíceis de escanear",
+                "Critérios de decisão pouco explicitados na interface",
+                "Risco de overclaim tecnológico em soluções de IA",
+              ],
+            },
+          ],
+        },
+        {
+          id: "thinking",
+          label: "Pensamento",
+          title: "Produto antes da feature de IA",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "A hipótese central: a IA só ajuda se o fluxo do recrutador já estiver claro. O desenho prioriza estados do funil, prioridades e próximos passos — e usa IA como apoio, não como narrativa mágica.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Separar triagem, avaliação e acompanhamento",
+                "Tornar status e critérios legíveis em poucos segundos",
+                "Declarar limites do conceito acadêmico (sem métricas inventadas)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "Interface para decisão rápida",
+          blocks: [
+            {
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Hierarquia por etapa do processo seletivo",
+                "Cards e listas com informação mínima necessária",
+                "Linguagem visual sóbria para contexto corporativo",
+              ],
+            },
+          ],
+        },
+        {
+          id: "tech",
+          label: "Tech / IA",
+          title: "IA como camada de apoio",
+          blocks: [
+            {
+              id: "te1",
+              type: "text",
+              content:
+                "No conceito, a IA apoia triagem e organização de informação. O case não descreve stack de produção nem performance real — o foco é o enquadramento de produto e a experiência.",
+            },
+          ],
+        },
+        {
+          id: "produto",
+          label: "Produto",
+          title: "Validação acadêmica (FIAP Next)",
+          blocks: [
+            {
+              id: "pr1",
+              type: "text",
+              content:
+                "Selecionado para apresentação na ARCA (FIAP Next), integrando produto, tecnologia e experiência. Resultado: exposição do conceito e narrativa híbrida Product + UX + IA — sem afirmar tração comercial.",
+            },
+            {
+              id: "pr2",
+              type: "stats",
+              stats: [
+                { label: "Contexto", value: "Acadêmico / conceitual" },
+                { label: "Apresentação", value: "ARCA · FIAP Next" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Sem preview público",
+      previewDescription:
+        "Este case é acadêmico/conceitual e não possui produto comercial aberto. O valor está na narrativa de problema, produto e experiência.",
+    },
+    caseProblem:
+      "Fluxos de recrutamento opacos e fragmentados; risco de vender “IA” sem clareza de produto.",
+    caseSolution:
+      "Conceito de ATS (Hirely / Recruta.AI) com funil legível e IA como apoio — apresentado academicamente no FIAP Next.",
+    caseResults: [
+      { label: "Contexto", value: "Acadêmico" },
+      { label: "Apresentação", value: "ARCA · FIAP Next" },
     ],
   },
 ];

@@ -1,11 +1,10 @@
 "use client";
 
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import type { Project } from "@/types";
 import type { UiMessages } from "@/lib/i18n/messages";
 import { ChapterSection } from "./ChapterSection";
-import { ChapterTrack } from "./ChapterTrack";
 import { CasePreviewStep } from "./CasePreviewStep";
 import { CaseGallery } from "./CaseGallery";
 
@@ -17,55 +16,22 @@ interface CaseDeckProps {
 export function CaseDeck({ project, t }: CaseDeckProps) {
   const chapters = project.caseStudy?.chapters ?? [];
   const gallery = project.caseStudy?.gallery ?? [];
-  const [activeChapter, setActiveChapter] = useState(0);
-  const touchStartX = useRef<number | null>(null);
-  const touchStartY = useRef<number | null>(null);
-
-  const contextCards = useMemo(() => {
-    const context = project.caseStudy?.context;
-    if (!context) return [];
-    return [
-      { label: t.caseDeck.projectType, value: context.type },
-      { label: t.caseDeck.segment, value: context.segment },
-      { label: t.caseDeck.objective, value: context.objective },
-      { label: t.caseDeck.role, value: context.role },
-    ];
-  }, [
-    project.caseStudy?.context,
-    t.caseDeck.objective,
-    t.caseDeck.projectType,
-    t.caseDeck.role,
-    t.caseDeck.segment,
-  ]);
+  const overviewRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (chapters.length === 0) return;
-      if (event.key === "ArrowRight") {
-        setActiveChapter((prev) => Math.min(prev + 1, chapters.length - 1));
-      }
-      if (event.key === "ArrowLeft") {
-        setActiveChapter((prev) => Math.max(prev - 1, 0));
-      }
-      if (event.key === "Home") {
-        setActiveChapter(0);
-      }
-      if (event.key === "End") {
-        setActiveChapter(chapters.length - 1);
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [chapters.length]);
-
-  useEffect(() => {
-    setActiveChapter(0);
+    overviewRef.current?.scrollIntoView({ block: "nearest" });
   }, [project.id]);
 
-  const active = chapters[activeChapter];
-  const activeChapterAnnouncement = active
-    ? `${active.label}: ${active.title}`
-    : `${t.caseDeck.chapterLabel} ${activeChapter + 1} / ${Math.max(1, chapters.length)}`;
+  const contextCards = [
+    project.caseStudy?.context
+      ? [
+          { label: t.caseDeck.projectType, value: project.caseStudy.context.type },
+          { label: t.caseDeck.segment, value: project.caseStudy.context.segment },
+          { label: t.caseDeck.objective, value: project.caseStudy.context.objective },
+          { label: t.caseDeck.role, value: project.caseStudy.context.role },
+        ]
+      : [],
+  ][0];
 
   const deliveryLabel = t.deliveryType[project.deliveryType];
 
@@ -86,12 +52,20 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         </Link>
       </div>
 
-      <header className="rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/40 to-surface/20 p-5 md:p-7 space-y-5 md:space-y-6">
+      <header
+        ref={overviewRef}
+        className="rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/40 to-surface/20 p-5 md:p-7 space-y-5 md:space-y-6"
+      >
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center rounded-md border border-accent/35 bg-accent/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">
               {deliveryLabel}
             </span>
+            {project.visibility === "academic" ? (
+              <span className="inline-flex items-center rounded-md border border-border-dark/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
+                {t.home.academicBadge}
+              </span>
+            ) : null}
             {project.caseStudy?.context.type ? (
               <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-muted">
                 {project.caseStudy.context.type}
@@ -140,56 +114,38 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
         />
       ) : null}
 
-      <div className="space-y-2">
-        <ChapterTrack
-          chapters={chapters}
-          activeIndex={activeChapter}
-          onSelect={setActiveChapter}
-          t={t}
-        />
-        <p className="text-center text-xs text-muted px-2 lg:hidden leading-relaxed">
-          {t.caseDeck.swipeHint}
-        </p>
-      </div>
-
-      <section
-        className="min-w-0"
-        aria-labelledby={active ? `chapter-title-${active.id}` : undefined}
-      >
-        <div
-          className="space-y-4 min-w-0 max-w-full overflow-x-hidden"
-          onTouchStart={(event) => {
-            touchStartX.current = event.touches[0]?.clientX ?? null;
-            touchStartY.current = event.touches[0]?.clientY ?? null;
-          }}
-          onTouchEnd={(event) => {
-            if (touchStartX.current == null || touchStartY.current == null) return;
-            const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
-            const endY = event.changedTouches[0]?.clientY ?? touchStartY.current;
-            const deltaX = touchStartX.current - endX;
-            const deltaY = touchStartY.current - endY;
-            const isHorizontalGesture = Math.abs(deltaX) > Math.abs(deltaY);
-            if (isHorizontalGesture && Math.abs(deltaX) > 45) {
-              if (deltaX > 0) {
-                setActiveChapter((prev) => Math.min(prev + 1, chapters.length - 1));
-              } else {
-                setActiveChapter((prev) => Math.max(prev - 1, 0));
-              }
-            }
-            touchStartX.current = null;
-            touchStartY.current = null;
-          }}
+      {chapters.length > 0 ? (
+        <nav
+          aria-label={t.caseDeck.chapterNavAria}
+          className="sticky top-0 z-10 -mx-4 px-4 sm:mx-0 sm:px-0 py-3 bg-dark/90 backdrop-blur-sm border-b border-border-dark/40"
         >
-          <p className="sr-only" aria-live="polite">
-            {activeChapterAnnouncement}
-          </p>
-          {active ? (
-            <div key={active.id} className="case-chapter-transition">
-              <ChapterSection chapter={active} />
-            </div>
-          ) : null}
-        </div>
-      </section>
+          <ul className="flex flex-wrap gap-2">
+            {chapters.map((chapter) => (
+              <li key={chapter.id}>
+                <a
+                  href={`#chapter-${chapter.id}`}
+                  className="inline-flex items-center rounded-full border border-border-dark/50 bg-surface/30 px-3 py-1.5 text-xs font-medium text-muted hover:text-accent hover:border-accent/40 transition-colors focus-ring"
+                >
+                  {chapter.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
+
+      <div className="space-y-8 md:space-y-10">
+        {chapters.map((chapter) => (
+          <section
+            key={chapter.id}
+            id={`chapter-${chapter.id}`}
+            className="scroll-mt-24 case-chapter-transition"
+            aria-labelledby={`chapter-title-${chapter.id}`}
+          >
+            <ChapterSection chapter={chapter} />
+          </section>
+        ))}
+      </div>
 
       <section className="w-full min-w-0 max-w-full border-t border-border-dark/30 pt-6 md:pt-8 mt-2">
         <div className="min-w-0">

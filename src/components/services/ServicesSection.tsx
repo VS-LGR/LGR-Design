@@ -112,7 +112,7 @@ function ServiceOfferingBlock({ offering }: { offering: ServiceOffering }) {
               project ? (
                 <li key={project.id}>
                   <Link
-                    href={`/cases/${project.slug}`}
+                    href={`/projetos/${project.slug}`}
                     className="inline-flex items-center gap-1.5 text-sm text-primary/90 border border-border-dark/60 rounded-lg px-3 py-1.5 hover:border-accent/45 hover:text-accent transition-colors focus-ring"
                   >
                     {project.title}
