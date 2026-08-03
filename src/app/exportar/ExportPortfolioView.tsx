@@ -16,7 +16,7 @@ const PRINT_PAGE_STYLE = `
 `;
 
 export function ExportPortfolioView() {
-  const { t } = useLocale();
+  const { t, projects } = useLocale();
 
   return (
     <div className="export-doc animate-in min-h-screen bg-dark text-primary">
@@ -25,7 +25,7 @@ export function ExportPortfolioView() {
         backHref={SITE_ROUTES.home}
         backLabel={t.exportPortfolio.backHome}
       />
-      <ExportPortfolioSheet t={t} />
+      <ExportPortfolioSheet t={t} projects={projects} />
     </div>
   );
 }

@@ -201,6 +201,16 @@ export type UiMessages = {
     backHome: string;
     carouselLabel: string;
     linkedinHint: string;
+    coverEyebrow: string;
+    coverTitle: string;
+    coverLead: string;
+    flagshipEyebrow: string;
+    webEyebrow: string;
+    webTitle: string;
+    productEyebrow: string;
+    ctaKicker: string;
+    ctaLead: string;
+    ctaContact: string;
   };
   hire: {
     viewCase: string;
@@ -530,9 +540,20 @@ export const uiPt: UiMessages = {
   },
   exportPortfolio: {
     backHome: "Início",
-    carouselLabel: "Telas do portfólio",
+    carouselLabel: "Carrossel LinkedIn — novo portfólio",
     linkedinHint:
       "Imprimir → Salvar como PDF (1200×627). No LinkedIn: Documento ou sequência de imagens.",
+    coverEyebrow: "Novidade",
+    coverTitle: "Meu novo portfólio está no ar 🚀",
+    coverLead:
+      "UX/UI, Product Design e Web — cases, processo e posicionamento em um só lugar.",
+    flagshipEyebrow: "Projeto principal",
+    webEyebrow: "Web",
+    webTitle: "Experiências web com clareza e conversão",
+    productEyebrow: "Produto · UX",
+    ctaKicker: "UX/UI · Product Design · Web",
+    ctaLead: "Conheça o portfólio completo e vamos conversar sobre o próximo passo.",
+    ctaContact: "Vamos conversar",
   },
   hire: {
     viewCase: "Ver case",
@@ -868,9 +889,20 @@ export const uiEn: UiMessages = {
   },
   exportPortfolio: {
     backHome: "Home",
-    carouselLabel: "Portfolio screens",
+    carouselLabel: "LinkedIn carousel — new portfolio",
     linkedinHint:
       "Print → Save as PDF (1200×627). On LinkedIn: Document or image sequence.",
+    coverEyebrow: "Update",
+    coverTitle: "My new portfolio is live 🚀",
+    coverLead:
+      "UX/UI, Product Design, and Web — cases, process, and positioning in one place.",
+    flagshipEyebrow: "Flagship project",
+    webEyebrow: "Web",
+    webTitle: "Web experiences with clarity and conversion",
+    productEyebrow: "Product · UX",
+    ctaKicker: "UX/UI · Product Design · Web",
+    ctaLead: "Explore the full portfolio — let's talk about the next step.",
+    ctaContact: "Let's talk",
   },
   hire: {
     viewCase: "View case",
