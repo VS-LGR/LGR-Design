@@ -328,6 +328,13 @@ body:has([data-export-layout]) {
   box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.65);
 }
 
+/* Capturas ao vivo no /exportar — sem animações / interaction */
+.export-live-content,
+.export-live-content * {
+  animation: none !important;
+  transition: none !important;
+}
+
 /* Documento LinkedIn — PDF carrossel (1 slide = 1 página quadrada) */
 @media print {
   @page {
