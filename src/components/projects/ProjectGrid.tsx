@@ -14,12 +14,14 @@ function ProjectCardLink({
   project,
   deliveryLabel,
   academicBadge,
+  privateBadge,
   roleLabel,
   flagship = false,
 }: {
   project: Project;
   deliveryLabel: string;
   academicBadge: string;
+  privateBadge: string;
   roleLabel: string;
   flagship?: boolean;
 }) {
@@ -60,6 +62,11 @@ function ProjectCardLink({
             {project.visibility === "academic" ? (
               <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-muted">
                 {academicBadge}
+              </span>
+            ) : null}
+            {project.visibility === "private" ? (
+              <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-muted">
+                {privateBadge}
               </span>
             ) : null}
           </div>
@@ -131,6 +138,7 @@ export function ProjectGrid() {
               project={flagship}
               deliveryLabel={t.deliveryType[flagship.deliveryType]}
               academicBadge={t.home.academicBadge}
+              privateBadge={t.home.privateBadge}
               roleLabel={t.home.roleLabel}
               flagship
             />
@@ -141,6 +149,7 @@ export function ProjectGrid() {
               project={project}
               deliveryLabel={t.deliveryType[project.deliveryType]}
               academicBadge={t.home.academicBadge}
+              privateBadge={t.home.privateBadge}
               roleLabel={t.home.roleLabel}
             />
           ))}
@@ -162,6 +171,7 @@ export function ProjectGrid() {
                 project={project}
                 deliveryLabel={t.deliveryType[project.deliveryType]}
                 academicBadge={t.home.academicBadge}
+                privateBadge={t.home.privateBadge}
                 roleLabel={t.home.roleLabel}
               />
             ))}

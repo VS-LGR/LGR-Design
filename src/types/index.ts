@@ -60,8 +60,8 @@ export type ProjectTopic = "saude" | "empresas";
 /** Tipo de entrega comercial exibido nos cards e na página Contratar */
 export type DeliveryType = "lp-institucional" | "sistema";
 
-/** Destaque na vitrine — academic = estudo/conceitual (sem claim comercial) */
-export type ProjectVisibility = "featured" | "secondary" | "academic";
+/** Destaque na vitrine — academic = estudo/conceitual; private = uso pessoal sem demo pública */
+export type ProjectVisibility = "featured" | "secondary" | "academic" | "private";
 
 export type ServiceId = "lp-institucional" | "sistemas-empresariais";
 
@@ -166,7 +166,7 @@ export interface Project {
   topic: ProjectTopic;
   /** LP/institucional vs sistema empresarial — badge nos cards */
   deliveryType: DeliveryType;
-  /** featured (padrão) | secondary (explorações) | academic */
+  /** featured (padrão) | secondary (explorações) | academic | private */
   visibility?: ProjectVisibility;
   /** Tags curtas no card (SaaS · UX/UI · …) */
   cardCategories?: string[];

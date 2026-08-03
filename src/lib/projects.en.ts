@@ -627,6 +627,146 @@ export const projectsListEn: Project[] = [
     ],
   },
   {
+    id: "devsistem",
+    title: "DevSistem",
+    category: "web",
+    topic: "empresas",
+    deliveryType: "sistema",
+    visibility: "private",
+    cardCategories: ["Product", "Process", "Systems", "MVP"],
+    cardHook: "How do you organize meeting → MVP with quality?",
+    cardRole: "Product · UX · Process · Development",
+    slug: "devsistem",
+    description:
+      "Personal (private) tool that manages system development across different topics — from the client meeting to a full MVP, with focus on speed, quality, and performance.",
+    developmentExplanation:
+      "Private personal project: organizes the path from client alignment and topic-based scope through product stages to a navigable MVP. No public demo — the case documents product and process thinking, without invented metrics.",
+    keyStages: [
+      {
+        title: "Intake: meeting and scope",
+        description:
+          "Capture need, constraints, and system topic before jumping to the interface.",
+      },
+      {
+        title: "Pipeline to MVP",
+        description:
+          "Orchestrate stages (discovery → structure → design → build) toward a complete MVP in little time.",
+      },
+      {
+        title: "Quality and performance",
+        description:
+          "Treat quality and performance as process criteria, not a bolted-on final step.",
+      },
+    ],
+    thumbnail: undefined,
+    link: undefined,
+    caseStudy: {
+      context: {
+        type: "Personal tool · Product + Process",
+        segment: "System development / MVP",
+        objective:
+          "Organize the meeting → MVP cycle with clear process and quality criteria",
+        role: "Product, UX, process, and development (personal project)",
+        overview:
+          "DevSistem is a private personal project that manages system development across different topics. The core idea: structure the path from the client meeting to a complete MVP, emphasizing speed without dropping quality and performance. There is no open public product — the case describes the framing and method.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problem",
+          title: "Systems without a clear path to MVP",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Building systems on different topics without an explicit meeting-to-MVP flow leads to loose scope, delay, and inconsistent quality — especially under time pressure.",
+            },
+            {
+              id: "p2",
+              type: "bullets",
+              items: [
+                "Client alignments hard to turn into actionable backlog",
+                "Different topics/contexts without one shared delivery method",
+                "Pressure for fast delivery without clear quality and performance criteria",
+              ],
+            },
+          ],
+        },
+        {
+          id: "thinking",
+          label: "Thinking",
+          title: "Process as the product",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "Hypothesis: speed is sustainable only if the process is readable. DevSistem treats the meeting → scope → stages → MVP journey as the thing to organize — not just the final UI.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Separate discovery, structure, design, and build without losing the client thread",
+                "Support multiple topics/systems under the same method",
+                "State the private nature (no claim of an open commercial product)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "A readable pipeline for decisions",
+          blocks: [
+            {
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Stage-based view of development through to MVP",
+                "Organization by topic/system without losing client context",
+                "Hierarchy that favors the next step over status clutter",
+              ],
+            },
+          ],
+        },
+        {
+          id: "produto",
+          label: "Product",
+          title: "MVP with quality and performance in the criteria",
+          blocks: [
+            {
+              id: "pr1",
+              type: "text",
+              content:
+                "The case does not invent time-to-market metrics: it frames a method to reach a navigable MVP with quality and performance as explicit process requirements.",
+            },
+            {
+              id: "pr2",
+              type: "stats",
+              stats: [
+                { label: "Status", value: "Personal / private" },
+                { label: "Arc", value: "Meeting → MVP" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "No public preview",
+      previewDescription:
+        "Private project. Value is in the process, product, and delivery-criteria narrative — no open demo.",
+    },
+    caseProblem:
+      "Building systems across topics without a clear meeting-to-MVP process leads to delay, loose scope, and inconsistent quality.",
+    caseSolution:
+      "A personal tool that organizes the client → scope → stages → MVP flow, with quality and performance as explicit criteria.",
+    caseResults: [
+      { label: "Status", value: "Personal / private" },
+      { label: "Focus", value: "Meeting → MVP" },
+    ],
+  },
+  {
     id: "clinica-dverso",
     title: "Clínica DVERSO",
     category: "web",

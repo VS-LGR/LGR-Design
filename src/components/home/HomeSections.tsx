@@ -14,10 +14,12 @@ import { ProjectCover } from "@/components/projects/covers/ProjectCover";
 function CardCategories({
   project,
   academicBadge,
+  privateBadge,
   deliveryFallback,
 }: {
   project: Project;
   academicBadge: string;
+  privateBadge: string;
   deliveryFallback: string;
 }) {
   const cats = project.cardCategories;
@@ -35,6 +37,11 @@ function CardCategories({
       {project.visibility === "academic" ? (
         <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-muted">
           {academicBadge}
+        </span>
+      ) : null}
+      {project.visibility === "private" ? (
+        <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-muted">
+          {privateBadge}
         </span>
       ) : null}
     </div>
@@ -130,6 +137,7 @@ export function HomeFeaturedProjects() {
             <CardCategories
               project={flagship}
               academicBadge={t.home.academicBadge}
+              privateBadge={t.home.privateBadge}
               deliveryFallback={t.deliveryType[flagship.deliveryType]}
             />
             <h3 className="text-xl md:text-2xl font-bold text-primary group-hover:text-accent transition-colors tracking-tight">
@@ -174,6 +182,7 @@ export function HomeFeaturedProjects() {
                 <CardCategories
                   project={project}
                   academicBadge={t.home.academicBadge}
+                  privateBadge={t.home.privateBadge}
                   deliveryFallback={t.deliveryType[project.deliveryType]}
                 />
                 <h3 className="text-lg font-semibold text-primary group-hover:text-accent transition-colors">
@@ -314,69 +323,95 @@ export function HomeContactCta() {
   const wa = `https://wa.me/55${phoneDigits}`;
   const resumeUrl = resolveResumeUrl(about.resumePdfUrl);
 
+  const secondaryLinkClass =
+    "inline-flex items-center justify-center min-h-[2.5rem] rounded-full border border-border-dark/45 bg-dark/25 px-4 text-sm font-medium text-primary/90 hover:border-accent/40 hover:text-accent transition-colors focus-ring";
+
   return (
-    <section className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-14 md:py-20">
-      <div className="rounded-2xl border border-border-dark/50 bg-gradient-to-br from-surface/50 via-surface/25 to-accent/5 p-6 md:p-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent mb-2">
-          {t.home.contactKicker}
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-primary tracking-tight max-w-xl text-balance">
-          {t.home.contactTitle}
-        </h2>
-        <p className="mt-3 text-sm md:text-base text-muted max-w-xl leading-relaxed">
-          {t.home.contactLead}
-        </p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Link
-            href={SITE_ROUTES.contact}
-            className="inline-flex items-center justify-center min-h-[2.75rem] rounded-full bg-accent px-5 text-sm font-semibold text-dark hover:bg-accent-soft transition-colors focus-ring"
+    <section
+      className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-14 md:py-20"
+      aria-labelledby="home-contact-heading"
+    >
+      <div className="relative overflow-hidden rounded-2xl border border-border-dark/50 bg-gradient-to-br from-surface/55 via-surface/30 to-accent/[0.06] p-6 sm:p-8 md:p-10">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-accent/10 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 -left-10 h-48 w-48 rounded-full bg-accent/5 blur-3xl"
+        />
+
+        <div className="relative max-w-2xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent mb-3">
+            {t.home.contactKicker}
+          </p>
+          <h2
+            id="home-contact-heading"
+            className="text-2xl sm:text-3xl md:text-[2rem] font-bold text-primary tracking-tight text-balance leading-tight"
           >
-            {t.home.ctaContact}
-          </Link>
-          {about.contact.linkedin ? (
+            {t.home.contactTitle}
+          </h2>
+          <p className="mt-3 sm:mt-4 text-sm md:text-base text-muted leading-relaxed max-w-xl">
+            {t.home.contactLead}
+          </p>
+        </div>
+
+        <div className="relative mt-8 md:mt-9 flex flex-col gap-4">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <Link
+              href={SITE_ROUTES.contact}
+              className="inline-flex items-center justify-center min-h-[3rem] rounded-full bg-accent px-6 text-sm font-semibold text-dark hover:bg-accent-soft transition-colors focus-ring shadow-[0_0_28px_-10px_rgba(34,184,207,0.45)]"
+            >
+              {t.home.ctaContact}
+            </Link>
+            {about.contact.linkedin ? (
+              <a
+                href={about.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center min-h-[3rem] rounded-full border border-accent/35 bg-accent/10 px-5 text-sm font-semibold text-accent hover:bg-accent/15 hover:border-accent/50 transition-colors focus-ring"
+              >
+                {t.contact.linkedin}
+              </a>
+            ) : null}
+            {about.contact.github ? (
+              <a
+                href={about.contact.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center min-h-[3rem] rounded-full border border-border-dark/55 bg-surface/40 px-5 text-sm font-semibold text-primary hover:border-accent/40 hover:text-accent transition-colors focus-ring"
+              >
+                {t.contact.github}
+              </a>
+            ) : null}
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-border-dark/35">
             <a
-              href={about.contact.linkedin}
+              href={`mailto:${about.contact.email}`}
+              className={secondaryLinkClass}
+            >
+              {t.contact.email}
+            </a>
+            {resumeUrl ? (
+              <a
+                href={resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={secondaryLinkClass}
+              >
+                {t.resume.download}
+              </a>
+            ) : null}
+            <a
+              href={wa}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-h-[2.75rem] rounded-full border border-border-dark/60 px-5 text-sm font-semibold text-primary hover:border-accent/40 transition-colors focus-ring"
+              className={secondaryLinkClass}
             >
-              {t.contact.linkedin}
+              {t.contact.whatsapp}
             </a>
-          ) : null}
-          {about.contact.github ? (
-            <a
-              href={about.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-h-[2.75rem] rounded-full border border-border-dark/60 px-5 text-sm font-semibold text-primary hover:border-accent/40 transition-colors focus-ring"
-            >
-              {t.contact.github}
-            </a>
-          ) : null}
-          <a
-            href={`mailto:${about.contact.email}`}
-            className="inline-flex items-center justify-center min-h-[2.75rem] rounded-full border border-transparent px-4 text-sm font-medium text-muted hover:text-accent transition-colors focus-ring"
-          >
-            {t.contact.email}
-          </a>
-          {resumeUrl ? (
-            <a
-              href={resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-h-[2.75rem] rounded-full border border-transparent px-4 text-sm font-medium text-muted hover:text-accent transition-colors focus-ring"
-            >
-              {t.resume.download}
-            </a>
-          ) : null}
-          <a
-            href={wa}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center min-h-[2.75rem] rounded-full border border-transparent px-4 text-sm font-medium text-muted hover:text-accent transition-colors focus-ring"
-          >
-            {t.contact.whatsapp}
-          </a>
+          </div>
         </div>
       </div>
     </section>

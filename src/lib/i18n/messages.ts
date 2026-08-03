@@ -25,6 +25,7 @@ export type UiMessages = {
     featuredAll: string;
     explorationsTitle: string;
     academicBadge: string;
+    privateBadge: string;
     roleLabel: string;
     processKicker: string;
     processTitle: string;
@@ -313,6 +314,7 @@ export const uiPt: UiMessages = {
     featuredAll: "Ver todos",
     explorationsTitle: "Explorações",
     academicBadge: "Acadêmico",
+    privateBadge: "Privado",
     roleLabel: "Meu papel",
     processKicker: "Método",
     processTitle: "Como eu trabalho",
@@ -646,6 +648,7 @@ export const uiEn: UiMessages = {
     featuredAll: "View all",
     explorationsTitle: "Explorations",
     academicBadge: "Academic",
+    privateBadge: "Private",
     roleLabel: "My role",
     processKicker: "Method",
     processTitle: "How I work",

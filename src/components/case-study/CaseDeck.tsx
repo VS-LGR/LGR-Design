@@ -72,6 +72,11 @@ export function CaseDeck({ project, t }: CaseDeckProps) {
                 {t.home.academicBadge}
               </span>
             ) : null}
+            {project.visibility === "private" ? (
+              <span className="inline-flex items-center rounded-md border border-border-dark/50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
+                {t.home.privateBadge}
+              </span>
+            ) : null}
             {project.caseStudy?.context.type ? (
               <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-muted">
                 {project.caseStudy.context.type}

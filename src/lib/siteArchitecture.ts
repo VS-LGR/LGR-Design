@@ -33,6 +33,7 @@ export const LEGACY_REDIRECTS: Array<{ source: string; destination: string; perm
 /** Ordem de destaque na home e lista (slugs) */
 export const FEATURED_PROJECT_ORDER = [
   "qualiproc-ctli",
+  "devsistem",
   "clinica-dverso",
   "grimorio-aventureiro",
   "ofag-revamp",

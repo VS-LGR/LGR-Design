@@ -99,6 +99,23 @@ export function IconHirely({ title, ...props }: IconProps) {
   );
 }
 
+/** DevSistem — pipeline reunião → MVP */
+export function IconDevSistem({ title, ...props }: IconProps) {
+  return (
+    <svg viewBox="0 0 120 120" role={title ? "img" : "presentation"} aria-hidden={title ? undefined : true} {...props}>
+      {title ? <title>{title}</title> : null}
+      <rect x="16" y="30" width="88" height="60" rx="8" {...base} opacity="0.9" />
+      <path d="M45 30v60M75 30v60" {...base} opacity="0.4" />
+      <rect x="22" y="40" width="18" height="12" rx="2" {...base} />
+      <rect x="22" y="58" width="18" height="12" rx="2" {...base} opacity="0.7" />
+      <rect x="52" y="40" width="18" height="12" rx="2" {...base} />
+      <rect x="52" y="58" width="18" height="12" rx="2" {...base} opacity="0.65" />
+      <rect x="82" y="46" width="16" height="20" rx="2" {...base} />
+      <path d="M86 56l3 3 6-7" {...base} strokeWidth="2" />
+    </svg>
+  );
+}
+
 /** Pharmatech / farma — molécula / tech institucional */
 export function IconPharmatech({ title, ...props }: IconProps) {
   return (
@@ -131,6 +148,7 @@ export const PROJECT_COVER_ICONS: Record<
   (props: IconProps) => ReactElement
 > = {
   "qualiproc-ctli": IconQualiProc,
+  devsistem: IconDevSistem,
   "clinica-dverso": IconDverso,
   "grimorio-aventureiro": IconGrimorio,
   "ofag-revamp": IconOfag,

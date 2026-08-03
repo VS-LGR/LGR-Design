@@ -33,10 +33,16 @@ export function MainNav() {
   return (
     <nav
       aria-label={t.nav.aria}
-      className="w-[calc(100%+2rem)] min-w-0 -mx-4 px-4 md:mx-0 md:w-auto md:px-0"
+      className="relative w-[calc(100%+2rem)] min-w-0 -mx-4 md:mx-0 md:w-auto"
     >
+      {/* Fade indício de scroll no mobile */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-8 bg-gradient-to-l from-dark via-dark/80 to-transparent md:hidden"
+      />
+
       <ul
-        className="flex flex-nowrap items-stretch gap-2 overflow-x-auto scrollbar-hide pb-1.5 pt-0.5 snap-x snap-mandatory md:flex-wrap md:overflow-visible md:gap-x-5 md:pb-0 md:pt-0 md:snap-none"
+        className="flex flex-nowrap items-stretch gap-1.5 overflow-x-auto scrollbar-hide px-4 pb-1 pt-0.5 snap-x snap-mandatory md:flex-wrap md:overflow-visible md:gap-x-5 md:px-0 md:pb-0 md:pt-0 md:snap-none"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         {PRIMARY_NAV.map(({ id, href }) => {
@@ -47,8 +53,8 @@ export function MainNav() {
               <Link
                 href={href}
                 className={`
-                  inline-flex items-center justify-center rounded-full border px-3.5 py-2 text-xs font-semibold transition-all duration-300 focus-ring min-h-[2.75rem] sm:text-sm
-                  md:min-h-0 md:rounded-none md:border-0 md:bg-transparent md:px-1 md:py-1 md:font-medium md:shadow-none
+                  inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-all duration-300 focus-ring min-h-[2.25rem] sm:px-3.5 sm:text-xs
+                  md:min-h-0 md:rounded-none md:border-0 md:bg-transparent md:px-1 md:py-1 md:text-sm md:font-medium md:shadow-none
                   ${
                     active
                       ? emphasize
@@ -66,6 +72,8 @@ export function MainNav() {
             </li>
           );
         })}
+        {/* Espaço extra para o último item não ficar sob o fade */}
+        <li className="w-4 shrink-0 md:hidden" aria-hidden />
       </ul>
     </nav>
   );

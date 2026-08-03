@@ -711,6 +711,146 @@ export const projectsList: Project[] = [
     ],
   },
   {
+    id: "devsistem",
+    title: "DevSistem",
+    category: "web",
+    topic: "empresas",
+    deliveryType: "sistema",
+    visibility: "private",
+    cardCategories: ["Produto", "Processo", "Sistemas", "MVP"],
+    cardHook: "Como organizar reunião → MVP com qualidade?",
+    cardRole: "Produto · UX · Processo · Desenvolvimento",
+    slug: "devsistem",
+    description:
+      "Ferramenta pessoal (privada) que gerencia o desenvolvimento de sistemas em diferentes tópicos — da reunião com o cliente a um MVP completo, com foco em velocidade, qualidade e desempenho.",
+    developmentExplanation:
+      "Projeto pessoal privado: organiza o processo entre alinhamento com cliente, escopo por tópico, etapas de produto e entrega de MVP navegável. Não há demo pública — o case documenta o pensamento de produto e processo, sem métricas inventadas.",
+    keyStages: [
+      {
+        title: "Entrada: reunião e escopo",
+        description:
+          "Capturar necessidade, restrições e tópico do sistema antes de saltar para a interface.",
+      },
+      {
+        title: "Pipeline até o MVP",
+        description:
+          "Orquestrar etapas (descoberta → estrutura → design → build) para um MVP completo em pouco tempo.",
+      },
+      {
+        title: "Qualidade e desempenho",
+        description:
+          "Tratar qualidade e performance como critérios do processo, não como etapa isolada no fim.",
+      },
+    ],
+    thumbnail: undefined,
+    link: undefined,
+    caseStudy: {
+      context: {
+        type: "Ferramenta pessoal · Produto + Processo",
+        segment: "Desenvolvimento de sistemas / MVP",
+        objective:
+          "Organizar o ciclo reunião → MVP com clareza de processo e critérios de qualidade",
+        role: "Produto, UX, processo e desenvolvimento (projeto pessoal)",
+        overview:
+          "DevSistem é um projeto pessoal privado que gerencia o desenvolvimento de sistemas em diferentes tópicos. A ideia central: estruturar o processo desde a reunião com o cliente até um MVP completo, com ênfase em agilidade sem abrir mão de qualidade e desempenho. Não há produto público aberto — o case descreve o enquadramento e o método.",
+      },
+      chapters: [
+        {
+          id: "problema",
+          label: "Problema",
+          title: "Sistemas sem processo claro até o MVP",
+          blocks: [
+            {
+              id: "p1",
+              type: "text",
+              content:
+                "Desenvolver sistemas em temas distintos sem um fluxo explícito da reunião ao MVP gera escopo solto, atraso e qualidade inconsistente — especialmente quando o tempo é curto.",
+            },
+            {
+              id: "p2",
+              type: "bullets",
+              items: [
+                "Alinhamentos com cliente difíceis de transformar em backlog acionável",
+                "Tópicos e contextos diferentes sem um mesmo método de condução",
+                "Pressão por entrega rápida sem critérios claros de qualidade e desempenho",
+              ],
+            },
+          ],
+        },
+        {
+          id: "thinking",
+          label: "Pensamento",
+          title: "Processo como produto",
+          blocks: [
+            {
+              id: "t1",
+              type: "text",
+              content:
+                "A hipótese: a velocidade só é sustentável se o processo for legível. DevSistem trata a jornada reunião → escopo → etapas → MVP como o objeto a organizar, não só a interface final.",
+            },
+            {
+              id: "t2",
+              type: "bullets",
+              items: [
+                "Separar descoberta, estrutura, design e build sem perder o fio do cliente",
+                "Permitir múltiplos tópicos/sistemas sob o mesmo método",
+                "Declarar o caráter privado (sem claim de produto comercial aberto)",
+              ],
+            },
+          ],
+        },
+        {
+          id: "design",
+          label: "Design",
+          title: "Pipeline legível para decisão",
+          blocks: [
+            {
+              id: "d1",
+              type: "bullets",
+              items: [
+                "Visão por etapas do desenvolvimento até o MVP",
+                "Organização por tópico/sistema sem perder contexto do cliente",
+                "Hierarquia que favorece o próximo passo, não o excesso de status",
+              ],
+            },
+          ],
+        },
+        {
+          id: "produto",
+          label: "Produto",
+          title: "MVP com qualidade e desempenho no critérios",
+          blocks: [
+            {
+              id: "pr1",
+              type: "text",
+              content:
+                "O foco do case não é métrica inventada de time-to-market: é o método para chegar a um MVP navegável com qualidade e desempenho como exigências explícitas do processo.",
+            },
+            {
+              id: "pr2",
+              type: "stats",
+              stats: [
+                { label: "Status", value: "Pessoal / privado" },
+                { label: "Arco", value: "Reunião → MVP" },
+              ],
+            },
+          ],
+        },
+      ],
+      previewTitle: "Sem preview público",
+      previewDescription:
+        "Projeto privado. O valor está na narrativa de processo, produto e critérios de entrega — sem demo aberta.",
+    },
+    caseProblem:
+      "Desenvolver sistemas em temas distintos sem processo claro da reunião ao MVP gera atraso, escopo solto e qualidade inconsistente.",
+    caseSolution:
+      "Ferramenta pessoal que organiza o fluxo cliente → escopo → etapas → MVP, com qualidade e desempenho como critérios explícitos.",
+    caseResults: [
+      { label: "Status", value: "Pessoal / privado" },
+      { label: "Foco", value: "Reunião → MVP" },
+    ],
+  },
+  {
     id: "clinica-dverso",
     title: "Clínica DVERSO",
     category: "web",

@@ -2,7 +2,11 @@
 
 import { useLocale, type Locale } from "@/contexts/LocaleContext";
 
-export function LanguageToggle() {
+type LanguageToggleProps = {
+  compact?: boolean;
+};
+
+export function LanguageToggle({ compact = false }: LanguageToggleProps) {
   const { locale, setLocale, t } = useLocale();
 
   const select = (next: Locale) => {
@@ -11,14 +15,18 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="flex items-center gap-1 rounded-lg border border-border-dark/60 bg-surface/50 p-0.5"
+      className={`flex items-center gap-0.5 rounded-lg border border-border-dark/60 bg-surface/50 ${
+        compact ? "p-0.5" : "p-0.5"
+      }`}
       role="group"
       aria-label={t.language.aria}
     >
       <button
         type="button"
         onClick={() => select("pt")}
-        className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors focus-ring ${
+        className={`font-semibold rounded-md transition-colors focus-ring ${
+          compact ? "px-2 py-1 text-[11px]" : "px-2.5 py-1 text-xs"
+        } ${
           locale === "pt"
             ? "bg-accent text-dark"
             : "text-muted hover:text-primary"
@@ -30,7 +38,9 @@ export function LanguageToggle() {
       <button
         type="button"
         onClick={() => select("en")}
-        className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors focus-ring ${
+        className={`font-semibold rounded-md transition-colors focus-ring ${
+          compact ? "px-2 py-1 text-[11px]" : "px-2.5 py-1 text-xs"
+        } ${
           locale === "en"
             ? "bg-accent text-dark"
             : "text-muted hover:text-primary"
