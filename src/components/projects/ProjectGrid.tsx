@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -9,17 +8,16 @@ import {
   featuredProjects,
   secondaryProjects,
 } from "@/lib/projectOrder";
+import { ProjectCover } from "@/components/projects/covers/ProjectCover";
 
 function ProjectCardLink({
   project,
-  thumbnailAltPrefix,
   deliveryLabel,
   academicBadge,
   roleLabel,
   flagship = false,
 }: {
   project: Project;
-  thumbnailAltPrefix: string;
   deliveryLabel: string;
   academicBadge: string;
   roleLabel: string;
@@ -37,35 +35,13 @@ function ProjectCardLink({
         href={SITE_ROUTES.project(project.slug)}
         className="flex flex-col flex-1 min-h-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark rounded-2xl"
       >
-        <div
-          className={`relative bg-dark/70 border-b border-border-dark/40 overflow-hidden ${
+        <ProjectCover
+          project={project}
+          variant={flagship ? "flagship" : "default"}
+          className={
             flagship ? "aspect-[16/10] md:aspect-[21/9]" : "aspect-[5/3]"
-          }`}
-        >
-          {project.thumbnail ? (
-            <Image
-              src={project.thumbnail}
-              alt={`${thumbnailAltPrefix} ${project.title}`}
-              fill
-              className={`object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] ${
-                project.deliveryType === "sistema"
-                  ? "object-left-top"
-                  : "object-top"
-              }`}
-              sizes={
-                flagship
-                  ? "(max-width: 768px) 100vw, 1024px"
-                  : "(max-width: 768px) 100vw, 50vw"
-              }
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,rgba(34,184,207,0.12),transparent_60%)]">
-              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accent/80">
-                {project.visibility === "academic" ? academicBadge : project.title}
-              </span>
-            </div>
-          )}
-        </div>
+          }
+        />
         <div
           className={`flex flex-col flex-1 gap-2 ${
             flagship ? "p-5 md:p-7 md:max-w-3xl" : "p-4 md:p-5"
@@ -153,7 +129,6 @@ export function ProjectGrid() {
             <ProjectCardLink
               key={flagship.id}
               project={flagship}
-              thumbnailAltPrefix={t.projects.thumbnailAltPrefix}
               deliveryLabel={t.deliveryType[flagship.deliveryType]}
               academicBadge={t.home.academicBadge}
               roleLabel={t.home.roleLabel}
@@ -164,7 +139,6 @@ export function ProjectGrid() {
             <ProjectCardLink
               key={project.id}
               project={project}
-              thumbnailAltPrefix={t.projects.thumbnailAltPrefix}
               deliveryLabel={t.deliveryType[project.deliveryType]}
               academicBadge={t.home.academicBadge}
               roleLabel={t.home.roleLabel}
@@ -186,7 +160,6 @@ export function ProjectGrid() {
               <ProjectCardLink
                 key={project.id}
                 project={project}
-                thumbnailAltPrefix={t.projects.thumbnailAltPrefix}
                 deliveryLabel={t.deliveryType[project.deliveryType]}
                 academicBadge={t.home.academicBadge}
                 roleLabel={t.home.roleLabel}

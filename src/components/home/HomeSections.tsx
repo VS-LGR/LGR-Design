@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import type { Project } from "@/types";
 import { useLocale } from "@/contexts/LocaleContext";
 import { SITE_ROUTES } from "@/lib/siteArchitecture";
@@ -10,6 +9,7 @@ import {
   secondaryProjects,
 } from "@/lib/projectOrder";
 import { resolveResumeUrl } from "@/lib/cv";
+import { ProjectCover } from "@/components/projects/covers/ProjectCover";
 
 function CardCategories({
   project,
@@ -37,40 +37,6 @@ function CardCategories({
           {academicBadge}
         </span>
       ) : null}
-    </div>
-  );
-}
-
-function ProjectThumb({
-  project,
-  alt,
-  className,
-  sizes,
-}: {
-  project: Project;
-  alt: string;
-  className: string;
-  sizes: string;
-}) {
-  return (
-    <div className={`relative bg-dark/70 border-b border-border-dark/40 overflow-hidden ${className}`}>
-      {project.thumbnail ? (
-        <Image
-          src={project.thumbnail}
-          alt={alt}
-          fill
-          className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${
-            project.deliveryType === "sistema" ? "object-left-top" : "object-top"
-          }`}
-          sizes={sizes}
-        />
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,rgba(34,184,207,0.12),transparent_60%)]">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accent/80 px-4 text-center">
-            {project.title}
-          </span>
-        </div>
-      )}
     </div>
   );
 }
@@ -155,11 +121,10 @@ export function HomeFeaturedProjects() {
           href={SITE_ROUTES.project(flagship.slug)}
           className="group mb-6 md:mb-8 flex flex-col rounded-2xl border border-border-dark/50 bg-gradient-to-b from-surface/45 to-surface/15 overflow-hidden transition-[border-color,transform] duration-300 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark animate-[fade-in-up_0.55s_ease-out_both]"
         >
-          <ProjectThumb
+          <ProjectCover
             project={flagship}
-            alt={`${t.projects.thumbnailAltPrefix} ${flagship.title}`}
+            variant="flagship"
             className="aspect-[16/10] md:aspect-[21/9]"
-            sizes="(max-width: 768px) 100vw, 1024px"
           />
           <div className="flex flex-col gap-3 p-5 md:p-7 md:max-w-3xl">
             <CardCategories
@@ -201,11 +166,9 @@ export function HomeFeaturedProjects() {
                 animation: `fade-in-up 0.55s ease-out ${0.05 * (index + 1)}s both`,
               }}
             >
-              <ProjectThumb
+              <ProjectCover
                 project={project}
-                alt={`${t.projects.thumbnailAltPrefix} ${project.title}`}
                 className="aspect-[16/9]"
-                sizes="(max-width: 640px) 100vw, 50vw"
               />
               <div className="flex flex-col flex-1 p-4 md:p-5 gap-2">
                 <CardCategories
