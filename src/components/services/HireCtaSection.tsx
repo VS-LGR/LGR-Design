@@ -13,11 +13,14 @@ export function HireCtaSection() {
   )}`;
 
   return (
-    <section className="space-y-5 py-2" aria-labelledby="hire-cta-heading">
+    <section
+      className="rounded-2xl border border-accent/25 bg-gradient-to-b from-accent/10 to-surface/20 px-5 py-7 md:px-8 md:py-9 space-y-5"
+      aria-labelledby="hire-cta-heading"
+    >
       <div className="max-w-2xl space-y-3">
         <h2
           id="hire-cta-heading"
-          className="text-xl md:text-2xl font-semibold text-primary tracking-tight"
+          className="text-xl md:text-2xl font-bold text-primary tracking-tight"
         >
           {services.ctaTitle}
         </h2>
@@ -34,7 +37,7 @@ export function HireCtaSection() {
         </a>
         <a
           href={mailto}
-          className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-medium bg-surface border border-accent/30 text-accent hover:border-accent/50 transition-colors focus-ring"
+          className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-medium bg-surface border border-accent/35 text-accent hover:border-accent/55 transition-colors focus-ring"
         >
           {services.emailCta}
         </a>

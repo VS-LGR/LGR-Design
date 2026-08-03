@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "Lucas Gabriel Rodrigues | UX, Web Design e Desenvolvimento Digital",
   description:
     "Portfólio de Lucas Gabriel Rodrigues — UX & Web Designer com desenvolvimento de landing pages, sites institucionais e sistemas empresariais.",
+  icons: {
+    icon: [{ url: "/icon", type: "image/png" }],
+    apple: [{ url: "/apple-icon", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({

@@ -6,11 +6,11 @@ export function HireProcessSection() {
   const { services } = useLocale();
 
   return (
-    <section className="space-y-6" aria-labelledby="hire-process-heading">
-      <div className="max-w-2xl space-y-2">
+    <section className="space-y-7" aria-labelledby="hire-process-heading">
+      <div className="max-w-2xl space-y-2.5">
         <h2
           id="hire-process-heading"
-          className="text-lg md:text-xl font-semibold text-primary accent-underline pb-1"
+          className="text-xl md:text-2xl font-bold text-primary tracking-tight accent-underline pb-1"
         >
           {services.processTitle}
         </h2>
@@ -20,7 +20,10 @@ export function HireProcessSection() {
       </div>
       <ol className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 list-none">
         {services.processSteps.map((step, index) => (
-          <li key={step.title} className="pl-4 border-l-2 border-accent/45 space-y-1.5">
+          <li
+            key={step.title}
+            className="rounded-xl border border-border-dark/45 bg-surface/20 px-4 py-4 border-l-[3px] border-l-accent/55 space-y-1.5"
+          >
             <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent/90">
               {String(index + 1).padStart(2, "0")}
             </p>

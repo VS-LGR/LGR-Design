@@ -118,9 +118,12 @@ export type UiMessages = {
     projectsKicker: string;
     projectsLead: string;
     historiaHeading: string;
+    historiaKicker: string;
+    historiaLead: string;
     workHeading: string;
     workLead: string;
     hireHeading: string;
+    sectionsJumpAria: string;
   };
   exportDoc: {
     title: string;
@@ -374,10 +377,14 @@ export const uiPt: UiMessages = {
     projectsLead:
       "Landing pages, sites institucionais e sistemas empresariais — cada card abre o estudo de caso completo.",
     historiaHeading: "História pessoal",
+    historiaKicker: "Trajetória",
+    historiaLead:
+      "Formação, reconhecimentos e posicionamento — o percurso que sustenta o trabalho em UX, web e sistemas.",
     workHeading: "Método de trabalho",
     workLead:
       "Princípios, processo adaptável e ferramentas que uso para transformar requisitos em interfaces claras e entregas navegáveis.",
     hireHeading: "Contratar",
+    sectionsJumpAria: "Ir para seção",
   },
   exportDoc: {
     title: "Export LinkedIn",
@@ -638,10 +645,14 @@ export const uiEn: UiMessages = {
     projectsLead:
       "Landing pages, institutional sites, and business systems — each card opens the full case study.",
     historiaHeading: "Personal story",
+    historiaKicker: "Background",
+    historiaLead:
+      "Education, recognition, and positioning — the path behind the UX, web, and systems work.",
     workHeading: "Working method",
     workLead:
       "Principles, an adaptable process, and tools I use to turn requirements into clear interfaces and navigable deliveries.",
     hireHeading: "Hire",
+    sectionsJumpAria: "Jump to section",
   },
   exportDoc: {
     title: "LinkedIn export",
