@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale } from "@/contexts/LocaleContext";
+import { useExportCapturePath } from "@/contexts/ExportCapturePathContext";
 import { PRIMARY_NAV, SITE_ROUTES } from "@/lib/siteArchitecture";
 import type { NavItemId } from "@/lib/siteArchitecture";
 
 export function MainNav() {
   const pathname = usePathname();
+  const capturePath = useExportCapturePath();
+  const activePath = capturePath ?? pathname;
   const { t } = useLocale();
 
   const labels: Record<NavItemId, string> = {
@@ -19,15 +22,15 @@ export function MainNav() {
   };
 
   const isActive = (href: string) => {
-    if (href === SITE_ROUTES.home) return pathname === "/";
+    if (href === SITE_ROUTES.home) return activePath === "/";
     if (href === SITE_ROUTES.projects) {
       return (
-        pathname === "/projetos" ||
-        pathname.startsWith("/projetos/") ||
-        pathname.startsWith("/cases/")
+        activePath === "/projetos" ||
+        activePath.startsWith("/projetos/") ||
+        activePath.startsWith("/cases/")
       );
     }
-    return pathname === href || pathname.startsWith(`${href}/`);
+    return activePath === href || activePath.startsWith(`${href}/`);
   };
 
   return (

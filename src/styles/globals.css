@@ -304,10 +304,16 @@
   }
 }
 
-/* Página de export: esconde chrome do site */
+/* Página de export: esconde chrome do site (layout raiz) */
 body:has([data-export-layout]) [data-site-chrome],
-body:has([data-export-layout]) [data-animated-bg] {
+body:has([data-export-layout]) [data-animated-bg],
+body:has([data-export-layout]) [data-intro-overlay] {
   display: none !important;
+}
+
+/* Mantém Header real dentro das capturas de página */
+body:has([data-export-layout]) .export-live-content [data-site-chrome] {
+  display: block !important;
 }
 
 body:has([data-export-layout]) {

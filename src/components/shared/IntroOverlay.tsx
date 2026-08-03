@@ -38,6 +38,7 @@ export function IntroOverlay() {
   return (
     <div
       aria-hidden="true"
+      data-intro-overlay
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-dark transition-opacity duration-300 ease-out ${
         exiting ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
