@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { DotLottieReact, type DotLottie } from "@lottiefiles/dotlottie-react";
 
 type AtelierWaterTransitionProps = {
@@ -8,45 +9,53 @@ type AtelierWaterTransitionProps = {
 };
 
 const WATER_PARTICLES = [
-  { left: "6%", size: 5, delay: 0.1, duration: 3.2 },
-  { left: "12%", size: 9, delay: 0.4, duration: 2.8 },
-  { left: "19%", size: 6, delay: 0.0, duration: 3.5 },
-  { left: "27%", size: 11, delay: 0.7, duration: 2.6 },
-  { left: "34%", size: 7, delay: 0.25, duration: 3.1 },
-  { left: "41%", size: 5, delay: 0.9, duration: 2.9 },
-  { left: "48%", size: 10, delay: 0.15, duration: 3.4 },
-  { left: "55%", size: 6, delay: 0.55, duration: 2.7 },
-  { left: "62%", size: 8, delay: 0.35, duration: 3.0 },
-  { left: "69%", size: 5, delay: 0.8, duration: 2.5 },
-  { left: "76%", size: 12, delay: 0.2, duration: 3.3 },
-  { left: "83%", size: 7, delay: 0.65, duration: 2.8 },
-  { left: "90%", size: 9, delay: 0.05, duration: 3.1 },
-  { left: "15%", size: 4, delay: 1.1, duration: 2.4 },
-  { left: "52%", size: 5, delay: 1.3, duration: 2.6 },
-  { left: "72%", size: 6, delay: 1.0, duration: 2.9 },
-  { left: "8%", size: 8, delay: 1.5, duration: 3.2 },
-  { left: "38%", size: 5, delay: 1.7, duration: 2.7 },
-  { left: "58%", size: 7, delay: 0.45, duration: 3.0 },
-  { left: "86%", size: 4, delay: 1.2, duration: 2.5 },
-  { left: "23%", size: 6, delay: 1.8, duration: 2.8 },
-  { left: "45%", size: 9, delay: 0.6, duration: 3.2 },
-  { left: "66%", size: 5, delay: 1.4, duration: 2.6 },
-  { left: "94%", size: 7, delay: 0.3, duration: 3.0 },
+  { left: "4%", size: 6, delay: 0.05, duration: 1.8 },
+  { left: "11%", size: 10, delay: 0.2, duration: 1.55 },
+  { left: "18%", size: 7, delay: 0.0, duration: 1.9 },
+  { left: "26%", size: 12, delay: 0.35, duration: 1.45 },
+  { left: "33%", size: 8, delay: 0.12, duration: 1.7 },
+  { left: "41%", size: 5, delay: 0.45, duration: 1.6 },
+  { left: "48%", size: 11, delay: 0.08, duration: 1.85 },
+  { left: "55%", size: 7, delay: 0.28, duration: 1.5 },
+  { left: "62%", size: 9, delay: 0.18, duration: 1.65 },
+  { left: "69%", size: 6, delay: 0.4, duration: 1.4 },
+  { left: "76%", size: 13, delay: 0.1, duration: 1.8 },
+  { left: "83%", size: 8, delay: 0.32, duration: 1.55 },
+  { left: "90%", size: 10, delay: 0.02, duration: 1.7 },
+  { left: "15%", size: 5, delay: 0.55, duration: 1.35 },
+  { left: "52%", size: 6, delay: 0.65, duration: 1.45 },
+  { left: "72%", size: 7, delay: 0.5, duration: 1.6 },
+  { left: "8%", size: 9, delay: 0.72, duration: 1.75 },
+  { left: "38%", size: 5, delay: 0.8, duration: 1.5 },
+  { left: "58%", size: 8, delay: 0.22, duration: 1.65 },
+  { left: "86%", size: 5, delay: 0.58, duration: 1.4 },
+  { left: "23%", size: 7, delay: 0.85, duration: 1.55 },
+  { left: "45%", size: 10, delay: 0.3, duration: 1.75 },
+  { left: "66%", size: 6, delay: 0.68, duration: 1.45 },
+  { left: "94%", size: 8, delay: 0.15, duration: 1.65 },
 ] as const;
 
-const FALLBACK_MS = 2800;
+/** Animação base ~5.55s → speed 3 ≈ 1.85s */
+const PLAYBACK_SPEED = 3;
+const FALLBACK_MS = 2200;
+const LAYOUT = { fit: "cover" as const, align: [0.5, 0.5] as [number, number] };
 
 /**
- * Transição Wave Fill (Lottie) + partículas de água em overlay.
- * Sem fill CSS opaco (evita a “barra preta”).
+ * Wave Fill fullscreen (portal no body — evita containing block do .animate-in)
+ * + partículas de água em overlay.
  */
 export function AtelierWaterTransition({
   reducedMotion = false,
 }: AtelierWaterTransitionProps) {
+  const [mounted, setMounted] = useState(false);
   const [showLottie, setShowLottie] = useState(!reducedMotion);
   const [particlesSoft, setParticlesSoft] = useState(false);
   const finishedRef = useRef(false);
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const finish = useCallback(() => {
     if (finishedRef.current) return;
@@ -69,40 +78,63 @@ export function AtelierWaterTransition({
 
   useEffect(() => {
     if (!dotLottie || reducedMotion) return;
+
+    const applyLayout = () => {
+      dotLottie.setLayout?.(LAYOUT);
+      dotLottie.setSpeed?.(PLAYBACK_SPEED);
+      dotLottie.resize?.();
+    };
+
+    applyLayout();
+    const onReady = () => applyLayout();
     const onComplete = () => finish();
+    const onResize = () => {
+      dotLottie.resize?.();
+      dotLottie.setLayout?.(LAYOUT);
+    };
+
+    dotLottie.addEventListener("ready", onReady);
     dotLottie.addEventListener("complete", onComplete);
-    return () => dotLottie.removeEventListener("complete", onComplete);
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      dotLottie.removeEventListener("ready", onReady);
+      dotLottie.removeEventListener("complete", onComplete);
+      window.removeEventListener("resize", onResize);
+    };
   }, [dotLottie, finish, reducedMotion]);
 
-  if (reducedMotion) return null;
+  if (reducedMotion || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
-      className="atelier-water-overlay pointer-events-none fixed inset-0 z-[25]"
+      className="atelier-water-overlay pointer-events-none fixed inset-0 z-[60]"
       aria-hidden
     >
       {showLottie ? (
-        <div className="absolute inset-0 overflow-hidden [&_canvas]:h-full [&_canvas]:w-full">
+        <div className="atelier-water-lottie absolute inset-0 h-[100dvh] w-[100vw] overflow-hidden">
           <DotLottieReact
             src="/atelie/wave-fill.lottie"
             autoplay
             loop={false}
+            speed={PLAYBACK_SPEED}
+            layout={LAYOUT}
             className="h-full w-full"
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%", display: "block" }}
             dotLottieRefCallback={setDotLottie}
           />
         </div>
       ) : null}
 
       <div
-        className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ${
-          particlesSoft ? "opacity-40" : "opacity-100"
+        className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${
+          particlesSoft ? "opacity-35" : "opacity-100"
         }`}
       >
         {WATER_PARTICLES.map((p, i) => (
           <span
             key={i}
-            className="atelier-water-particle absolute bottom-0 rounded-full border border-accent/40 bg-accent/20"
+            className="atelier-water-particle absolute bottom-0 rounded-full border border-accent/45 bg-accent/25"
             style={{
               left: p.left,
               width: p.size,
@@ -113,6 +145,7 @@ export function AtelierWaterTransition({
           />
         ))}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

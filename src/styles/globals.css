@@ -357,6 +357,19 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
   opacity: 0.25;
 }
 
+/* Wave Fill Lottie — canvas preenche a viewport */
+.atelier-water-lottie,
+.atelier-water-lottie canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.atelier-water-overlay {
+  width: 100vw;
+  height: 100dvh;
+}
+
 /* Partículas de água (overlay) */
 @keyframes atelier-water-particle-rise {
   0% {
@@ -364,7 +377,7 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
     transform: translateY(8px) scale(0.7);
   }
   12% {
-    opacity: 0.9;
+    opacity: 0.95;
   }
   100% {
     opacity: 0;
@@ -377,6 +390,7 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   animation-iteration-count: infinite;
   animation-fill-mode: both;
+  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
