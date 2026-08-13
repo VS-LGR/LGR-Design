@@ -96,35 +96,37 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
       </div>
 
       <div
-        className={`mt-6 md:mt-8 max-w-3xl mx-auto px-1 ${
+        className={`mt-6 md:mt-8 mx-auto px-1 ${
           showCopy
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
         } transition-[opacity,transform] duration-700 ease-out`}
       >
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent mb-3">
-          {piece.kicker}
-        </p>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary tracking-tight text-balance">
-          {piece.title}
-        </h1>
-        <p className="mt-4 text-base text-muted leading-relaxed">
-          {piece.summary}
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {piece.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md border border-border-dark/50 bg-surface/30 px-2.5 py-1 text-[11px] font-medium text-primary/90"
-            >
-              {tag}
-            </span>
-          ))}
+        <div className="max-w-3xl mx-auto">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent mb-3">
+            {piece.kicker}
+          </p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary tracking-tight text-balance">
+            {piece.title}
+          </h1>
+          <p className="mt-4 text-base text-muted leading-relaxed">
+            {piece.summary}
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {piece.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md border border-border-dark/50 bg-surface/30 px-2.5 py-1 text-[11px] font-medium text-primary/90"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          {piece.tools.length > 0 ? (
+            <p className="mt-4 text-xs text-muted">{piece.tools.join(" · ")}</p>
+          ) : null}
         </div>
-        {piece.tools.length > 0 ? (
-          <p className="mt-4 text-xs text-muted">{piece.tools.join(" · ")}</p>
-        ) : null}
-        <div className="mt-6 space-y-4">
+        <div className="mt-8 md:mt-10 max-w-4xl mx-auto space-y-5 md:space-y-6">
           {piece.description.map((para) => (
             <p
               key={para}

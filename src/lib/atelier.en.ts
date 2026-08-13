@@ -7,11 +7,14 @@ export const atelierListEn: AtelierPiece[] = [
     title: "Reflection study — Sneakers",
     kicker: "Light · Reflection · Product",
     summary:
-      "Practice in light reflection and product presentation with three-point lighting, while refining the scene development process.",
+      "Practice in light reflection and product presentation with three-point lighting, while refining the scene development process — from composition to the artistic mood of the render.",
     description: [
-      "This study focused on practicing light reflection on a dark surface and building a product presentation with three-point lighting.",
-      "Beyond the visual result, the goal was to improve the scene development process — from light and material setup to a final composition with a clear product read.",
-      "The render aims for a cinematic language: controlled contrast, edge highlights, and a mirror that reinforces depth without stealing focus from the sneakers.",
+      "This study began as product-presentation practice: a dark sneaker pair on a black surface, with three-point lighting and a deliberate focus on light reflection.",
+      "In the creation process, the scene was built in Blender from camera and light setup (key, fill, and rim), tuning materials and roughness until leather and shoe details read clearly without losing the contrast of the background.",
+      "Composition places the product on the main axis, with generous negative space around it. The mirror/reflection at the base elongates the silhouette and reinforces depth without competing with the sneaker’s volume — the eye enters through edge highlights and settles into the mirror.",
+      "The visual theme is deliberately sober: dark product, near-absorptive surface, few light points. Material read (controlled sheen, micro-details, stitching) depends on that low contrast and the precision of the highlights.",
+      "Artistically, the render aims for a cinematic language — the mood of a premium product still, controlled contrast, and a clean silhouette. Less “bright catalog,” more atmosphere: darkness wraps, reflection anchors, and the sneakers remain the only protagonist.",
+      "More than a final frame, the exercise consolidated a scene workflow: intent → light → material → composition → mood review. Each iteration moved the result toward an image that communicates process and sensibility, not technique alone.",
     ],
     tags: ["Reflection", "3-point", "Product", "Scene"],
     tools: ["Blender"],

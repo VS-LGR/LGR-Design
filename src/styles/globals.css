@@ -373,6 +373,7 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
 .atelier-water-lottie {
   opacity: 0;
   will-change: opacity;
+  mix-blend-mode: multiply;
   transition: opacity var(--atelier-water-fade-in, 320ms) ease-out;
 }
 
@@ -381,8 +382,8 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
 }
 
 .atelier-water-lottie--visible {
-  /* leve transparência no pico para o render aparecer por baixo */
-  opacity: 0.88;
+  /* multiply remove o branco do Lottie no fundo #000; pico em 1 */
+  opacity: 1;
   transition: opacity var(--atelier-water-fade-in, 320ms) ease-out;
 }
 
