@@ -22,33 +22,33 @@ export function AtelieView() {
         </p>
       </header>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 list-none">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10 list-none">
         {atelier.map((piece) => (
           <li key={piece.id}>
             <Link
               href={SITE_ROUTES.atelierPiece(piece.slug)}
-              className="group flex flex-col h-full overflow-hidden rounded-2xl border border-border-dark/45 bg-gradient-to-b from-surface/40 to-surface/15 transition-[border-color,transform] duration-300 hover:border-accent/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
+              className="group flex flex-col gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark rounded-sm"
             >
-              <div className="relative aspect-[4/3] bg-[#05080f] border-b border-border-dark/40">
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
                 <Image
                   src={piece.image.src}
                   alt={piece.image.alt}
                   fill
-                  className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="atelier-render-multiply object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                  sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>
-              <div className="flex flex-col flex-1 gap-2 p-4 md:p-5">
+              <div className="flex flex-col gap-2 max-w-xl">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">
                   {piece.kicker}
                 </p>
-                <h2 className="text-lg font-semibold text-primary group-hover:text-accent transition-colors">
+                <h2 className="text-xl md:text-2xl font-semibold text-primary group-hover:text-accent transition-colors tracking-tight">
                   {piece.title}
                 </h2>
                 <p className="text-sm text-muted leading-relaxed line-clamp-3">
                   {piece.summary}
                 </p>
-                <p className="mt-auto pt-2 text-xs font-medium text-accent">
+                <p className="pt-1 text-xs font-medium text-accent">
                   {t.pages.atelierOpen} →
                 </p>
               </div>

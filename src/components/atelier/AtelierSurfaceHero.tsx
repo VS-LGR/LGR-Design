@@ -24,6 +24,7 @@ const BUBBLES = [
 
 /**
  * Hero do Ateliê: render sobe da “superfície” com bolhas, depois o texto entra.
+ * Multiply funde o preto do render com o fundo da página (sem card).
  * Prefers-reduced-motion → estado final estático.
  */
 export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
@@ -51,25 +52,16 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
 
   return (
     <div className="w-full">
-      <div
-        className="relative overflow-hidden rounded-2xl border border-border-dark/45 bg-[#05080f]"
-        aria-hidden={false}
-      >
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 opacity-70"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(34,184,207,0.08), transparent 70%)",
-          }}
-          aria-hidden
-        />
-
+      <div className="relative -mx-4 sm:-mx-6 md:-mx-8 overflow-hidden">
         {!reduced ? (
-          <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+          <div
+            className="pointer-events-none absolute inset-0 overflow-hidden"
+            aria-hidden
+          >
             {BUBBLES.map((b, i) => (
               <span
                 key={i}
-                className={`atelier-bubble absolute bottom-0 rounded-full border border-accent/35 bg-accent/15 ${
+                className={`atelier-bubble absolute bottom-[8%] rounded-full border border-accent/35 bg-accent/15 ${
                   showMotion ? "atelier-bubble-rise" : "opacity-0"
                 }`}
                 style={{
@@ -85,24 +77,26 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
         ) : null}
 
         <div
-          className={`relative mx-auto flex max-w-3xl items-end justify-center px-4 pt-10 pb-6 sm:px-8 sm:pt-14 sm:pb-8 ${
-            showMotion || reduced ? "atelier-surface-image-in" : "opacity-0 translate-y-[45%]"
+          className={`relative z-[1] mx-auto flex w-full max-w-5xl items-end justify-center px-2 sm:px-4 pt-4 pb-2 sm:pt-6 sm:pb-4 ${
+            showMotion || reduced
+              ? "atelier-surface-image-in"
+              : "opacity-0 translate-y-[45%]"
           }`}
         >
           <Image
             src={piece.image.src}
             alt={piece.image.alt}
-            width={1200}
+            width={1600}
             height={900}
             priority
-            className="h-auto w-full max-w-2xl object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.55)]"
-            sizes="(max-width: 768px) 100vw, 672px"
+            className="atelier-render-multiply h-auto w-full object-contain"
+            sizes="(max-width: 1024px) 100vw, 1024px"
           />
         </div>
       </div>
 
       <div
-        className={`mt-8 md:mt-10 max-w-3xl mx-auto px-1 ${
+        className={`mt-6 md:mt-8 max-w-3xl mx-auto px-1 ${
           showCopy
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
@@ -114,7 +108,9 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary tracking-tight text-balance">
           {piece.title}
         </h1>
-        <p className="mt-4 text-base text-muted leading-relaxed">{piece.summary}</p>
+        <p className="mt-4 text-base text-muted leading-relaxed">
+          {piece.summary}
+        </p>
         <div className="mt-5 flex flex-wrap gap-2">
           {piece.tags.map((tag) => (
             <span
@@ -126,13 +122,14 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
           ))}
         </div>
         {piece.tools.length > 0 ? (
-          <p className="mt-4 text-xs text-muted">
-            {piece.tools.join(" · ")}
-          </p>
+          <p className="mt-4 text-xs text-muted">{piece.tools.join(" · ")}</p>
         ) : null}
         <div className="mt-6 space-y-4">
           {piece.description.map((para) => (
-            <p key={para} className="text-sm md:text-base text-primary/85 leading-relaxed">
+            <p
+              key={para}
+              className="text-sm md:text-base text-primary/85 leading-relaxed"
+            >
               {para}
             </p>
           ))}
