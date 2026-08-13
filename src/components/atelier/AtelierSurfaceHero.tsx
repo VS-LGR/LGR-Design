@@ -39,8 +39,8 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
       return;
     }
 
-    const start = window.setTimeout(() => setPhase("rising"), 420);
-    const settle = window.setTimeout(() => setPhase("settled"), 2100);
+    const start = window.setTimeout(() => setPhase("rising"), 1700);
+    const settle = window.setTimeout(() => setPhase("settled"), 3200);
     return () => {
       window.clearTimeout(start);
       window.clearTimeout(settle);
