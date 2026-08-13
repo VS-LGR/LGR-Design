@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { createPortal } from "react-dom";
 import { DotLottieReact, type DotLottie } from "@lottiefiles/dotlottie-react";
 
@@ -37,19 +43,26 @@ const WATER_PARTICLES = [
 
 /** Animação base ~5.55s → speed 3 ≈ 1.85s */
 const PLAYBACK_SPEED = 3;
-const FALLBACK_MS = 2200;
+const FADE_IN_MS = 320;
+const FADE_OUT_MS = 560;
+/** Inicia o fade-out um pouco antes do fim da Wave Fill */
+const EARLY_FADE_MS = 1450;
+const FALLBACK_MS = 2100;
 const LAYOUT = { fit: "cover" as const, align: [0.5, 0.5] as [number, number] };
 
+type LottieVis = "enter" | "visible" | "exit";
+
 /**
- * Wave Fill fullscreen (portal no body — evita containing block do .animate-in)
- * + partículas de água em overlay.
+ * Wave Fill fullscreen com transparência in/out
+ * (portal no body — evita containing block do .animate-in).
  */
 export function AtelierWaterTransition({
   reducedMotion = false,
 }: AtelierWaterTransitionProps) {
   const [mounted, setMounted] = useState(false);
   const [showLottie, setShowLottie] = useState(!reducedMotion);
-  const [particlesSoft, setParticlesSoft] = useState(false);
+  const [lottieVis, setLottieVis] = useState<LottieVis>("enter");
+  const [particlesVis, setParticlesVis] = useState<LottieVis>("enter");
   const finishedRef = useRef(false);
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
 
@@ -57,24 +70,40 @@ export function AtelierWaterTransition({
     setMounted(true);
   }, []);
 
-  const finish = useCallback(() => {
+  const beginExit = useCallback(() => {
     if (finishedRef.current) return;
     finishedRef.current = true;
     document.documentElement.classList.add("atelier-immersive--settled");
     document.documentElement.classList.add("atelier-immersive--water-done");
-    setShowLottie(false);
-    setParticlesSoft(true);
+    setLottieVis("exit");
+    setParticlesVis("exit");
+    window.setTimeout(() => setShowLottie(false), FADE_OUT_MS);
   }, []);
+
+  // Fade-in após mount (evita flash opaco no 1º frame)
+  useEffect(() => {
+    if (reducedMotion || !mounted) return;
+
+    const show = window.setTimeout(() => {
+      setLottieVis("visible");
+      setParticlesVis("visible");
+    }, 40);
+
+    const earlyOut = window.setTimeout(beginExit, EARLY_FADE_MS);
+    const fallback = window.setTimeout(beginExit, FALLBACK_MS);
+
+    return () => {
+      window.clearTimeout(show);
+      window.clearTimeout(earlyOut);
+      window.clearTimeout(fallback);
+    };
+  }, [reducedMotion, mounted, beginExit]);
 
   useEffect(() => {
     if (reducedMotion) {
       document.documentElement.classList.add("atelier-immersive--settled");
-      return;
     }
-
-    const fallback = window.setTimeout(finish, FALLBACK_MS);
-    return () => window.clearTimeout(fallback);
-  }, [reducedMotion, finish]);
+  }, [reducedMotion]);
 
   useEffect(() => {
     if (!dotLottie || reducedMotion) return;
@@ -87,7 +116,7 @@ export function AtelierWaterTransition({
 
     applyLayout();
     const onReady = () => applyLayout();
-    const onComplete = () => finish();
+    const onComplete = () => beginExit();
     const onResize = () => {
       dotLottie.resize?.();
       dotLottie.setLayout?.(LAYOUT);
@@ -102,9 +131,23 @@ export function AtelierWaterTransition({
       dotLottie.removeEventListener("complete", onComplete);
       window.removeEventListener("resize", onResize);
     };
-  }, [dotLottie, finish, reducedMotion]);
+  }, [dotLottie, beginExit, reducedMotion]);
 
   if (reducedMotion || !mounted) return null;
+
+  const lottieOpacityClass =
+    lottieVis === "enter"
+      ? "atelier-water-lottie--enter"
+      : lottieVis === "visible"
+        ? "atelier-water-lottie--visible"
+        : "atelier-water-lottie--exit";
+
+  const particlesOpacityClass =
+    particlesVis === "enter"
+      ? "atelier-water-particles--enter"
+      : particlesVis === "visible"
+        ? "atelier-water-particles--visible"
+        : "atelier-water-particles--exit";
 
   return createPortal(
     <div
@@ -112,7 +155,15 @@ export function AtelierWaterTransition({
       aria-hidden
     >
       {showLottie ? (
-        <div className="atelier-water-lottie absolute inset-0 h-[100dvh] w-[100vw] overflow-hidden">
+        <div
+          className={`atelier-water-lottie absolute inset-0 h-[100dvh] w-[100vw] overflow-hidden ${lottieOpacityClass}`}
+          style={
+            {
+              "--atelier-water-fade-in": `${FADE_IN_MS}ms`,
+              "--atelier-water-fade-out": `${FADE_OUT_MS}ms`,
+            } as CSSProperties
+          }
+        >
           <DotLottieReact
             src="/atelie/wave-fill.lottie"
             autoplay
@@ -127,9 +178,13 @@ export function AtelierWaterTransition({
       ) : null}
 
       <div
-        className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${
-          particlesSoft ? "opacity-35" : "opacity-100"
-        }`}
+        className={`atelier-water-particles absolute inset-0 overflow-hidden ${particlesOpacityClass}`}
+        style={
+          {
+            "--atelier-water-fade-in": `${FADE_IN_MS}ms`,
+            "--atelier-water-fade-out": `${FADE_OUT_MS + 200}ms`,
+          } as CSSProperties
+        }
       >
         {WATER_PARTICLES.map((p, i) => (
           <span

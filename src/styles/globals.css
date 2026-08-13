@@ -357,7 +357,7 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
   opacity: 0.25;
 }
 
-/* Wave Fill Lottie — canvas preenche a viewport */
+/* Wave Fill Lottie — canvas preenche a viewport + fade in/out */
 .atelier-water-lottie,
 .atelier-water-lottie canvas {
   width: 100% !important;
@@ -368,6 +368,47 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
 .atelier-water-overlay {
   width: 100vw;
   height: 100dvh;
+}
+
+.atelier-water-lottie {
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity var(--atelier-water-fade-in, 320ms) ease-out;
+}
+
+.atelier-water-lottie--enter {
+  opacity: 0;
+}
+
+.atelier-water-lottie--visible {
+  /* leve transparência no pico para o render aparecer por baixo */
+  opacity: 0.88;
+  transition: opacity var(--atelier-water-fade-in, 320ms) ease-out;
+}
+
+.atelier-water-lottie--exit {
+  opacity: 0;
+  transition: opacity var(--atelier-water-fade-out, 560ms) ease-in;
+}
+
+.atelier-water-particles {
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity var(--atelier-water-fade-in, 320ms) ease-out;
+}
+
+.atelier-water-particles--enter {
+  opacity: 0;
+}
+
+.atelier-water-particles--visible {
+  opacity: 1;
+  transition: opacity var(--atelier-water-fade-in, 320ms) ease-out;
+}
+
+.atelier-water-particles--exit {
+  opacity: 0;
+  transition: opacity var(--atelier-water-fade-out, 760ms) ease-in;
 }
 
 /* Partículas de água (overlay) */
@@ -397,6 +438,11 @@ html.atelier-immersive [data-animated-bg] .animated-bg-float {
   .atelier-water-particle {
     animation: none !important;
     opacity: 0 !important;
+  }
+
+  .atelier-water-lottie,
+  .atelier-water-particles {
+    transition: none !important;
   }
 }
 
