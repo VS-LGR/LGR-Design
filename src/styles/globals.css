@@ -312,9 +312,136 @@
   animation-fill-mode: both;
 }
 
-/* Knockout do preto do render no fundo dark (screen: preto some, luzes ficam) */
-.atelier-render-knockout {
-  mix-blend-mode: screen;
+/* Tema imersivo — iguala fundo da página ao preto do render */
+html.atelier-immersive {
+  --atelier-immersive-bg: #000000;
+  --atelier-immersive-wash: #0a0c10;
+}
+
+html.atelier-immersive,
+html.atelier-immersive body {
+  background-color: var(--atelier-immersive-bg);
+  transition: background-color 0.9s ease;
+}
+
+html.atelier-immersive [data-site-chrome="header"] {
+  background-color: color-mix(
+    in srgb,
+    var(--atelier-immersive-bg) 88%,
+    transparent
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+html.atelier-immersive [data-site-chrome="footer"] {
+  background-color: var(--atelier-immersive-bg) !important;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+html.atelier-immersive [data-animated-bg] {
+  opacity: 0.28;
+  transition: opacity 1s ease;
+}
+
+html.atelier-immersive [data-animated-bg] .animated-bg-gradient {
+  background: linear-gradient(
+    180deg,
+    #000000 0%,
+    var(--atelier-immersive-wash) 55%,
+    #000000 100%
+  ) !important;
+  animation: none !important;
+}
+
+html.atelier-immersive [data-animated-bg] .animated-bg-float {
+  opacity: 0.25;
+}
+
+/* Água subindo */
+@keyframes atelier-water-fill-rise {
+  from {
+    transform: translateY(18%);
+  }
+  to {
+    transform: translateY(-8%);
+  }
+}
+
+@keyframes atelier-water-wave-drift {
+  0% {
+    transform: translateX(-4%);
+  }
+  100% {
+    transform: translateX(4%);
+  }
+}
+
+@keyframes atelier-water-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.atelier-water-overlay {
+  animation: atelier-water-fade-out 0.45s ease 1.15s both;
+}
+
+.atelier-water-fill {
+  animation: atelier-water-fill-rise 1.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.atelier-water-body {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--atelier-immersive-wash, #0a0c10) 18%,
+    var(--atelier-immersive-bg, #000) 48%,
+    #000000 100%
+  );
+}
+
+.atelier-water-wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 72px;
+  opacity: 0.9;
+  background: radial-gradient(
+      ellipse 40% 70% at 20% 100%,
+      rgba(34, 184, 207, 0.12) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 45% 80% at 55% 100%,
+      rgba(180, 220, 230, 0.08) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 35% 65% at 85% 100%,
+      rgba(34, 184, 207, 0.1) 0%,
+      transparent 70%
+    );
+  mask-image: linear-gradient(to bottom, transparent, black 40%, black);
+}
+
+.atelier-water-wave--a {
+  top: 0;
+  animation: atelier-water-wave-drift 2.4s ease-in-out infinite alternate;
+}
+
+.atelier-water-wave--b {
+  top: 18px;
+  opacity: 0.65;
+  animation: atelier-water-wave-drift 2.8s ease-in-out infinite alternate-reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atelier-water-overlay,
+  .atelier-water-fill,
+  .atelier-water-wave--a,
+  .atelier-water-wave--b {
+    animation: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

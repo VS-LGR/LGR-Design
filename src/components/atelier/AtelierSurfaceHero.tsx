@@ -24,7 +24,7 @@ const BUBBLES = [
 
 /**
  * Hero do Ateliê: render sobe da “superfície” com bolhas, depois o texto entra.
- * Screen remove o preto do render no fundo dark (Multiply deixava a caixa preta).
+ * No detalhe imersivo o fundo da página já é #000 (mesmo preto do JPG).
  * Prefers-reduced-motion → estado final estático.
  */
 export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
@@ -39,8 +39,8 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
       return;
     }
 
-    const start = window.setTimeout(() => setPhase("rising"), 80);
-    const settle = window.setTimeout(() => setPhase("settled"), 1800);
+    const start = window.setTimeout(() => setPhase("rising"), 420);
+    const settle = window.setTimeout(() => setPhase("settled"), 2100);
     return () => {
       window.clearTimeout(start);
       window.clearTimeout(settle);
@@ -89,7 +89,7 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
             width={1600}
             height={900}
             priority
-            className="atelier-render-knockout h-auto w-full object-contain"
+            className="h-auto w-full max-w-5xl object-contain"
             sizes="(max-width: 1024px) 100vw, 1024px"
           />
         </div>

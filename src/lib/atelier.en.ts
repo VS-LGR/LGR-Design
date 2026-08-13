@@ -19,5 +19,9 @@ export const atelierListEn: AtelierPiece[] = [
       src: "/atelie/Shoe_Render_Water_JPG.jpg",
       alt: "3D render of a dark sneaker pair with reflection on a black surface",
     },
+    immersiveTheme: {
+      background: "#000000",
+      wash: "#0a0c10",
+    },
   },
 ];

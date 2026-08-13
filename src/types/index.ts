@@ -236,4 +236,9 @@ export interface AtelierPiece {
     src: string;
     alt: string;
   };
+  /** Tema de página no detalhe (ex.: preto do render) */
+  immersiveTheme?: {
+    background: string;
+    wash: string;
+  };
 }
