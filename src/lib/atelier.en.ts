@@ -16,7 +16,7 @@ export const atelierListEn: AtelierPiece[] = [
     tags: ["Reflection", "3-point", "Product", "Scene"],
     tools: ["Blender"],
     image: {
-      src: "/atelie/sneakers-reflexao-3-pontos.png",
+      src: "/atelie/Shoe_Render_Water_JPG.jpg",
       alt: "3D render of a dark sneaker pair with reflection on a black surface",
     },
   },

@@ -24,7 +24,7 @@ const BUBBLES = [
 
 /**
  * Hero do Ateliê: render sobe da “superfície” com bolhas, depois o texto entra.
- * Multiply funde o preto do render com o fundo da página (sem card).
+ * Screen remove o preto do render no fundo dark (Multiply deixava a caixa preta).
  * Prefers-reduced-motion → estado final estático.
  */
 export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
@@ -89,7 +89,7 @@ export function AtelierSurfaceHero({ piece }: AtelierSurfaceHeroProps) {
             width={1600}
             height={900}
             priority
-            className="atelier-render-multiply h-auto w-full object-contain"
+            className="atelier-render-knockout h-auto w-full object-contain"
             sizes="(max-width: 1024px) 100vw, 1024px"
           />
         </div>

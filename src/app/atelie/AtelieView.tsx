@@ -34,7 +34,7 @@ export function AtelieView() {
                   src={piece.image.src}
                   alt={piece.image.alt}
                   fill
-                  className="atelier-render-multiply object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                  className="atelier-render-knockout object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>

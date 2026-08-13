@@ -312,9 +312,9 @@
   animation-fill-mode: both;
 }
 
-/* Funde o preto do render com o fundo da página; mantém sapato/reflexo */
-.atelier-render-multiply {
-  mix-blend-mode: multiply;
+/* Knockout do preto do render no fundo dark (screen: preto some, luzes ficam) */
+.atelier-render-knockout {
+  mix-blend-mode: screen;
 }
 
 @media (prefers-reduced-motion: reduce) {
