@@ -276,6 +276,42 @@
 .stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
 .stagger-children > *:nth-child(9) { animation-delay: 0.45s; }
 
+/* Ateliê 3D — surface rise */
+@keyframes atelier-surface-rise {
+  from {
+    opacity: 0;
+    transform: translateY(48%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes atelier-bubble-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.6);
+  }
+  15% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-220px) scale(1);
+  }
+}
+
+.atelier-surface-image-in {
+  animation: atelier-surface-rise 1.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.atelier-bubble-rise {
+  animation-name: atelier-bubble-rise;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-in,
   .animate-in-up,
@@ -283,6 +319,12 @@
     animation-duration: 0.01ms;
     animation-delay: 0s;
     opacity: 1;
+  }
+  .atelier-surface-image-in,
+  .atelier-bubble-rise {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
   }
   .animated-bg-float,
   .animated-bg-gradient {

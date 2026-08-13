@@ -221,3 +221,19 @@ export interface DesignProcessContent {
   /** Rótulos de uma grade 2×2 estática (texto apenas) */
   ansoffQuadrants: [string, string, string, string];
 }
+
+/** Peça do Ateliê 3D (prática visual, separada dos cases de entrega) */
+export interface AtelierPiece {
+  id: string;
+  slug: string;
+  title: string;
+  kicker: string;
+  summary: string;
+  description: string[];
+  tags: string[];
+  tools: string[];
+  image: {
+    src: string;
+    alt: string;
+  };
+}

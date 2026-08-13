@@ -14,6 +14,8 @@ export const SITE_ROUTES = {
   home: "/",
   projects: "/projetos",
   project: (slug: string) => `/projetos/${slug}`,
+  atelier: "/atelie",
+  atelierPiece: (slug: string) => `/atelie/${slug}`,
   process: "/processo",
   about: "/sobre",
   contact: "/contato",
@@ -42,11 +44,18 @@ export const FEATURED_PROJECT_ORDER = [
   "hirely",
 ] as const;
 
-export type NavItemId = "home" | "projects" | "process" | "about" | "contact";
+export type NavItemId =
+  | "home"
+  | "projects"
+  | "atelier"
+  | "process"
+  | "about"
+  | "contact";
 
 export const PRIMARY_NAV: Array<{ id: NavItemId; href: string }> = [
   { id: "home", href: SITE_ROUTES.home },
   { id: "projects", href: SITE_ROUTES.projects },
+  { id: "atelier", href: SITE_ROUTES.atelier },
   { id: "process", href: SITE_ROUTES.process },
   { id: "about", href: SITE_ROUTES.about },
   { id: "contact", href: SITE_ROUTES.contact },

@@ -16,6 +16,7 @@ export function MainNav() {
   const labels: Record<NavItemId, string> = {
     home: t.nav.menu,
     projects: t.nav.projects,
+    atelier: t.nav.atelier,
     process: t.nav.process,
     about: t.nav.about,
     contact: t.nav.contact,
@@ -28,6 +29,12 @@ export function MainNav() {
         activePath === "/projetos" ||
         activePath.startsWith("/projetos/") ||
         activePath.startsWith("/cases/")
+      );
+    }
+    if (href === SITE_ROUTES.atelier) {
+      return (
+        activePath === SITE_ROUTES.atelier ||
+        activePath.startsWith(`${SITE_ROUTES.atelier}/`)
       );
     }
     return activePath === href || activePath.startsWith(`${href}/`);

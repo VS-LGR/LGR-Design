@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { projectsList } from "@/lib/projects";
+import { atelierList } from "@/lib/atelier";
 import { SITE_URL } from "@/lib/siteMeta";
 import { SITE_ROUTES } from "@/lib/siteArchitecture";
 
@@ -8,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     SITE_ROUTES.home,
     SITE_ROUTES.projects,
+    SITE_ROUTES.atelier,
     SITE_ROUTES.process,
     SITE_ROUTES.about,
     SITE_ROUTES.contact,
@@ -26,5 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const atelierRoutes = atelierList.map((piece) => ({
+    url: `${SITE_URL}${SITE_ROUTES.atelierPiece(piece.slug)}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...atelierRoutes];
 }

@@ -11,6 +11,7 @@ import {
 } from "react";
 import type {
   AboutContent,
+  AtelierPiece,
   Project,
   ProjectCategory,
   ProjectTopic,
@@ -30,6 +31,8 @@ import {
 } from "@/lib/projects.en";
 import { servicesContent } from "@/lib/services";
 import { servicesContentEn } from "@/lib/services.en";
+import { atelierList } from "@/lib/atelier";
+import { atelierListEn } from "@/lib/atelier.en";
 import { uiPt, uiEn, type UiMessages } from "@/lib/i18n/messages";
 import { orderProjects } from "@/lib/projectOrder";
 
@@ -41,6 +44,7 @@ type LocaleContextValue = {
   t: UiMessages;
   about: AboutContent;
   projects: Project[];
+  atelier: AtelierPiece[];
   projectCategories: { id: ProjectCategory; label: string }[];
   projectTopics: { id: ProjectTopic; label: string }[];
   services: ServicesContent;
@@ -83,6 +87,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       t: isEn ? uiEn : uiPt,
       about: isEn ? aboutContentEn : aboutContent,
       projects: orderProjects(isEn ? projectsListEn : projectsList),
+      atelier: isEn ? atelierListEn : atelierList,
       projectCategories: isEn ? projectCategoriesEn : projectCategories,
       projectTopics: isEn ? projectTopicsEn : projectTopics,
       services: isEn ? servicesContentEn : servicesContent,

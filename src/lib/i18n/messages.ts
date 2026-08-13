@@ -5,6 +5,7 @@ export type UiMessages = {
     menu: string;
     close: string;
     projects: string;
+    atelier: string;
     about: string;
     story: string;
     work: string;
@@ -148,6 +149,12 @@ export type UiMessages = {
     projectsLead: string;
     projectsFeaturedHeading: string;
     projectsExplorationsHeading: string;
+    atelierHeading: string;
+    atelierKicker: string;
+    atelierLead: string;
+    atelierBack: string;
+    atelierOpen: string;
+    atelierNotFound: string;
     historiaHeading: string;
     historiaKicker: string;
     historiaLead: string;
@@ -310,6 +317,7 @@ export const uiPt: UiMessages = {
     menu: "Início",
     close: "Fechar",
     projects: "Projetos",
+    atelier: "Ateliê 3D",
     about: "Sobre",
     story: "Sobre",
     work: "Processo",
@@ -485,6 +493,13 @@ export const uiPt: UiMessages = {
       "Projetos onde UX, produto e tecnologia trabalham juntos — cada card abre o estudo de caso. Explorações ficam em seção própria.",
     projectsFeaturedHeading: "Em destaque",
     projectsExplorationsHeading: "Explorações",
+    atelierHeading: "Ateliê 3D",
+    atelierKicker: "Prática visual",
+    atelierLead:
+      "Estudos de cena, luz e apresentação de produto — um espaço para o processo 3D, separado dos cases de entrega.",
+    atelierBack: "Voltar ao Ateliê",
+    atelierOpen: "Ver estudo",
+    atelierNotFound: "Peça não encontrada.",
     historiaHeading: "Sobre",
     historiaKicker: "Trajetória",
     historiaLead:
@@ -664,6 +679,7 @@ export const uiEn: UiMessages = {
     menu: "Home",
     close: "Close",
     projects: "Projects",
+    atelier: "3D Atelier",
     about: "About",
     story: "About",
     work: "Process",
@@ -837,6 +853,13 @@ export const uiEn: UiMessages = {
       "Projects where UX, product, and technology work together — each card opens the full case study. Explorations live in their own section.",
     projectsFeaturedHeading: "Featured",
     projectsExplorationsHeading: "Explorations",
+    atelierHeading: "3D Atelier",
+    atelierKicker: "Visual practice",
+    atelierLead:
+      "Scene, lighting, and product-presentation studies — a space for the 3D process, separate from delivery cases.",
+    atelierBack: "Back to Atelier",
+    atelierOpen: "View study",
+    atelierNotFound: "Piece not found.",
     historiaHeading: "About",
     historiaKicker: "Background",
     historiaLead:
