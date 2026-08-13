@@ -165,11 +165,12 @@ export function AtelierWaterTransition({
           }
         >
           <DotLottieReact
-            src="/atelie/wave-fill.lottie"
+            src="/atelie/wave-fill.lottie?v=3"
             autoplay
             loop={false}
             speed={PLAYBACK_SPEED}
             layout={LAYOUT}
+            backgroundColor="#000000"
             className="h-full w-full"
             style={{ width: "100%", height: "100%", display: "block" }}
             dotLottieRefCallback={setDotLottie}
