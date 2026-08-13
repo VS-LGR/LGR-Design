@@ -149,5 +149,5 @@ export const aboutContentEn: AboutContent = {
     linkedin: "https://www.linkedin.com/in/lgr-art",
     github: "https://github.com/VS-LGR",
   },
-  resumePdfUrl: "/cv/lucas-gabriel-rodrigues.pdf",
+  resumePdfUrl: "/cv/lucas-gabriel-rodrigues-en.pdf",
 };
